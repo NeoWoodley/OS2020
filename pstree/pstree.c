@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 int main(int argc, char *argv[]) {
-  pid_t curr_pid = getpid(void);
+  pid_t curr_pid = getpid();
   printf("PID:%d\n",curr_pid);
 
   for (int i = 0; i < argc; i++) {

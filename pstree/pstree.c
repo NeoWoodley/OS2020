@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 int main(int argc, char *argv[]) {
   pid_t curr_pid = getpid(void);

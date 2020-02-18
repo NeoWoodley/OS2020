@@ -22,9 +22,11 @@ int main(int argc, char *argv[]) {
   printf("PID:%d\n",curr_pid);
 
   while((entry=readdir(dir))) {
-      printf("File %d: %s\n", files, entry->d_name);  
+      printf("File %d: Name: %s Type:%d\n", files, entry->d_name, entry->d_type);  
       files ++;
   }
+
+  closdir(dir);
 
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);

@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
       files ++;
   }
 
-  closdir(dir);
+  closedir(dir);
 
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);

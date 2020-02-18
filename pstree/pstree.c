@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
   DIR* dir;
   struct dirent* entry;
 
-  char* proclib[256];
+  char* proclib[512];
 
   dir = opendir("/proc");
   assert(dir != NULL);
@@ -42,6 +42,7 @@ int main(int argc, char *argv[]) {
         }
         else {
             printf("File %s :Process!\n", entry->d_name);
+            proclib[count] = entry->d_name;
             count ++;
         }
   }

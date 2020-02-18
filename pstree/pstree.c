@@ -21,7 +21,8 @@ int main(int argc, char *argv[]) {
 
   DIR* dir;
   struct dirent* entry;
-  //int files = 0;
+
+  char* proclib[256];
 
   dir = opendir("/proc");
   assert(dir != NULL);
@@ -32,6 +33,8 @@ int main(int argc, char *argv[]) {
 
   pid_t curr_pid = getpid();
   printf("PID:%d\n",curr_pid);
+  
+  int count = 0;
 
   while((entry=readdir(dir))) {
         if(find_num(entry->d_name) == 0) {
@@ -39,10 +42,11 @@ int main(int argc, char *argv[]) {
         }
         else {
             printf("File %s :Process!\n", entry->d_name);
+            count ++;
         }
-//      printf("File %d: Name: %s Type:%d\n", files, entry->d_name, entry->d_type);  
-//      files ++;
   }
+
+  printf("Total process number:%d\n",count);
 
   closedir(dir);
 

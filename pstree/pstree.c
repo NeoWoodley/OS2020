@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
 
   DIR* dir;
   struct dirent* entry;
-  int files = 0;
+  //int files = 0;
 
   dir = opendir("/proc");
   assert(dir != NULL);
@@ -34,8 +34,14 @@ int main(int argc, char *argv[]) {
   printf("PID:%d\n",curr_pid);
 
   while((entry=readdir(dir))) {
-      printf("File %d: Name: %s Type:%d\n", files, entry->d_name, entry->d_type);  
-      files ++;
+        if(find_num(entry->d_name) == 0) {
+            printf("Not a process file!\n");
+        }
+        else {
+            printf("Process!\n");
+        }
+//      printf("File %d: Name: %s Type:%d\n", files, entry->d_name, entry->d_type);  
+//      files ++;
   }
 
   closedir(dir);

@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
   printf("PID:%d\n",curr_pid);
 
   while((entry=readdir(dir))) {
-      print("File %d: %s\n", files, entry->d_name);  
+      printf("File %d: %s\n", files, entry->d_name);  
       files ++;
   }
 

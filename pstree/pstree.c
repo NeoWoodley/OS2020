@@ -5,6 +5,17 @@
 #include <string.h>   //char *strstr(const char *haystack, const char *needle)
 #include <dirent.h>
 
+int find_num(char *str) {
+    int return_code;
+
+    if(strchr(str, '0') || strchr(str, '1') || strchr(str, '2') || strchr(str, '3') || strchr(str, '4') || strchr(str, '5') || strchr(str, '6') || strchr(str, '7') || strchr(str, '8') || strchr(str, '9') == NULL) {
+        return_code = 0;
+    }
+    else {
+        return_code = 1; 
+    }
+}
+
 int main(int argc, char *argv[]) {
 
   DIR* dir;

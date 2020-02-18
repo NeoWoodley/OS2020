@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
   dir = opendir("/proc");
   assert(dir != NULL);
 
-  char _V[13]="-V --version"
+  char _V[13]="-V --version";
   char _n[18]="-n --numeric-sort";
   char _p[15]="-p --show-pids";
 

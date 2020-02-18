@@ -51,6 +51,10 @@ int main(int argc, char *argv[]) {
 
   closedir(dir);
 
+  for(int i = 0; i < count; i ++) {
+      printf("File %s\n", proclib[i]);
+  }
+
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);
     printf("argv[%d] = %s\n", i, argv[i]);

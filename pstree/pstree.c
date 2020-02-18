@@ -35,10 +35,10 @@ int main(int argc, char *argv[]) {
 
   while((entry=readdir(dir))) {
         if(find_num(entry->d_name) == 0) {
-            printf("Not a process file!\n");
+            printf("File %s :Not a process file!\n", entry->d_name);
         }
         else {
-            printf("Process!\n");
+            printf("File %s :Process!\n", entry->d_name);
         }
 //      printf("File %d: Name: %s Type:%d\n", files, entry->d_name, entry->d_type);  
 //      files ++;

@@ -8,6 +8,8 @@
 int main(int argc, char *argv[]) {
 
   DIR* dir;
+  struct dirent* entry;
+  int files = 0;
 
   dir = opendir("/proc");
   assert(dir != NULL);
@@ -19,7 +21,10 @@ int main(int argc, char *argv[]) {
   pid_t curr_pid = getpid();
   printf("PID:%d\n",curr_pid);
 
-  
+  while((entry=readdir(dir))) {
+      print("File %d: %s\n", files, entry->d_name);  
+      files ++;
+  }
 
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);

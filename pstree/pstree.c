@@ -14,6 +14,7 @@ int find_num(char *str) {
     else {
         return_code = 1; 
     }
+    return return_code;
 }
 
 int main(int argc, char *argv[]) {

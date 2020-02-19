@@ -5,10 +5,6 @@
 #include <string.h>   //char *strstr(const char *haystack, const char *needle)
 #include <dirent.h>
 
-struct node {
-    
-}
-
 int str2int(char *str) {
     int val = 0;
 	int i = 0;

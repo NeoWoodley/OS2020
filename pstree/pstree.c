@@ -62,8 +62,8 @@ int main(int argc, char *argv[]) {
             printf("File %s :Process!\n", entry->d_name);
             proclib[count] = entry->d_name;
 			pidlib[count] = str2int(entry->d_name);
-            infolib[count]->name = entry->d_name;
-			infolib[count]->pid = str2int(entry->d_name);
+            infolib[count].name = entry->d_name;
+			infolib[count].pid = str2int(entry->d_name);
             count ++;
         }
   }
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
   closedir(dir);
 
   for(int i = 0; i < count; i ++) {
-      printf("File %s PID %d Agagin File %s PID %d\n",proclib[count], pidlib[count], infolib[i]->name, infolib[i]->pid);
+      printf("File %s PID %d Agagin File %s PID %d\n",proclib[count], pidlib[count], infolib[i].name, infolib[i].pid);
   }
 
   for (int i = 0; i < argc; i++) {

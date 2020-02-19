@@ -10,7 +10,7 @@ struct node {
 	char* name;
 };
 
-const char* pid2name(int pid) {
+char* pid2name(int pid) {
     char* name = NULL;
     if(name){
 	    sprintf(name, "/proc/%d/cmdline", pid);

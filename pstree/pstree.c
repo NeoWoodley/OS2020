@@ -14,7 +14,7 @@ char* pid2name(int pid) {
     char* name = NULL;
     if(name){
 	    sprintf(name, "/proc/%d/cmdline", pid);
-		FILE* file = fopen(name,"r");
+		FILE* f = fopen(name,"r");
 		if(f){
 		    size_t size;
 			size = fread(name, sizeof(char), 128, f);

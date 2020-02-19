@@ -5,6 +5,11 @@
 #include <string.h>   //char *strstr(const char *haystack, const char *needle)
 #include <dirent.h>
 
+struct node {
+    int pid;
+	char* name[32];
+}
+
 int str2int(char *str) {
     int val = 0;
 	int i = 0;
@@ -35,6 +40,7 @@ int main(int argc, char *argv[]) {
 
   char* proclib[512];
   int pidlib[512];
+  struct node infolib[512];
 
   dir = opendir("/proc");
   assert(dir != NULL);
@@ -56,6 +62,8 @@ int main(int argc, char *argv[]) {
             printf("File %s :Process!\n", entry->d_name);
             proclib[count] = entry->d_name;
 			pidlib[count] = str2int(entry->d_name);
+            infolib[count]->name = entry->d_name;
+			infolib[count]->pid = str2int(entry->d_name);
             count ++;
         }
   }
@@ -65,7 +73,7 @@ int main(int argc, char *argv[]) {
   closedir(dir);
 
   for(int i = 0; i < count; i ++) {
-      printf("File %s PID %d\n", proclib[i], pidlib[i]);
+      printf("File %s PID %d\n", infolib[i], infolib[i]);
   }
 
   for (int i = 0; i < argc; i++) {

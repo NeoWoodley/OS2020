@@ -10,6 +10,25 @@ struct node {
 	char* name;
 };
 
+const char* pid2name(int pid) {
+    char* name = NULL;
+    if(name){
+	    sprintf(name, "/proc/%d/cmdline", pid);
+		FILE* file = fopen(name,"r");
+		if(f){
+		    size_t size;
+			size = fread(name, sizeof(char), 128, f);
+			if(size > 0) {
+			    if('\n'==name[size-1]){
+				    name[size-1]='\0';
+				}
+			}
+			fclose(f);
+		}
+	}
+	return name;
+}
+
 int str2int(char *str) {
     int val = 0;
 	int i = 0;
@@ -62,8 +81,8 @@ int main(int argc, char *argv[]) {
             printf("File %s :Process!\n", entry->d_name);
             proclib[count] = entry->d_name;
 			pidlib[count] = str2int(entry->d_name);
-            infolib[count].name = entry->d_name;
 			infolib[count].pid = str2int(entry->d_name);
+            infolib[count].name = pid2name(infolib[count].pid);
             count ++;
         }
   }

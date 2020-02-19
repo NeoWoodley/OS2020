@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -11,7 +12,7 @@ struct node {
 };
 
 char* pid2name(int pid) {
-    char* name = (char*)calloc(128,sizeof(char));
+    char* name = (char*)malloc(128,sizeof(char));
     if(name){
 	    sprintf(name, "/proc/%d/cmdline", pid);
 		FILE* f = fopen(name,"r");

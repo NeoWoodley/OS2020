@@ -26,6 +26,7 @@ char* pid2name(int pid) {
 			fclose(f);
 		}
 	}
+	assert(name != NULL);
 	return name;
 }
 

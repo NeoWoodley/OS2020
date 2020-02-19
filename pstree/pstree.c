@@ -11,7 +11,7 @@ struct node {
 };
 
 char* pid2name(int pid) {
-    char* name = NULL;
+    char* name = (char*)malloc(128,sizeof(char));
     if(name){
 	    sprintf(name, "/proc/%d/cmdline", pid);
 		FILE* f = fopen(name,"r");

@@ -8,7 +8,7 @@
 struct node {
     int pid;
 	char* name[32];
-}
+};
 
 int str2int(char *str) {
     int val = 0;

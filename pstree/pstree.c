@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
   closedir(dir);
 
   for(int i = 0; i < count; i ++) {
-      printf("File %s PID %d Agagin File %s PID %d\n",proclib[count], pidlib[count], infolib[i], infolib[i]);
+      printf("File %s PID %d Agagin File %s PID %d\n",proclib[count], pidlib[count], infolib[i]->name, infolib[i]->pid);
   }
 
   for (int i = 0; i < argc; i++) {

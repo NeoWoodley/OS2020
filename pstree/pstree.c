@@ -34,6 +34,14 @@ char* pid2name(int pid) {
 }
 */
 
+int len2n(char *str) {
+    int len = 0;
+	while (str[len] != '\n') {
+	    len ++;
+	}
+	return len;
+}
+
 int str2int(char *str) {
     int val = 0;
 	int i = 0;
@@ -102,6 +110,7 @@ int main(int argc, char *argv[]) {
       if(file) {
 	      fgets(name, 63, file);
 		  infolib[i].name = &name[6];
+		  printf("len: %d\n",len2n((char*)&(infolib[i].name)));
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
 	  }   

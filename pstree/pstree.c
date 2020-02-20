@@ -61,8 +61,6 @@ int main(int argc, char *argv[]) {
   DIR* dir;
   struct dirent* entry;
 
-  char* proclib[512];
-  int pidlib[512];
   struct node infolib[512];
 
   dir = opendir("/proc");
@@ -83,8 +81,6 @@ int main(int argc, char *argv[]) {
         }
         else {
             printf("File %s :Process!\n", entry->d_name);
-            proclib[count] = entry->d_name;
-			pidlib[count] = str2int(entry->d_name);
 			infolib[count].pid = str2int(entry->d_name);
             infolib[count].name = entry->d_name;
             count ++;

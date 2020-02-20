@@ -94,12 +94,13 @@ int main(int argc, char *argv[]) {
 
   char* path = (char*)malloc(32*sizeof(char));
   char* line = (char*)malloc(64*sizeof(char));
+  size_t line_buf_size = 63;
   FILE* file;
   for(int i = 0; i < count; i ++) {
 	  sprintf(path,"/proc/%d/status",infolib[i].pid);
       file = fopen(path, "r");
       if(file) {
-	      fgets(line, 63, file);
+	      getline(line, &line_buf_size, file);
 		  infolib[i].name = &line[6];
 		  /*
 		  for(int j = 0; j < 5; j ++) {

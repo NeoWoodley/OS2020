@@ -102,12 +102,12 @@ int main(int argc, char *argv[]) {
       if(file) {
 	      getline(&line, &line_buf_size, file);
 		  infolib[i].name = &line[6];
-		  /*
+		  
 		  for(int j = 0; j < 5; j ++) {
-		      fgets(line, 63, file);
+		      getline(&line, &line_buf_size, file);
 		  }
 		  printf("?????%s\n",line);
-		  */
+		  
 	  } 	  
       printf("File %s PID %d\n", infolib[i].name, infolib[i].pid);
   }

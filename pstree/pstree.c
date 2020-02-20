@@ -101,6 +101,7 @@ int main(int argc, char *argv[]) {
       file = fopen(path, "r");
       if(file) {
 	      getline(&line, &line_buf_size, file);
+		  printf("name? %s\n",line);
 		  infolib[i].name = &line[6];
 		  
 		  for(int j = 0; j < 5; j ++) {

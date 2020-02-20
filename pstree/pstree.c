@@ -105,7 +105,7 @@ int main(int argc, char *argv[]) {
       for(int i = 0; i < 6; i ++) {
 	      fgets(ppid, 32, file);
 	  }   
-	  printf("@@@@@@@%s\n",ppid);
+	  printf("@@@@@@@%s\n",ppid[6]);
 	  
 		  
 		  

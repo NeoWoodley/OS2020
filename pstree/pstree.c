@@ -102,15 +102,13 @@ int main(int argc, char *argv[]) {
       if(file) {
 	      fgets(name, 63, file);
 		  infolib[i].name = &name[6];
-      for(int i = 0; i < 6; i ++) {
+      for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
 	  }   
-	  printf("@@@@@@@%s\n",&ppid[6]);
-	  
-		  
-		  
+	  infolib[i].ppid=str2int(&ppid[6]);
 	  } 	  
-      printf("File %s PID %d\n", infolib[i].name, infolib[i].pid);
+
+      printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
   }
 
   for (int i = 0; i < argc; i++) {

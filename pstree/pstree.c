@@ -93,21 +93,17 @@ int main(int argc, char *argv[]) {
   closedir(dir);
 
   char* path = (char*)malloc(32*sizeof(char));
-  char* line = (char*)malloc(64*sizeof(char));
-  size_t line_buf_size = 63;
+  char* name = (char*)malloc(64*sizeof(char));
   FILE* file;
   for(int i = 0; i < count; i ++) {
 	  sprintf(path,"/proc/%d/status",infolib[i].pid);
       file = fopen(path, "r");
       if(file) {
-	      getline(&line, &line_buf_size, file);
-		  printf("name? %s\n",line);
-		  infolib[i].name = &line[6];
+	      fgets(name, 63, file);
+		  infolib[i].name = &name[6];
+
+	  
 		  
-		  for(int j = 0; j < 5; j ++) {
-		      getline(&line, &line_buf_size, file);
-		      printf("?????%s\n",line);
-		  }
 		  
 	  } 	  
       printf("File %s PID %d\n", infolib[i].name, infolib[i].pid);

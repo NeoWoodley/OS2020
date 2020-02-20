@@ -94,7 +94,7 @@ int main(int argc, char *argv[]) {
 
   char* path = (char*)malloc(16*sizeof(char));
   char* line = (char*)malloc(64*sizeof(char));
-  FILE* file
+  FILE* file;
   for(int i = 0; i < count; i ++) {
 	  sprintf(path,"/proc/%d/status",infolib[i].pid);
       file = fopen(path, 'r');

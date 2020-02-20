@@ -110,7 +110,7 @@ int main(int argc, char *argv[]) {
       if(file) {
 	      fgets(name, 63, file);
 		  infolib[i].name = &name[6];
-		  printf("len: %d\n",len2n(&(infolib[i].name)));
+		  printf("len: %d\n",len2n(infolib[i].name));
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
 	  }   

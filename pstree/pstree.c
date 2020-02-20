@@ -9,6 +9,7 @@
 struct node {
     int pid;
 	char* name;
+	int ppid;
 };
 
 /*
@@ -77,10 +78,10 @@ int main(int argc, char *argv[]) {
 
   while((entry=readdir(dir))) {
         if(find_num(entry->d_name) == 0) {
-            printf("File %s :Not a process file!\n", entry->d_name);
+            // printf("File %s :Not a process file!\n", entry->d_name);
         }
         else {
-            printf("File %s :Process!\n", entry->d_name);
+            // printf("File %s :Process!\n", entry->d_name);
 			infolib[count].pid = str2int(entry->d_name);
             infolib[count].name = entry->d_name;
             count ++;

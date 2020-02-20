@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
   FILE* file;
   for(int i = 0; i < count; i ++) {
 	  sprintf(path,"/proc/%d/status",infolib[i].pid);
-      file = fopen(path, 'r');
+      file = fopen(path, "r");
       if(file) {
 	      fgets(line, 63, file);
 		  printf("%s\n",line);

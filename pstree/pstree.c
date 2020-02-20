@@ -93,7 +93,7 @@ int main(int argc, char *argv[]) {
   closedir(dir);
 
   char* path = (char*)malloc(16*sizeof(char));
-  char* line = (char*)malloc(64*sizeof(char));
+  char* line = (char*)malloc(128*sizeof(char));
   FILE* file;
   for(int i = 0; i < count; i ++) {
 	  sprintf(path,"/proc/%d/status",infolib[i].pid);

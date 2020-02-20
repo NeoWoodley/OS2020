@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
 		  for(int i = 0; i < 5; i ++) {
 		      fgets(line, 63, file);
 		  }
-		  printf("%s\n",line);
+		  printf("?????%s\n",line);
 	  } 	  
       printf("File %s PID %d\n", infolib[i].name, infolib[i].pid);
   }

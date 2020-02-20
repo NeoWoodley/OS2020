@@ -45,7 +45,7 @@ int len2n(char *str) {
 int str2int(char *str) {
     int val = 0;
 	int i = 0;
-	while(str[i] != '\0') {
+	while(str[i] != '\0' && str[i] != '\n') {
 		val *= 10;
 		val += str[i] - '0';
 		i ++;

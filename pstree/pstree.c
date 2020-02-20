@@ -11,6 +11,7 @@ struct node {
 	char* name;
 };
 
+/*
 char* pid2name(int pid) {
     char* name = (char*)calloc(128,sizeof(char));
     if(name){
@@ -30,6 +31,7 @@ char* pid2name(int pid) {
 	assert(name != NULL);
 	return name;
 }
+*/
 
 int str2int(char *str) {
     int val = 0;
@@ -84,7 +86,7 @@ int main(int argc, char *argv[]) {
             proclib[count] = entry->d_name;
 			pidlib[count] = str2int(entry->d_name);
 			infolib[count].pid = str2int(entry->d_name);
-            infolib[count].name = pid2name(infolib[count].pid);
+            infolib[count].name = entry->d_name;
             count ++;
         }
   }
@@ -94,7 +96,7 @@ int main(int argc, char *argv[]) {
   closedir(dir);
 
   for(int i = 0; i < count; i ++) {
-      printf("File %s PID %d Agagin File %s PID %d\n",proclib[i], pidlib[i], infolib[i].name, infolib[i].pid);
+      printf("File %s PID %d\n", infolib[i].name, infolib[i].pid);
   }
 
   for (int i = 0; i < argc; i++) {

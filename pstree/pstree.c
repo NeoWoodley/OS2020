@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
 	      fgets(name, 63, file);
 		  infolib[i].name = &name[6];
 		  printf("len: %d\n",len2n(infolib[i].name));
-		  infolib[i].name[len2n(infolib)[i].name] = '\0';
+		  infolib[i].name[len2n(infolib[i].name)] = '\0';
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
 	  }   

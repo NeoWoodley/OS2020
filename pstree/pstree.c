@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
 	      fgets(line, 63, file);
 		  infolib[i].name = &line[6];
 		  for(int i = 0; i < 5; i ++) {
-		      fgets(line, 63, file)
+		      fgets(line, 63, file);
 		  }
 		  printf("%s\n",line);
 	  } 	  

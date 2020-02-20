@@ -94,6 +94,7 @@ int main(int argc, char *argv[]) {
 
   char* path = (char*)malloc(32*sizeof(char));
   char* name = (char*)malloc(64*sizeof(char));
+  char* ppid = (char*)malloc(32*sizeof(char));
   FILE* file;
   for(int i = 0; i < count; i ++) {
 	  sprintf(path,"/proc/%d/status",infolib[i].pid);
@@ -101,7 +102,10 @@ int main(int argc, char *argv[]) {
       if(file) {
 	      fgets(name, 63, file);
 		  infolib[i].name = &name[6];
-
+      for(int i = 0; i < 6; i ++) {
+	      fgets(ppid, 32, file);
+	  }   
+	  printf("@@@@@@@%s\n",ppid);
 	  
 		  
 		  

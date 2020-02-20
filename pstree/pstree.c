@@ -100,9 +100,10 @@ int main(int argc, char *argv[]) {
       file = fopen(path, "r");
       if(file) {
 	      fgets(line, 63, file);
+		  infolib[i].name = &line[8];
 		  printf("%s\n",line);
 	  } 	  
-     // printf("File %s PID %d\n", infolib[i].name, infolib[i].pid);
+      printf("File %s PID %d\n", infolib[i].name, infolib[i].pid);
   }
 
   for (int i = 0; i < argc; i++) {

@@ -71,8 +71,8 @@ int main(int argc, char *argv[]) {
   char _n[18]="-n --numeric-sort";
   char _p[15]="-p --show-pids";
 
-  pid_t curr_pid = getpid();
-  printf("PID:%d\n",curr_pid);
+//  pid_t curr_pid = getpid();
+//  printf("PID:%d\n",curr_pid);
   
   int count = 0;
 
@@ -92,8 +92,17 @@ int main(int argc, char *argv[]) {
 
   closedir(dir);
 
+  char* path = (char*)malloc(16*sizeof(char));
+  char* line = (char*)malloc(64*sizeof(char));
+  FILE* file
   for(int i = 0; i < count; i ++) {
-      printf("File %s PID %d\n", infolib[i].name, infolib[i].pid);
+	  sprintf(path,"/proc/%d/status",infolib[i].pid);
+      file = fopen(path, 'r');
+      if(file) {
+	      fgets(line, 63, file);
+		  printf("%s\n",line);
+	  } 	  
+     // printf("File %s PID %d\n", infolib[i].name, infolib[i].pid);
   }
 
   for (int i = 0; i < argc; i++) {

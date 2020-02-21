@@ -116,7 +116,7 @@ int main(int argc, char *argv[]) {
 		      infolib[i].child = &infolib[j];
 		  }
 		  else if(infolib[i].child != NULL && infolib[j].ppid == infolib[i].pid) {
-              temp = findpeertail((struct node*)&(infolib[i].child.peer));
+              temp = findpeertail((struct node*)&(infolib[i].child->peer));
 			  temp->peer = (struct node*)&infolib[j];
 		  }
 		  else {

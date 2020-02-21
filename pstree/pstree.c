@@ -68,7 +68,7 @@ void buildtree(struct node* Node) {
 		   printf("--------+-\n");
 		   printf("        |\n");
 		   printf("        |\n");
-		   printf("        |\n");
+		   printf("        |");
 		   buildtree((struct node*)(temp));
 		   temp = temp->peer;
 		}

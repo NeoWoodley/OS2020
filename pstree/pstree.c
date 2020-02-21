@@ -58,7 +58,7 @@ int find_num(char *str) {
 void buildtree(struct node* Node) {
 	struct node* temp;
     if(Node->child == NULL) {
-	    printf("--%s{%d}\n",&Node->name[0],Node->pid);
+	    printf("--%s{%d}",&Node->name[0],Node->pid);
 	}
 	
 	else if(Node->child != NULL) {

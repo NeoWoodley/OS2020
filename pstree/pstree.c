@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
       file = fopen(path, "r");
       if(file) {
 	      fgets(name, 63, file);
-		  strcat(&infolib[i].name, &name[6]);
+		  strcat(&infolib[i].name[0], &name[6]);
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);

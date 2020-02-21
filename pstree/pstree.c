@@ -66,10 +66,10 @@ void buildtree(struct node* Node) {
 	    while(temp != NULL) {
 		   count ++;
 		   printf("-+-");
+		   printf("        |\n");
+		   printf("        |\n");
+		   printf("        |\n");
 		   buildtree((struct node*)(temp));
-		   printf("        |\n");
-		   printf("        |\n");
-		   printf("        |\n");
 		   temp = temp->peer;
 		}
 	}

@@ -12,28 +12,6 @@ struct node {
 	int ppid;
 };
 
-/*
-char* pid2name(int pid) {
-    char* name = (char*)calloc(128,sizeof(char));
-    if(name){
-	    sprintf(name, "/proc/%d/cmdline", pid);
-		FILE* f = fopen(name,"r");
-		if(f){
-		    size_t size;
-			size = fread(name, sizeof(char), 128, f);
-			if(size > 0) {
-			    if('\n'==name[size-1]){
-				    name[size-1]='\0';
-				}
-			}
-			fclose(f);
-		}
-	}
-	assert(name != NULL);
-	return name;
-}
-*/
-
 int len2n(char *str) {
     int len = 0;
 	while (str[len] != '\n') {
@@ -79,9 +57,6 @@ int main(int argc, char *argv[]) {
   char _n[18]="-n --numeric-sort";
   char _p[15]="-p --show-pids";
 
-//  pid_t curr_pid = getpid();
-//  printf("PID:%d\n",curr_pid);
-  
   int count = 0;
 
   while((entry=readdir(dir))) {
@@ -118,7 +93,7 @@ int main(int argc, char *argv[]) {
 	  infolib[i].ppid=str2int(&ppid[6]);
 	  } 	  
 
-//      printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
+      printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
   }
   free(path);
   free(name);

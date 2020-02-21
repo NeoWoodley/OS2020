@@ -10,7 +10,7 @@ int time = 0;
 
 struct node {
     int pid;
-	char* name;
+	char name[50];
 	int ppid;
 	struct node* child;
 	struct node* peer;
@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
       file = fopen(path, "r");
       if(file) {
 	      fgets(name, 63, file);
-		  infolib[i].name = &name[6];
+		  strcat(&infolib[i].name, &name[6]);
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
@@ -113,12 +113,15 @@ int main(int argc, char *argv[]) {
 	  infolib[i].ppid=str2int(&ppid[6]);
 	  } 	  
 
-      printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
   }
   free(path);
   free(name);
   free(ppid);
 
+  for(int i=0; i < count; i ++) {
+      printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
+  
+  }
 
   struct node* temp = (struct node*)malloc(sizeof(struct node));
   for(int i = 0; i < count; i ++) {

@@ -6,6 +6,8 @@
 #include <string.h>   //char *strstr(const char *haystack, const char *needle)
 #include <dirent.h>
 
+int time = 0;
+
 struct node {
     int pid;
 	char* name;
@@ -54,12 +56,11 @@ int find_num(char *str) {
 }
 
 void buildtree(struct node* Node) {
-	int i = 0;
     if(Node->child == NULL) {
 	    printf("Hello World!\n");
-		i ++;
+		time ++;
 	}
-	printf("Total count:%d\n",i);
+	printf("Total count:%d\n",time);
 }
 
 int main(int argc, char *argv[]) {

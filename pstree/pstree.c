@@ -134,7 +134,7 @@ int main(int argc, char *argv[]) {
   }
 
   for(int i = 0; i < count; i ++) {
-      buildtree(&infolib[i]);
+      buildtree((struct node*)&infolib[i]);
   }
 
   for (int i = 0; i < argc; i++) {

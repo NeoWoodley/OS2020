@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
 
   }
   free(path);
-  free(name);
+//  free(name);
   free(ppid);
 
   for(int i = 0; i < count; i ++) {

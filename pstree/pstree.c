@@ -10,7 +10,17 @@ struct node {
     int pid;
 	char* name;
 	int ppid;
+	struct node* child;
+	struct node* peer;
 };
+
+struct node* findpeertail(struct node* Node) {
+	struct node* end = Node;
+    while(end.peer!=NULL) {
+	    end = end.peer;
+	}
+	return end;
+}
 
 int len2n(char *str) {
     int len = 0;
@@ -98,7 +108,23 @@ int main(int argc, char *argv[]) {
   free(path);
   free(name);
   free(ppid);
-
+  
+  struct node* temp = (struct node*)malloc(sizeof(struct node));
+  for(int i = 0; i < count; i ++) {
+	  for(int j = i+1; j < countl; j ++) {
+	      if(infolib[i].child == NULL && infolib[j].ppid == infolib[i].pid) {
+		      infolib[i].child = &infolib[j];
+		  }
+		  else if(infolib[i].child != NULL && infolib[j].ppid == infolib[i].pid) {
+              temp = findpeertail((struct node*)&(infolib[i].child.peer));
+			  temp.peer = (struct node*)&infolib[j];
+		  }
+		  else {
+		      assert(0);
+		  }
+	  }
+      
+  }
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);
     printf("argv[%d] = %s\n", i, argv[i]);

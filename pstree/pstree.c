@@ -6,6 +6,8 @@
 #include <string.h>   //char *strstr(const char *haystack, const char *needle)
 #include <dirent.h>
 
+int count = 0;
+
 struct node {
     int pid;
 	char name[50];
@@ -62,8 +64,10 @@ void buildtree(struct node* Node) {
 	else if(Node->child != NULL) {
 		temp = (struct node*)Node->child->peer;
 	    while(temp != NULL) {
+		   count ++;
 		   buildtree((struct node*)(&(temp)));
 		   temp = temp->peer;
+		   printf("Times:%d\n",count);
 		}
 	}
 }

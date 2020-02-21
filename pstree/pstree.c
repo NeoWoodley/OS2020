@@ -118,7 +118,7 @@ int main(int argc, char *argv[]) {
 	  infolib[i].ppid=str2int(&ppid[6]);
 	  } 	  
 
-      printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
+//      printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
   }
   free(path);
   free(name);

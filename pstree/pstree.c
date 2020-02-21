@@ -123,7 +123,7 @@ int main(int argc, char *argv[]) {
   for(int i = 0; i < count; i ++) {
 	  for(int j = i+1; j < count; j ++) {
 	      if(infolib[i].child == NULL && infolib[j].ppid == infolib[i].pid) {
-		      infolib[i].child = &infolib[j];
+		      infolib[i].child = (struct node*)&infolib[j];
 		  }
 		  else if(infolib[i].child != NULL && infolib[j].ppid == infolib[i].pid) {
               temp = findpeertail((struct node*)&(infolib[i].child->peer));

@@ -16,8 +16,8 @@ struct node {
 
 struct node* findpeertail(struct node* Node) {
 	struct node* end = Node;
-    while(end.peer!=NULL) {
-	    end = end.peer;
+    while(end->peer!=NULL) {
+	    end = end->peer;
 	}
 	return end;
 }
@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
   
   struct node* temp = (struct node*)malloc(sizeof(struct node));
   for(int i = 0; i < count; i ++) {
-	  for(int j = i+1; j < countl; j ++) {
+	  for(int j = i+1; j < count; j ++) {
 	      if(infolib[i].child == NULL && infolib[j].ppid == infolib[i].pid) {
 		      infolib[i].child = &infolib[j];
 		  }

@@ -117,8 +117,11 @@ int main(int argc, char *argv[]) {
   free(path);
   free(name);
   free(ppid);
+
+  for(int i = 0; i < count; i ++) {
       printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
-  
+  }
+
   struct node* temp = (struct node*)malloc(sizeof(struct node));
   for(int i = 0; i < count; i ++) {
 	  for(int j = i+1; j < count; j ++) {

@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
 	  infolib[i].ppid=str2int(&ppid[6]);
 	  } 	  
 
-      printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
+//      printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
   }
   free(path);
   free(name);
@@ -118,9 +118,6 @@ int main(int argc, char *argv[]) {
 		  else if(infolib[i].child != NULL && infolib[j].ppid == infolib[i].pid) {
               temp = findpeertail((struct node*)&(infolib[i].child->peer));
 			  temp->peer = (struct node*)&infolib[j];
-		  }
-		  else {
-		      assert(0);
 		  }
 	  }
       

@@ -113,14 +113,12 @@ int main(int argc, char *argv[]) {
 	  infolib[i].ppid=str2int(&ppid[6]);
 	  } 	  
 
-  }
-  free(path);
-//  free(name);
-  free(ppid);
-
-  for(int i = 0; i < count; i ++) {
       printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
   }
+  free(path);
+  free(name);
+  free(ppid);
+
 
   struct node* temp = (struct node*)malloc(sizeof(struct node));
   for(int i = 0; i < count; i ++) {

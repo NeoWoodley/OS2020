@@ -57,7 +57,7 @@ int find_num(char *str) {
 
 void buildtree(struct node* Node) {
     if(Node->child == NULL) {
-	    printf("%d!\n",Node->pid);
+	    printf("--%s{%d}\n",&Node->name[0],Node->pid);
 		time ++;
 	}
 	printf("Total count:%d\n",time);

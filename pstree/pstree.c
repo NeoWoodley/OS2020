@@ -58,14 +58,14 @@ int find_num(char *str) {
 void buildtree(struct node* Node) {
 	struct node* temp;
     if(Node->child == NULL) {
-	    printf("--%s{%d}",&Node->name[0],Node->pid);
+	    printf("--%s{%d}\n",&Node->name[0],Node->pid);
 	}
 	
 	else if(Node->child != NULL) {
 		temp = (struct node*)Node->child->peer;
 	    while(temp != NULL) {
 		   count ++;
-	//	   printf("Times:%d\n",count);
+		   printf("-------------Times:%d\n",count);
 		   buildtree((struct node*)(temp));
 		   temp = temp->peer;
 		}

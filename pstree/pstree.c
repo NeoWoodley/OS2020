@@ -53,6 +53,12 @@ int find_num(char *str) {
     return return_code;
 }
 
+void buildtree(struct node* Node) {
+    if(Node->child == NULL) {
+	    printf("--%s{%d}\n"，Node->name, Node->pid);
+	}
+}
+
 int main(int argc, char *argv[]) {
 
   DIR* dir;
@@ -122,6 +128,11 @@ int main(int argc, char *argv[]) {
 	  }
       
   }
+
+  for(int i = 0; i < count; i ++) {
+      buildtree((struct node*)&infolib[i]);
+  }
+
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);
     printf("argv[%d] = %s\n", i, argv[i]);

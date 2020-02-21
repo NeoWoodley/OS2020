@@ -54,8 +54,17 @@ int find_num(char *str) {
 }
 
 void buildtree(struct node* Node) {
+	struct node* temp = NULL;
     if(Node->child == NULL) {
 	    printf("--%s{%d}\n",&Node->name[0],Node->pid);
+	}
+	
+	else if(Node->child != NULL) {
+		temp = (struct node*)Node->child->peer;
+	    while(temp != NULL) {
+		   buildtree((struct node*)(&(temp)));
+		   temp = temp->peer;
+		}
 	}
 }
 

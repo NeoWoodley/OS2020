@@ -14,6 +14,7 @@ struct node {
 	int ppid;
 	struct node* child;
 	struct node* peer;
+	int depth;
 };
 
 struct node* findpeertail(struct node* Node) {
@@ -132,10 +133,12 @@ int main(int argc, char *argv[]) {
 	  for(int j = i+1; j < count; j ++) {
 	      if(infolib[i].child == NULL && infolib[j].ppid == infolib[i].pid) {
 		      infolib[i].child = (struct node*)&infolib[j];
+			  infolib[j].depth = infolib[i].depth + 1; 
 		  }
 		  else if(infolib[i].child != NULL && infolib[j].ppid == infolib[i].pid) {
               temp = findpeertail((struct node*)&(infolib[i].child->peer));
 			  temp->peer = (struct node*)&infolib[j];
+			  infolib[j].depth = infolib[i].depth; 
 		  }
 	  }
       

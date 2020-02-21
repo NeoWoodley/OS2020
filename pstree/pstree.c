@@ -66,7 +66,7 @@ void buildtree(struct node* Node) {
 	    while(temp != NULL) {
 		   count ++;
 		   printf("-------------Times:%d\n",count);
-		   printf("-+-")
+		   printf("-+-");
 		   buildtree((struct node*)(temp));
 		   temp = temp->peer;
 		}

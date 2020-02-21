@@ -113,11 +113,11 @@ int main(int argc, char *argv[]) {
 	  infolib[i].ppid=str2int(&ppid[6]);
 	  } 	  
 
-//      printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
   }
   free(path);
   free(name);
   free(ppid);
+      printf("File %s PID %d PPID %d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
   
   struct node* temp = (struct node*)malloc(sizeof(struct node));
   for(int i = 0; i < count; i ++) {
@@ -133,10 +133,11 @@ int main(int argc, char *argv[]) {
       
   }
 
+  /*
   for(int i = 0; i < count; i ++) {
       buildtree((struct node*)&infolib[i]);
   }
-
+  */
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);
     printf("argv[%d] = %s\n", i, argv[i]);

@@ -64,7 +64,7 @@ void buildtree(struct node* Node) {
 		for(int i = 0; i < Node->depth; i ++) {
 		    printf("%s",&space[0]);
 		}
-		printf("%s{%d}--ppid{%d}--depth{%d}\n",&(Node)->name[0],Node->pid,Node->ppid.Node->depth);
+		printf("%s{%d}--ppid{%d}--depth{%d}\n",&(Node)->name[0],Node->pid,Node->ppid,Node->depth);
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
 		return;
 	}
@@ -73,7 +73,7 @@ void buildtree(struct node* Node) {
 		for(int i = 0; i < Node->depth; i ++) {
 		    printf("%s",&space[0]);
 		}
-		printf("%s{%d}--ppid{%d}--depth{%d}\n",&(Node)->name[0],Node->pid,Node->ppid.Node->depth);
+		printf("%s{%d}--ppid{%d}--depth{%d}\n",&(Node)->name[0],Node->pid,Node->ppid,Node->depth);
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
 		temp = (struct node*)Node->child->peer;
 	    while(temp != NULL) {

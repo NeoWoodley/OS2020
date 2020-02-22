@@ -165,6 +165,7 @@ int main(int argc, char *argv[]) {
       
   }
 
+  assert(infolib[1].child != NULL);
 
   for(int i = 0; i < count; i ++) {
 //	  if(infolib[i].depth == 0) {

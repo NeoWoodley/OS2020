@@ -146,8 +146,8 @@ int main(int argc, char *argv[]) {
   free(ppid);
 
 
-  //struct node* temp = (struct node*)malloc(sizeof(struct node));
-  struct node* temp;
+  struct node* temp = (struct node*)malloc(sizeof(struct node));
+  //struct node* temp;
   for(int i = 0; i < count; i ++) {
 	  for(int j = 0; j < count; j ++) {
 	      if(infolib[i].child == NULL && infolib[j].ppid == infolib[i].pid) {
@@ -165,9 +165,10 @@ int main(int argc, char *argv[]) {
 
 
   for(int i = 0; i < count; i ++) {
-	  if(infolib[i].depth == 0) {
+//	  if(infolib[i].depth == 0) {
           buildtree((struct node*)&infolib[i]);
-	  }
+		  printf("-------------------------------------------------------------");
+//	  }
 //	  printf("%s{%d}--ppid{%d}--depth{%d}\n",&infolib[i].name[0], infolib[i].pid, infolib[i].ppid, infolib[i].depth);
   }
 

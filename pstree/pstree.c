@@ -14,7 +14,6 @@ struct node {
 	int ppid;
 	struct node* child;
 	struct node* peer;
-	int depth;
 };
 
 struct node* findpeertail(struct node* Node) {

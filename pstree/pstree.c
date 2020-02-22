@@ -152,11 +152,14 @@ int main(int argc, char *argv[]) {
       
   }
 
-/*
+
   for(int i = 0; i < count; i ++) {
       buildtree((struct node*)&infolib[i]);
   }
-*/
+
+  for(int i = 0; i < count; i ++) {
+	  printf("%s\n",infolib[i].string);
+  }
 
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);

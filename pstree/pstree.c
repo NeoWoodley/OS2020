@@ -162,6 +162,7 @@ int main(int argc, char *argv[]) {
       
   }
 
+  printf("systemd\n");
 
   for(int i = 0; i < count; i ++) {
       buildtree((struct node*)&infolib[i]);

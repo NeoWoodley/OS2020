@@ -61,7 +61,7 @@ int find_num(char *str) {
 void buildtree(struct node* Node) {
 	struct node* temp;
     if(Node->child == NULL) {
-		for(int i = 0; i <= Node->depth; i ++) {
+		for(int i = 0; i < Node->depth; i ++) {
 		    printf("%s",&space[0]);
 		}
 		printf("%s{%d}\n",&(Node)->name[0],Node->pid);
@@ -69,7 +69,7 @@ void buildtree(struct node* Node) {
 	}
 	
 	else if(Node->child != NULL) {
-		for(int i = 0; i <= Node->depth; i ++) {
+		for(int i = 0; i < Node->depth; i ++) {
 		    printf("%s",&space[0]);
 		}
         printf("%s{%d}\n",&(Node->name[0]), Node->pid);
@@ -162,11 +162,12 @@ int main(int argc, char *argv[]) {
       
   }
 
-  printf("systemd\n");
 
   for(int i = 0; i < count; i ++) {
- //     buildtree((struct node*)&infolib[i]);
-	  printf("%s{%d}--ppid{%d}--depth{%d}\n",&infolib[i].name[0], infolib[i].pid, infolib[i].ppid, infolib[i].depth);
+	  if(infolib[i].depth == 0) {
+          buildtree((struct node*)&infolib[i]);
+	  }
+//	  printf("%s{%d}--ppid{%d}--depth{%d}\n",&infolib[i].name[0], infolib[i].pid, infolib[i].ppid, infolib[i].depth);
   }
 
   for (int i = 0; i < argc; i++) {

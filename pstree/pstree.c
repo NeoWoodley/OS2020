@@ -148,7 +148,7 @@ int main(int argc, char *argv[]) {
 
   struct node* temp = (struct node*)malloc(sizeof(struct node));
   for(int i = 0; i < count; i ++) {
-	  for(int j = i+1; j < count; j ++) {
+	  for(int j = 0; j < count; j ++) {
 	      if(infolib[i].child == NULL && infolib[j].ppid == infolib[i].pid) {
 		      infolib[i].child = (struct node*)&infolib[j];
 			  infolib[j].depth = infolib[i].depth + 1; 

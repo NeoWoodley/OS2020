@@ -99,11 +99,11 @@ int main(int argc, char *argv[]) {
             count ++;
         }
   }
-
+/*
   for(int i = 0; i < count; i ++){
       infolib[i].depth = 0;
   }
-
+*/
   printf("Total process number:%d\n",count);
 
   closedir(dir);

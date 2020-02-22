@@ -14,9 +14,9 @@ struct node {
 	char name[50];
 	int ppid;
 	int depth;
-	char* string;
 	struct node* child;
 	struct node* peer;
+	char* string;
 };
 
 struct node* findpeertail(struct node* Node) {

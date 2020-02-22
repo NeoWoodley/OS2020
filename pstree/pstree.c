@@ -14,7 +14,7 @@ struct node {
 	char name[50];
 	int ppid;
 	int depth;
-	char string[64];
+	char* string;
 	struct node* child;
 	struct node* peer;
 };
@@ -60,8 +60,10 @@ int find_num(char *str) {
 
 void buildtree(struct node* Node) {
 	struct node* temp;
+	char* string;
     if(Node->child == NULL) {
-	    asprintf((char*)&((char*)&Node->string[0]),"%s{%d}%c",&Node->name[0],Node->pid,'\0');
+	    asprintf(&string,"%s{%d}%c",&Node->name[0],Node->pid,'\0');
+		Node->string = string;
 	}
 	
 	else if(Node->child != NULL) {

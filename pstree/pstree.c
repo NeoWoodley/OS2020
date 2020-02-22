@@ -165,7 +165,8 @@ int main(int argc, char *argv[]) {
   printf("systemd\n");
 
   for(int i = 0; i < count; i ++) {
-      buildtree((struct node*)&infolib[i]);
+ //     buildtree((struct node*)&infolib[i]);
+	  printf("%s{%d}\n",&infolib.name[0], infolib.pid);
   }
 
   for (int i = 0; i < argc; i++) {

@@ -8,13 +8,13 @@
 #include <dirent.h>
 
 int count = 0;
+char space[3] = "  ";
 
 struct node {
     int pid;
 	char name[50];
 	int ppid;
 	int depth;
-	char* string;
 	struct node* child;
 	struct node* peer;
 };
@@ -61,16 +61,24 @@ int find_num(char *str) {
 void buildtree(struct node* Node) {
 	struct node* temp;
     if(Node->child == NULL) {
-	    asprintf(&Node->string,"%s{%d}%c",&Node->name[0],Node->pid,'\0');
+		for(int i = 0; i < Node->depth;; i ++) {
+		    printf("%s",&space[0]);
+		}
+		printf("%s{%d}\n",&(Node)->string[0],Node->pid);
+		return;
 	}
 	
 	else if(Node->child != NULL) {
+		for(int i = 0; i < Node->depth; i ++) {
+		    printf("%s",&space[0]);
+		}
+        printf("%s{%d}\n",&(Node->string[0]), Node->pid);
 		temp = (struct node*)Node->child->peer;
 	    while(temp != NULL) {
-		   count ++;
-		   buildtree((struct node*)(temp));
-		   temp = temp->peer;
+		   buildtree(temp);
+		   temp = (struct node*)(temp->peer);
 		}
+		return;
 	}
 }
 
@@ -80,6 +88,8 @@ int main(int argc, char *argv[]) {
   struct dirent* entry;
 
   struct node infolib[512];
+
+  
 
   dir = opendir("/proc");
   assert(dir != NULL);
@@ -104,6 +114,8 @@ int main(int argc, char *argv[]) {
 
   for(int i = 0; i < count; i ++){
       infolib[i].depth = 0;
+	  infolib[i].peer = NULL;
+	  infolib[i].child = NULL;
   }
 
   printf("Total process number:%d\n",count);
@@ -153,10 +165,6 @@ int main(int argc, char *argv[]) {
 
   for(int i = 0; i < count; i ++) {
       buildtree((struct node*)&infolib[i]);
-  }
-
-  for(int i = 0; i < count; i ++) {
-	  printf("%s\n",infolib[i].string);
   }
 
   for (int i = 0; i < argc; i++) {

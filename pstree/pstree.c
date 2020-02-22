@@ -164,9 +164,7 @@ int main(int argc, char *argv[]) {
 
 
   for(int i = 0; i < count; i ++) {
-	  if(infolib[i].depth == 0) {
-          buildtree((struct node*)&infolib[i]);
-	  }
+      buildtree((struct node*)&infolib[i]);
   }
 
   for (int i = 0; i < argc; i++) {

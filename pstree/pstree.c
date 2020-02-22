@@ -12,6 +12,7 @@ struct node {
     int pid;
 	char name[50];
 	int ppid;
+	int depth;
 	struct node* child;
 	struct node* peer;
 };

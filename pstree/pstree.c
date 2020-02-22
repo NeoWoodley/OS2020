@@ -166,7 +166,7 @@ int main(int argc, char *argv[]) {
 
   for(int i = 0; i < count; i ++) {
  //     buildtree((struct node*)&infolib[i]);
-	  printf("%s{%d}\n",&infolib[i].name[0], infolib[i].pid);
+	  printf("%s{%d}-ppid{%d}\n",&infolib[i].name[0], infolib[i].pid, infolib[i].ppid);
   }
 
   for (int i = 0; i < argc; i++) {

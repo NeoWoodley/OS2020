@@ -229,14 +229,13 @@ int main(int argc, char *argv[]) {
       test_node = test_node->peer; 
   }
 
-  /*
   for(int i = 0; i < count; i ++){
 	  if(infolib[i].depth == 0) {
           buildtree(&infolib[i]);
 	  }
 	  //printf("%d: ppid: %d\n", i, infolib[i].ppid);
   }
-  */
+
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);
 //    printf("argv[%d] = %s\n", i, argv[i]);

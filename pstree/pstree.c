@@ -188,6 +188,7 @@ int main(int argc, char *argv[]) {
   }
   */
 
+  /*
   for(int i = 0; i < 1; i ++) {
 	  if(infolib[i].depth == 0) {
 		  assert(infolib[i].child->peer != NULL);
@@ -207,6 +208,8 @@ int main(int argc, char *argv[]) {
 	  }
 //	  printf("%s{%d}--ppid{%d}--depth{%d}\n",&infolib[i].name[0], infolib[i].pid, infolib[i].ppid, infolib[i].depth);
   }
+  */
+
   struct node* test_node = &infolib[63];
   while(test_node->peer != NULL) {
 	  printf("Thread:%s Pid:%d PPid:%d\n", test_node->name, test_node->pid, test_node->ppid);

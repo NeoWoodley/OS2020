@@ -230,7 +230,7 @@ int main(int argc, char *argv[]) {
           buildtree(&infolib[i]);
 	  }
 	  */
-	  printf("%d: ppid: %d\n", i, infolib[i].ppid);
+	  //printf("%d: ppid: %d\n", i, infolib[i].ppid);
   }
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);

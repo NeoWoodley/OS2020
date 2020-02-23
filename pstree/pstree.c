@@ -170,7 +170,7 @@ int main(int argc, char *argv[]) {
       
   }
 
-  assert(infolib[0].child != NULL);
+  assert(infolib[0].child->peer != NULL);
 
   for(int i = 0; i < count; i ++) {
 	  if(infolib[i].depth == 0) {

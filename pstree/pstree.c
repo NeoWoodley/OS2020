@@ -173,7 +173,7 @@ int main(int argc, char *argv[]) {
 		  else {
 		      printf("-----S3\n");
 		  }
-		  printf("i=%d,j=%d,lib[%d].depth=%d, lib[%d].child:%p, lib[%d].depth=%d\n",i,j,i,infolib[i].depth,i,infolib[i].child,j,infolib[j].depth); 
+	//	  printf("i=%d,j=%d,lib[%d].depth=%d, lib[%d].child:%p, lib[%d].depth=%d\n",i,j,i,infolib[i].depth,i,infolib[i].child,j,infolib[j].depth); 
 	  }
   }
 
@@ -209,7 +209,7 @@ int main(int argc, char *argv[]) {
   }
   */
 
-
+  /*
   for(int i = 0; i < count; i ++){
       if(infolib[i].peer == NULL) {
 	      printf("%d: YES!\n",i);
@@ -218,6 +218,7 @@ int main(int argc, char *argv[]) {
 	      printf("%d: NO!\n",i);
 	  }
   }
+  */
 
   struct node* test_node = &infolib[64];
   while(test_node->peer != NULL) {

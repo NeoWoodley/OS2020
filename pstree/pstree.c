@@ -99,8 +99,6 @@ int main(int argc, char *argv[]) {
   char _n[18]="-n --numeric-sort";
   char _p[15]="-p --show-pids";
 
-  int count = 0;
-
   while((entry=readdir(dir))) {
         if(find_num(entry->d_name) == 0) {
             // printf("File %s :Not a process file!\n", entry->d_name);

@@ -171,25 +171,26 @@ int main(int argc, char *argv[]) {
 
   assert(infolib[0].child->peer != NULL);
 
+  /*
   temp = infolib[0].child;
   while(temp != NULL) {
 	  printf("Thread:%s Pid:%d PPid:%d\n", temp->name, temp->pid, temp->ppid);
 	  temp = temp->peer;
   }
+  */
 
-  /*
   for(int i = 0; i < 1; i ++) {
 	  if(infolib[i].depth == 0) {
 		  assert(infolib[i].child->peer != NULL);
 		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
 		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].child->name, infolib[i].child->pid, infolib[i].child->ppid);
 		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].child->peer->name, infolib[i].child->peer->pid, infolib[i].child->peer->ppid);
+		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].child->peer->peer->name, infolib[i].child->peer->peer->pid, infolib[i].child->peer->peer->ppid);
   //        buildtree((struct node*)&infolib[i].child->peer);
 		  printf("-------------------------------------------------------------\n");
 	  }
 //	  printf("%s{%d}--ppid{%d}--depth{%d}\n",&infolib[i].name[0], infolib[i].pid, infolib[i].ppid, infolib[i].depth);
   }
-  */
 
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);

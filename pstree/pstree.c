@@ -135,7 +135,7 @@ int main(int argc, char *argv[]) {
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
-		  if(ppid, &_ppid[0] != NULL) {
+		  if(strstr(ppid, &_ppid[0]) != NULL) {
 		      break;
 		  }
 	  }   

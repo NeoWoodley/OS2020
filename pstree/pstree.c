@@ -184,7 +184,7 @@ int main(int argc, char *argv[]) {
 		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
 		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].child->name, infolib[i].child->pid, infolib[i].child->ppid);
 		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].child->peer->name, infolib[i].child->peer->pid, infolib[i].child->peer->ppid);
-		  if(infolib[i].child->peer->peer == NULL) {
+		  if(infolib[i].child->peer->child == NULL) {
 		      printf("Yes!!!!!!!!!!!!!!!!\n");
 		  }
 		  else {

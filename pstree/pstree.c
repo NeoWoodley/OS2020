@@ -235,7 +235,7 @@ int main(int argc, char *argv[]) {
 	  /*if(infolib[i].depth == 0) {
           buildtree(&infolib[i]);
 	  }*/
-	  printf("%d: ppid: %d\n", i, infolib[i].ppid);
+	  printf("%d: ppid: %d pid: %d\n", i, infolib[i].ppid, infolib[i].pid);
   }
 
   for (int i = 0; i < argc; i++) {

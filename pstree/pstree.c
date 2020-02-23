@@ -226,6 +226,8 @@ int main(int argc, char *argv[]) {
       test_node = test_node->peer; 
   }
 
+  buildtree(&infolib[0]);
+
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);
 //    printf("argv[%d] = %s\n", i, argv[i]);

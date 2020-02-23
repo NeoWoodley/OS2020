@@ -207,6 +207,11 @@ int main(int argc, char *argv[]) {
 	  }
 //	  printf("%s{%d}--ppid{%d}--depth{%d}\n",&infolib[i].name[0], infolib[i].pid, infolib[i].ppid, infolib[i].depth);
   }
+  struct node* test_node = &infolib[63];
+  while(test_node->peer != NULL) {
+	  printf("Thread:%s Pid:%d PPid:%d\n", test_node->name, test_node->pid, test_node->ppid);
+      test_node = test_node->peer; 
+  }
 
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);

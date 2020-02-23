@@ -135,7 +135,7 @@ int main(int argc, char *argv[]) {
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
 	  }   
-	  printf("-----%d: %s",ppid);
+	  printf("-----%d: %s",i, ppid);
 	  infolib[i].ppid=str2int(&ppid[6]);
 	  } 	  
 

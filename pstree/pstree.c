@@ -188,8 +188,8 @@ int main(int argc, char *argv[]) {
 		  printf("-------------------------------------------------------------\n");
 	  }
 //	  printf("%s{%d}--ppid{%d}--depth{%d}\n",&infolib[i].name[0], infolib[i].pid, infolib[i].ppid, infolib[i].depth);
-  */
   }
+  */
 
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);

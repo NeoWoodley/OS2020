@@ -175,7 +175,7 @@ int main(int argc, char *argv[]) {
   for(int i = 0; i < count; i ++) {
 	  if(infolib[i].depth == 0) {
           buildtree((struct node*)&infolib[i]);
-	//	  printf("-------------------------------------------------------------\n");
+		  printf("-------------------------------------------------------------\n");
 	  }
 //	  printf("%s{%d}--ppid{%d}--depth{%d}\n",&infolib[i].name[0], infolib[i].pid, infolib[i].ppid, infolib[i].depth);
   }

@@ -91,7 +91,6 @@ int main(int argc, char *argv[]) {
 
   struct node infolib[512];
 
-  
 
   dir = opendir("/proc");
   assert(dir != NULL);
@@ -161,11 +160,8 @@ int main(int argc, char *argv[]) {
 			      infolib[i].child->peer = (struct node*)&infolib[j];
 			  }
 			  else if(infolib[i].child->peer != NULL){
-				  /*
                   temp = findpeertail((struct node*)&(infolib[i].child->peer));
 			      temp->peer = (struct node*)&infolib[j];
-				  */
-                  findpeertail((struct node*)&(infolib[i].child->peer)) = (struct node*)&(infolib[i].child->peer);
 			  }
 			  infolib[j].depth = infolib[i].depth + 1; 
 		  }
@@ -175,7 +171,7 @@ int main(int argc, char *argv[]) {
 
   assert(infolib[0].child->peer != NULL);
 
-  for(int i = 0; i < count; i ++) {
+  for(int i = 0; i < 1; i ++) {
 	  if(infolib[i].depth == 0) {
           buildtree((struct node*)&infolib[i]);
 		  printf("-------------------------------------------------------------\n");

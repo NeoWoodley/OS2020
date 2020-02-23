@@ -171,6 +171,13 @@ int main(int argc, char *argv[]) {
 
   assert(infolib[0].child->peer != NULL);
 
+  temp = infolib[0].child;
+  while(temp != NULL) {
+	  printf("Thread:%s Pid:%d PPid:%d\n", temp->name, temp->pid, temp->ppid);
+	  temp = temp->peer;
+  }
+
+  /*
   for(int i = 0; i < 1; i ++) {
 	  if(infolib[i].depth == 0) {
 		  assert(infolib[i].child->peer != NULL);
@@ -181,6 +188,7 @@ int main(int argc, char *argv[]) {
 		  printf("-------------------------------------------------------------\n");
 	  }
 //	  printf("%s{%d}--ppid{%d}--depth{%d}\n",&infolib[i].name[0], infolib[i].pid, infolib[i].ppid, infolib[i].depth);
+  */
   }
 
   for (int i = 0; i < argc; i++) {

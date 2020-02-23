@@ -179,6 +179,7 @@ int main(int argc, char *argv[]) {
   }
   */
 
+  /*
   for(int i = 0; i < count; i ++) {
 	  if(infolib[i].depth == 0) {
 		  assert(infolib[i].child->peer != NULL);
@@ -198,6 +199,7 @@ int main(int argc, char *argv[]) {
 	  }
 //	  printf("%s{%d}--ppid{%d}--depth{%d}\n",&infolib[i].name[0], infolib[i].pid, infolib[i].ppid, infolib[i].depth);
   }
+  */
 
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);

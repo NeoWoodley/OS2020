@@ -173,6 +173,7 @@ int main(int argc, char *argv[]) {
 
   for(int i = 0; i < 1; i ++) {
 	  if(infolib[i].depth == 0) {
+		  assert(infolib[i].child->peer != NULL);
           buildtree((struct node*)&infolib[i].child->peer);
 		  printf("-------------------------------------------------------------\n");
 	  }

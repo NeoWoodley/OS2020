@@ -231,7 +231,7 @@ int main(int argc, char *argv[]) {
 	  printf("%d: ppid: %d pid: %d\n", i, infolib[i].ppid, infolib[i].pid);
   }
   
-  struct node* test_node = (struct node*)malloc(struct node);
+  struct node* test_node = (struct node*)malloc(sizeof(struct node));
   test_node = &infolib[63];
   while(test_node->peer != NULL) {
 	  printf("Thread:%s Pid:%d PPid:%d\n", test_node->name, test_node->pid, test_node->ppid);

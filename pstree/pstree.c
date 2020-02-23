@@ -20,11 +20,11 @@ struct node {
 };
 
 struct node* findpeertail(struct node* Node) {
-	// struct node* end = Node;
-    while(Node->peer!=NULL) {
-	    Node = Node->peer;
+	struct node* end = (struct node*)Node;
+    while(end->peer != NULL) {
+	    end = end->peer;
 	}
-	return Node;
+	return (struct node*)end;
 }
 
 int len2n(char *str) {

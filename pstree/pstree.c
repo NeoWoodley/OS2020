@@ -215,6 +215,15 @@ int main(int argc, char *argv[]) {
       test_node = test_node->peer; 
   }
 
+  for(int i = 0; i < count; i ++){
+      if(infolib[i].peer == NULL) {
+	      printf("%d: YES!\n",i);
+	  }
+	  else {
+	      printf("%d: YES!\n",i);
+	  }
+  }
+
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);
 //    printf("argv[%d] = %s\n", i, argv[i]);

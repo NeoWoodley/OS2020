@@ -222,18 +222,20 @@ int main(int argc, char *argv[]) {
 	  }
   }
   */
-
+  
+  /*
   struct node* test_node = &infolib[63];
   while(test_node->peer != NULL) {
 	  printf("Thread:%s Pid:%d PPid:%d\n", test_node->name, test_node->pid, test_node->ppid);
       test_node = test_node->peer; 
   }
+  */
 
   for(int i = 0; i < count; i ++){
-	  if(infolib[i].depth == 0) {
+	  /*if(infolib[i].depth == 0) {
           buildtree(&infolib[i]);
-	  }
-	  //printf("%d: ppid: %d\n", i, infolib[i].ppid);
+	  }*/
+	  printf("%d: ppid: %d\n", i, infolib[i].ppid);
   }
 
   for (int i = 0; i < argc; i++) {

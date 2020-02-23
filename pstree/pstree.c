@@ -150,7 +150,7 @@ int main(int argc, char *argv[]) {
   struct node* temp = (struct node*)malloc(sizeof(struct node));
   //struct node* temp;
   for(int i = 0; i < count; i ++) {
-	  for(int j = i + 1; j < count; j ++) {
+	  for(int j = 0; j < count; j ++) {
 	      if(infolib[i].child == NULL && infolib[j].ppid == infolib[i].pid) {
 		      infolib[i].child = (struct node*)&infolib[j];
 			  infolib[j].depth = infolib[i].depth + 1; 
@@ -184,7 +184,14 @@ int main(int argc, char *argv[]) {
 		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
 		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].child->name, infolib[i].child->pid, infolib[i].child->ppid);
 		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].child->peer->name, infolib[i].child->peer->pid, infolib[i].child->peer->ppid);
-		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].child->peer->peer->name, infolib[i].child->peer->peer->pid, infolib[i].child->peer->peer->ppid);
+		  if(infolib[i].child->peer->peer == NULL) {
+		      printf("Yes!!!!!!!!!!!!!!!!\n");
+		  }
+		  else {
+		      printf("No?????????????????\n");
+		  
+		  }
+		  //printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].child->peer->peer->name, infolib[i].child->peer->peer->pid, infolib[i].child->peer->peer->ppid);
   //        buildtree((struct node*)&infolib[i].child->peer);
 		  printf("-------------------------------------------------------------\n");
 	  }

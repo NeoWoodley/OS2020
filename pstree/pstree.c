@@ -140,7 +140,7 @@ int main(int argc, char *argv[]) {
 		      break;
 		  }
 	  }   
-	  printf("-----%d: %s",i, ppid);
+	  //printf("-----%d: %s",i, ppid);
 	  infolib[i].ppid=str2int(&ppid[6]);
 	  } 	  
 

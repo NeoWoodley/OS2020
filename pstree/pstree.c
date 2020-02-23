@@ -220,7 +220,7 @@ int main(int argc, char *argv[]) {
 	      printf("%d: YES!\n",i);
 	  }
 	  else {
-	      printf("%d: YES!\n",i);
+	      printf("%d: NO!\n",i);
 	  }
   }
 

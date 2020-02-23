@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
   char _V[13]="-V --version";
   char _n[18]="-n --numeric-sort";
   char _p[15]="-p --show-pids";
-  char _ppid[5]="ppid";
+  char _ppid[5]="PPid";
 
   while((entry=readdir(dir))) {
         if(find_num(entry->d_name) == 0) {
@@ -136,7 +136,7 @@ int main(int argc, char *argv[]) {
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
 		  if(strstr(ppid, &_ppid[0]) != NULL) {
-			  printf("%s",ppid);
+	//		  printf("%s",ppid);
 		      break;
 		  }
 	  }   

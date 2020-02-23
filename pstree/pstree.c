@@ -174,6 +174,7 @@ int main(int argc, char *argv[]) {
   for(int i = 0; i < 1; i ++) {
 	  if(infolib[i].depth == 0) {
 		  assert(infolib[i].child->peer != NULL);
+		  printf("Thread:%s Pid:%d PPid:%d\n", infolib[i].child->peer->name, infolib[i].child->peer->pid, infolib[i].child->peer->ppid);
   //        buildtree((struct node*)&infolib[i].child->peer);
 		  printf("-------------------------------------------------------------\n");
 	  }

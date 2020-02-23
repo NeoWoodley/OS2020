@@ -162,14 +162,14 @@ int main(int argc, char *argv[]) {
 			  else if(infolib[i].child->peer != NULL){
                   temp = findpeertail((struct node*)&(infolib[i].child->peer));
 			      temp->peer = (struct node*)&infolib[j];
-				  printf("@@@@@%s\n",temp->peer->name);
+//				  printf("@@@@@%s\n",temp->peer->name);
 			  }
 			  infolib[j].depth = infolib[i].depth + 1; 
 		  }
 	  }
   }
 
-  assert(infolib[0].child->peer != NULL);
+ // assert(infolib[0].child->peer != NULL);
 
   /*
   temp = infolib[0].child;

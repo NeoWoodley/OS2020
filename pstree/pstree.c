@@ -16,8 +16,6 @@ struct node {
 	int ppid;
 	int depth;
 	struct node* child;
-	long int space;
-	long int space2;
 	struct node* peer;
 };
 
@@ -88,7 +86,7 @@ void buildtree(struct node* Node, int mode) {
 		    printf("%s{%d}\n",&(Node)->name[0],Node->pid);
 		}
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
-		temp = (struct node*)Node->child->peer;
+		temp =(struct node*) ((struct node*)(Node->child))->peer;
 	    while(temp != NULL) {
 		   buildtree(temp , mode);
 		   temp = (struct node*)(temp->peer);

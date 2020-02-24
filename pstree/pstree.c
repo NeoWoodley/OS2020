@@ -165,6 +165,12 @@ int main(int argc, char *argv[]) {
 		      break;
 		  }
 	  }   
+      while(*head != ' ') {
+	      head ++;
+	  }
+	  while(*head == ' ') {
+	      head ++;
+	  }
 	  //printf("-----%d: %s",i, ppid);
 	  infolib[i].ppid=str2int(&ppid[6]);
 	  } 	  

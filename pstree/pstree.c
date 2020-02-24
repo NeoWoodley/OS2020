@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
   DIR* dir;
   struct dirent* entry;
 
-   struct *node infolib[10];
+   struct node* infolib[10];
    
    for(int i = 0 ; i < 10 ; i ++) {
         infolib[i] = (struct node*)malloc(sizeof(struct node));

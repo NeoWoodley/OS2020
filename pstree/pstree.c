@@ -296,7 +296,7 @@ int main(int argc, char *argv[]) {
 	  case 3: {
 				  int v;
 				  int p;
-				  int n;
+//				  int n;
 
 				  for(int i = 1; i < 3) {
 				      if(strstr(&_V[0], argv[i]) != NULL) {
@@ -307,9 +307,9 @@ int main(int argc, char *argv[]) {
 					      p = 1;
 					  }
 
-					  if(strstr(&_n[0], argv[i] != NULL)) {
-					      n = 1;
-					  }
+//					  if(strstr(&_n[0], argv[i] != NULL)) {
+//					      n = 1;
+//					  }
 				  }
 
 				  if(v == 1) {

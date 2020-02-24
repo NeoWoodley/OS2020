@@ -214,7 +214,7 @@ int main(int argc, char *argv[]) {
 //		      printf("-----S3\n");
 		  }
 //		  printf("i=%d,j=%d,lib[%d].depth=%d, lib[%d].child:%p, lib[%d].depth=%d\n",i,j,i,infolib[i].depth,i,infolib[i].child,j,infolib[j].depth); 
-		  printf("name_i:%s, pid_i:%d, ppid_i:%d, depth_i:%d\nname_j:%s, pid_j:%d, ppid_j%d, depth_j:%d\n",&infolib[i].name[0],infolib[i].pid,infolib[i].ppid,infolib[i].depth, &infolib[j].name[0],infolib[j].pid,infolib[j].ppid,infolib[j].depth);
+		  printf("name_i:%s, pid_i:%d, ppid_i:%d, depth_i:%d\nname_j:%s, pid_j:%d, ppid_j:%d, depth_j:%d\n",&infolib[i].name[0],infolib[i].pid,infolib[i].ppid,infolib[i].depth, &infolib[j].name[0],infolib[j].pid,infolib[j].ppid,infolib[j].depth);
 		  printf("------------------------------------------------------\n");
 	  }
   }

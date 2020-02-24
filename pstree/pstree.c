@@ -396,7 +396,7 @@ int main(int argc, char *argv[]) {
 	  default: assert(0);
   }
 */
-	printf("Time : %d\n, time");
+	printf("Time : %d\n ",time);
 
 
   return 0;

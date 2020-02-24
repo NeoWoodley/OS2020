@@ -134,7 +134,7 @@ int main(int argc, char *argv[]) {
   closedir(dir);
 
   char* path = (char*)malloc(32*sizeof(char));
-  char* name = (char*)malloc(64*sizeof(char));
+  char* name = (char*)malloc(50*sizeof(char));
   char* ppid = (char*)malloc(32*sizeof(char));
   FILE* file;
   for(int i = 0; i < count; i ++) {
@@ -143,7 +143,7 @@ int main(int argc, char *argv[]) {
 	  assert(file != NULL);
       if(file) {
 		  //printf("----------\n");
-	      fgets(name, 63, file);
+	      fgets(name, 49, file);
 		  strcat(&infolib[i].name[0], &name[6]);
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
 		  printf("Name:%s\n",infolib[i].name);

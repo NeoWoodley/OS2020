@@ -232,12 +232,17 @@ int main(int argc, char *argv[]) {
 	  }
 	  printf("-------------------------------\n");
   }
+
+  buildtree(&infolib[5],0);
+
+  /*
   assert(infolib[2].child == NULL);
   assert(infolib[0].child == NULL);
   assert(infolib[1].peer == NULL);
   assert(infolib[2].peer == NULL);
   assert(infolib[4].peer == NULL);
   assert(infolib[3].child == NULL);
+  */
 
  // assert(infolib[0].child->peer != NULL);
 

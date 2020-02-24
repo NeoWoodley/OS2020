@@ -127,6 +127,7 @@ int main(int argc, char *argv[]) {
       infolib[i].depth = 0;
 	  infolib[i].peer = NULL;
 	  infolib[i].child = NULL;
+	  infolib[i].name = NULL;
   }
 
   printf("Total process number:%d\n",count);

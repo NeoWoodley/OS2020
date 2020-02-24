@@ -100,7 +100,7 @@ int main(int argc, char *argv[]) {
   DIR* dir;
   struct dirent* entry;
 
-  struct node infolib[512];
+  struct node infolib[10];
 
   //dir = opendir("/proc");
   dir = opendir("./TESTM1");
@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
   char* ppid = (char*)malloc(32*sizeof(char));
   FILE* file;
   for(int i = 0; i < count; i ++) {
-	  sprintf(path,"/proc/%d/status",infolib[i].pid);
+	  sprintf(path,"./%d/status",infolib[i].pid);
       file = fopen(path, "r");
       if(file) {
 	      fgets(name, 63, file);

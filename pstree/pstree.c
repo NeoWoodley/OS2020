@@ -88,6 +88,7 @@ void buildtree(struct node* Node, int mode) {
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
 		temp =(struct node*) ((struct node*)(Node->child))->peer;
 	    while(temp != NULL) {
+		   assert(0);
 		   buildtree(temp , mode);
 		   temp = (struct node*)(temp->peer);
 		}

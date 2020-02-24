@@ -246,6 +246,22 @@ int main(int argc, char *argv[]) {
     printf("argv[%d] = %s\n", i, argv[i]);
   }
   assert(!argv[argc]);
+
+  
+  switch(argc) {
+  
+      case 2: {
+			  
+			  }
+
+	  case 3: {
+			  
+			  }
+
+	  default: assert(0);
+  }
+
+
   return 0;
   
 }

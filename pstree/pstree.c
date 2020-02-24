@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
 
   struct node infolib[512];
 
-  dir = opendir("/proc");
+  dir = opendir("/home/nector/Codes/Cidr/TESTM1");
   assert(dir != NULL);
 
   char _V[13]="-V --version";
@@ -262,7 +262,7 @@ int main(int argc, char *argv[]) {
   switch(argc) {
 	  case 1: {
 				      for(int i = 0; i < count; i ++) {
-					      if(infolib[i].depth == 0) {
+					      if(infolib[i].ppid == 0) {
 						      buildtree(&infolib[i], 0);
 						  }
 					  }
@@ -276,14 +276,14 @@ int main(int argc, char *argv[]) {
 				  }
 				  else if(strstr(&_p[0], argv[1]) != NULL) {
 				      for(int i = 0; i < count; i ++) {
-					      if(infolib[i].depth == 0) {
+					      if(infolib[i].ppid == 0) {
 						      buildtree(&infolib[i], 1);
 						  }
 					  }
 				  }
 				  else if(strstr(&_n[0], argv[1]) != NULL) {
 				      for(int i = 0; i < count; i ++) {
-					      if(infolib[i].depth == 0) {
+					      if(infolib[i].ppid == 0) {
 						      buildtree(&infolib[i], 0);
 						  }
 					  }
@@ -318,7 +318,7 @@ int main(int argc, char *argv[]) {
 			  
 				  else if(p == 1) {
 				      for(int i = 0; i < count; i ++) {
-					      if(infolib[i].depth == 0) {
+					      if(infolib[i].ppid == 0) {
 						      buildtree(&infolib[i], 1);
 						  }
 					  }
@@ -326,7 +326,7 @@ int main(int argc, char *argv[]) {
 				  
 				  else {
 				      for(int i = 0; i < count; i ++) {
-					      if(infolib[i].depth == 0) {
+					      if(infolib[i].ppid == 0) {
 						      buildtree(&infolib[i], 0);
 						  }
 					  }

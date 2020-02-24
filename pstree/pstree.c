@@ -140,6 +140,7 @@ int main(int argc, char *argv[]) {
   for(int i = 0; i < count; i ++) {
 	  sprintf(path,"/TESTM1/%d/status",infolib[i].pid);
       file = fopen(path, "r");
+	  assert(file != NULL);
       if(file) {
 		  printf("----------\n");
 	      fgets(name, 63, file);

@@ -165,6 +165,7 @@ int main(int argc, char *argv[]) {
 		      break;
 		  }
 	  }   
+	  head = ppid;
       while(*head != ' ') {
 	      head ++;
 	  }
@@ -172,7 +173,7 @@ int main(int argc, char *argv[]) {
 	      head ++;
 	  }
 	  //printf("-----%d: %s",i, ppid);
-	  infolib[i].ppid=str2int(&ppid[6]);
+	  infolib[i].ppid=str2int(head);
 	  } 	  
 
   }

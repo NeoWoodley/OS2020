@@ -175,7 +175,7 @@ int main(int argc, char *argv[]) {
   free(ppid);
 
   for(int i = 0; i < count; i ++) {
-       printf("name:%s, pid:%d, ppid:%d", infolib[i].name, infolib[i].pid, infolib[i].ppid);
+       printf("name:%s, pid:%d, ppid:%d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
   }
 
   struct node* temp = (struct node*)malloc(sizeof(struct node));
@@ -183,28 +183,28 @@ int main(int argc, char *argv[]) {
   for(int i = 0; i < count; i ++) {
 	  for(int j = 0; j < count; j ++) {
 	      if(infolib[i].child == NULL && infolib[j].ppid == infolib[i].pid) {
-			  printf("-----S1\n");
+//			  printf("-----S1\n");
 		      infolib[i].child = (struct node*)&infolib[j];
 			  infolib[j].depth = infolib[i].depth + 1; 
 		  }
 		  else if(infolib[i].child != NULL && infolib[j].ppid == infolib[i].pid) {
-			  printf("-----S2\n");
+//			  printf("-----S2\n");
 			  if(infolib[i].child->peer == NULL) {
-			      printf("-----S2-1\n");
+//			      printf("-----S2-1\n");
 			      infolib[i].child->peer = (struct node*)&infolib[j];
 			  }
 			  else if(infolib[i].child->peer != NULL){
-			      printf("-----S2-2\n");
+//			      printf("-----S2-2\n");
                   temp = findpeertail((struct node*)&(infolib[i].child->peer));
 			      temp->peer = (struct node*)&infolib[j];
-				  printf("@@@@@%s\n",temp->peer->name);
+//				  printf("@@@@@%s\n",temp->peer->name);
 			  }
 			  infolib[j].depth = infolib[i].depth + 1; 
 		  }
 		  else {
-		      printf("-----S3\n");
+//		      printf("-----S3\n");
 		  }
-		  printf("i=%d,j=%d,lib[%d].depth=%d, lib[%d].child:%p, lib[%d].depth=%d\n",i,j,i,infolib[i].depth,i,infolib[i].child,j,infolib[j].depth); 
+//		  printf("i=%d,j=%d,lib[%d].depth=%d, lib[%d].child:%p, lib[%d].depth=%d\n",i,j,i,infolib[i].depth,i,infolib[i].child,j,infolib[j].depth); 
 	  }
   }
 

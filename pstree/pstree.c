@@ -294,8 +294,8 @@ int main(int argc, char *argv[]) {
 			  }
 
 	  case 3: {
-				  int v;
-				  int p;
+				  int v = 0;
+				  int p = 0;
 //				  int n;
 
 				  for(int i = 1; i < 3; i ++) {

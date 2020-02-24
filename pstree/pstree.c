@@ -128,7 +128,7 @@ int main(int argc, char *argv[]) {
 	  infolib[i].child = NULL;
   }
 
-  printf("Total process number:%d\n",count);
+  //printf("Total process number:%d\n",count);
 
   closedir(dir);
 

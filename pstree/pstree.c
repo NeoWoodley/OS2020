@@ -91,7 +91,6 @@ int main(int argc, char *argv[]) {
 
   struct node infolib[512];
 
-
   dir = opendir("/proc");
   assert(dir != NULL);
 
@@ -224,23 +223,27 @@ int main(int argc, char *argv[]) {
   */
   
 
+  /*
   for(int i = 0; i < count; i ++){
-	  /*if(infolib[i].depth == 0) {
+	  if(infolib[i].depth == 0) {
           buildtree(&infolib[i]);
-	  }*/
-	  printf("%d: ppid: %d pid: %d\n", i, infolib[i].ppid, infolib[i].pid);
+	  }
+	  //printf("%d: ppid: %d pid: %d\n", i, infolib[i].ppid, infolib[i].pid);
   }
+  */
   
+  /*
   struct node* test_node = (struct node*)malloc(sizeof(struct node));
   test_node = &infolib[63];
   while(test_node->peer != NULL) {
 	  printf("Thread:%s Pid:%d PPid:%d\n", test_node->name, test_node->pid, test_node->ppid);
       test_node = test_node->peer; 
   }
+  */
  
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);
-//    printf("argv[%d] = %s\n", i, argv[i]);
+    printf("argv[%d] = %s\n", i, argv[i]);
   }
   assert(!argv[argc]);
   return 0;

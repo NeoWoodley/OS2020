@@ -147,7 +147,7 @@ int main(int argc, char *argv[]) {
       if(file) {
 		  //printf("----------\n");
 	      fgets(name, 49, file);
-		  strcat(&infolib[i].name[0], &name[6]);
+		  strcat(&infolib[i].name[0], &name[7]);
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
 		  printf("Name:%s\n",(char*)&infolib[i].name[0]);
       for(int j = 0; j < 6; j ++) {

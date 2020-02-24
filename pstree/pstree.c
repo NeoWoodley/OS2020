@@ -142,11 +142,11 @@ int main(int argc, char *argv[]) {
       file = fopen(path, "r");
 	  assert(file != NULL);
       if(file) {
-		  printf("----------\n");
+		  //printf("----------\n");
 	      fgets(name, 63, file);
 		  strcat(&infolib[i].name[0], &name[6]);
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
-		 // printf("Name:%s\n",infolib[i].name);
+		  printf("Name:%s\n",infolib[i].name);
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
 		  if(strstr(ppid, &_ppid[0]) != NULL) {

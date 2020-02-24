@@ -58,14 +58,20 @@ int find_num(char *str) {
     return return_code;
 }
 
-void buildtree(struct node* Node) {
+void buildtree(struct node* Node, int mode) {
 	struct node* temp;
     if(Node->child == NULL) {
 		for(int i = 0; i < Node->depth; i ++) {
 		    printf("%s",&space[0]);
 		}
-		printf("%s{%d}--ppid{%d}--depth{%d}\n",&(Node)->name[0],Node->pid,Node->ppid,Node->depth);
-       // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
+		if(mode == 0) {
+		    printf("%s\n",&(Node)->name[0]);
+		}
+		else {
+		    printf("%s{%d}\n",&(Node)->name[0],Node->pid);
+		}
+			// printf("%s{%d}\n",&(Node->name[0]), Node->pid);
+		    //printf("%s{%d}--ppid{%d}--depth{%d}\n",&(Node)->name[0],Node->pid,Node->ppid,Node->depth);
 		return;
 	}
 	
@@ -73,7 +79,12 @@ void buildtree(struct node* Node) {
 		for(int i = 0; i < Node->depth; i ++) {
 		    printf("%s",&space[0]);
 		}
-		printf("%s{%d}--ppid{%d}--depth{%d}\n",&(Node)->name[0],Node->pid,Node->ppid,Node->depth);
+		if(mode == 0) {
+		    printf("%s\n",&(Node)->name[0]);
+		}
+		else {
+		    printf("%s{%d}\n",&(Node)->name[0],Node->pid);
+		}
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
 		temp = (struct node*)Node->child->peer;
 	    while(temp != NULL) {
@@ -257,6 +268,21 @@ int main(int argc, char *argv[]) {
 
 				  if(strstr(&_V[0], argv[1]) != NULL) {
 				      printf("Pstree-lite\nCopyright by Gan Chen\n");
+				  }
+				  else if(strstr(&_p[0], argv[1]) != NULL) {
+				      for(int i = 0; i < count; i ++) {
+					      if(infolib[i].depth == 0) {
+						      buildtree(&infolib[i], 1);
+						  }
+					  }
+				  }
+				  else if(strstr(&_n[0], argv[1]) != NULL) {
+				      for(int i = 0; i < count; i ++) {
+					      if(infolib[i].depth == 0) {
+						      buildtree(&infolib[i], 0);
+						  }
+					  }
+				  
 				  }
 
 			      break;

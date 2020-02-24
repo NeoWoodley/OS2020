@@ -250,6 +250,9 @@ int main(int argc, char *argv[]) {
   
   switch(argc) {
 	  case 1: {
+				  if(strstr(&_V[0], argv[1]) != NULL) {
+				      printf("Pstree-lite\n Copyright by Gan Chen\n")
+				  }
 			  
 				  break;
 			  }

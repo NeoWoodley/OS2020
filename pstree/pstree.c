@@ -220,6 +220,7 @@ int main(int argc, char *argv[]) {
   }
 
   for(int i = 0; i < count; i ++) {
+	  printf("i:%d\n",i);
       if(infolib[i].child == NULL) {
 	       printf("CHILD NULL!\n");
 	  }
@@ -229,6 +230,7 @@ int main(int argc, char *argv[]) {
 	  if(infolib[i].depth == 0) {
 	      printf("DEPTH 0!\n");
 	  }
+	  printf("-------------------------------\n");
   }
 
  // assert(infolib[0].child->peer != NULL);

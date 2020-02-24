@@ -100,7 +100,7 @@ int main(int argc, char *argv[]) {
   DIR* dir;
   struct dirent* entry;
 
-  volatile struct node infolib[10];
+  static struct node infolib[10];
 
   //dir = opendir("/proc");
   dir = opendir("./TESTM1");

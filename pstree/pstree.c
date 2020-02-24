@@ -226,6 +226,9 @@ int main(int argc, char *argv[]) {
       if(infolib[i].peer == NULL) {
 	       printf("PEER NULL!\n");
 	  }
+	  if(infolib[i].depth == 0) {
+	      printf("DEPTH 0!\n");
+	  }
   }
 
  // assert(infolib[0].child->peer != NULL);

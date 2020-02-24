@@ -251,16 +251,21 @@ int main(int argc, char *argv[]) {
       test_node = test_node->peer; 
   }
   */
- 
+/* 
   for (int i = 0; i < argc; i++) {
     assert(argv[i]);
     printf("argv[%d] = %s\n", i, argv[i]);
   }
   assert(!argv[argc]);
-
+*/
   
   switch(argc) {
 	  case 1: {
+				      for(int i = 0; i < count; i ++) {
+					      if(infolib[i].depth == 0) {
+						      buildtree(&infolib[i], 0);
+						  }
+					  }
 				  break;
 			  }
   
@@ -289,7 +294,44 @@ int main(int argc, char *argv[]) {
 			  }
 
 	  case 3: {
+				  int v;
+				  int p;
+				  int n;
+
+				  for(int i = 1; i < 3) {
+				      if(strstr(&_V[0], argv[i]) != NULL) {
+					      v = 1;
+					  }
+
+					  if(strstr(&_p[0], argv[i] != NULL)) {
+					      p = 1;
+					  }
+
+					  if(strstr(&_n[0], argv[i] != NULL)) {
+					      n = 1;
+					  }
+				  }
+
+				  if(v == 1) {
+				      printf("Pstree-lite\nCopyright by Gan Chen\n");
+				  }
 			  
+				  else if(p == 1) {
+				      for(int i = 0; i < count; i ++) {
+					      if(infolib[i].depth == 0) {
+						      buildtree(&infolib[i], 1);
+						  }
+					  }
+				  }
+				  
+				  else {
+				      for(int i = 0; i < count; i ++) {
+					      if(infolib[i].depth == 0) {
+						      buildtree(&infolib[i], 0);
+						  }
+					  }
+				  }
+
 				  break;
 			  }
 

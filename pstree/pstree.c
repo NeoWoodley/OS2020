@@ -249,6 +249,9 @@ int main(int argc, char *argv[]) {
 
   
   switch(argc) {
+	  case 1: {
+			  
+			  }
   
       case 2: {
 			  

@@ -17,6 +17,7 @@ struct node {
 	int depth;
 	struct node* child;
 	long int space;
+	long int space2;
 	struct node* peer;
 };
 

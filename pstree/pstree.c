@@ -369,8 +369,9 @@ int main(int argc, char *argv[]) {
   }
 */
 
-	buildtree(&infolib[0],0);
-
+  assert(infolib[1].peer == NULL);
+  assert(infolib[2].peer == NULL);
+  assert(infolib[4].peer == NULL);
 
   return 0;
   

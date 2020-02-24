@@ -139,6 +139,7 @@ int main(int argc, char *argv[]) {
   char* path = (char*)malloc(32*sizeof(char));
   char* name = (char*)malloc(50*sizeof(char));
   char* ppid = (char*)malloc(32*sizeof(char));
+  char* head;
   FILE* file;
   for(int i = 0; i < count; i ++) {
 	  sprintf(path,"./TESTM1/%d/status",infolib[i].pid);
@@ -147,7 +148,14 @@ int main(int argc, char *argv[]) {
       if(file) {
 		  //printf("----------\n");
 	      fgets(name, 49, file);
-		  strcat(&infolib[i].name[0], &name[8]);
+		  head = name;
+		  while(name != ' ') {
+		      name ++;
+		  }
+		  while(name == ' ') {
+		      name ++;
+		  }
+		  strcat(&infolib[i].name[0], name);
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
 		  printf("Name:%s\n",(char*)&infolib[i].name[0]);
       for(int j = 0; j < 6; j ++) {

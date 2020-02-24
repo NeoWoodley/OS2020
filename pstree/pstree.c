@@ -132,7 +132,7 @@ int main(int argc, char *argv[]) {
 	  }
   }
 
-  printf("Total process number:%d\n",count);
+  // printf("Total process number:%d\n",count);
 
   closedir(dir);
 
@@ -181,9 +181,11 @@ int main(int argc, char *argv[]) {
   free(name);
   free(ppid);
 
+  /*
   for(int i = 0; i < count; i ++) {
        printf("name:%s, pid:%d, ppid:%d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
   }
+  */
 
   struct node* temp = (struct node*)malloc(sizeof(struct node));
   //struct node* temp;

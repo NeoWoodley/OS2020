@@ -288,6 +288,7 @@ int main(int argc, char *argv[]) {
   assert(!argv[argc]);
 */
   
+  /*
   switch(argc) {
 	  case 1: {
 				      for(int i = 0; i < count; i ++) {
@@ -366,6 +367,9 @@ int main(int argc, char *argv[]) {
 
 	  default: assert(0);
   }
+*/
+
+	buildtree(&infolib[0]);
 
 
   return 0;

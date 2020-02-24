@@ -149,13 +149,13 @@ int main(int argc, char *argv[]) {
 		  //printf("----------\n");
 	      fgets(name, 49, file);
 		  head = name;
-		  while(*name != ' ') {
-		      name ++;
+		  while(*head != ' ') {
+		      head ++;
 		  }
-		  while(*name == ' ') {
-		      name ++;
+		  while(*head == ' ') {
+		      head ++;
 		  }
-		  strcat(&infolib[i].name[0], name);
+		  strcat(&infolib[i].name[0], head);
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
 		  printf("Name:%s\n",(char*)&infolib[i].name[0]);
       for(int j = 0; j < 6; j ++) {

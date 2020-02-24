@@ -149,10 +149,10 @@ int main(int argc, char *argv[]) {
 		  //printf("----------\n");
 	      fgets(name, 49, file);
 		  head = name;
-		  while(name != ' ') {
+		  while(*name != ' ') {
 		      name ++;
 		  }
-		  while(name == ' ') {
+		  while(*name == ' ') {
 		      name ++;
 		  }
 		  strcat(&infolib[i].name[0], name);

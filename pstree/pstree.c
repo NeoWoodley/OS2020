@@ -29,7 +29,7 @@ struct node* findpeertail(struct node* Node) {
 
 int len2n(char *str) {
     int len = 0;
-	while (str[len] != '\n' && str[len] != '\0') {
+	while (str[len] != '\n' && str[len] != '\0' && str[len] != ' ') {
 	    len ++;
 	}
 	return len;

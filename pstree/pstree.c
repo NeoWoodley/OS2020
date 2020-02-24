@@ -127,7 +127,9 @@ int main(int argc, char *argv[]) {
       infolib[i].depth = 0;
 	  infolib[i].peer = NULL;
 	  infolib[i].child = NULL;
-	  infolib[i].name = NULL;
+	  for(int j = 0; j < 50; j ++) {
+	      infolib[i].name[j] = '\0';
+	  }
   }
 
   printf("Total process number:%d\n",count);
@@ -145,9 +147,9 @@ int main(int argc, char *argv[]) {
       if(file) {
 		  //printf("----------\n");
 	      fgets(name, 49, file);
-		  strcat(infolib[i].name, &name[6]);
+		  strcat(&infolib[i].name[0], &name[6]);
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
-		  printf("Name:%s\n",(char*)infolib[i].name);
+		  printf("Name:%s\n",(char*)&infolib[i].name[0]);
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
 		  if(strstr(ppid, &_ppid[0]) != NULL) {

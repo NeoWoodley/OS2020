@@ -188,7 +188,7 @@ int main(int argc, char *argv[]) {
   */
 
   //struct node* temp = (struct node*)malloc(sizeof(struct node));
-  struct node* temp;
+  static struct node* temp;
   for(int i = 0; i < count; i ++) {
 	  for(int j = 0; j < count; j ++) {
 	      if(infolib[i].child == NULL && infolib[j].ppid == infolib[i].pid) {

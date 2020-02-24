@@ -199,14 +199,14 @@ int main(int argc, char *argv[]) {
 		  }
 		  else if(infolib[i].child != NULL && infolib[j].ppid == infolib[i].pid) {
 //			  printf("-----S2\n");
-			  if(infolib[i].child.peer == NULL) {
+			  if(infolib[i].child->peer == NULL) {
 //			      printf("-----S2-1\n");
 			      infolib[i].child->peer = &infolib[j];
 			  }
-			  else if(infolib[i].child.peer != NULL){
+			  else if(infolib[i].child->peer != NULL){
 //			      printf("-----S2-2\n");
                   temp = findpeertail(infolib[i].child->peer);
-			      temp.peer = &infolib[j];
+			      temp->peer = &infolib[j];
 //				  printf("@@@@@%s\n",temp->peer->name);
 			  }
 			  infolib[j].depth = infolib[i].depth + 1; 

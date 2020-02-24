@@ -298,12 +298,12 @@ int main(int argc, char *argv[]) {
 				  int p;
 //				  int n;
 
-				  for(int i = 1; i < 3) {
+				  for(int i = 1; i < 3; i ++) {
 				      if(strstr(&_V[0], argv[i]) != NULL) {
 					      v = 1;
 					  }
 
-					  if(strstr(&_p[0], argv[i] != NULL)) {
+					  if(strstr(&_p[0], argv[i]) != NULL) {
 					      p = 1;
 					  }
 

@@ -102,7 +102,8 @@ int main(int argc, char *argv[]) {
 
   struct node infolib[512];
 
-  dir = opendir("/home/nector/Codes/Cidr/TESTM1");
+  //dir = opendir("/proc");
+  dir = opendir("./TESTM1");
   assert(dir != NULL);
 
   char _V[13]="-V --version";

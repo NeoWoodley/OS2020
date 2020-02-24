@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
   char* ppid = (char*)malloc(32*sizeof(char));
   FILE* file;
   for(int i = 0; i < count; i ++) {
-	  sprintf(path,"./TESTM1/%d/status",infolib[i].pid);
+	  sprintf(path,"/TESTM1/%d/status",infolib[i].pid);
       file = fopen(path, "r");
       if(file) {
 	      fgets(name, 63, file);

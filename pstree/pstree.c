@@ -10,6 +10,8 @@
 int count = 0;
 char space[3] = "  ";
 
+int time = 0;
+
 struct node {
     int pid;
 	char name[50];
@@ -59,6 +61,7 @@ int find_num(char *str) {
 }
 
 void buildtree(struct node* Node, int mode) {
+	time ++;
 	struct node* temp;
     if(Node->child == NULL) {
 		for(int i = 0; i < Node->depth; i ++) {
@@ -88,7 +91,6 @@ void buildtree(struct node* Node, int mode) {
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
 		temp = (struct node*) ((struct node*)(Node->child))->peer;
 	    while(temp != NULL) {
-		   printf("%p\n",temp);
 		   buildtree((struct node*)temp , mode);
 		   temp = (struct node*)(temp->peer);
 		}
@@ -394,6 +396,7 @@ int main(int argc, char *argv[]) {
 	  default: assert(0);
   }
 */
+	printf("Time : %d\n, time");
 
 
   return 0;

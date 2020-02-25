@@ -169,6 +169,7 @@ int main(int argc, char *argv[]) {
   char _V[13]="-V --version";
   char _n[18]="-n --numeric-sort";
   char _p[15]="-p --show-pids";
+  char _t[2] = ">";
   char _ppid[5]="PPid";
 
   while((entry=readdir(dir))) {
@@ -464,6 +465,16 @@ int main(int argc, char *argv[]) {
 				  }
 
 				  break;
+			  }
+	  case 4: case 5:
+			  {
+                  int p = 0;
+                  for(int i = 0; i < argc; i ++) {
+				      if(strstr(argv[i], &_t[0]) != NULL) {
+				          printf("pstree (PSmisc) 23.1\nCopyright (C) 1993-2017 Werner Almesberger and Craig Small\n\nPSmisc comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under\nthe terms of the GNU General Public License.\n");
+					      
+					  }
+				  }				  
 			  }
 
 	  default: assert(0);

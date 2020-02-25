@@ -243,11 +243,9 @@ int main(int argc, char *argv[]) {
   free(name);
   free(ppid);
 
-  /*
   for(int i = 0; i < count; i ++) {
        printf("name:%s, pid:%d, ppid:%d\n", infolib[i].name, infolib[i].pid, infolib[i].ppid);
   }
-  */
 
   struct node* temp;
   //struct node* temp;
@@ -472,7 +470,7 @@ int main(int argc, char *argv[]) {
 */
 //	printf("Time : %d\n ",time);
 
-  buildtree(&infolib[0],0);
+//  buildtree(&infolib[0],0);
 
   return 0;
   

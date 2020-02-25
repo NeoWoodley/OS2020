@@ -213,10 +213,10 @@ int main(int argc, char *argv[]) {
 		  while(*head != ' ') {
 		      head ++;
 		  }
+		  printf("%s\n",head);
 		  while(*head == ' ') {
 		      head ++;
 		  }
-		  printf("%s\n",head);
 		  strcat(&infolib[i].name[0], head);
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
 		 // printf("Name:%s\n",(char*)&infolib[i].name[0]);

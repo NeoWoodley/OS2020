@@ -138,7 +138,7 @@ void buildtree(struct node* Node, int mode) {
 		}
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
 		//temp = (struct node*) ((struct node*)(Node->child))->peer;
-		pill = Node->child->peer;
+		pill = Node->child;
 	    while(pill != NULL) {
 		   buildtree((struct node*)pill, mode);
 		   pill = pill->peer;
@@ -303,7 +303,7 @@ int main(int argc, char *argv[]) {
   }
   */
 
-  recursion(&infolib[0]);
+  buildtree(&infolib[0]);
 
   /*
   assert(infolib[2].child == NULL);

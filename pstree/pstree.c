@@ -271,7 +271,7 @@ int main(int argc, char *argv[]) {
   free(temp);
 
   for(int i = 0; i < count; i ++) {
-      myprint(&infolib[i]);
+      myprint(infolib[i]);
 	  printf("-------------------------------\n");
   }
 

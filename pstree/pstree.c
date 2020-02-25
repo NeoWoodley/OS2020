@@ -305,10 +305,12 @@ int main(int argc, char *argv[]) {
   }
   */
 
+  /*
   for(int i = 0; i < count; i ++) {
 	  if(infolib[i].depth == 0)
           buildtree(&infolib[i],0);
   }
+  */
 
   /*
   assert(infolib[2].child == NULL);

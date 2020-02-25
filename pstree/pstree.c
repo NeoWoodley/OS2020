@@ -303,7 +303,10 @@ int main(int argc, char *argv[]) {
   }
   */
 
-  buildtree(&infolib[0],0);
+  for(int i = 0; i < count; i ++) {
+	  if(infolib[i].depth == 0)
+          buildtree(&infolib[0],0);
+  }
 
   /*
   assert(infolib[2].child == NULL);
@@ -463,7 +466,7 @@ int main(int argc, char *argv[]) {
 	  default: assert(0);
   }
 */
-	printf("Time : %d\n ",time);
+//	printf("Time : %d\n ",time);
 
 
   return 0;

@@ -472,7 +472,13 @@ int main(int argc, char *argv[]) {
 */
 //	printf("Time : %d\n ",time);
 
-  buildtree(&infolib[0],0);
+
+
+
+  for(int i = 0; i < count; i ++) {
+  
+      buildtree(&infolib[i]);
+  }
 
   return 0;
   

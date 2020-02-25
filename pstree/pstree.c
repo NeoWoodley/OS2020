@@ -62,7 +62,7 @@ int find_num(char *str) {
 
 void buildtree(struct node* Node, int mode) {
 	time ++;
-	//struct node* temp;
+	struct node* temp;
     if(Node->child == NULL) {
 		for(int i = 0; i < Node->depth; i ++) {
 		    printf("%s",&space[0]);
@@ -89,7 +89,9 @@ void buildtree(struct node* Node, int mode) {
 		    printf("%s{%d}\n",&(Node)->name[0],Node->pid);
 		}
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
-		Node = (struct node*) ((struct node*)(Node->child))->peer;
+		temp = (struct node*) ((struct node*)(Node->child))->peer;
+		temp->peer = Node->peer;
+		temp->child = Node->child;
 	    while(Node != NULL) {
 		   buildtree((struct node*)Node , mode);
 		   Node = (struct node*)(Node->peer);

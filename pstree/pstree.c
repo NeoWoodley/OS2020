@@ -22,7 +22,7 @@ struct node {
 };
 
 void deepcpy(struct node* dest, struct node* src) {
-	memcpy(dest, node, sizeof(struct node));
+	memcpy(dest, src, sizeof(struct node));
 }
 
 struct node* findpeertail(struct node* Node) {

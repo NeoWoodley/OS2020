@@ -192,7 +192,7 @@ int main(int argc, char *argv[]) {
 	  }
   }
 
-  // printf("Total process number:%d\n",count);
+   printf("Total process number:%d\n",count);
 
   closedir(dir);
 
@@ -476,7 +476,8 @@ int main(int argc, char *argv[]) {
 
 
   for(int i = 0; i < count; i ++) {
-      buildtree(&infolib[i], 0);
+	  if(infolib[i].depth == 0)
+          buildtree(&infolib[i], 0);
   }
 
   return 0;

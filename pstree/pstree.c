@@ -447,7 +447,7 @@ int main(int argc, char *argv[]) {
 				      printf("pstree (PSmisc) 23.1\nCopyright (C) 1993-2017 Werner Almesberger and Craig Small\n\nPSmisc comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under\nthe terms of the GNU General Public License.\n");
 				  }
 			  
-				  ELSE IF(P == 1) {
+				  else if(p == 1) {
 				      for(int i = 0; i < count; i ++) {
 					      if(infolib[i].ppid == 0) {
 						      buildtree(&infolib[i], 1);

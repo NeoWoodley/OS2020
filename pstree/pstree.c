@@ -303,7 +303,7 @@ int main(int argc, char *argv[]) {
   }
   */
 
-  buildtree(&infolib[0],0);
+  recursion(&infolib[0]);
 
   /*
   assert(infolib[2].child == NULL);

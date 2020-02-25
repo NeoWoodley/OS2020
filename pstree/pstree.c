@@ -95,8 +95,6 @@ void buildtree(struct node* Node, int mode) {
 	    while(temp != NULL) {
 		   buildtree((struct node*)temp , mode);
 		   temp = (struct node*)(temp->peer);
-		   temp->peer = temp->peer->peer;
-		   temp->child = temp->peer->child;
 		}
 		return;
 	}

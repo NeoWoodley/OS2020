@@ -21,6 +21,8 @@ struct node {
 	struct node* peer;
 };
 
+struct node* NODE = (struct node*)malloc(sizeof(struct node));
+
 void myprint(struct node* Node) {
 	struct node* temp = Node;
     printf("Name:%s\n",&(temp->name[0]));
@@ -87,7 +89,6 @@ int find_num(char *str) {
 
 void buildtree(struct node* Node, int mode) {
 	time ++;
-	struct node* temp = (struct node*)malloc(sizeof(struct node));
     if(Node->child == NULL) {
 		for(int i = 0; i < Node->depth; i ++) {
 		    printf("%s",&space[0]);
@@ -115,10 +116,10 @@ void buildtree(struct node* Node, int mode) {
 		}
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
 		//temp = (struct node*) ((struct node*)(Node->child))->peer;
-		deepcpy(temp, Node->child->peer);
-	    while(temp != NULL) {
-		   buildtree((struct node*)temp , mode);
-		   deepcpy(temp, temp->peer);
+		deepcpy(NODE, Node->child->peer);
+	    while(NODE != NULL) {
+		   buildtree((struct node*)NODE , mode);
+		   deepcpy(NODE, NODE->peer);
 		   //temp = (struct node*)(temp->peer);
 		}
 		return;

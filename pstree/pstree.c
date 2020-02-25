@@ -275,14 +275,15 @@ int main(int argc, char *argv[]) {
   }
   */
 
-
+  /*
   for(int i = 0; i < count; i ++) {
 	  temp = &infolib[i];
       myprint(temp);
 	  printf("-------------------------------\n");
   }
+  */
 
-  buildtree(&infolib[0],0);
+  buildtree(&infolib[5],0);
 
   /*
   assert(infolib[2].child == NULL);

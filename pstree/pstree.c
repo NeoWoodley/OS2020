@@ -192,7 +192,7 @@ int main(int argc, char *argv[]) {
 	  }
   }
 
-  // printf("Total process number:%d\n",count);
+   printf("Total process number:%d\n",count);
 
   closedir(dir);
 

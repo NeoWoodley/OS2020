@@ -403,7 +403,7 @@ int main(int argc, char *argv[]) {
       case 2: {
 
 				  if(strstr(&_V[0], argv[1]) != NULL) {
-				      printf("Pstree-lite\nCopyright by Gan Chen\n");
+				      printf("pstree (PSmisc) 23.1\nCopyright (C) 1993-2017 Werner Almesberger and Craig Small\n\nPSmisc comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under\nthe terms of the GNU General Public License.\n");
 				  }
 				  else if(strstr(&_p[0], argv[1]) != NULL) {
 				      for(int i = 0; i < count; i ++) {
@@ -447,7 +447,7 @@ int main(int argc, char *argv[]) {
 				      printf("pstree (PSmisc) 23.1\nCopyright (C) 1993-2017 Werner Almesberger and Craig Small\n\nPSmisc comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under\nthe terms of the GNU General Public License.\n");
 				  }
 			  
-				  else if(p == 1) {
+				  ELSE IF(P == 1) {
 				      for(int i = 0; i < count; i ++) {
 					      if(infolib[i].ppid == 0) {
 						      buildtree(&infolib[i], 1);

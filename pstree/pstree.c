@@ -444,7 +444,7 @@ int main(int argc, char *argv[]) {
 				  }
 
 				  if(v == 1) {
-				      printf("Pstree-lite\nCopyright by Gan Chen\n");
+				      printf("pstree (PSmisc) 23.1\nCopyright (C) 1993-2017 Werner Almesberger and Craig Small\n\nPSmisc comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under\nthe terms of the GNU General Public License.\n");
 				  }
 			  
 				  else if(p == 1) {

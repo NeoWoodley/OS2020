@@ -89,7 +89,7 @@ int find_num(char *str) {
 }
 
 void buildtree(struct node* Node, int mode) {
-	struct node* pill;
+	struct node* pill = NULL;
 	time ++;
     if(Node->child == NULL) {
 		for(int i = 0; i < Node->depth; i ++) {

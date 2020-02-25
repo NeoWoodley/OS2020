@@ -154,7 +154,7 @@ int main(int argc, char *argv[]) {
   struct dirent* entry;
 
 //   struct node* infolib[10];
-   struct node infolib[500];
+   struct node infolib[300];
    
    /*
    for(int i = 0 ; i < 10 ; i ++) {
@@ -218,7 +218,7 @@ int main(int argc, char *argv[]) {
 		  }
 		  strcat(&infolib[i].name[0], head);
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
-	//	  printf("Name:%s\n",(char*)&infolib[i].name[0]);
+		  printf("Name:%s\n",(char*)&infolib[i].name[0]);
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
 		  if(strstr(ppid, &_ppid[0]) != NULL) {

@@ -472,6 +472,7 @@ int main(int argc, char *argv[]) {
 */
 //	printf("Time : %d\n ",time);
 
+  buildtree(&infolib[0],0);
 
   return 0;
   

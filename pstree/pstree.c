@@ -132,11 +132,14 @@ int main(int argc, char *argv[]) {
   DIR* dir;
   struct dirent* entry;
 
-   struct node* infolib[10];
+//   struct node* infolib[10];
+   struct node infolib[10];
    
+   /*
    for(int i = 0 ; i < 10 ; i ++) {
         infolib[i] = (struct node*)malloc(sizeof(struct node));
    }
+   */
 
   //dir = opendir("/proc");
   dir = opendir("./TESTM1");
@@ -153,18 +156,18 @@ int main(int argc, char *argv[]) {
         }
         else {
            // printf("File %s :Process!\n", entry->d_name);
-			infolib[count]->pid = str2int(entry->d_name);
+			infolib[count].pid = str2int(entry->d_name);
             //infolib[count].name = entry->d_name;
             count ++;
         }
   }
 
   for(int i = 0; i < count; i ++){
-      infolib[i]->depth = 0;
-	  infolib[i]->peer = NULL;
-	  infolib[i]->child = NULL;
+      infolib[i].depth = 0;
+	  infolib[i].peer = NULL;
+	  infolib[i].child = NULL;
 	  for(int j = 0; j < 50; j ++) {
-	      infolib[i]->name[j] = '\0';
+	      infolib[i].name[j] = '\0';
 	  }
   }
 
@@ -178,7 +181,7 @@ int main(int argc, char *argv[]) {
   char* head;
   FILE* file;
   for(int i = 0; i < count; i ++) {
-	  sprintf(path,"./TESTM1/%d/status",infolib[i]->pid);
+	  sprintf(path,"./TESTM1/%d/status",infolib[i].pid);
       file = fopen(path, "r");
 	  assert(file != NULL);
       if(file) {
@@ -191,8 +194,8 @@ int main(int argc, char *argv[]) {
 		  while(*head == ' ') {
 		      head ++;
 		  }
-		  strcat(&infolib[i]->name[0], head);
-		  infolib[i]->name[len2n(infolib[i]->name)] = '\0';
+		  strcat(&infolib[i].name[0], head);
+		  infolib[i].name[len2n(infolib[i].name)] = '\0';
 	//	  printf("Name:%s\n",(char*)&infolib[i].name[0]);
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
@@ -209,7 +212,7 @@ int main(int argc, char *argv[]) {
 	      head ++;
 	  }
 	  //printf("-----%d: %s",i, ppid);
-	  infolib[i]->ppid=str2int(head);
+	  infolib[i].ppid=str2int(head);
 	  } 	  
 
   }
@@ -227,24 +230,24 @@ int main(int argc, char *argv[]) {
   //struct node* temp;
   for(int i = 0; i < count; i ++) {
 	  for(int j = 0; j < count; j ++) {
-	      if(infolib[i]->child == NULL && infolib[j]->ppid == infolib[i]->pid) {
+	      if(infolib[i].child == NULL && infolib[j].ppid == infolib[i].pid) {
 //			  printf("-----S1\n");
-		      infolib[i]->child = infolib[j];
-			  infolib[j]->depth = infolib[i]->depth + 1; 
+		      infolib[i].child = infolib[j];
+			  infolib[j].depth = infolib[i].depth + 1; 
 		  }
-		  else if(infolib[i]->child != NULL && infolib[j]->ppid == infolib[i]->pid) {
+		  else if(infolib[i].child != NULL && infolib[j].ppid == infolib[i].pid) {
 //			  printf("-----S2\n");
-			  if(infolib[i]->child->peer == NULL) {
+			  if(infolib[i].child->peer == NULL) {
 //			      printf("-----S2-1\n");
-			      infolib[i]->child->peer = infolib[j];
+			      infolib[i].child->peer = infolib[j];
 			  }
-			  else if(infolib[i]->child->peer != NULL){
+			  else if(infolib[i].child->peer != NULL){
 //			      printf("-----S2-2\n");
-                  temp = findpeertail(infolib[i]->child->peer);
+                  temp = findpeertail(infolib[i].child->peer);
 			      temp->peer = infolib[j];
 //				  printf("@@@@@%s\n",temp->peer->name);
 			  }
-			  infolib[j]->depth = infolib[i]->depth + 1; 
+			  infolib[j].depth = infolib[i].depth + 1; 
 		  }
 		  else {
 //		      printf("-----S3\n");
@@ -279,7 +282,7 @@ int main(int argc, char *argv[]) {
   }
 
   free(temp);
-  buildtree(infolib[0],0);
+  buildtree(&infolib[0],0);
 
   /*
   assert(infolib[2].child == NULL);

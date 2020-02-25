@@ -276,7 +276,7 @@ int main(int argc, char *argv[]) {
 
 
   for(int i = 0; i < count; i ++) {
-	  temp = infolib[i];
+	  temp = &infolib[i];
       myprint(temp);
 	  printf("-------------------------------\n");
   }

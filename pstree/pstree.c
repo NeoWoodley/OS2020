@@ -22,7 +22,7 @@ struct node {
 };
 
 //struct node* NODE = (struct node*)malloc(sizeof(struct node));
-struct node* NODE = NULL;
+struct node* NODE;
 
 void myprint(struct node* Node) {
 	struct node* temp = Node;

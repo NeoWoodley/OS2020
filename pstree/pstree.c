@@ -27,12 +27,12 @@ struct node {
 void recursion(struct node* Node) {
 	struct node* temp = Node->child;
     if(Node->child == NULL) {
-	    printf("Leaf Node!\n");
+	    printf("%s Leaf Node!\n", &Node->name[0]);
 		return;
 	}
 
 	else if(Node->child != NULL) {
-		printf("Parent Node!\n");
+		printf("%s Parent Node!\n", &Node->name[0]);
 		while(temp->peer != NULL) {
 		    recursion(temp);
 			temp = temp->peer;

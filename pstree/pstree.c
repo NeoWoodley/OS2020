@@ -24,6 +24,21 @@ struct node {
 //struct node* NODE = (struct node*)malloc(sizeof(struct node));
 //struct node* NODE;
 
+void recursion(struct node* Node) {
+    if(Node->child == NULL) {
+	    print("Leaf Node!\n");
+	}
+
+	else if(Node->child != NULL) {
+		printf("Parent Node!\n")
+	    struct node* temp = Node->child;
+		while(temp->peer != NULL) {
+		    recursion(temp);
+			temp = temp->peer;
+		}
+	}
+}
+
 void myprint(struct node* Node) {
 	struct node* temp = Node;
     printf("Name:%s\n",&(temp->name[0]));

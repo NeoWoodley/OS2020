@@ -21,7 +21,7 @@ struct node {
 	struct node* peer;
 };
 
-struct node* NODE = (struct node*)malloc(sizeof(struct node));
+struct node* NODE = (struct node*)malloc(sizeof(struct node)) = NULL;
 
 void myprint(struct node* Node) {
 	struct node* temp = Node;

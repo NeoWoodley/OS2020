@@ -22,21 +22,22 @@ struct node {
 };
 
 void myprint(struct node* Node) {
-    printf("Name:%s\n",&(Node->name[0]));
+	struct node* temp Node;
+    printf("Name:%s\n",&(temp->name[0]));
 
-    if(Node->peer == NULL) {
+    if(temp->peer == NULL) {
 	    printf("NULL peer!\n");
 	}
 
-	else if(Node->peer != NULL) {
+	else if(temp->peer != NULL) {
 	    printf("Peer exist!\n");
 	}
 
-	if(Node->child == NULL) {
+	if(temp->child == NULL) {
 	    printf("NULL child!\n");
 	}
 
-	else if(Node->child != NULL) {
+	else if(temp->child != NULL) {
 	    printf("Child exist!\n");
 	}
 }

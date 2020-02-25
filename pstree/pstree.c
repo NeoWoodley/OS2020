@@ -45,9 +45,11 @@ void myprint(struct node* Node) {
 	}
 }
 
+/*
 void deepcpy(struct node* dest, struct node* src) {
 	memcpy(dest, src, sizeof(struct node));
 }
+*/
 
 struct node* findpeertail(struct node* Node) {
 	struct node* end = Node;
@@ -119,10 +121,10 @@ void buildtree(struct node* Node, int mode) {
 		}
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
 		//temp = (struct node*) ((struct node*)(Node->child))->peer;
-		deepcpy(pill, Node->child->peer);
+		pill = Node->child->peer;
 	    while(pill != NULL) {
 		   buildtree((struct node*)pill, mode);
-		   deepcpy(pill, pill->peer);
+		   pill = pill->peer;
 		   //temp = (struct node*)(temp->peer);
 		}
 		return;

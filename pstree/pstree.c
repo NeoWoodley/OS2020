@@ -22,7 +22,7 @@ struct node {
 };
 
 void myprint(struct node* Node) {
-	struct node* temp;
+	struct node* temp = Node;
     printf("Name:%s\n",&(temp->name[0]));
 
     if(temp->peer == NULL) {

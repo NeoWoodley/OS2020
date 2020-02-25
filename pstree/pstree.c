@@ -109,7 +109,7 @@ int find_num(char *str) {
 
 void buildtree(struct node* Node, int mode) {
 	time ++;
-	printf("Hello from %s time %d\n", &Node->name[0],time);
+//	printf("Hello from %s time %d\n", &Node->name[0],time);
 	struct node* pill = NULL;
     if(Node->child == NULL) {
 		for(int i = 0; i < Node->depth; i ++) {

@@ -268,13 +268,14 @@ int main(int argc, char *argv[]) {
   }
   */
 
-  free(temp);
 
   for(int i = 0; i < count; i ++) {
-      myprint(infolib[i]);
+	  temp = infolib[i];
+      myprint(temp);
 	  printf("-------------------------------\n");
   }
 
+  free(temp);
 //  buildtree(infolib[0],0);
 
   /*

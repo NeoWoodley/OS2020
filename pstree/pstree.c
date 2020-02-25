@@ -210,11 +210,11 @@ int main(int argc, char *argv[]) {
 		  //printf("----------\n");
 	      fgets(name, 49, file);
 		  head = name;
-		  while(*head != ' ') {
+		  while(*head != '\t') {
 		      head ++;
 		  }
 		  printf("%s\n",head);
-		  while(*head == ' ') {
+		  while(*head == '\t') {
 		      head ++;
 		  }
 		  strcat(&infolib[i].name[0], head);

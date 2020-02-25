@@ -32,7 +32,7 @@ void recursion(struct node* Node) {
 	}
 
 	else if(Node->child != NULL) {
-		printf("Parent Node!\n")
+		printf("Parent Node!\n");
 		while(temp->peer != NULL) {
 		    recursion(temp);
 			temp = temp->peer;

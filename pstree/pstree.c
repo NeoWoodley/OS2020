@@ -476,8 +476,7 @@ int main(int argc, char *argv[]) {
 
 
   for(int i = 0; i < count; i ++) {
-  
-      buildtree(&infolib[i]);
+      buildtree(&infolib[i], 0);
   }
 
   return 0;

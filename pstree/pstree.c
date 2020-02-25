@@ -213,7 +213,7 @@ int main(int argc, char *argv[]) {
 		  while(*head != '\t') {
 		      head ++;
 		  }
-		  printf("%s\n",head);
+//		  printf("%s\n",head);
 		  while(*head == '\t') {
 		      head ++;
 		  }

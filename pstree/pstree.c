@@ -154,7 +154,7 @@ int main(int argc, char *argv[]) {
   struct dirent* entry;
 
 //   struct node* infolib[10];
-   struct node infolib[10];
+   struct node infolib[500];
    
    /*
    for(int i = 0 ; i < 10 ; i ++) {
@@ -162,8 +162,8 @@ int main(int argc, char *argv[]) {
    }
    */
 
-  //dir = opendir("/proc");
-  dir = opendir("./TESTM1");
+  dir = opendir("/proc");
+  //dir = opendir("./TESTM1");
   assert(dir != NULL);
 
   char _V[13]="-V --version";
@@ -202,7 +202,8 @@ int main(int argc, char *argv[]) {
   char* head;
   FILE* file;
   for(int i = 0; i < count; i ++) {
-	  sprintf(path,"./TESTM1/%d/status",infolib[i].pid);
+	  //sprintf(path,"./TESTM1/%d/status",infolib[i].pid);
+	  sprintf(path,"/proc/%d/status",infolib[i].pid);
       file = fopen(path, "r");
 	  assert(file != NULL);
       if(file) {

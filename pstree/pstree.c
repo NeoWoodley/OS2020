@@ -209,6 +209,7 @@ int main(int argc, char *argv[]) {
       if(file) {
 		  //printf("----------\n");
 	      fgets(name, 49, file);
+		  printf("%s\n",name);
 		  head = name;
 		  while(*head != ' ') {
 		      head ++;
@@ -218,7 +219,7 @@ int main(int argc, char *argv[]) {
 		  }
 		  strcat(&infolib[i].name[0], head);
 		  infolib[i].name[len2n(infolib[i].name)] = '\0';
-		  printf("Name:%s\n",(char*)&infolib[i].name[0]);
+		 // printf("Name:%s\n",(char*)&infolib[i].name[0]);
       for(int j = 0; j < 6; j ++) {
 	      fgets(ppid, 32, file);
 		  if(strstr(ppid, &_ppid[0]) != NULL) {

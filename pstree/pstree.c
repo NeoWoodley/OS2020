@@ -25,18 +25,20 @@ struct node {
 //struct node* NODE;
 
 void recursion(struct node* Node) {
+	struct node* temp = Node->child;
     if(Node->child == NULL) {
-	    print("Leaf Node!\n");
+	    printf("Leaf Node!\n");
+		return;
 	}
 
 	else if(Node->child != NULL) {
 		printf("Parent Node!\n")
-	    struct node* temp = Node->child;
 		while(temp->peer != NULL) {
 		    recursion(temp);
 			temp = temp->peer;
 		}
 	}
+	return;
 }
 
 void myprint(struct node* Node) {

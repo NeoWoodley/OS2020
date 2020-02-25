@@ -90,11 +90,13 @@ void buildtree(struct node* Node, int mode) {
 		}
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
 		temp = (struct node*) ((struct node*)(Node->child))->peer;
-		temp->peer = Node->peer;
-		temp->child = Node->child;
-	    while(Node != NULL) {
-		   buildtree((struct node*)Node , mode);
-		   Node = (struct node*)(Node->peer);
+		temp->peer = Node->child->peer->peer;
+		temp->child = Node->child->peer->child;
+	    while(temp != NULL) {
+		   buildtree((struct node*)temp , mode);
+		   temp = (struct node*)(temp->peer);
+		   temp->peer = temp->peer->peer;
+		   temp->child = temp->peer->child;
 		}
 		return;
 	}

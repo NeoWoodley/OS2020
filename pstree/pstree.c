@@ -282,7 +282,6 @@ int main(int argc, char *argv[]) {
 	  printf("-------------------------------\n");
   }
 
-  printf("############%p\n", temp);
   buildtree(&infolib[0],0);
 
   /*

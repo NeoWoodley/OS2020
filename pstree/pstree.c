@@ -89,7 +89,7 @@ int find_num(char *str) {
 }
 
 void buildtree(struct node* Node, int mode) {
-	struct node* pill = (struct node*)malloc(sizeof(struct node));
+	struct node* pill;
 	time ++;
     if(Node->child == NULL) {
 		for(int i = 0; i < Node->depth; i ++) {
@@ -227,7 +227,7 @@ int main(int argc, char *argv[]) {
   }
   */
 
-  struct node* temp = (struct node*)malloc(sizeof(struct node));
+  struct node* temp;
   //struct node* temp;
   for(int i = 0; i < count; i ++) {
 	  for(int j = 0; j < count; j ++) {
@@ -283,7 +283,6 @@ int main(int argc, char *argv[]) {
   }
 
   printf("############%p\n", temp);
-  free(temp);
   buildtree(&infolib[0],0);
 
   /*

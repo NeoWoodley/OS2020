@@ -21,6 +21,17 @@ struct node {
 	struct node* peer;
 };
 
+void deepcpy(struct node* dest, struct node* src) {
+   dest->pid = src->pid;
+   dest->ppid = src->ppid;
+   dest->depth = src->depth;
+   memcpy(dest->child, src->child, sizeof(src->child)) 
+   memcpy(dest->peer, src->peer, sizeof(src->peer))
+   for(int i = 0; i < 50; i ++) {
+       dest->name[i] = src->name[i];
+   } 
+}
+
 struct node* findpeertail(struct node* Node) {
 	struct node* end = Node;
     while(end->peer != NULL) {
@@ -90,11 +101,11 @@ void buildtree(struct node* Node, int mode) {
 		}
        // printf("%s{%d}\n",&(Node->name[0]), Node->pid);
 		temp = (struct node*) ((struct node*)(Node->child))->peer;
-		temp->peer = Node->child->peer->peer;
-		temp->child = Node->child->peer->child;
+		deepcpy(temp, Node->child->peer)
 	    while(temp != NULL) {
 		   buildtree((struct node*)temp , mode);
-		   temp = (struct node*)(temp->peer);
+		   deepcpy(temp, temp->peer);
+		   //temp = (struct node*)(temp->peer);
 		}
 		return;
 	}

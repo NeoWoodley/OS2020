@@ -21,6 +21,26 @@ struct node {
 	struct node* peer;
 };
 
+void myprint(struct node* Node) {
+    printf("Name:%s\n",&(Node->name[0]));
+
+    if(Node->peer == NULL) {
+	    printf("NULL peer!\n");
+	}
+
+	else if(Node->peer != NULL) {
+	    printf("Peer exist!\n");
+	}
+
+	if(Node->child == NULL) {
+	    printf("NULL child!\n");
+	}
+
+	else if(Node->child != NULL) {
+	    printf("Child exist!\n");
+	}
+}
+
 void deepcpy(struct node* dest, struct node* src) {
 	memcpy(dest, src, sizeof(struct node));
 }
@@ -232,6 +252,7 @@ int main(int argc, char *argv[]) {
 	  }
   }
 
+  /*
   for(int i = 0; i < count; i ++) {
 	  printf("i:%d\n",i);
       if(infolib[i]->child == NULL) {
@@ -245,10 +266,16 @@ int main(int argc, char *argv[]) {
 	  }
 	  printf("-------------------------------\n");
   }
+  */
 
   free(temp);
 
-  buildtree(infolib[0],0);
+  for(int i = 0; i < count; i ++) {
+      myprint(&infolib[i]);
+	  printf("-------------------------------\n");
+  }
+
+//  buildtree(infolib[0],0);
 
   /*
   assert(infolib[2].child == NULL);

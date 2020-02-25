@@ -440,7 +440,7 @@ int main(int argc, char *argv[]) {
 					      p = 1;
 					  }
 
-					  if(strstr(&_t[0], argv[i] != NULL)) {
+					  if(strstr(&_t[0], argv[i]) != NULL)) {
 					      t = 1;
 					  }
 				  }

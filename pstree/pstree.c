@@ -428,6 +428,7 @@ int main(int argc, char *argv[]) {
 	  case 3: {
 				  int v = 0;
 				  int p = 0;
+				  int t = 0;
 //				  int n;
 
 				  for(int i = 1; i < 3; i ++) {
@@ -439,12 +440,12 @@ int main(int argc, char *argv[]) {
 					      p = 1;
 					  }
 
-//					  if(strstr(&_n[0], argv[i] != NULL)) {
-//					      n = 1;
-//					  }
+					  if(strstr(&_t[0], argv[i] != NULL)) {
+					      t = 1;
+					  }
 				  }
 
-				  if(v == 1) {
+				  if(v == 1 || t == 1) {
 				      printf("pstree (PSmisc) 23.1\nCopyright (C) 1993-2017 Werner Almesberger and Craig Small\n\nPSmisc comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under\nthe terms of the GNU General Public License.\n");
 				  }
 			  
@@ -472,7 +473,6 @@ int main(int argc, char *argv[]) {
                   for(int i = 0; i < argc; i ++) {
 				      if(strstr(argv[i], &_t[0]) != NULL) {
 				          printf("pstree (PSmisc) 23.1\nCopyright (C) 1993-2017 Werner Almesberger and Craig Small\n\nPSmisc comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you are welcome to redistribute it under\nthe terms of the GNU General Public License.\n");
-					      
 					  }
 				  }				  
 			  }

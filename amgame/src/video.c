@@ -35,10 +35,10 @@ void splash() {
 
 void game_bg() {
   init();
-    for (int y = 4; y * SIDE <= h - 100; y++) {
+    for (int y = 8; y * SIDE <= h - 120; y++) {
       draw_tile(4 * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
     }
-    for (int y = 4; y * SIDE <= h - 100; y++) {
+    for (int y = 8; y * SIDE <= h - 120; y++) {
       draw_tile(16 * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
     }
 

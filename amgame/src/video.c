@@ -35,8 +35,8 @@ void splash() {
 
 void game_bg() {
   init();
-  for (int x = 0; x * SIDE <= w; x ++) {
-    for (int y = 0; y * SIDE <= h; y++) {
+  for (int x = 8; x == 8 || x == 32; x ++) {
+    for (int y = 4; y * SIDE <= h - 100; y++) {
       draw_tile(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
     }
   }

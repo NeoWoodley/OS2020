@@ -29,7 +29,7 @@ void splash() {
       if ((x & 1) ^ (y & 1)) {
         draw_tile(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
       }
-	printf("H:%d W:%d x:%d y:%d\n",h,w,x,y);
+//	printf("H:%d W:%d x:%d y:%d\n",h,w,x,y);
     }
   }
 }
@@ -65,7 +65,7 @@ void blacksh() {
   init();
   for(int x = 2; x < x / SIDE - 2; x ++) {
     for (int y = 2; y < y / SIDE -2; y++) {
-      draw_tile(x * SIDE, y * SIDE, SIDE, SIDE, 0x272727); // white
+      draw_tile(x * SIDE, y * SIDE, SIDE, SIDE, 0x3a006f); // white
     }
   }
     

@@ -41,7 +41,7 @@ void game_bg() {
     }
 
 	for (int y = 0; y * SIDE <= h; y++) {
-      draw_tile(40 * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
+      draw_tile(39 * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
 	}
 
 }

@@ -65,7 +65,7 @@ void blacksh() {
   init();
  for(int x = 2; x < w / SIDE - 2; x ++) {
     for (int y = 2; y < h / SIDE -2; y++) {
-      draw_tile(x * SIDE, y * SIDE, SIDE, SIDE, 0x3a006f); // white
+      draw_tile(x * SIDE, y * SIDE, SIDE, SIDE, 0x272727); // white
     }
   }
     

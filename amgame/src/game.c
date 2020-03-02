@@ -14,9 +14,9 @@ int main(const char *args) {
   puts("Press any key to see its key code...\n");
   while (1) {
     //_halt(0);
-	// if(read_key() != _KEY_NONE) {
-	    printf("key:%d\n", _KEY_NONE);
-	// }
+	    int receive = read_key();
+	    printf("key:%d\n", receive);
+   //  }
    // print_key();
   }
   return 0;

@@ -13,7 +13,7 @@ int main(const char *args) {
 
   for(int x = 2; x <= 5; x ++) {
       for(int y = 2; y <= 5; y ++) {
-	  splash();
+	  blacksh();
       pacman_go(x,y);	  
 	  }
   }

@@ -1,5 +1,6 @@
 #include <am.h>
 #include <amdev.h>
+#include <klib.h> //modified
 
 void splash();
 void game_bg();

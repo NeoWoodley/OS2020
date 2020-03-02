@@ -29,6 +29,7 @@ void splash() {
       if ((x & 1) ^ (y & 1)) {
         draw_tile(x * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
       }
+	printf("H:%d W:%d x:%d y:%d\n",h,w,x,y);
     }
   }
 }
@@ -37,9 +38,6 @@ void game_bg() {
   init();
     for (int y = 0; y * SIDE <= h; y++) {
       draw_tile(0 * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
-    }
-    for (int y = 0; y * SIDE <= h; y++) {
-      draw_tile((w-1) * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
     }
 
 }

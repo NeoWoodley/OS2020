@@ -11,20 +11,10 @@ int main(const char *args) {
 //  splash();
   game_bg();
 
-  for(int x = 2; x <= 5; x ++) {
-      for(int y = 2; y <= 5; y ++) {
-          for(int i = 0; i < 21474836; i ++)
-		  {
-		      
-		  }
-	      blacksh();
-          pacman_go(x,y);	  
-	  }
-  }
-
   puts("Press any key to see its key code...\n");
   while (1) {
     //_halt(0);
+	printf("uptime:%d\n", uptime());
     print_key();
   }
   return 0;

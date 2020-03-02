@@ -38,8 +38,8 @@ void game_bg() {
     for (int y = 0; y * SIDE <= h; y++) {
       draw_tile(0 * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
     }
-    for (int y = 8; y * SIDE <= h - 120; y++) {
-      draw_tile(20 * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
+    for (int y = 0; y * SIDE <= h; y++) {
+      draw_tile(w * SIDE, y * SIDE, SIDE, SIDE, 0xffffff); // white
     }
 
 }

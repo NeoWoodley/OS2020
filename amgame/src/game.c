@@ -14,7 +14,7 @@ int main(const char *args) {
   puts("Press any key to see its key code...\n");
   while (1) {
     //_halt(0);
-	printf("uptime:%d\n", uptime());
+	printf("key:%d\n", read_key());
     print_key();
   }
   return 0;

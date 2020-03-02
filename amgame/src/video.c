@@ -60,3 +60,9 @@ void game_bg() {
     }
   }
 }
+
+void pacman_go(int x, int y) {
+	init();
+    draw_tile(x * SIDE, y * SIDE, SIDE, SIDE, 0xf9f900);
+    
+}

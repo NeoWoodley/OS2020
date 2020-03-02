@@ -9,7 +9,13 @@ int main(const char *args) {
   puts("\"\n");
 
 //  splash();
-  game_bg();
+
+  for(int x = 2; x <= 4; x ++) {
+      for(int y = 2; y <= 4; y ++) {
+      game_bg();
+      pacman_go(x,y);	  
+	  }
+  }
 
   puts("Press any key to see its key code...\n");
   while (1) {

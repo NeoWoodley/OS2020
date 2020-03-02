@@ -9,10 +9,11 @@ int main(const char *args) {
   puts("\"\n");
 
 //  splash();
+  game_bg();
 
   for(int x = 2; x <= 2; x ++) {
       for(int y = 2; y <= 2; y ++) {
-      game_bg();
+	  blacksh();
       pacman_go(x,y);	  
 	  }
   }

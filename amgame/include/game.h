@@ -4,6 +4,7 @@
 
 void splash();
 void game_bg();
+void blacksh();
 void pacman_go(int x, int y);
 void print_key();
 static inline void puts(const char *s) {

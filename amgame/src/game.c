@@ -13,8 +13,12 @@ int main(const char *args) {
 
   for(int x = 2; x <= 5; x ++) {
       for(int y = 2; y <= 5; y ++) {
-	  blacksh();
-      pacman_go(x,y);	  
+          for(int i = 0; i < 21474836; i ++)
+		  {
+		      
+		  }
+	      blacksh();
+          pacman_go(x,y);	  
 	  }
   }
 

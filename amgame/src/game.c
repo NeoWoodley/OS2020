@@ -11,8 +11,8 @@ int main(const char *args) {
 //  splash();
   game_bg();
 
-  for(int x = 2; x <= 2; x ++) {
-      for(int y = 2; y <= 2; y ++) {
+  for(int x = 2; x <= 5; x ++) {
+      for(int y = 2; y <= 5; y ++) {
 	  blacksh();
       pacman_go(x,y);	  
 	  }

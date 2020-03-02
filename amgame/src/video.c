@@ -61,7 +61,7 @@ void game_bg() {
   }
 }
 
-void blaksh() {
+void blacksh() {
   init();
   for(int x = 2; x < x / SIDE - 2; x ++) {
     for (int y = 2; y < y / SIDE -2; y++) {

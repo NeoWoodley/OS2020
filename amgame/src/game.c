@@ -10,8 +10,8 @@ int main(const char *args) {
 
 //  splash();
 
-  for(int x = 2; x <= 4; x ++) {
-      for(int y = 2; y <= 4; y ++) {
+  for(int x = 2; x <= 2; x ++) {
+      for(int y = 2; y <= 2; y ++) {
       game_bg();
       pacman_go(x,y);	  
 	  }

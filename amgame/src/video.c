@@ -61,6 +61,16 @@ void game_bg() {
   }
 }
 
+void blaksh() {
+  init();
+  for(int x = 2; x < x / SIDE - 2; x ++) {
+    for (int y = 2; y < y / SIDE -2; y++) {
+      draw_tile(x * SIDE, y * SIDE, SIDE, SIDE, 0x272727); // white
+    }
+  }
+    
+}
+
 void pacman_go(int x, int y) {
 	init();
     draw_tile(x * SIDE, y * SIDE, SIDE, SIDE, 0xf9f900);

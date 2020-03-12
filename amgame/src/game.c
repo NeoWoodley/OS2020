@@ -12,18 +12,16 @@ int main(const char *args) {
   game_bg();
 
   puts("Start your game!\n");
-  int receive = 0;
+  int receive = 128;
+  int x = 5;
+  int y = 5;
   //puts("Press any key to see its key code...\n");
   while (1) {
-	  int x = 5;
-	  int y = 5;
 	  receive = read_key();
-	  printf("Key:%d\n",receive);
-	  while(receive != 1 && ((receive | 0x8000) != 0x8001)) {
+	  if (receive != 1 && ((receive | 0x8000) != 0x8001) && receive != _KEY_NONE) {
 		  if (x < 25) {
 		      x ++;
 		  }
-
 		  else {
 		      x = 5;
 		      y ++;
@@ -31,9 +29,13 @@ int main(const char *args) {
 			  pacman_go(x, y);
 	     /// update_game_bg();
 	  } 
+	  
+	  else {
+	      break;
+	  }
+  }
 	  _halt(0);
     //_halt(0);
 		//if(receive != _KEY_NONE && ((receive | 0x8000)!= receive) ) 
-  }
   return 0;
 }

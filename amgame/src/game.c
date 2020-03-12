@@ -15,7 +15,7 @@ int main(const char *args) {
   while (1) {
     //_halt(0);
 	    int receive = read_key();
-		if(receive != _KEY_NONE) 
+		if(receive != _KEY_NONE && ((receive | 0x8000)!= receive) ) 
 	        //printf("Key : %d\n", receive & 0x00ff);
 	        printf("Key : %d\n", receive);
    // print_key();

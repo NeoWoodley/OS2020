@@ -73,10 +73,12 @@ void blacksh() {
 
 void pacman_go(int x, int y) { // the pacman go forward
 	init();
+	/*
 	int sum = 0;
 	for (int i = 0; i < 10000000; i++) {
 	    asm volatile("addq $1, %0": "=m"(sum));
 	}
+	*/
     draw_tile(x * SIDE, y * SIDE, SIDE, SIDE, 0xf9f900); // yellow
     
 }

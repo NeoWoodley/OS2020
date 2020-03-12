@@ -1,5 +1,7 @@
 #include <game.h>
 
+#define SIDE 16
+
 // Operating system is a C program!
 int main(const char *args) {
   _ioe_init();
@@ -13,8 +15,11 @@ int main(const char *args) {
 
   puts("Start your game!\n");
   int receive = 0;
+  int w = screen_width();
+  int h = screen_height();
   int x = 5;
   int y = 5;
+  printf("w:%d,h:%d\n",w,h);
   //puts("Press any key to see its key code...\n");
   while (1) {
 	  while (receive == _KEY_NONE)

@@ -19,7 +19,8 @@ int main(const char *args) {
   while (1) {
 	  while (receive == _KEY_NONE)
 	      receive = read_key();
-	  _halt(0);
+	  if(receive == 1 || ((receive | 0x8000) != 0x8001))
+	      _halt(0);
 	  if (receive != 1 && (receive | 0x8000) != 0x8001) {
 		  if (x < 25) {
 		      x ++;
@@ -33,8 +34,6 @@ int main(const char *args) {
 	     /// update_game_bg();
 	  } 
 	  
-	  else if (receive == 1 || ((receive | 0x8000) != 0x8001)) 
-          _halt(1);
   }
     //_halt(0);
 		//if(receive != _KEY_NONE && ((receive | 0x8000)!= receive) ) 

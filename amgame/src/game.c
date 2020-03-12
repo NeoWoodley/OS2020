@@ -19,7 +19,7 @@ int main(const char *args) {
   while (1) {
 	  while (receive == _KEY_NONE)
 	      receive = read_key();
-	  if(receive == 1 || ((receive | 0x8000) != 0x8001))
+	  if(receive == 1 || ((receive | 0x8000) == 0x8001)) 
 	      _halt(0);
 	  if (receive != 1 && (receive | 0x8000) != 0x8001) {
 		  if (x < 25) {

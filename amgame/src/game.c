@@ -17,8 +17,8 @@ int main(const char *args) {
   int receive = 0;
   int w = screen_width();
   int h = screen_height();
-  int x = 5;
-  int y = 5;
+  int x = 2;
+  int y = 2;
   printf("w:%d,h:%d\n",w,h);
   //puts("Press any key to see its key code...\n");
   while (1) {
@@ -27,14 +27,21 @@ int main(const char *args) {
 	  if(receive == 1 || ((receive | 0x8000) == 0x8001)) 
 	      _halt(0);
 	  if (receive != 1 && (receive | 0x8000) != 0x8001) {
-		  if (x < 25) {
-		      x ++;
+		  if (x < w / SIDE - 2 && y < h / SIDE - 2) {
+			  pacman_go(x, y);
+			  x ++;
 		  }
-		  else {
-		      x = 5;
-		      y ++;
+		  else if(x == w / SIDE - 2 && y < h / SIDE - 2) {
+              x = 2;
+			  y ++;
+			  continue;
+		  } 
+		  else if( y == h / SIDE - 2) {
+		      blacksh(); 
+			  x = 2;
+			  y = 2;
+			  continue;
 		  }
-	      pacman_go(x, y);
 		  receive = _KEY_NONE;
 	     /// update_game_bg();
 	  } 

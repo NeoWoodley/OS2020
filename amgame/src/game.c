@@ -27,7 +27,8 @@ int main(const char *args) {
 		      x = 5;
 		      y ++;
 		  }
-			  pacman_go(x, y);
+	      pacman_go(x, y);
+		  receive = _KEY_NONE;
 	     /// update_game_bg();
 	  } 
 	  

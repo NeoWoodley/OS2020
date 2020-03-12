@@ -18,7 +18,8 @@ int main(const char *args) {
 	  int x = 5;
 	  int y = 5;
 	  receive = read_key();
-	  while(receive != 1 && receive != _KEY_NONE && ((receive | 0x8000) != 0x8001)) {
+	  printf("Key:%d\n",receive);
+	  while(receive != 1 && ((receive | 0x8000) != 0x8001)) {
 		  if (x < 25) {
 		      x ++;
 		  }

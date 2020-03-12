@@ -11,16 +11,17 @@ int main(const char *args) {
 //  splash();
   game_bg();
 
-  puts("Press any key to see its key code...\n");
+  puts("Start your game!\n");
+  int receive = 0;
+  //puts("Press any key to see its key code...\n");
   while (1) {
+	  receive = read_key();
+	  while(receive != 1 && ((receive | 0x8000) != 0x8001)) {
+	     /// update_game_bg();
+	  } 
+	  _halt(0);
     //_halt(0);
-	    int receive = read_key();
-		if(receive != _KEY_NONE && ((receive | 0x8000)!= receive) ) 
-	        //printf("Key : %d\n", receive & 0x00ff);
-	        printf("Key : %d\n", receive);
-   // print_key();
-   //  }
-   // print_key();
+		//if(receive != _KEY_NONE && ((receive | 0x8000)!= receive) ) 
   }
   return 0;
 }

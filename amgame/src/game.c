@@ -12,13 +12,14 @@ int main(const char *args) {
   game_bg();
 
   puts("Start your game!\n");
-  int receive = 128;
+  int receive = 0;
   int x = 5;
   int y = 5;
   //puts("Press any key to see its key code...\n");
   while (1) {
-	  receive = read_key();
-	  if (receive != 1 && ((receive | 0x8000) != 0x8001) && receive != _KEY_NONE) {
+	  while (receive == _KEY_NONE)
+	      receive = read_key();
+	  if (receive != 1 && (receive | 0x8000) != 0x8001) {
 		  if (x < 25) {
 		      x ++;
 		  }
@@ -30,10 +31,8 @@ int main(const char *args) {
 	     /// update_game_bg();
 	  } 
 	  
-	  else {
-		  if (receive == 1 || ((receive | 0x8000) != 0x8001)) 
+	  else if (receive == 1 || ((receive | 0x8000) != 0x8001)) 
 	          break;
-	  }
   }
   _halt(0);
     //_halt(0);

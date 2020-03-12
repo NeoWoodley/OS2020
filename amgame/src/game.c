@@ -33,7 +33,7 @@ int main(const char *args) {
 	  } 
 	  
 	  else if (receive == 1 || ((receive | 0x8000) != 0x8001)) 
-          _halt(0);
+          _halt(1);
   }
     //_halt(0);
 		//if(receive != _KEY_NONE && ((receive | 0x8000)!= receive) ) 

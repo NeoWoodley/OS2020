@@ -17,6 +17,7 @@ int main(const char *args) {
   int y = 5;
   //puts("Press any key to see its key code...\n");
   while (1) {
+	  _halt(0);
 	  while (receive == _KEY_NONE)
 	      receive = read_key();
 	  if (receive != 1 && (receive | 0x8000) != 0x8001) {

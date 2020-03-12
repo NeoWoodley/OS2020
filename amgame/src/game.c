@@ -15,8 +15,19 @@ int main(const char *args) {
   int receive = 0;
   //puts("Press any key to see its key code...\n");
   while (1) {
+	  int x = 5;
+	  int y = 5;
 	  receive = read_key();
 	  while(receive != 1 && ((receive | 0x8000) != 0x8001)) {
+		  if (x < 25) {
+		      x ++;
+		  }
+
+		  else {
+		      x = 0;
+		      y ++;
+		  }
+			  pacman_go(x, y);
 	     /// update_game_bg();
 	  } 
 	  _halt(0);

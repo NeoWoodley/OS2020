@@ -34,7 +34,7 @@ void splash() {
   }
 }
 
-void game_bg() {
+void game_bg() { // to draw the fences onto the screen
   init();
   for(int x = 0; x < 2; x ++) {
     for (int y = 0; y * SIDE <= h; y++) {
@@ -71,7 +71,7 @@ void blacksh() {
     
 }
 
-void pacman_go(int x, int y) {
+void pacman_go(int x, int y) { // the pacman go forward
 	init();
 	int sum = 0;
 	for (int i = 0; i < 10000000; i++) {

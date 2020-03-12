@@ -14,11 +14,10 @@ int main(const char *args) {
   puts("Press any key to see its key code...\n");
   while (1) {
     //_halt(0);
-	    int receive = read_key();
-		if(receive != _KEY_NONE) {
+//	    int receive = read_key();
+//		if(receive != _KEY_NONE) {
 //	        printf("Key : %d\n", receive);
     print_key();
-		}
    //  }
    // print_key();
   }

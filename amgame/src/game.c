@@ -15,7 +15,9 @@ int main(const char *args) {
   while (1) {
     //_halt(0);
 	    int receive = read_key();
-	    printf("key:%d\n", receive);
+		if(receive != _KEY_NONE) {
+	        printf("key:%d\n", receive);
+		}
    //  }
    // print_key();
   }

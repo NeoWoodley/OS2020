@@ -19,7 +19,6 @@ int main(const char *args) {
   int h = screen_height();
   int x = 2;
   int y = 2;
-  assert(x != 2);
   //printf("w:%d,h:%d\n",w,h);
   //puts("Press any key to see its key code...\n");
   while (1) {

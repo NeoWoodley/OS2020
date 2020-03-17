@@ -1,6 +1,6 @@
 #include "co.h"
 #include <stdlib.h>
-#include "list.h"
+#include <linux/list.h>
 
 #define STACK_SIZE (1<<10)
 

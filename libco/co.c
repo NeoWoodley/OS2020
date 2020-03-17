@@ -1,14 +1,30 @@
 #include "co.h"
-#include "x86.h"
 #include <stdlib.h>
+#include <list.h>
 
 #define STACK_SIZE (1<<10)
+
+static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
+
+  asm volatile (
+#if __x86_64__
+    "movq %0, %%rsp; movq %2, %%rdi; jmp *%1"
+      : : "b"((uintptr_t)sp),     "d"(entry), "a"(arg)
+#else
+    "movl %0, %%esp; movl %2, 4(%0); jmp *%1"
+      : : "b"((uintptr_t)sp - 8), "d"(entry), "a"(arg)
+#endif
+  );
+
+}
 
 /*
 #if __x86_64__
 
 #else
 */
+
+LIST_HEAD_INIT(co_head);
 
 enum co_status {
 
@@ -25,6 +41,8 @@ struct co {
 	void (*func)(void *);
 	void *arg;
 
+	struct list_head node;
+
 	enum co_status status;
 	struct co *    waiter;
 	jmp_buf        context;
@@ -33,6 +51,10 @@ struct co {
 };
 
 struct co *current;
+
+struct list_head {
+    struct list_head *next, *prev;
+}
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
@@ -63,9 +85,9 @@ void co_wait(struct co *co) {
 void co_yield() {
 
 	current->status = CO_WAITING;
-    int val = setjmo(current->context);
+    int val = setjmp(current->context);
     if (val == 0) {
-        	
+        
 	}
     else {
 	

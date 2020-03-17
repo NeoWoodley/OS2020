@@ -24,8 +24,6 @@ static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 #else
 */
 
-LIST_HEAD_INIT(co_head);
-
 enum co_status {
 
     CO_NEW = 1,
@@ -51,10 +49,6 @@ struct co {
 };
 
 struct co *current;
-
-struct list_head {
-    struct list_head *next, *prev;
-}
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 

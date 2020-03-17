@@ -39,8 +39,6 @@ struct co {
 	void (*func)(void *);
 	void *arg;
 
-	struct list_head node;
-
 	enum co_status status;
 	struct co *    waiter;
 	jmp_buf        context;

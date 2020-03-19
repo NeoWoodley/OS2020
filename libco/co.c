@@ -56,8 +56,7 @@ struct co {
 	void *arg;
 
 	enum co_status status;
-	struct co *    waiter;
-	struct co *    next;
+	struct co *    waiter, next;
 	jmp_buf        context;
 	uint8_t        stack[STACK_SIZE];
 

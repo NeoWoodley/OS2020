@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <assert.h>
 #include <setjmp.h>
+#include <linux/list.h>
 
 #define STACK_SIZE (1<<10)
 

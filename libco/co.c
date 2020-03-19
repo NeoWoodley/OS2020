@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <assert.h>
 #include <setjmp.h>
-#include "list.h"
+#include <linux/list.h>
 
 #define __KERNEL__ 
 

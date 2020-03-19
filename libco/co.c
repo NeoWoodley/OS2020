@@ -5,6 +5,8 @@
 #include <setjmp.h>
 #include "list.h"
 
+#define __KERNEL__ 
+
 #define STACK_SIZE (1<<10)
 
 struct list_head {

@@ -27,6 +27,19 @@ static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 #else
 */
 
+void list_append(struct co* head, struct co* new_co) {
+	if(head == NULL) {
+	    head = new_co;
+	}
+    else {
+    	struct co* temp = head;
+		while(temp->next != NULL) {
+	    	temp = temp->next;
+		}
+		temp->next = new_co;
+	}
+}
+
 enum co_status {
 
     CO_NEW = 1,
@@ -44,16 +57,15 @@ struct co {
 
 	enum co_status status;
 	struct co *    waiter;
-	struct {
-	    struct co * prev;
-	    struct co * next;
-	};
+	struct co *    next;
 	jmp_buf        context;
 	uint8_t        stack[STACK_SIZE];
 
 };
 
-struct co *current;
+struct co *current = NULL;
+
+struct co *co_list == NULL;
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
@@ -64,32 +76,46 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	new_co->func = func;
 	new_co->arg = arg;
 	new_co->status = CO_NEW;
+	new_co->next = NULL;
     
-    return new_co;
+	list_append(co_list, new_co);
 
+    return new_co;
 }
 
 void co_wait(struct co *co) {
 
-	current->status = CO_WAITING;
-	struct co *old_current = current;
-	co->status = CO_RUNNING;
-	current = co;
-	current->func(current->arg);
-	current->status = CO_DEAD;
-	current = old_current;
-	free(co);
-
+	if(current == NULL) {
+		co->status = CO_RUNNING;
+        current = co;	
+		assert(current != NULL);
+	}
+	else {
+	    current->status = CO_WAITING;
+	    struct co *old_current = current;
+	    co->status = CO_RUNNING;
+	    current = co;
+	    current->func(current->arg);
+	    current->status = CO_DEAD;
+	    current = old_current;
+		current->status = CO_RUNNING;
+	    free(co);
+		assert(co == NULL);
+	}
 }
 
 void co_yield() {
-
-	current->status = CO_WAITING;
-    int val = setjmp(current->context);
-    if (val == 0) {
-        
+    
+	if(current == NULL) {
+	    exit(0);
 	}
-    else {
-	
-	}	
+	else {
+	    current->status = CO_WAITING;
+        int val = setjmp(current->context);
+        if (val == 0) {
+            
+	    }
+        else {
+           return;	
+	    }	
 }

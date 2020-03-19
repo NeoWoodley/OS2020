@@ -3,10 +3,17 @@
 #include <stdint.h>
 #include <assert.h>
 #include <setjmp.h>
-#include <linux/kernel.h>
-#include <linux/list.h>
+#include "list.h"
 
 #define STACK_SIZE (1<<10)
+
+struct list_head {
+    struct list_head *prev,*next;
+};
+
+struct list_head *head;
+head->prev = head;
+head->next = head;
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 

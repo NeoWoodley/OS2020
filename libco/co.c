@@ -27,19 +27,6 @@ static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 #else
 */
 
-void list_append(struct co* head, struct co* new_co) {
-	if(head == NULL) {
-	    head = new_co;
-	}
-    else {
-    	struct co* temp = head;
-		while(temp->next != NULL) {
-	    	temp = temp->next;
-		}
-		temp->next = new_co;
-	}
-}
-
 enum co_status {
 
     CO_NEW = 1,
@@ -55,13 +42,26 @@ struct co {
 	void (*func)(void *);
 	void *arg;
 
-	struct co *next;
+	struct co *    next;
 	enum co_status status;
-	struct co *waiter;
+	struct co *    waiter;
 	jmp_buf        context;
 	uint8_t        stack[STACK_SIZE];
 
 };
+
+void list_append(struct co* head, struct co* new_co) {
+	if(head == NULL) {
+	    head = new_co;
+	}
+    else {
+    	struct co* temp = head;
+		while(temp->next != NULL) {
+	    	temp = temp->next;
+		}
+		temp->next = new_co;
+	}
+}
 
 struct co *current = NULL;
 

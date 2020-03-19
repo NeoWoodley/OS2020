@@ -33,7 +33,7 @@ void list_append(struct co* head, struct co* new_co) {
 	}
     else {
     	struct co* temp = head;
-		while((temp->next) != NULL) {
+		while(temp->next != NULL) {
 	    	temp = temp->next;
 		}
 		temp->next = new_co;

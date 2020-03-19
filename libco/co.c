@@ -44,7 +44,8 @@ struct co {
 	enum co_status status;
 	struct co *    waiter;
 	struct {
-	    struct co * prev, next;
+	    struct co * prev;
+	    struct co * next;
 	};
 	jmp_buf        context;
 	uint8_t        stack[STACK_SIZE];

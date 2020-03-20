@@ -8,6 +8,8 @@
 
 #define STACK_SIZE (1<<10)
 
+#define random(x) (rand()%x)
+
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 
   asm volatile (
@@ -99,7 +101,7 @@ void rand_choose(struct co* head, struct co* rand) {
     }
     
 	srand((unsigned)time(NULL));
-	index = rand() % count;
+	index = random(count);
 	struct co* pool = rand_pool;
 	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;

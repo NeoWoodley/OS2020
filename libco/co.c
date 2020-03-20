@@ -57,9 +57,11 @@ struct co {
 
 struct co *current = NULL;
 
-struct co *co_list = (struct co*)malloc(sizeof(struct co));
+struct co *co_list = NULL;
+co_list = (struct co*)malloc(sizeof(struct co));
 
-struct co *rand_pool = (struct co*)malloc(sizeof(struct co));
+struct co *rand_pool = NULL;
+rand_pool = (struct co*)malloc(sizeof(struct co));
 
 void list_append(struct co* head, struct co* new_co) {
     struct co* temp = head;

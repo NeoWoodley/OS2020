@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <setjmp.h>
 #include <string.h>
+#include <time.h>
 
 #define STACK_SIZE (1<<10)
 
@@ -42,9 +43,10 @@ struct co {
 	void (*func)(void *);
 	void *arg;
 
-	struct co *    next;
 	enum co_status status;
 	struct co *    waiter;
+	struct co *    next; // to connect members in list
+	struct co *    brother; // to connect members in rand_pool
 	jmp_buf        context;
 	uint8_t        stack[STACK_SIZE];
 
@@ -63,6 +65,51 @@ void list_append(struct co* head, struct co* new_co) {
 	}
 }
 
+void rand_pool_append(struct co* head, struct co* new_co) {
+	if(head == NULL) {
+	    head = new_co;
+	}
+    else {
+    	struct co* temp = head;
+		while(temp->brother != NULL) {
+	    	temp = temp->brother;
+		}
+		temp->brother = new_co;
+	}
+}
+
+void waiter_append(struct co* prev, struct co* current) {
+	assert(prev->waiter == NULL);
+	prev->waiter = current;
+	assert(prev->waiter != NULL);
+}
+
+struct co* rand_pool = NULL;
+
+void rand_choose(struct co* head, struct co* rand) {
+    int count = 0;
+
+    struct co* temp = head;
+    while(temp != NULL) {
+        if(temp->co_status == CO_NEW || temp->co_status == CO_WAITING) {
+	        rand_pool_append(rand_pool, temp)
+		    count ++;
+	    }
+		temp = temp->next
+    }
+    
+	srand((unsigned)time(NULL));
+	index = rand() % count;
+	struct co* pool = rand_pool;
+	for(i=0; i < index; i ++) {
+	    pool = pool->brother;
+	}
+	rand = pool;
+
+	rand_pool = NULL;
+
+}
+
 struct co *current = NULL;
 
 struct co *co_list = NULL;
@@ -71,12 +118,15 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 	assert(name != NULL && func != NULL && arg != NULL);
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
-//	new_co->name = name;
     strcpy(new_co->name, name);
 	new_co->func = func;
 	new_co->arg = arg;
 	new_co->status = CO_NEW;
 	new_co->next = NULL;
+	new_co->brother = NULL;
+	for(int i = 0; i < STACK_SIZE; i ++) {
+	    new_co->stack[i] = 0;
+	}
     
 	list_append(co_list, new_co);
 
@@ -94,13 +144,13 @@ void co_wait(struct co *co) {
 	    current->status = CO_WAITING;
 	    struct co *old_current = current;
 	    co->status = CO_RUNNING;
+		waiter_append(co, current);
 	    current = co;
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
 	    current = old_current;
 		current->status = CO_RUNNING;
 	    free(co);
-		assert(co == NULL);
 	}
 }
 
@@ -113,10 +163,21 @@ void co_yield() {
 	    current->status = CO_WAITING;
         int val = setjmp(current->context);
         if (val == 0) {
+            struct co* new_co = NULL;
+			rand_choose(co_list, new_co);
+			assert(new_co->status == CO_NEW || new_co->status == CO_WAITING);
+			
+			if (new_co->status == CO_NEW) {
+			    stack_switch_call(&new_co->status, new_co->func, new_co->name);
+			}
+			else {
+			   longjmp(new_co->context, 2); 
+			}
             
 	    }
         else {
-           return;	
+			current->status = CO_RUNNING;
+            return;	
 	    }	
 	}
 }

@@ -101,6 +101,7 @@ void rand_choose(struct co* head, struct co* candidate) {
 	    }
 		temp = temp->next;
     }
+		printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
     
 	srand((unsigned)time(NULL));
 	int index = rand() % count;
@@ -209,7 +210,6 @@ void co_yield() {
         if (val == 0) {
             struct co* new_co = NULL;
 			rand_choose(co_list, new_co);
-		printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
 			assert(new_co->status == CO_NEW || new_co->status == CO_WAITING);
 			
 			if (new_co->status == CO_NEW) {

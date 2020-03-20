@@ -111,12 +111,12 @@ void rand_choose(struct co* head, struct co* candidate) {
 	    pool = pool->brother;
 	}
 	candidate = pool;
-	printf("HHHHHHHHHHHHH\n");
 
 #ifdef DEBUG
 	printf("co %s was chosen to run!\n", candidate->name);
 #endif
 
+	printf("HHHHHHHHHHHHH\n");
 	rand_pool = NULL;
 
 }

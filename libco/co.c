@@ -100,6 +100,7 @@ void rand_choose(struct co* head, struct co* candidate) {
 	    }
 		temp = temp->next;
     }
+	assert(rand_pool != NULL);
 
 	int index = 0;
 	srand((unsigned)time(0));
@@ -113,13 +114,10 @@ void rand_choose(struct co* head, struct co* candidate) {
 	candidate = pool;
 
 	assert(candidate != NULL);
-//	printf("HHHHHHHHHHHHH\n");
 #ifdef DEBUG
 	printf("co %s was chosen to run!\n", candidate->name);
 #endif
-
 	rand_pool = NULL;
-
 }
 
 struct co *current = NULL;

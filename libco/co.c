@@ -122,6 +122,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 	assert(name != NULL && func != NULL && arg != NULL);
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
+	new_co->name = (char*)malloc(32*sizeof(char));
 	assert(new_co->name != NULL);
     printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
 	new_co->func = func;

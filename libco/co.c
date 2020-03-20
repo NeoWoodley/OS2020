@@ -107,10 +107,10 @@ void rand_choose(struct co* head, struct co* candidate) {
         index = rand() % count;
 	}
 	struct co* pool = rand_pool;
-	printf("HHHHHHHHHHHHH\n");
 	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;
 	}
+	printf("HHHHHHHHHHHHH\n");
 	candidate = pool;
 
 #ifdef DEBUG

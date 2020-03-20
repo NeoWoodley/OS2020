@@ -8,6 +8,7 @@
 
 #define STACK_SIZE (1<<10)
 
+#define DEBUG
 //#define random(x) (rand()%x)
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
@@ -132,6 +133,10 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
     
 	list_append(co_list, new_co);
 
+#ifdef DEBUG
+	printf("co %s is created!\n", new_co->name);
+#endif 
+
     return new_co;
 }
 
@@ -141,6 +146,11 @@ void co_wait(struct co *co) {
 		co->status = CO_RUNNING;
         current = co;	
 		assert(current != NULL);
+
+#ifdef DEBUG
+	printf("Exit from main directly!\n");
+#endif 
+
 	}
 	else {
 	    current->status = CO_WAITING;
@@ -148,10 +158,20 @@ void co_wait(struct co *co) {
 	    co->status = CO_RUNNING;
 		waiter_append(co, current);
 	    current = co;
+
+#ifdef DEBUG
+	printf("co %s was replaced | co %s is runing Now!!\n", old_current->name, current->name);
+#endif 
+
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
 	    current = old_current;
 		current->status = CO_RUNNING;
+
+#ifdef DEBUG
+	printf("co %s was restored | co %s is finished Now!!\n", current->name, co->name);
+#endif 
+
 	    free(co);
 	}
 }

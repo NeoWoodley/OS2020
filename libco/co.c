@@ -90,6 +90,9 @@ void waiter_append(struct co* prev, struct co* current) {
 struct co* rand_pool = NULL;
 
 void rand_choose(struct co* head, struct co* candidate) {
+
+	assert(head != NULL);
+
     int count = 0;
 
     struct co* temp = head;

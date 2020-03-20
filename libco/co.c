@@ -144,6 +144,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	}
     
 	list_append(co_list, new_co);
+    assert(co_list != NULL);
 
 #ifdef DEBUG
 	printf("co %s is created!\n", new_co->name);

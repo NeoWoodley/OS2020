@@ -154,6 +154,15 @@ void co_wait(struct co *co) {
 	printf("main thread was waiting | co %s is running now!\n", current->name);
 #endif 
 
+	    current->func(current->arg);
+	    current->status = CO_DEAD;
+	    current = NULL;
+
+#ifdef DEBUG
+	printf("main thread was restored | co %s is finished Now!!\n", co->name);
+#endif 
+
+	free(co);
 	}
 	else {
 	    current->status = CO_WAITING;
@@ -163,7 +172,7 @@ void co_wait(struct co *co) {
 	    current = co;
 
 #ifdef DEBUG
-	printf("co %s was replaced | co %s is runing Now!!\n", old_current->name, current->name);
+	printf("co %s was replaced | co %s is runing Now!\n", old_current->name, current->name);
 #endif 
 
 	    current->func(current->arg);

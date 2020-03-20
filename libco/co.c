@@ -151,7 +151,7 @@ void co_wait(struct co *co) {
 		assert(current != NULL);
 
 #ifdef DEBUG
-	printf("Exit from main directly!\n");
+	printf("co %s exit from main directly!\n", current->name);
 #endif 
 
 	}

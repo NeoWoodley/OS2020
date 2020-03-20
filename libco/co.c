@@ -8,7 +8,7 @@
 
 #define STACK_SIZE (1<<10)
 
-#define random(x) (rand()%x)
+//#define random(x) (rand()%x)
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 
@@ -101,7 +101,7 @@ void rand_choose(struct co* head, struct co* candidate) {
     }
     
 	srand((unsigned)time(NULL));
-	index = random(count);
+	index = rand() % count;
 	struct co* pool = rand_pool;
 	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;

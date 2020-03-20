@@ -106,12 +106,16 @@ void rand_choose(struct co* head, struct co* candidate) {
 	if(count != 0) {
         index = rand() % count;
 	}
-	printf("HHHHHHHHHHHHH\n");
+//	printf("HHHHHHHHHHHHH\n");
 	struct co* pool = rand_pool;
 	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;
 	}
 	candidate = pool;
+
+#ifdef DEBUG
+	printf("co %s was chosen to run!\n", candidate->name);
+#endif
 
 	rand_pool = NULL;
 

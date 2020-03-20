@@ -57,46 +57,39 @@ struct co {
 
 struct co *current = NULL;
 
-struct co *co_list = NULL;
+struct co *co_list = (struct co*)malloc(sizeof(struct co));
 
-struct co* rand_pool = NULL;
+struct co* rand_pool = (struct co*)malloc(sizeof(struct co));
 
 void list_append(struct co* head, struct co* new_co) {
-	if(head == NULL) {
-	    head = new_co;
-#ifdef DEBUG
-    printf("In list_append function: case head == NULL!\n");
-#endif
+    struct co* temp = head;
+	while(temp->next != NULL) {
+	   	temp = temp->next;
 	}
-    else {
-    	struct co* temp = head;
-		while(temp->next != NULL) {
-	    	temp = temp->next;
-		}
-		temp->next = new_co;
+	temp->next = new_co;
 #ifdef DEBUG
-    printf("In list_append function: case head != NULL!\n");
+    printf("In list_append function!\n");
 #endif
-	}
 }
 
 void rand_pool_append(struct co* head, struct co* new_co) {
-	if(head == NULL) {
-	    head = new_co;
+   	struct co* temp = head;
+	while(temp->brother != NULL) {
+    	temp = temp->brother;
 	}
-    else {
-    	struct co* temp = head;
-		while(temp->brother != NULL) {
-	    	temp = temp->brother;
-		}
-		temp->brother = new_co;
-	}
+	temp->brother = new_co;
+#ifdef DEBUG
+    printf("In rand_pool_append function!\n");
+#endif
 }
 
 void waiter_append(struct co* prev, struct co* current) {
 	assert(prev->waiter == NULL);
 	prev->waiter = current;
 	assert(prev->waiter != NULL);
+#ifdef DEBUG
+    printf("In waiter_append function!\n");
+#endif
 }
 
 void rand_choose(struct co* head, struct co* candidate) {

@@ -64,6 +64,9 @@ struct co* rand_pool = NULL;
 void list_append(struct co* head, struct co* new_co) {
 	if(head == NULL) {
 	    head = new_co;
+#ifdef DEBUG
+    printf("In list_append function: case head == NULL!\n");
+#endif
 	}
     else {
     	struct co* temp = head;
@@ -71,6 +74,9 @@ void list_append(struct co* head, struct co* new_co) {
 	    	temp = temp->next;
 		}
 		temp->next = new_co;
+#ifdef DEBUG
+    printf("In list_append function: case head != NULL!\n");
+#endif
 	}
 }
 

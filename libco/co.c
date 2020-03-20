@@ -206,7 +206,7 @@ void co_yield() {
 #endif
 
         int val = setjmp(current->context);
-		printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n")
+		printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
         if (val == 0) {
             struct co* new_co = NULL;
 			rand_choose(co_list, new_co);

@@ -202,10 +202,11 @@ void co_yield() {
 	    current->status = CO_WAITING;
 
 #ifdef DEBUG
-		printf("yield occured in co %s\n!", current->name);
+		printf("yield occured in co %s!\n", current->name);
 #endif
 
         int val = setjmp(current->context);
+		printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n")
         if (val == 0) {
             struct co* new_co = NULL;
 			rand_choose(co_list, new_co);

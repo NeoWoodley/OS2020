@@ -110,8 +110,8 @@ void rand_choose(struct co* head, struct co* candidate) {
 	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;
 	}
-	printf("HHHHHHHHHHHHH\n");
 	candidate = pool;
+	printf("HHHHHHHHHHHHH\n");
 
 #ifdef DEBUG
 	printf("co %s was chosen to run!\n", candidate->name);

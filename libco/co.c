@@ -106,8 +106,8 @@ void rand_choose(struct co* head, struct co* candidate) {
 	if(count != 0) {
         index = rand() % count;
 	}
-//	printf("HHHHHHHHHHHHH\n");
 	struct co* pool = rand_pool;
+//	printf("HHHHHHHHHHHHH\n");
 	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;
 	}

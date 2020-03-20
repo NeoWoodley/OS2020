@@ -101,7 +101,7 @@ void rand_choose(struct co* head, struct co* rand) {
 	srand((unsigned)time(NULL));
 	index = rand() % count;
 	struct co* pool = rand_pool;
-	for(i=0; i < index; i ++) {
+	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;
 	}
 	rand = pool;

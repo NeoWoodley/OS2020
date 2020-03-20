@@ -55,6 +55,12 @@ struct co {
 
 };
 
+struct co *current = NULL;
+
+struct co *co_list = NULL;
+
+struct co* rand_pool = NULL;
+
 void list_append(struct co* head, struct co* new_co) {
 	if(head == NULL) {
 	    head = new_co;
@@ -86,8 +92,6 @@ void waiter_append(struct co* prev, struct co* current) {
 	prev->waiter = current;
 	assert(prev->waiter != NULL);
 }
-
-struct co* rand_pool = NULL;
 
 void rand_choose(struct co* head, struct co* candidate) {
 
@@ -122,10 +126,6 @@ void rand_choose(struct co* head, struct co* candidate) {
 #endif
 	rand_pool = NULL;
 }
-
-struct co *current = NULL;
-
-struct co *co_list = NULL;
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 

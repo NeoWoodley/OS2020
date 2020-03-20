@@ -101,7 +101,7 @@ void rand_choose(struct co* head, struct co* candidate) {
 		temp = temp->next;
     }
     
-	srand((unsigned)time(NULL));
+	srand((unsigned)time(0));
 	int index;
     index = rand() % count;
 	printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");

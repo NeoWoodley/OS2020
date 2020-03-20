@@ -170,7 +170,7 @@ void co_yield() {
 			assert(new_co->status == CO_NEW || new_co->status == CO_WAITING);
 			
 			if (new_co->status == CO_NEW) {
-			    stack_switch_call(&new_co->status, new_co->func, new_co->name);
+			    stack_switch_call(&new_co->status, new_co->func, new_co->arg);
 			}
 			else {
 			   longjmp(new_co->context, 2); 

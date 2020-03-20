@@ -91,11 +91,11 @@ void rand_choose(struct co* head, struct co* rand) {
 
     struct co* temp = head;
     while(temp != NULL) {
-        if(temp->co_status == CO_NEW || temp->co_status == CO_WAITING) {
-	        rand_pool_append(rand_pool, temp)
+        if(temp->status == CO_NEW || temp->status == CO_WAITING) {
+	        rand_pool_append(rand_pool, temp);
 		    count ++;
 	    }
-		temp = temp->next
+		temp = temp->next;
     }
     
 	srand((unsigned)time(NULL));

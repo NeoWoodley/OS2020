@@ -207,9 +207,9 @@ void co_yield() {
 
         int val = setjmp(current->context);
         if (val == 0) {
-		printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
             struct co* new_co = NULL;
 			rand_choose(co_list, new_co);
+		printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
 			assert(new_co->status == CO_NEW || new_co->status == CO_WAITING);
 			
 			if (new_co->status == CO_NEW) {

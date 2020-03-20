@@ -103,8 +103,9 @@ void rand_choose(struct co* head, struct co* candidate) {
     }
     
 	srand((unsigned)time(NULL));
-	int index = rand() % count;
-		printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
+	int index;
+	printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
+    index = rand() % count;
 	struct co* pool = rand_pool;
 	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;

@@ -191,10 +191,20 @@ void co_wait(struct co *co) {
 void co_yield() {
     
 	if(current == NULL) {
+
+#ifdef DEBUG
+		printf("Exit from main thread directly!\n");
+#endif
+
 	    exit(0);
 	}
 	else {
 	    current->status = CO_WAITING;
+
+#ifdef DEBUG
+		printf("yield occured in co %s\n!", current->name);
+#endif
+
         int val = setjmp(current->context);
         if (val == 0) {
             struct co* new_co = NULL;

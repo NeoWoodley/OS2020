@@ -246,7 +246,7 @@ void co_yield() {
 		        printf("Another co was chosen and it is a new co!\n");
 #endif
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
-#ifdef DEBUd
+#ifdef DEBUG
 		        printf("stack_space 1:%p\n", &new_co.brother->stack[0]);
 		        printf("stack_space 2:%p\n", &new_co.brother->stack[STACK_SIZE-1]);
 		        printf("func_entry:%p\n", new_co.brother->func);

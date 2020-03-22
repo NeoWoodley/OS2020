@@ -254,10 +254,10 @@ void co_yield() {
 			}
             
 	    }
+        else {
 #ifdef DEBUG
 		printf("The return value of setjmp is not  0 | The current co is %s\n", current->name);
 #endif
-        else {
 			current->status = CO_RUNNING;
             return;	
 	    }	

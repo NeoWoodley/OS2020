@@ -249,7 +249,7 @@ void co_yield() {
 #ifdef DEBUG
 		        printf("Another co was chosen and it is a new co!\n");
 #endif
-			    stack_switch_call(&new_co.brother->stack, new_co.brother->func, (uintptr_t)new_co.brother->arg);
+			    stack_switch_call(&new_co.brother->stack[0], new_co.brother->func, (uintptr_t)new_co.brother->arg);
 #ifdef DEBUG
 		        printf("Stack switch is done!\n");
 #endif

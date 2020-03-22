@@ -12,7 +12,9 @@
 #define DEBUG
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
-
+#ifdef DEBUG
+	printf("In function stack_switch_call!\n");
+#endif
   asm volatile (
 #if __x86_64__
     "movq %0, %%rsp; movq %2, %%rdi; jmp *%1"

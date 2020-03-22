@@ -258,6 +258,9 @@ void co_yield() {
 						break;
 					}
 				}
+#ifdef DEBUG
+		        printf("Aligened stack:%p\n",&new_co.brother->stack[STACK_SIZE-1-i]);
+#endif
 			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-1-i], new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			}
 

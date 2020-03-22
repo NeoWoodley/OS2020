@@ -27,12 +27,6 @@ static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 
 }
 
-/*
-#if __x86_64__
-
-#else
-*/
-
 enum co_status {
 
     CO_NEW = 1,
@@ -249,6 +243,7 @@ void co_yield() {
 #ifdef DEBUG
 		        printf("Another co was chosen and it is a new co!\n");
 #endif
+				assert(&new_co.brother->stack[0] != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
 			    stack_switch_call(&new_co.brother->stack[0], new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			}
 

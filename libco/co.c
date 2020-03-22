@@ -123,20 +123,19 @@ void rand_choose(struct co* head, struct co* candidate) {
 	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;
 	}
-	candidate->next = pool;
+	candidate->brother = pool;
 
-	assert(candidate->next != NULL);
+	assert(candidate->brother != NULL);
 #ifdef DEBUG
-	printf("co %s was chosen to run!\n", candidate->next->name);
+	printf("co %s was chosen to run!\n", candidate->brother->name);
 #endif
-    temp = rand_pool_head->next;
-	rand_pool_head->next = NULL;
-	while(temp->next != NULL) {
+    temp = rand_pool_head->brother;
+	rand_pool_head->brother = NULL;
+	while(temp->brother != NULL) {
 	    struct co* old = temp;
-		temp = temp->next;
-		old->next = NULL;
+		temp = temp->brother;
+		old->brother = NULL;
 	}
-	printf("HHHHHHHHHHHHHHHHHHHH\n");
 }
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {

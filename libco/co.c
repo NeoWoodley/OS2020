@@ -239,7 +239,7 @@ void co_yield() {
 			    rand_choose(co_list_head, &new_co);
 				assert(new_co.next != NULL);
 #ifdef DEBUG
-		        printf("The temp chosen co is %s | The running co is %s\n", new_co.next->name, current->name);
+		        printf("The temp chosen co is %s | The running co is %s\n", new_co.brother->name, current->name);
 #endif
 			} while(strcmp(new_co.next->name, current->name) == 0);
 			assert(new_co.brother->status == CO_NEW || new_co.brother->status == CO_WAITING);

@@ -241,7 +241,7 @@ void co_yield() {
 #ifdef DEBUG
 		        printf("The temp chosen co is %s | The running co is %s\n", new_co.brother->name, current->name);
 #endif
-			} while(strcmp(new_co.brother->name, current->name) == 0);
+			} while(strcmp(new_co.next->name, current->name) == 0);
 			assert(new_co.brother->status == CO_NEW || new_co.brother->status == CO_WAITING);
 #ifdef DEBUG
 		    printf("Another co was chosen\n");
@@ -254,6 +254,9 @@ void co_yield() {
 			}
             
 	    }
+#ifdef DEBUG
+		printf("The return value of setjmp is not  0 | The current co is %s\n", current->name);
+#endif
         else {
 			current->status = CO_RUNNING;
             return;	

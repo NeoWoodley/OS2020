@@ -111,7 +111,7 @@ void rand_choose(struct co* head, struct co* candidate) {
 	assert(rand_pool_head != NULL);
 
 #ifdef DEBUG
-	printf("There %d co in rand pool!\n");
+	printf("There %d co in rand pool!\n", count);
 #endif
 
 	int index = 0;

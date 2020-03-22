@@ -249,7 +249,7 @@ void co_yield() {
 #ifdef DEBUG
 		        printf("stack_space:%p\n", new_co.brother->stack);
 		        printf("func_entry:%p\n", new_co.brother->func);
-		        printf("arg:%s\n", new_co.brother->arg);
+		        printf("arg:%s\n", (char*)new_co.brother->arg);
 #endif
 			    stack_switch_call(new_co.brother->stack, new_co.brother->func, (uintptr_t)new_co.brother->arg);
 				assert(0);

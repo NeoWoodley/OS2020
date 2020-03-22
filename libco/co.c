@@ -24,9 +24,6 @@ static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
       : : "b"((uintptr_t)sp - 8), "d"(entry), "a"(arg)
 #endif
   );
-#ifdef DEBUG
-	printf("stack_switch_call will return now!\n");
-#endif
 
 }
 
@@ -253,10 +250,8 @@ void co_yield() {
 		        printf("Another co was chosen and it is a new co!\n");
 #endif
 			    stack_switch_call(&new_co.brother->stack[0], new_co.brother->func, (uintptr_t)new_co.brother->arg);
-#ifdef DEBUG
-		        printf("Stack switch is done!\n");
-#endif
 			}
+
 			else {
 #ifdef DEBUG
 		        printf("Another co was chosen and it is a waiting co!\n");

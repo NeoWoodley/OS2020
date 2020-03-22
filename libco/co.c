@@ -241,10 +241,10 @@ void co_yield() {
 #ifdef DEBUG
 		        printf("The temp chosen co is %s | The running co is %s\n", new_co.brother->name, current->name);
 #endif
-			} while(strcmp(new_co.next->name, current->name) == 0);
+			} while(strcmp(new_co.brother->name, current->name) == 0);
 			assert(new_co.brother->status == CO_NEW || new_co.brother->status == CO_WAITING);
 #ifdef DEBUG
-		        printf("Another co was chosen\n");
+		    printf("Another co was chosen\n");
 #endif
 			if (new_co.brother->status == CO_NEW) {
 			    stack_switch_call(&new_co.brother->status, new_co.brother->func, (uintptr_t)new_co.brother->arg);

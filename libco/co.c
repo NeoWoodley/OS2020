@@ -9,7 +9,7 @@
 
 #define STACK_SIZE (1<<10)
 
-//#define DEBUG
+#define DEBUG
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 

@@ -243,13 +243,17 @@ void co_yield() {
 #endif
 			} while(strcmp(new_co.brother->name, current->name) == 0);
 			assert(new_co.brother->status == CO_NEW || new_co.brother->status == CO_WAITING);
-#ifdef DEBUG
-		    printf("Another co was chosen\n");
-#endif
 			if (new_co.brother->status == CO_NEW) {
+#ifdef DEBUG
+		        printf("Another co was chosen and it is a new co!\n");
+#endif
 			    stack_switch_call(&new_co.brother->status, new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			}
 			else {
+#ifdef DEBUG
+		        printf("Another co was chosen and it is a waiting co!\n");
+#endif
+			    stack_switch_call(&new_co.brother->status, new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			   longjmp(new_co.brother->context, 2); 
 			}
             

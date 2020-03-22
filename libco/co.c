@@ -242,13 +242,13 @@ void co_yield() {
 		        printf("The temp chosen co is %s | The running co is %s\n", new_co.next->name, current->name);
 #endif
 			} while(strcmp(new_co.next->name, current->name) == 0);
-			assert(new_co.next->status == CO_NEW || new_co.next->status == CO_WAITING);
+			assert(new_co.brother->status == CO_NEW || new_co.brother->status == CO_WAITING);
 			
-			if (new_co.next->status == CO_NEW) {
-			    stack_switch_call(&new_co.next->status, new_co.next->func, (uintptr_t)new_co.next->arg);
+			if (new_co.brother->status == CO_NEW) {
+			    stack_switch_call(&new_co.brother->status, new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			}
 			else {
-			   longjmp(new_co.next->context, 2); 
+			   longjmp(new_co.brother->context, 2); 
 			}
             
 	    }

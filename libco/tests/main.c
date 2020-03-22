@@ -28,7 +28,8 @@ static void work_loop(void *arg) {
 		putchar('\n');
 		*/
 //        printf("%s%d ", s, get_count());
-        printf("%s ", s);
+        printf("%d ", get_count());
+//        printf("%s ", s);
         add_count();
         co_yield();
     }

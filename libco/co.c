@@ -108,6 +108,9 @@ void rand_choose(struct co* head, struct co* candidate) {
 
 #ifdef DEBUG
 	printf("There %d co in rand pool!\n", count);
+
+
+:q!
 #endif
 
 	int index = 0;
@@ -252,7 +255,13 @@ void co_yield() {
 		        printf("func_entry:%p\n", new_co.brother->func);
 		        printf("arg:%s\n", (char*)new_co.brother->arg);
 #endif
-			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-1], new_co.brother->func, (uintptr_t)new_co.brother->arg);
+				int i = 0;
+				for( i = 0; i < 20; i ++) {
+				    if(((uintptr_t)(&new_co.brother->stack[STACK_SIZE-1-i])) % 16 == 0 ) {
+						break;
+					}
+				}
+			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-1-i], new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			}
 
 			else {

@@ -219,7 +219,9 @@ void co_yield() {
         int val = setjmp(current->context);
         if (val == 0) {
             struct co* new_co = NULL;
-			while(rand_choose(co_list_head, new_co) == current);
+			do {
+			    rand_choose(co_list_head, new_co);
+			} while(new_co == current);
 			assert(new_co->status == CO_NEW || new_co->status == CO_WAITING);
 			
 			if (new_co->status == CO_NEW) {

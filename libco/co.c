@@ -108,14 +108,14 @@ void rand_choose(struct co* head, struct co* candidate) {
 	    }
 		temp = temp->next;
     }
-	assert(rand_pool != NULL);
+	assert(rand_pool_head != NULL);
 
 	int index = 0;
 	srand((unsigned)time(0));
 	if(count != 0) {
         index = rand() % count;
 	}
-	struct co* pool = rand_pool;
+	struct co* pool = rand_pool_head;
 	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;
 	}
@@ -125,7 +125,7 @@ void rand_choose(struct co* head, struct co* candidate) {
 #ifdef DEBUG
 	printf("co %s was chosen to run!\n", candidate->name);
 #endif
-	rand_pool = NULL;
+	rand_pool_head->next = NULL;
 }
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
@@ -145,7 +145,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	}
     
 	list_append(co_list_head, new_co);
-    assert(co_list != NULL);
+    assert(co_list_head != NULL);
 
 #ifdef DEBUG
 	printf("co %s is created!\n", new_co->name);

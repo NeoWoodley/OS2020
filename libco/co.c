@@ -223,7 +223,7 @@ void co_yield() {
         int val = setjmp(current->context);
         if (val == 0) {
 #ifdef DEBUG
-		printf("The return value of setjmp is 0 | The current co is %s\n", current-name);
+		printf("The return value of setjmp is 0 | The current co is %s\n", current->name);
 #endif
             struct co* new_co = NULL;
 			do {

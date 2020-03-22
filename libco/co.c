@@ -57,9 +57,11 @@ struct co {
 
 struct co *current = NULL;
 
-struct co *co_list = (struct co*)malloc(sizeof(struct co));
+struct co co_list;
+struct co *co_list_head = &co_list;
 
-struct co *rand_pool = (struct co*)malloc(sizeof(struct co));
+struct co rand_pool;
+struct co *rand_pool_head = &rand_pool;
 
 void list_append(struct co* head, struct co* new_co) {
     struct co* temp = head;
@@ -101,7 +103,7 @@ void rand_choose(struct co* head, struct co* candidate) {
     struct co* temp = head;
     while(temp != NULL) {
         if(temp->status == CO_NEW || temp->status == CO_WAITING) {
-	        rand_pool_append(rand_pool, temp);
+	        rand_pool_append(rand_pool_head, temp);
 		    count ++;
 	    }
 		temp = temp->next;
@@ -142,7 +144,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	    new_co->stack[i] = 0;
 	}
     
-	list_append(co_list, new_co);
+	list_append(co_list_head, new_co);
     assert(co_list != NULL);
 
 #ifdef DEBUG
@@ -217,7 +219,7 @@ void co_yield() {
         int val = setjmp(current->context);
         if (val == 0) {
             struct co* new_co = NULL;
-			rand_choose(co_list, new_co);
+			rand_choose(co_list_head, new_co);
 			assert(new_co->status == CO_NEW || new_co->status == CO_WAITING);
 			
 			if (new_co->status == CO_NEW) {

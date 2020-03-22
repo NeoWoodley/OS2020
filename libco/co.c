@@ -118,6 +118,9 @@ void rand_choose(struct co* head, struct co* candidate) {
 	srand((unsigned)time(0));
 	if(count != 0) {
         index = rand() % count;
+#ifdef DEBUG
+		printf("Index is %d\n", index);
+#endif
 	}
 	struct co* pool = rand_pool_head;
 	for(int i=0; i < index; i ++) {

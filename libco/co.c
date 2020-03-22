@@ -127,7 +127,7 @@ void rand_choose(struct co* head, struct co* candidate) {
 
 	assert(candidate->next != NULL);
 #ifdef DEBUG
-	printf("co %s was chosen to run!\n", candidate->name);
+	printf("co %s was chosen to run!\n", candidate->next->name);
 #endif
 	rand_pool_head->next = NULL;
 }

@@ -81,7 +81,7 @@ void rand_pool_append(struct co* head, struct co* new_co) {
 	}
 	temp->brother = new_co;
 #ifdef DEBUG
-    printf("In rand_pool_append function!\n");
+    printf("In rand_pool_append function! co %s was appended\n", temp->brother->name);
 #endif
 }
 

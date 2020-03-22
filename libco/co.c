@@ -136,6 +136,7 @@ void rand_choose(struct co* head, struct co* candidate) {
 		temp = temp->next;
 		old->next = NULL;
 	}
+	printf("HHHHHHHHHHHHHHHHHHHH\n");
 }
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {

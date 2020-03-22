@@ -110,6 +110,10 @@ void rand_choose(struct co* head, struct co* candidate) {
     }
 	assert(rand_pool_head != NULL);
 
+#ifdef DEBUG
+	printf("There %d co in rand pool!\n");
+#endif
+
 	int index = 0;
 	srand((unsigned)time(0));
 	if(count != 0) {

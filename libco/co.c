@@ -149,9 +149,11 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	new_co->status = CO_NEW;
 	new_co->next = NULL;
 	new_co->brother = NULL;
+	/*
 	for(int i = 0; i < STACK_SIZE; i ++) {
 	    new_co->stack[i] = 0;
 	}
+	*/
     
 	list_append(co_list_head, new_co);
     assert(co_list_head != NULL);

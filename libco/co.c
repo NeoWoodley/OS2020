@@ -123,9 +123,9 @@ void rand_choose(struct co* head, struct co* candidate) {
 	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;
 	}
-	candidate = pool;
+	candidate->next = pool;
 
-	assert(candidate != NULL);
+	assert(candidate->next != NULL);
 #ifdef DEBUG
 	printf("co %s was chosen to run!\n", candidate->name);
 #endif
@@ -225,21 +225,21 @@ void co_yield() {
 #ifdef DEBUG
 		printf("The return value of setjmp is 0 | The current co is %s\n", current->name);
 #endif
-            struct co* new_co = NULL;
+            struct co new_co;
 			do {
-			    rand_choose(co_list_head, new_co);
-				assert(new_co != NULL);
+			    rand_choose(co_list_head, &new_co);
+				assert(new_co.next != NULL);
 //#ifdef DEBUG
-		        printf("The temp chosen co is\n");
+		        printf("The temp chosen co is\n", new_co.next->name);
 //#endif
-			} while(strcmp(new_co->name, current->name) == 0);
-			assert(new_co->status == CO_NEW || new_co->status == CO_WAITING);
+			} while(strcmp(new_co.next->name, current->name) == 0);
+			assert(new_co.next->status == CO_NEW || new_co.next->status == CO_WAITING);
 			
-			if (new_co->status == CO_NEW) {
-			    stack_switch_call(&new_co->status, new_co->func, (uintptr_t)new_co->arg);
+			if (new_co.next->status == CO_NEW) {
+			    stack_switch_call(&new_co.next->status, new_co.next->func, (uintptr_t)new_co.next->arg);
 			}
 			else {
-			   longjmp(new_co->context, 2); 
+			   longjmp(new_co.next->context, 2); 
 			}
             
 	    }

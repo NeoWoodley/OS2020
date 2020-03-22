@@ -252,8 +252,7 @@ void co_yield() {
 		        printf("func_entry:%p\n", new_co.brother->func);
 		        printf("arg:%s\n", (char*)new_co.brother->arg);
 #endif
-			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-1], new_co.brother->func, &new_co.brother->arg);
-				assert(0);
+			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-1], new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			}
 
 			else {

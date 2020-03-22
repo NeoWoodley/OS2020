@@ -222,6 +222,9 @@ void co_yield() {
 
         int val = setjmp(current->context);
         if (val == 0) {
+#ifdef DEBUG
+		printf("The return value of setjmp is 0\n");
+#endif
             struct co* new_co = NULL;
 			do {
 			    rand_choose(co_list_head, new_co);

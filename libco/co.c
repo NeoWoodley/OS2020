@@ -108,9 +108,6 @@ void rand_choose(struct co* head, struct co* candidate) {
 
 #ifdef DEBUG
 	printf("There %d co in rand pool!\n", count);
-
-
-:q!
 #endif
 
 	int index = 0;

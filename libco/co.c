@@ -228,6 +228,7 @@ void co_yield() {
             struct co* new_co = NULL;
 			do {
 			    rand_choose(co_list_head, new_co);
+				printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
 #ifdef DEBUG
 		        printf("The temp chosen co is %s\n", new_co->name);
 #endif

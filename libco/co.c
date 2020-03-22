@@ -70,7 +70,7 @@ void list_append(struct co* head, struct co* new_co) {
 	}
 	temp->next = new_co;
 #ifdef DEBUG
-    printf("In list_append function!\n");
+    printf("In list_append function! ");
 #endif
 }
 

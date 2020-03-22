@@ -235,7 +235,7 @@ void co_yield() {
             struct co new_co;
 			do {
 			    rand_choose(co_list_head, &new_co);
-				assert(new_co.next != NULL);
+				assert(new_co.brother != NULL);
 #ifdef DEBUG
 		        printf("The temp chosen co is %s | The running co is %s\n", new_co.brother->name, current->name);
 #endif

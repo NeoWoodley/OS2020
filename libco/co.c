@@ -129,7 +129,13 @@ void rand_choose(struct co* head, struct co* candidate) {
 #ifdef DEBUG
 	printf("co %s was chosen to run!\n", candidate->next->name);
 #endif
+    temp = rand_pool_head->next;
 	rand_pool_head->next = NULL;
+	while(temp->next != NULL) {
+	    struct co* old = temp;
+		temp = temp->next;
+		old->next = NULL;
+	}
 }
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {

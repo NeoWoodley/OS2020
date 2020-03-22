@@ -136,6 +136,9 @@ void rand_choose(struct co* head, struct co* candidate) {
 		temp = temp->brother;
 		old->brother = NULL;
 	}
+#ifdef DEBUG
+	printf("rand pool was cleared!\n");
+#endif
 }
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {

@@ -248,12 +248,14 @@ void co_yield() {
 		        printf("Another co was chosen and it is a new co!\n");
 #endif
 			    stack_switch_call(&new_co.brother->status, new_co.brother->func, (uintptr_t)new_co.brother->arg);
+#ifdef DEBUG
+		        printf("Stack switch is done!\n");
+#endif
 			}
 			else {
 #ifdef DEBUG
 		        printf("Another co was chosen and it is a waiting co!\n");
 #endif
-			    stack_switch_call(&new_co.brother->status, new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			   longjmp(new_co.brother->context, 2); 
 			}
             

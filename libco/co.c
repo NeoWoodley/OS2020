@@ -94,9 +94,9 @@ __attribute__((aligned (16))) void rand_choose(struct co* head, struct co* candi
 
 	assert(head != NULL);
 
-    int count = 0;
+    __attribute__((aligned (16))) int count = 0;
 
-    struct co* temp = head;
+    __attribute__((aligned (16))) struct co* temp = head;
     while(temp != NULL) {
         if(temp->status == CO_NEW || temp->status == CO_WAITING) {
 	        rand_pool_append(rand_pool_head, temp);
@@ -110,12 +110,12 @@ __attribute__((aligned (16))) void rand_choose(struct co* head, struct co* candi
 	printf("There %d co in rand pool!\n", count);
 #endif
 
-	int index = 0;
+	__attribute__((aligned (16))) int index = 0;
 	srand((unsigned)time(0));
 	if(count != 0) {
         index = rand() % count + 1;
 	}
-	struct co* pool = rand_pool_head;
+	__attribute__((aligned (16))) struct co* pool = rand_pool_head;
 	for(int i=0; i < index; i ++) {
 	    pool = pool->brother;
 	}
@@ -128,7 +128,7 @@ __attribute__((aligned (16))) void rand_choose(struct co* head, struct co* candi
     temp = rand_pool_head->brother;
 	rand_pool_head->brother = NULL;
 	while(temp->brother != NULL) {
-	    struct co* old = temp;
+	    __attribute__((aligned (16))) struct co* old = temp;
 		temp = temp->brother;
 		old->brother = NULL;
 	}
@@ -140,7 +140,7 @@ __attribute__((aligned (16))) void rand_choose(struct co* head, struct co* candi
 __attribute__((aligned (16))) struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 	assert(name != NULL && func != NULL && arg != NULL);
-	struct co *new_co = (struct co*)malloc(sizeof(struct co));
+	__attribute__((aligned (16))) struct co *new_co = (struct co*)malloc(sizeof(struct co));
 	new_co->name = (char*)malloc(32*sizeof(char));
 	assert(new_co->name != NULL);
 	strcpy(new_co->name, name);
@@ -188,7 +188,7 @@ __attribute__((aligned (16))) void co_wait(struct co *co) {
 	}
 	else {
 	    current->status = CO_WAITING;
-	    struct co *old_current = current;
+	    __attribute__((aligned (16))) struct co *old_current = current;
 	    co->status = CO_RUNNING;
 		waiter_append(co, current);
 	    current = co;
@@ -227,12 +227,12 @@ __attribute__((aligned (16))) void co_yield() {
 		printf("yield occured in co %s!\n", current->name);
 #endif
 
-        int val = setjmp(current->context);
+        __attribute__((aligned (16))) int val = setjmp(current->context);
         if (val == 0) {
 #ifdef DEBUG
 		printf("The return value of setjmp is 0 | The current co is %s\n", current->name);
 #endif
-            struct co new_co;
+            __attribute__((aligned (16))) struct co new_co;
 			do {
 			    rand_choose(co_list_head, &new_co);
 				assert(new_co.brother != NULL);

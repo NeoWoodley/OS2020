@@ -251,7 +251,7 @@ void co_yield() {
 	else {
 	    current->status = CO_WAITING;
 
-#ifdef DEBUG
+#ifdef TEST
 		printf("yield occured in co %s!\n", current->name);
 #endif
 

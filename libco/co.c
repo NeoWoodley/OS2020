@@ -268,6 +268,7 @@ void co_yield() {
 #ifdef DEBUG
 		        printf("Another co was chosen and it is a waiting co!\n");
 #endif
+			   current = new_co.brother;
 			   longjmp(new_co.brother->context, 2); 
 			}
             

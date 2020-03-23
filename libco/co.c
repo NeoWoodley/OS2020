@@ -248,7 +248,7 @@ void co_yield() {
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
 #ifdef DEBUG
 		        printf("stack_space 1:%p\n", &new_co.brother->stack[0]);
-		        printf("stack_space 2:%p\n", &new_co.brother->stack[STACK_SIZE-1]);
+		        printf("stack_space 2:%p\n", &new_co.brother->stack[STACK_SIZE]);
 		        printf("func_entry:%p\n", new_co.brother->func);
 		        printf("arg:%s\n", (char*)new_co.brother->arg);
 #endif
@@ -261,9 +261,9 @@ void co_yield() {
 				}
 				*/
 #ifdef DEBUG
-		        printf("Aligened stack:%p\n", &new_co.brother->stack[STACK_SIZE-1]);
+		        printf("Aligened stack:%p\n", &new_co.brother->stack[STACK_SIZE]);
 #endif
-			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-1], new_co.brother->func, (uintptr_t)new_co.brother->arg);
+			    stack_switch_call(&new_co.brother->stack[STACK_SIZE], new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			}
 
 			else {

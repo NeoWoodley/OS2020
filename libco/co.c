@@ -47,7 +47,7 @@ struct co {
 	struct co *    next; // to connect members in list
 	struct co *    brother; // to connect members in rand_pool
 	jmp_buf        context;
-	__attribute__ ((aligned (16))) uint8_t        stack[STACK_SIZE];
+	uint8_t        stack[STACK_SIZE];
 
 }__attribute__ ((aligned (16)));;
 
@@ -250,7 +250,7 @@ void co_yield() {
 		        printf("stack_space 1:%p\n", &new_co.brother->stack[0]);
 		        printf("stack_space 2:%p\n", &new_co.brother->stack[STACK_SIZE]);
 		        printf("func_entry:%p\n", new_co.brother->func);
-		        printf("arg:%s\n", (char*)new_co.brother->arg);
+		        printf("arg:%s\n", new_co.brother->arg);
 #endif
 				/*
 				int i = 0;

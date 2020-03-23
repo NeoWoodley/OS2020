@@ -90,7 +90,7 @@ void waiter_append(struct co* prev, struct co* current) {
 #endif
 }
 
-void rand_choose(struct co* head, struct co* candidate) {
+void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 
 	assert(head != NULL);
 
@@ -110,16 +110,17 @@ void rand_choose(struct co* head, struct co* candidate) {
 	printf("There %d co in rand pool!\n", count);
 #endif
 
-	int index = 0;
-	srand((unsigned)time(0));
-	if(count != 0) {
-        index = rand() % count + 1;
-	}
-	struct co* pool = rand_pool_head;
-	for(int i=0; i < index; i ++) {
-	    pool = pool->brother;
-	}
-	candidate->brother = pool;
+	do {
+		srand((unsigned)time(0));
+		if(count != 0) {
+        	int index = rand() % count + 1;
+		}
+		struct co* pool = rand_pool_head;
+		for(int i=0; i < index; i ++) {
+	    	pool = pool->brother;
+		}
+		candidate->brother = pool;
+	} while(strcmp(pool->name, current->name) == 0);
 
 	assert(candidate->brother != NULL);
 #ifdef DEBUG
@@ -233,13 +234,8 @@ void co_yield() {
 		printf("The return value of setjmp is 0 | The current co is %s\n", current->name);
 #endif
             struct co new_co;
-			do {
-			    rand_choose(co_list_head, &new_co);
-				assert(new_co.brother != NULL);
-#ifdef DEBUG
-		        printf("The temp chosen co is %s | The running co is %s\n", new_co.brother->name, current->name);
-#endif
-			} while(strcmp(new_co.brother->name, current->name) == 0);
+			rand_choose(co_list_head, &new_co);
+			assert(new_co.brother != NULL);
 			assert(new_co.brother->status == CO_NEW || new_co.brother->status == CO_WAITING);
 			if (new_co.brother->status == CO_NEW) {
 #ifdef DEBUG

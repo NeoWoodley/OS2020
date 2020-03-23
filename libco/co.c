@@ -51,7 +51,7 @@ struct co {
 
 }__attribute__ ((aligned (16)));;
 
-struct co *current = NULL;
+__attribute__((aligned (16))) struct co *current = NULL;
 
 struct co co_list;
 struct co *co_list_head = &co_list;

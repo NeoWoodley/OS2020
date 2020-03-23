@@ -153,7 +153,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 		temp = temp->brother;
 		old->brother = NULL;
 	}
-#ifdef DEBUG
+#ifdef TEST
 	printf("rand pool was cleared!\n");
 #endif
 }

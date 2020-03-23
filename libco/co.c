@@ -120,7 +120,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	    	pool = pool->brother;
 		}
 		candidate->brother = pool;
-	} while(strcmp(pool->name, current->name) == 0);
+	} while(strcmp(candidate->brother->name, current->name) == 0);
 
 	assert(candidate->brother != NULL);
 #ifdef DEBUG

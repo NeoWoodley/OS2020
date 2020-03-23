@@ -53,11 +53,11 @@ struct co {
 
 __attribute__((aligned (16))) struct co *current = NULL;
 
-struct co co_list;
-struct co *co_list_head = &co_list;
+__attribute__((aligned (16))) struct co co_list;
+__attribute__((aligned (16))) struct co *co_list_head = &co_list;
 
-struct co rand_pool;
-struct co *rand_pool_head = &rand_pool;
+__attribute__((aligned (16))) struct co rand_pool;
+__attribute__((aligned (16))) struct co *rand_pool_head = &rand_pool;
 
 void list_append(struct co* head, struct co* new_co) {
     struct co* temp = head;

@@ -110,18 +110,34 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	printf("There %d co in rand pool!\n", count);
 #endif
 
-	do {
-		int index = 0;
-		srand((unsigned)time(0));
-		if(count != 0) {
-        	index = rand() % count + 1;
+	int index = 0;
+	srand((unsigned)time(0));
+	if(count != 0) {
+       	index = rand() % count + 1;
+	}
+	struct co* pool = rand_pool_head;
+	for(int i=0; i < index; i ++) {
+	   	pool = pool->brother;
+	}
+	candidate->brother = pool;
+
+	if(!strcmp(candidate->brother->name, current->name)) {
+	    if(count == 2) {
+		    index = count + 1 - index;
+	        for(int i=0; i < index; i ++) {
+	   	        pool = pool->brother;
+	        }
+	        candidate->brother = pool;
 		}
-		struct co* pool = rand_pool_head;
-		for(int i=0; i < index; i ++) {
-	    	pool = pool->brother;
+
+		else {
+		    index = (index + 1) % count + 1;
+	        for(int i=0; i < index; i ++) {
+	   	        pool = pool->brother;
+	        }
+	        candidate->brother = pool;
 		}
-		candidate->brother = pool;
-	} while(strcmp(candidate->brother->name, current->name) == 0);
+	}
 
 	assert(candidate->brother != NULL);
 #ifdef DEBUG

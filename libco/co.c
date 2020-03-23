@@ -9,7 +9,7 @@
 
 #define STACK_SIZE (1<<16)
 
-//#define DEBUG
+#define DEBUG
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 #ifdef DEBUG
@@ -225,7 +225,6 @@ void co_wait(struct co *co) {
 #ifdef DEBUG
 	printf("co %s was restored | co %s is finished Now!!\n", current->name, co->name);
 #endif 
-printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
 	    free(co);
 	}
 }

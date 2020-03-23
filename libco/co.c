@@ -316,7 +316,6 @@ void co_yield() {
 #ifdef TEST
 		printf("Before return!\n");
 #endif
-            return;	
 	    }	
 	}
 }

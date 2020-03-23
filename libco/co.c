@@ -210,6 +210,9 @@ void co_wait(struct co *co) {
 	printf("co %s was to be free!\n", co->name);
 #endif
 	free(co);
+#ifdef TEST
+	printf("A pointer free happened in if clause whose condition is current == NULL\n");
+#endif
 	}
 	else {
 	    current->status = CO_WAITING;
@@ -235,6 +238,9 @@ void co_wait(struct co *co) {
 		printf("co %s was to be free!\n", co->name);
 #endif
 	    free(co);
+#ifdef TEST
+	printf("A pointer free happened in if clause whose condition is current != NULL\n");
+#endif
 	}
 }
 

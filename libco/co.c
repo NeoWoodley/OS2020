@@ -200,6 +200,9 @@ void co_wait(struct co *co) {
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
 		free(current);
+#ifdef TEST
+		printf("HHHHHHHHHHHHHHHHHHHHH\n");
+#endif
 	    current = NULL;
 
 #ifdef TEST

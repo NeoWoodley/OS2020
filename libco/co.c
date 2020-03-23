@@ -86,7 +86,7 @@ void waiter_append(struct co* prev, struct co* current) {
 	assert(prev->waiter == NULL);
 	prev->waiter = current;
 	assert(prev->waiter != NULL);
-#ifdef DEBUG
+#ifdef TEST
     printf("In waiter_append function!\n");
 #endif
 }

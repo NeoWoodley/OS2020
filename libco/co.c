@@ -204,8 +204,8 @@ void co_wait(struct co *co) {
 	printf("main thread was restored | co %s is finished Now!!\n", co->name);
 #endif 
 
-	free(co);
 	assert(co != NULL);
+	free(co);
 	}
 	else {
 	    current->status = CO_WAITING;

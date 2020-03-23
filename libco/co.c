@@ -278,14 +278,12 @@ void co_yield() {
 		        printf("Another co was chosen and it is a new co!\n");
 #endif
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
-/*
 #ifdef DEBUG
 		        printf("stack_space 1:%p\n", &new_co.brother->stack[0]);
 		        printf("stack_space 2:%p\n", &new_co.brother->stack[STACK_SIZE]);
 		        printf("func_entry:%p\n", new_co.brother->func);
 		        printf("arg:%p\n", new_co.brother->arg);
 #endif
-*/
 				/*
 				int i = 0;
 				for( i = 0; i < 20; i ++) {
@@ -298,7 +296,7 @@ void co_yield() {
 		        printf("Aligened stack:%p\n", &new_co.brother->stack[STACK_SIZE]);
 #endif
 				current = new_co.brother;
-			    stack_switch_call(&new_co.brother->stack[STACK_SIZE - 11], new_co.brother->func, (uintptr_t)new_co.brother->arg);
+			    stack_switch_call(&new_co.brother->stack[STACK_SIZE - 16], new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			}
 
 			else {

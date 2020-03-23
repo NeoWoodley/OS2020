@@ -13,7 +13,7 @@
 #define TEST
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
-#ifdef TEST
+#ifdef DEBUG
 	printf("In function stack_switch_call!\n");
 #endif
   asm volatile (
@@ -66,7 +66,7 @@ void list_append(struct co* head, struct co* new_co) {
 	   	temp = temp->next;
 	}
 	temp->next = new_co;
-#ifdef DEBUG
+#ifdef TEST
     printf("In list_append function! ");
 #endif
 }

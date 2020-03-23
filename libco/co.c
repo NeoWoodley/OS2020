@@ -179,7 +179,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	list_append(co_list_head, new_co);
     assert(co_list_head != NULL);
 
-#ifdef DEBUG
+#ifdef TEST
 	printf("co %s is created!\n", new_co->name);
 #endif 
 

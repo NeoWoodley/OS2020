@@ -59,7 +59,7 @@ __attribute__((aligned (16))) struct co *co_list_head = &co_list;
 __attribute__((aligned (16))) struct co rand_pool;
 __attribute__((aligned (16))) struct co *rand_pool_head = &rand_pool;
 
-void list_append(struct co* head, struct co* new_co) {
+__attribute__((aligned (16))) void list_append(struct co* head, struct co* new_co) {
     struct co* temp = head;
 	while(temp->next != NULL) {
 	   	temp = temp->next;
@@ -70,7 +70,7 @@ void list_append(struct co* head, struct co* new_co) {
 #endif
 }
 
-void rand_pool_append(struct co* head, struct co* new_co) {
+__attribute__((aligned (16))) void rand_pool_append(struct co* head, struct co* new_co) {
    	struct co* temp = head;
 	while(temp->brother != NULL) {
     	temp = temp->brother;
@@ -81,7 +81,7 @@ void rand_pool_append(struct co* head, struct co* new_co) {
 #endif
 }
 
-void waiter_append(struct co* prev, struct co* current) {
+__attribute__((aligned (16))) void waiter_append(struct co* prev, struct co* current) {
 	assert(prev->waiter == NULL);
 	prev->waiter = current;
 	assert(prev->waiter != NULL);
@@ -90,7 +90,7 @@ void waiter_append(struct co* prev, struct co* current) {
 #endif
 }
 
-void rand_choose(struct co* head, struct co* candidate) {
+__attribute__((aligned (16))) void rand_choose(struct co* head, struct co* candidate) {
 
 	assert(head != NULL);
 
@@ -137,7 +137,7 @@ void rand_choose(struct co* head, struct co* candidate) {
 #endif
 }
 
-struct co *co_start(const char *name, void (*func)(void *), void *arg) {
+__attribute__((aligned (16))) struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 	assert(name != NULL && func != NULL && arg != NULL);
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
@@ -165,7 +165,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
     return new_co;
 }
 
-void co_wait(struct co *co) {
+__attribute__((aligned (16))) void co_wait(struct co *co) {
 
 	if(current == NULL) {
 		co->status = CO_RUNNING;
@@ -210,7 +210,7 @@ void co_wait(struct co *co) {
 	}
 }
 
-void co_yield() {
+__attribute__((aligned (16))) void co_yield() {
     
 	if(current == NULL) {
 

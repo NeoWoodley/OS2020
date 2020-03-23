@@ -265,7 +265,7 @@ void co_yield() {
 			assert(new_co.brother != NULL);
 			assert(new_co.brother->status == CO_NEW || new_co.brother->status == CO_WAITING);
 			if (new_co.brother->status == CO_NEW) {
-#ifdef DEBUG
+#ifdef TEST
 		        printf("Another co was chosen and it is a new co!\n");
 #endif
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);

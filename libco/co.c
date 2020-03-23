@@ -210,7 +210,7 @@ void co_wait(struct co *co) {
 	printf("co %s was to be free!\n", co->name);
 #endif
 #ifdef TEST
-	printf("A pointer free happened in if clause whose condition is current == NULL | current co is %s\n", current->name);
+	printf("A pointer free happened in if clause whose condition is current == NULL | current co is main\n");
 #endif
 	free(co);
 	}

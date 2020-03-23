@@ -13,7 +13,7 @@
 #define TEST
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
-#ifdef DEBUG
+#ifdef TEST
 	printf("In function stack_switch_call!\n");
 #endif
   asm volatile (

@@ -205,6 +205,9 @@ void co_wait(struct co *co) {
 #endif 
 
 	assert(co != NULL);
+#ifdef DEBUG
+	printf("co %s was to be free!\n", co->name);
+#endif
 	free(co);
 	}
 	else {
@@ -227,6 +230,9 @@ void co_wait(struct co *co) {
 	printf("co %s was restored | co %s is finished Now!!\n", current->name, co->name);
 #endif 
 	    assert(co != NULL);
+#ifdef DEBUG
+		printf("co %s was to be free!\n", co->name);
+#endif
 	    free(co);
 	}
 }

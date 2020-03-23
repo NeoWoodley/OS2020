@@ -143,7 +143,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	}
 
 	assert(candidate->brother != NULL);
-#ifdef DEBUG
+#ifdef TEST
 	printf("co %s was chosen to run!\n", candidate->brother->name);
 #endif
     temp = rand_pool_head->brother;

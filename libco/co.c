@@ -9,7 +9,8 @@
 
 #define STACK_SIZE (1<<16)
 
-#define DEBUG
+//#define DEBUG
+#define TEST
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 #ifdef DEBUG
@@ -205,7 +206,7 @@ void co_wait(struct co *co) {
 #endif 
 
 	assert(co != NULL);
-#ifdef DEBUG
+#ifdef TEST
 	printf("co %s was to be free!\n", co->name);
 #endif
 	free(co);
@@ -230,7 +231,7 @@ void co_wait(struct co *co) {
 	printf("co %s was restored | co %s is finished Now!!\n", current->name, co->name);
 #endif 
 	    assert(co != NULL);
-#ifdef DEBUG
+#ifdef TEST
 		printf("co %s was to be free!\n", co->name);
 #endif
 	    free(co);

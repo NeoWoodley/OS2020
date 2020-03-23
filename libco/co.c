@@ -111,9 +111,10 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 #endif
 
 	do {
+		int index = 0;
 		srand((unsigned)time(0));
 		if(count != 0) {
-        	int index = rand() % count + 1;
+        	index = rand() % count + 1;
 		}
 		struct co* pool = rand_pool_head;
 		for(int i=0; i < index; i ++) {

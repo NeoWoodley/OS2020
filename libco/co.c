@@ -193,7 +193,7 @@ void co_wait(struct co *co) {
         current = co;	
 		assert(current != NULL);
 
-#ifdef DEBUG
+#ifdef TEST
 	printf("main thread was waiting | co %s is running now!\n", current->name);
 #endif 
 

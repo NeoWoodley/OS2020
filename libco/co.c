@@ -199,7 +199,7 @@ void co_wait(struct co *co) {
 
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
-		free(current)
+		free(current);
 	    current = NULL;
 
 #ifdef TEST

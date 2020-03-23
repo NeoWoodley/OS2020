@@ -122,6 +122,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	}
 	candidate->brother = pool;
 
+	/*
 	if(!strcmp(candidate->brother->name, current->name)) {
 	    if(count == 2) {
 		    index = count + 1 - index;
@@ -141,6 +142,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	        candidate->brother = pool;
 		}
 	}
+	*/
 
 	assert(candidate->brother != NULL);
 #ifdef TEST

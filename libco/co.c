@@ -49,7 +49,7 @@ struct co {
 	jmp_buf        context;
 	uint8_t        stack[STACK_SIZE];
 
-};
+}__attribute__ ((aligned (16)));;
 
 struct co *current = NULL;
 
@@ -252,12 +252,14 @@ void co_yield() {
 		        printf("func_entry:%p\n", new_co.brother->func);
 		        printf("arg:%s\n", (char*)new_co.brother->arg);
 #endif
+				/*
 				int i = 0;
 				for( i = 0; i < 20; i ++) {
 				    if(((uintptr_t)(&new_co.brother->stack[STACK_SIZE-1-i])) % 16 == 0 ) {
 						break;
 					}
 				}
+				*/
 #ifdef DEBUG
 		        printf("i: %d | Aligened stack:%p\n", i, &new_co.brother->stack[STACK_SIZE-1-i]);
 #endif

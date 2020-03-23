@@ -38,16 +38,16 @@ enum co_status {
 
 struct co {
 
-	__attribute__((aligned (16))) char *name;
-	__attribute__((aligned (16))) void (*func)(void *);
-	__attribute__((aligned (16))) void *arg;
+	char *name;
+	void (*func)(void *);
+	void *arg;
 
-	__attribute__((aligned (16))) enum co_status status;
-	__attribute__((aligned (16))) struct co *    waiter;
-	__attribute__((aligned (16))) struct co *    next; // to connect members in list
-	__attribute__((aligned (16))) struct co *    brother; // to connect members in rand_pool
-	__attribute__((aligned (16))) jmp_buf        context;
-	__attribute__((aligned (16))) uint8_t        stack[STACK_SIZE];
+	enum co_status status;
+	struct co *    waiter;
+	struct co *    next; // to connect members in list
+	struct co *    brother; // to connect members in rand_pool
+	jmp_buf        context;
+	uint8_t        stack[STACK_SIZE];
 
 }__attribute__ ((aligned (16)));;
 
@@ -71,7 +71,7 @@ __attribute__((aligned (16))) void list_append(struct co* head, struct co* new_c
 }
 
 __attribute__((aligned (16))) void rand_pool_append(struct co* head, struct co* new_co) {
-   	struct co* temp = head;
+   	__attribute__((aligned (16))) struct co* temp = head;
 	while(temp->brother != NULL) {
     	temp = temp->brother;
 	}

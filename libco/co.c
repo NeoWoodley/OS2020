@@ -227,7 +227,7 @@ void co_wait(struct co *co) {
 	    current = old_current;
 		current->status = CO_RUNNING;
 
-#ifdef DEBUG
+#ifdef TEST
 	printf("co %s was restored | co %s is finished Now!!\n", current->name, co->name);
 #endif 
 	    assert(co != NULL);

@@ -201,7 +201,7 @@ void co_wait(struct co *co) {
 	    current->status = CO_DEAD;
 	    current = NULL;
 
-#ifdef DEBUG
+#ifdef TEST
 	printf("main thread was restored | co %s is finished Now!!\n", co->name);
 #endif 
 

@@ -234,7 +234,7 @@ void co_yield() {
 		printf("The return value of setjmp is 0 | The current co is %s\n", current->name);
 #endif
             struct co new_co;
-			rand_choose(co_list_head, &new_co);
+			rand_choose(co_list_head, &new_co, current);
 			assert(new_co.brother != NULL);
 			assert(new_co.brother->status == CO_NEW || new_co.brother->status == CO_WAITING);
 			if (new_co.brother->status == CO_NEW) {

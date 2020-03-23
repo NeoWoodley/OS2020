@@ -40,7 +40,7 @@ struct co {
 
 	char *name;
 	__attribute__ ((aligned (16))) void (*func)(void *);
-	__attribute__ ((aligned (16))) void *arg;
+	void *arg;
 
 	enum co_status status;
 	struct co *    waiter;

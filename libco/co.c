@@ -218,7 +218,7 @@ void co_wait(struct co *co) {
 		waiter_append(co, current);
 	    current = co;
 
-#ifdef DEBUG
+#ifdef TEST
 	printf("co %s was replaced | co %s is runing Now!\n", old_current->name, current->name);
 #endif 
 

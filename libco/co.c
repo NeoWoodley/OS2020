@@ -250,7 +250,7 @@ void co_yield() {
 		        printf("stack_space 1:%p\n", &new_co.brother->stack[0]);
 		        printf("stack_space 2:%p\n", &new_co.brother->stack[STACK_SIZE]);
 		        printf("func_entry:%p\n", new_co.brother->func);
-		        printf("arg:%lu\n", (uintptr_t)new_co.brother->arg);
+		        printf("arg:%u\n", (uintptr_t)new_co.brother->arg);
 #endif
 				/*
 				int i = 0;

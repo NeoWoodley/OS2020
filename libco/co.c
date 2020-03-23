@@ -295,7 +295,7 @@ void co_yield() {
 			}
 
 			else {
-#ifdef DEBUG
+#ifdef TEST
 		        printf("Another co was chosen and it is a waiting co!\n");
 #endif
 			   current = new_co.brother;

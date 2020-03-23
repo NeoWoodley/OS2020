@@ -10,7 +10,7 @@
 #define STACK_SIZE (1<<16)
 
 //#define DEBUG
-//#define TEST
+#define TEST
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 #ifdef DEBUG
@@ -209,11 +209,9 @@ void co_wait(struct co *co) {
 #ifdef TEST
 	printf("co %s was to be free!\n", co->name);
 #endif
-/*
 #ifdef TEST
 	printf("A pointer free happened in if clause whose condition is current == NULL | current co is main\n");
 #endif
-*/
 	free(co);
 	}
 	else {
@@ -295,11 +293,9 @@ void co_yield() {
 					}
 				}
 				*/
-/*
 #ifdef DEBUG
 		        printf("Aligened stack:%p\n", &new_co.brother->stack[STACK_SIZE]);
 #endif
-*/
 				current = new_co.brother;
 			    stack_switch_call(&new_co.brother->stack[STACK_SIZE], new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			}

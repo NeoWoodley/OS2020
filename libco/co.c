@@ -205,6 +205,7 @@ void co_wait(struct co *co) {
 #endif 
 
 	free(co);
+	assert(co != NULL);
 	}
 	else {
 	    current->status = CO_WAITING;
@@ -225,6 +226,7 @@ void co_wait(struct co *co) {
 #ifdef DEBUG
 	printf("co %s was restored | co %s is finished Now!!\n", current->name, co->name);
 #endif 
+	    assert(co != NULL);
 	    free(co);
 	}
 }

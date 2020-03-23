@@ -242,7 +242,7 @@ void co_yield() {
     
 	if(current == NULL) {
 
-#ifdef DEBUG
+#ifdef TEST
 		printf("Exit from main thread directly!\n");
 #endif
 

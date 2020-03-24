@@ -283,7 +283,7 @@ void co_yield() {
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
 #ifdef TEST
 		        printf("stack_space 1:%p\n", &new_co.brother->stack[0]);
-		        printf("stack_space 2:%p\n", &new_co.brother->stack[STACK_SIZE-1]);
+		        printf("stack_space 2:%p\n", &new_co.brother->stack[STACK_SIZE-8]);
 		        printf("func_entry:%p\n", new_co.brother->func);
 		        printf("arg:%p\n", new_co.brother->arg);
 #endif

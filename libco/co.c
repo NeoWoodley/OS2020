@@ -69,6 +69,7 @@ void list_append(struct co* head, struct co* new_co) {
 #ifdef TEST
     printf("In list_append function! ");
 #endif
+	return;
 }
 
 void rand_pool_append(struct co* head, struct co* new_co) {
@@ -89,6 +90,7 @@ void waiter_append(struct co* prev, struct co* current) {
 #ifdef TEST
     printf("In waiter_append function!\n");
 #endif
+	return;
 }
 
 void rand_choose(struct co* head, struct co* candidate, struct co* current) {
@@ -156,6 +158,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 #ifdef TEST
 	printf("rand pool was cleared!\n");
 #endif
+	return;
 }
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
@@ -315,6 +318,7 @@ void co_yield() {
 			current->status = CO_RUNNING;
 #ifdef TEST
 		printf("Before return!\n");
+		return;
 #endif
 	    }	
 	}

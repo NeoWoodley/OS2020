@@ -214,6 +214,7 @@ void co_wait(struct co *co) {
 #endif
 	assert(co != NULL);
 	free(co);
+	return;
 	}
 	else {
 	    current->status = CO_WAITING;
@@ -242,6 +243,7 @@ void co_wait(struct co *co) {
 #endif
 	    assert(co != NULL);
 	    free(co);
+		return;
 	}
 }
 

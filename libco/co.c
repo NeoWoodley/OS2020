@@ -190,6 +190,9 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 }
 
 void co_wait(struct co *co) {
+#ifdef TEST
+	printf("-----------The state of co is %d------------\n", co->status);
+#endif
 
 	if(current == NULL && co->status != CO_DEAD) {
 		co->status = CO_RUNNING;
@@ -319,7 +322,7 @@ void co_yield() {
 #ifdef TEST
 		printf("The return value of setjmp is not  0 | The current co is %s\n", current->name);
 #endif
-			current->status = CO_DEAD;
+			current->status = CO_RUNNING;
 #ifdef TEST
 		printf("Before return!\n");
 		return;

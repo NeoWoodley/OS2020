@@ -191,7 +191,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 void co_wait(struct co *co) {
 
-	if(current == NULL) {
+	if(current == NULL && co->status != CO_DEAD) {
 		co->status = CO_RUNNING;
         current = co;	
 		assert(current != NULL);
@@ -219,7 +219,7 @@ void co_wait(struct co *co) {
 	free(co);
 	return;
 	}
-	else {
+	else if (current != NULL && co->status != CO_DEAD){
 	    current->status = CO_WAITING;
 	    struct co *old_current = current;
 	    co->status = CO_RUNNING;
@@ -247,6 +247,10 @@ void co_wait(struct co *co) {
 	    assert(co != NULL);
 	    free(co);
 		return;
+	}
+
+	else {
+	    return;
 	}
 }
 

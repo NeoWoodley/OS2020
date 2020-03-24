@@ -190,12 +190,15 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 }
 
 void co_wait(struct co *co) {
-#ifdef TEST
-	printf("-----------The state of co is %d------------\n", co->status);
+#ifdef STATE
+	printf("-----------The state of co %s %d in co_wait------------\n", co->name, co->status);
 #endif
 
 	if(current == NULL && co->status != CO_DEAD) {
 		co->status = CO_RUNNING;
+#ifdef STATE
+	printf("-----------The state of co %s %d in co_wait------------\n", co->name, co->status);
+#endif
         current = co;	
 		assert(current != NULL);
 
@@ -205,6 +208,9 @@ void co_wait(struct co *co) {
 
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
+#ifdef STATE
+	printf("-----------The state of co %s %d in co_wait------------\n", current->name, current->status);
+#endif
 	    current = NULL;
 
 #ifdef TEST
@@ -226,6 +232,9 @@ void co_wait(struct co *co) {
 	    current->status = CO_WAITING;
 	    struct co *old_current = current;
 	    co->status = CO_RUNNING;
+#ifdef STATE
+	printf("-----------The state of co %s %d in co_wait------------\n", co->name, co->status);
+#endif
 		waiter_append(co, current);
 	    current = co;
 
@@ -235,8 +244,14 @@ void co_wait(struct co *co) {
 
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
+#ifdef STATE
+	printf("-----------The state of co %s %d in co_wait------------\n", current->name, current->status);
+#endif
 	    current = old_current;
 		current->status = CO_RUNNING;
+#ifdef STATE
+	printf("-----------The state of co %s %d in co_wait------------\n", current->name, current->status);
+#endif
 
 #ifdef TEST
 	printf("co %s was restored | co %s is finished Now!!\n", current->name, co->name);
@@ -269,6 +284,9 @@ void co_yield() {
 	}
 	else {
 	    current->status = CO_WAITING;
+#ifdef STATE
+	printf("-----------The state of co %s %d in co_yield------------\n", current->name, current->status);
+#endif
 
 #ifdef TEST
 		printf("yield occured in co %s!\n", current->name);
@@ -322,7 +340,7 @@ void co_yield() {
 #ifdef TEST
 		printf("The return value of setjmp is not  0 | The current co is %s\n", current->name);
 #endif
-			current->status = CO_RUNNING;
+		//	current->status = CO_RUNNING;
 #ifdef TEST
 		printf("Before return!\n");
 		return;

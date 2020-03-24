@@ -191,10 +191,6 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 }
 
 void co_wait(struct co *co) {
-#ifdef STATE
-	printf("-----------The state of co %s %d in co_wait------------\n", co->name, co->status);
-#endif
-
 	if(current == NULL && co->status != CO_DEAD) {
 		co->status = CO_RUNNING;
 #ifdef STATE

@@ -333,6 +333,10 @@ void co_yield() {
 		        printf("Another co was chosen and it is a waiting co!\n");
 #endif
 			   current = new_co.brother;
+			   current->status = CO_RUNNING;
+#ifdef STATE
+	printf("-----------The state of co %s %d in co_yield------------\n", current->name, current->status);
+#endif
 			   longjmp(current->context, 2); 
 			}
             

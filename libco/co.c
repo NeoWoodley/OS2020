@@ -319,7 +319,7 @@ void co_yield() {
 #ifdef TEST
 		printf("The return value of setjmp is not  0 | The current co is %s\n", current->name);
 #endif
-			current->status = CO_RUNNING;
+			current->status = CO_DEAD;
 #ifdef TEST
 		printf("Before return!\n");
 		return;

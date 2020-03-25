@@ -168,7 +168,8 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	list_append(co_list_head, new_co);
     assert(co_list_head != NULL);
 #ifdef DEBUG
-	printf("co %s was created! It's state is %d\n", new_co->name, new_co->status);
+	//printf("co %s was created! It's state is %d\n", new_co->name, new_co->status);
+	printf("Haha, I am here!\n");
 #endif
     return new_co;
 }

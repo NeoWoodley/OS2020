@@ -14,9 +14,6 @@
 #define STATE
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
-#ifdef DEBUG
-	printf("In function stack_switch_call!\n");
-#endif
   asm volatile (
 #if __x86_64__
     "movq %0, %%rsp; movq %2, %%rdi; jmp *%1"
@@ -67,9 +64,6 @@ void list_append(struct co* head, struct co* new_co) {
 	   	temp = temp->next;
 	}
 	temp->next = new_co;
-#ifdef TEST
-    printf("In list_append function! ");
-#endif
 	return;
 }
 
@@ -79,18 +73,12 @@ void rand_pool_append(struct co* head, struct co* new_co) {
     	temp = temp->brother;
 	}
 	temp->brother = new_co;
-#ifdef TEST
-    printf("In rand_pool_append function! co %s was appended\n", temp->brother->name);
-#endif
 }
 
 void waiter_append(struct co* prev, struct co* current) {
 	assert(prev->waiter == NULL);
 	prev->waiter = current;
 	assert(prev->waiter != NULL);
-#ifdef TEST
-    printf("In waiter_append function!\n");
-#endif
 	return;
 }
 
@@ -109,10 +97,6 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 		temp = temp->next;
     }
 	assert(rand_pool_head != NULL);
-
-#ifdef TEST
-	printf("There %d co in rand pool!\n", count);
-#endif
 
 	int index = 0;
 	srand((unsigned)time(0));
@@ -146,9 +130,6 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	}
 
 	assert(candidate->brother != NULL);
-#ifdef TEST
-	printf("co %s was chosen to run!\n", candidate->brother->name);
-#endif
     temp = rand_pool_head->brother;
 	rand_pool_head->brother = NULL;
 	while(temp->brother != NULL) {
@@ -156,9 +137,6 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 		temp = temp->brother;
 		old->brother = NULL;
 	}
-#ifdef TEST
-	printf("rand pool was cleared!\n");
-#endif
 	return;
 }
 
@@ -174,18 +152,9 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	new_co->status = CO_NEW;
 	new_co->next = NULL;
 	new_co->brother = NULL;
-	/*
-	for(int i = 0; i < STACK_SIZE; i ++) {
-	    new_co->stack[i] = 0;
-	}
-	*/
     
 	list_append(co_list_head, new_co);
     assert(co_list_head != NULL);
-
-#ifdef TEST
-	printf("co %s is created!\n", new_co->name);
-#endif 
 
     return new_co;
 }
@@ -193,34 +162,13 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 void co_wait(struct co *co) {
 	if(current == NULL && co->status != CO_DEAD) {
 		co->status = CO_RUNNING;
-#ifdef STATE
-	printf("-----------The state of co %s %d in co_wait------------\n", co->name, co->status);
-#endif
         current = co;	
 		assert(current != NULL);
 
-#ifdef TEST
-	printf("main thread was waiting | co %s is running now!\n", current->name);
-#endif 
-
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
-#ifdef STATE
-	printf("-----------The state of co %s %d in co_wait------------\n", current->name, current->status);
-#endif
 	    current = NULL;
 
-#ifdef TEST
-	printf("main thread was restored | co %s is finished Now!!\n", co->name);
-#endif 
-
-#ifdef TEST
-	printf("co %s was to be free!\n", co->name);
-#endif
-#ifdef TEST
-	printf("A pointer free happened in if clause whose condition is current == NULL | current co is main\n");
-	printf("co->%p\n", co);
-#endif
 	co->status = CO_DEAD;
 	assert(co != NULL);
 	free(co);
@@ -230,36 +178,14 @@ void co_wait(struct co *co) {
 	    current->status = CO_WAITING;
 	    struct co *old_current = current;
 	    co->status = CO_RUNNING;
-#ifdef STATE
-	printf("-----------The state of co %s %d in co_wait------------\n", co->name, co->status);
-#endif
 		waiter_append(co, current);
 	    current = co;
 
-#ifdef TEST
-	printf("co %s was replaced | co %s is runing Now!\n", old_current->name, current->name);
-#endif 
-
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
-#ifdef STATE
-	printf("-----------The state of co %s %d in co_wait------------\n", current->name, current->status);
-#endif
 	    current = old_current;
 		current->status = CO_RUNNING;
-#ifdef STATE
-	printf("-----------The state of co %s %d in co_wait------------\n", current->name, current->status);
-#endif
 
-#ifdef TEST
-	printf("co %s was restored | co %s is finished Now!!\n", current->name, co->name);
-#endif 
-#ifdef TEST
-		printf("co %s was to be free!\n", co->name);
-#endif
-#ifdef TEST
-	printf("A pointer free happened in if clause whose condition is current != NULL, current co is %s\n", current->name);
-#endif
 	    assert(co != NULL);
 		co->status = CO_DEAD;
 	    free(co);
@@ -274,80 +200,33 @@ void co_wait(struct co *co) {
 void co_yield() {
     
 	if(current == NULL) {
-
-#ifdef TEST
-		printf("Exit from main thread directly!\n");
-#endif
-
 	    exit(0);
 	}
 	else {
 	    current->status = CO_WAITING;
-#ifdef STATE
-	printf("-----------The state of co %s %d in co_yield------------\n", current->name, current->status);
-#endif
-
-#ifdef TEST
-		printf("yield occured in co %s!\n", current->name);
-#endif
 
         int val = setjmp(current->context);
         if (val == 0) {
-#ifdef TEST
-		printf("The return value of setjmp is 0 | The current co is %s\n", current->name);
-#endif
             struct co new_co;
 			rand_choose(co_list_head, &new_co, current);
 			assert(new_co.brother != NULL);
 			assert(new_co.brother->status == CO_NEW || new_co.brother->status == CO_WAITING);
 			if (new_co.brother->status == CO_NEW) {
-#ifdef TEST
-		        printf("Another co was chosen and it is a new co!\n");
-#endif
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
-#ifdef TEST
-		        printf("stack_space 1:%p\n", &new_co.brother->stack[0]);
-		        printf("stack_space 2:%p\n", &new_co.brother->stack[STACK_SIZE-16]);
-		        printf("func_entry:%p\n", new_co.brother->func);
-		        printf("arg:%p\n", new_co.brother->arg);
-#endif
-				/*
-				int i = 0;
-				for( i = 0; i < 20; i ++) {
-				    if(((uintptr_t)(&new_co.brother->stack[STACK_SIZE-1-i])) % 16 == 0 ) {
-						break;
-					}
-				}
-				*/
-#ifdef DEBUG
-		        printf("Aligened stack:%p\n", &new_co.brother->stack[STACK_SIZE]);
-#endif
 				current = new_co.brother;
 			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-16], new_co.brother->func, (uintptr_t)new_co.brother->arg);
 			}
 
 			else {
-#ifdef TEST
-		        printf("Another co was chosen and it is a waiting co!\n");
-#endif
 			   current = new_co.brother;
 			   current->status = CO_RUNNING;
-#ifdef STATE
-	printf("-----------The state of co %s %d in co_yield------------\n", current->name, current->status);
-#endif
 			   longjmp(current->context, 2); 
 			}
             
 	    }
         else {
-#ifdef TEST
-		printf("The return value of setjmp is not  0 | The current co is %s\n", current->name);
-#endif
 		//	current->status = CO_RUNNING;
-#ifdef TEST
-		printf("Before return!\n");
 		return;
-#endif
 	    }	
 	}
 }

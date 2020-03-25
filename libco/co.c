@@ -9,8 +9,8 @@
 
 #define STACK_SIZE (1<<16)
 
-#define DEBUG
-#define JMP
+//#define DEBUG
+//#define JMP
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (
@@ -192,9 +192,8 @@ void co_wait(struct co *co) {
 			longjmp(current->context, 2);
 			*/
 			co_yield();
-#ifdef JMP
-			printf("I am here\n");
-#endif
+			free(co);
+			return;
 		}
 	}
 	else if (current != NULL && co->status != CO_DEAD){

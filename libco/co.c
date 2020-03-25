@@ -256,6 +256,9 @@ void co_yield() {
 #endif
 	    }	
 	}
+#ifdef JMP
+	printf("Game Over!\n");
+#endif
 }
 
 

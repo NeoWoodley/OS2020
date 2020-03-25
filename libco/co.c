@@ -143,11 +143,23 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 	assert(name != NULL && func != NULL && arg != NULL);
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
+#ifdef TEST_2
+	printf("A new space was distributed!\n");
+#endif
 	new_co->name = (char*)malloc(32*sizeof(char));
 	assert(new_co->name != NULL);
 	strcpy(new_co->name, name);
+#ifdef TEST_2
+	printf("The name was copied!\n");
+#endif
 	new_co->func = func;
+#ifdef TEST_2
+	printf("The function was pointed!\n");
+#endif
 	new_co->arg = arg;
+#ifdef TEST_2
+	printf("The arg was assigned!\n");
+#endif
 	new_co->status = CO_NEW;
 	new_co->next = NULL;
 	new_co->brother = NULL;

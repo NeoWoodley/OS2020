@@ -165,21 +165,27 @@ void co_wait(struct co *co) {
 	printf("co %s is to be waited, its state is %d\n", co->name, co->status);
 #endif
 	if(current == NULL && co->status != CO_DEAD) {
-		co->status = CO_RUNNING;
-        current = co;	
-		assert(current != NULL);
+		if(co->status == CO_NEW) {
+			co->status = CO_RUNNING;
+        	current = co;	
+			assert(current != NULL);
 
-	    current->func(current->arg);
-	    current->status = CO_DEAD;
-	    current = NULL;
+	    	current->func(current->arg);
+	    	current->status = CO_DEAD;
+	    	current = NULL;
 
-	co->status = CO_DEAD;
-	assert(co != NULL);
+		co->status = CO_DEAD;
+		assert(co != NULL);
 #ifdef DEBUG
-	printf("co %s was freed\n", co->name);
+		printf("co %s was freed\n", co->name);
 #endif
-	free(co);
-	return;
+		free(co);
+		return;
+		}
+
+		else if(co->status == CO_WAITING) {
+			longjmp(co->context, 2);
+		}
 	}
 	else if (current != NULL && co->status != CO_DEAD){
 	    current->status = CO_WAITING;

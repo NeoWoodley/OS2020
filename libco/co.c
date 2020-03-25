@@ -188,6 +188,9 @@ void co_wait(struct co *co) {
 			printf("co %s was once run\n", co->name);
 #endif
 			longjmp(co->context, 2);
+#ifdef JMP
+			printf("I am here\n");
+#endif
 		}
 	}
 	else if (current != NULL && co->status != CO_DEAD){

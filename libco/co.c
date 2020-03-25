@@ -60,11 +60,10 @@ struct co *rand_pool_head = &rand_pool;
 
 void list_append(struct co* head, struct co* new_co) {
     struct co* temp = head;
-	printf("A\n");
+	assert(temp->next != NULL)
 	while(temp->next != NULL) {
 	   	temp = temp->next;
 	}
-	printf("B\n");
 	temp->next = new_co;
 	return;
 }

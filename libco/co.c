@@ -184,6 +184,9 @@ void co_wait(struct co *co) {
 		}
 
 		else if(co->status == CO_WAITING) {
+#ifdef JMP
+			printf("co %s was once run\n", co->name);
+#endif
 			longjmp(co->context, 2);
 		}
 	}

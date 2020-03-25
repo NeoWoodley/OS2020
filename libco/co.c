@@ -192,6 +192,9 @@ void co_wait(struct co *co) {
 			longjmp(current->context, 2);
 			*/
 			co_yield();
+#ifdef DEBUG
+		printf("co %s was freed\n", co->name);
+#endif
 			free(co);
 			return;
 		}

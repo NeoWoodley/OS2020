@@ -174,10 +174,10 @@ void co_wait(struct co *co) {
 
 	co->status = CO_DEAD;
 	assert(co != NULL);
-	free(co);
 #ifdef DEBUG
 	printf("co %s was freed\n", co->name);
 #endif
+	free(co);
 	return;
 	}
 	else if (current != NULL && co->status != CO_DEAD){

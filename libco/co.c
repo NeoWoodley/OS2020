@@ -188,7 +188,10 @@ void co_wait(struct co *co) {
 			printf("co %s was once run\n", co->name);
 #endif
 			current = co;
+			/*
 			longjmp(current->context, 2);
+			*/
+			co_yield();
 #ifdef JMP
 			printf("I am here\n");
 #endif
@@ -254,11 +257,9 @@ void co_yield() {
 #ifdef JMP
 			printf("A longjmp returned 2, co %s's context was restored\n", current->name);
 #endif
+			return;
 	    }	
 	}
-#ifdef JMP
-	printf("Game Over!\n");
-#endif
 }
 
 

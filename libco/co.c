@@ -161,7 +161,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 void co_wait(struct co *co) {
 #ifdef DEBUG
-	printf("co %s was be waited\n", co->name);
+	printf("co %s is to be waited, its state is %d\n", co->name, co->status);
 #endif
 	if(current == NULL && co->status != CO_DEAD) {
 		co->status = CO_RUNNING;
@@ -234,8 +234,7 @@ void co_yield() {
             
 	    }
         else {
-			current->status = CO_DEAD;
-		return;
+			return;
 	    }	
 	}
 }

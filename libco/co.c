@@ -231,7 +231,7 @@ void co_yield() {
             
 	    }
         else {
-		//	current->status = CO_RUNNING;
+			current->status = CO_DEAD;
 		return;
 	    }	
 	}

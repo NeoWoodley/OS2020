@@ -9,9 +9,9 @@
 
 #define STACK_SIZE (1<<16)
 
-#define DEBUG
-#define JMP
-#define TEST_2
+//#define DEBUG
+//#define JMP
+//#define TEST_2
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (

@@ -9,10 +9,6 @@
 
 #define STACK_SIZE (1<<16)
 
-//#define DEBUG
-//#define TEST
-#define STATE
-
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (
 #if __x86_64__
@@ -155,11 +151,16 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
     
 	list_append(co_list_head, new_co);
     assert(co_list_head != NULL);
-
+#ifdef DEBUG
+	printf("co %s was created! It's state is %d\n", new_co->name, new_co->status);
+#endif
     return new_co;
 }
 
 void co_wait(struct co *co) {
+#ifdef DEBUG
+	printf("co %s was be waited\n", co->name);
+#endif
 	if(current == NULL && co->status != CO_DEAD) {
 		co->status = CO_RUNNING;
         current = co;	

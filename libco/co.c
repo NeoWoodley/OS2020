@@ -218,6 +218,9 @@ void co_yield() {
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
 				current = new_co.brother;
 			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-16], new_co.brother->func, (uintptr_t)new_co.brother->arg);
+#ifdef DEBUG
+				printf("Haha! I am here\n");
+#endif
 			}
 
 			else {

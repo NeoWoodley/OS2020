@@ -11,6 +11,7 @@
 
 #define DEBUG
 #define JMP
+#define TEST_2
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (

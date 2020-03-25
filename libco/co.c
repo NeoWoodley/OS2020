@@ -10,6 +10,7 @@
 #define STACK_SIZE (1<<16)
 
 #define DEBUG
+#define JMP
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (

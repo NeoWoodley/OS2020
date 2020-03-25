@@ -9,6 +9,8 @@
 
 #define STACK_SIZE (1<<16)
 
+#define DEBUG
+
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (
 #if __x86_64__

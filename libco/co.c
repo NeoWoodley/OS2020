@@ -187,7 +187,8 @@ void co_wait(struct co *co) {
 #ifdef JMP
 			printf("co %s was once run\n", co->name);
 #endif
-			longjmp(co->context, 2);
+			current = co;
+			longjmp(current->context, 2);
 #ifdef JMP
 			printf("I am here\n");
 #endif

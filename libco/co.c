@@ -166,10 +166,12 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	new_co->brother = NULL;
     
 	list_append(co_list_head, new_co);
+#ifdef TEST_2
+	printf("The new co was appended!\n");
+#endif
     assert(co_list_head != NULL);
 #ifdef DEBUG
-	//printf("co %s was created! It's state is %d\n", new_co->name, new_co->status);
-	printf("Haha, I am here!\n");
+	printf("co %s was created! It's state is %d\n", new_co->name, new_co->status);
 #endif
     return new_co;
 }

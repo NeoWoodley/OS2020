@@ -254,7 +254,6 @@ void co_yield() {
 #ifdef JMP
 			printf("A longjmp returned 2, co %s's context was restored\n", current->name);
 #endif
-			return;
 	    }	
 	}
 }

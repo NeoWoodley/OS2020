@@ -56,7 +56,7 @@ static void do_produce(Queue *queue) {
         return;
     }
     memset(item->data, 0, 10);
-    sprintf(item->data, "libco-%d\n", g_count++);
+    sprintf(item->data, "libco-%d", g_count++);
     q_push(queue, item);
 }
 
@@ -77,7 +77,7 @@ static void do_consume(Queue *queue) {
 
     Item *item = q_pop(queue);
     if (item) {
-        printf("%s  ", (char *)item->data);
+        printf("%s  \n", (char *)item->data);
         free(item->data);
         free(item);
     }

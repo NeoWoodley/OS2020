@@ -102,6 +102,8 @@ static void test_2() {
     struct co *thd3 = co_start("consumer-1", consumer, queue);
     struct co *thd4 = co_start("consumer-2", consumer, queue);
 
+	co_count();
+
     co_wait(thd1);
     co_wait(thd2);
 

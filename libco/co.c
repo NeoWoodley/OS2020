@@ -9,7 +9,7 @@
 
 #define STACK_SIZE (1<<16)
 
-//#define DEBUG
+#define DEBUG
 //#define JMP
 //#define TEST_2
 #define CO_DELETE

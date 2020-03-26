@@ -73,7 +73,7 @@ void list_append(struct co* head, struct co* new_co) {
 void current_chk() {
 #ifdef CURCHK
 	if(current == NULL) {
-	    fprintf(stdout, "Hahahahahahahahahahahahahahahaha\n");
+	    fprintf(stdout, "co main\n");
 	}
 	else {
 	    printf("***{CURRENT CO}: co %s\n", current->name);
@@ -254,6 +254,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 void co_wait(struct co *co) {
 	current_chk();
 #ifdef BUG
+	assert(co->name != NULL);
 	printf("###[WAIT]:co %s was waited\n",co->name);
 #endif
 #ifdef DEBUG

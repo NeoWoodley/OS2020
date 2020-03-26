@@ -89,6 +89,9 @@ void waiter_append(struct co* prev, struct co* current) {
 }
 
 void co_delete(struct co* node) {
+#ifdef CO_DELETE
+	printf("***In co_delete function\n");
+#endif
     struct co* temp = co_list_head->next;
 	struct co* before_temp = co_list_head;
 	while(temp != NULL) {

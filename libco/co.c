@@ -82,6 +82,16 @@ void rand_pool_append(struct co* head, struct co* new_co) {
 	temp->brother = new_co;
 }
 
+void co_count() {
+    assert(co_list_head->next != NULL);
+	int count = 0;
+	struct co* temp = co_list_head->next;
+	while(temp != NULL) {
+	    count ++
+		temp = temp->next;
+	}
+}
+
 void waiter_append(struct co* prev, struct co* current) {
 	assert(prev->waiter == NULL);
 	prev->waiter = current;

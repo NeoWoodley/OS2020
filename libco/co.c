@@ -13,6 +13,7 @@
 //#define JMP
 //#define TEST_2
 //#define CO_DELETE
+#define BUG
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (
@@ -115,6 +116,9 @@ void co_delete(struct co* node) {
 #ifdef CO_DELETE
 	printf("co %s was deleted from co_list\n", node->name);
 #endif
+#ifdef BUG
+	printf("###[DELETE]:co %s was deleted\n",co->name);
+#endif
 	return;
 }
 
@@ -177,6 +181,9 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 		temp = temp->brother;
 		old->brother = NULL;
 	}
+#ifdef BUG
+	printf("###[CHOOSE]:co %s was chosen\n",candidate->name);
+#endif
 	return;
 }
 
@@ -213,10 +220,16 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 #ifdef DEBUG
 	printf("co %s was created! It's state is %d\n", new_co->name, new_co->status);
 #endif
+#ifdef BUG
+	printf("###[CREATE]:co %s was deleted\n",new_co->name);
+#endif
     return new_co;
 }
 
 void co_wait(struct co *co) {
+#ifdef BUG
+	printf("###[WAIT]:co %s was waited\n",co->name);
+#endif
 #ifdef DEBUG
 	printf("co %s is to be waited, its state is %d\n", co->name, co->status);
 #endif
@@ -236,6 +249,9 @@ void co_wait(struct co *co) {
 		printf("co %s was freed\n", co->name);
 #endif
         co_delete(co);
+#ifdef BUG
+	printf("###[FREE]:co %s was freed\n",co->name);
+#endif
 		free(co);
 		return;
 		}
@@ -253,6 +269,9 @@ void co_wait(struct co *co) {
 		printf("co %s was freed\n", co->name);
 #endif
 		    co_delete(co);
+#ifdef BUG
+	printf("###[FREE]:co %s was freed\n",co->name);
+#endif
 			free(co);
 			return;
 		}
@@ -272,6 +291,9 @@ void co_wait(struct co *co) {
 	    assert(co != NULL);
 		co->status = CO_DEAD;
 		co_delete(co);
+#ifdef BUG
+	printf("###[FREE]:co %s was freed\n",co->name);
+#endif
 	    free(co);
 		return;
 	}
@@ -282,7 +304,9 @@ void co_wait(struct co *co) {
 }
 
 void co_yield() {
-    
+#ifdef BUG
+	printf("###[YIELD]:co %s was yield\n",current->name);
+#endif
 	if(current == NULL) {
 	    exit(0);
 	}
@@ -291,6 +315,9 @@ void co_yield() {
 
         int val = setjmp(current->context);
         if (val == 0) {
+#ifdef BUG
+	printf("###[SETJMP]:co %s's context was saved\n",current->name);
+#endif
 #ifdef JMP
 			printf("A longjmp returned 0, co %s's context was saved\n", current->name);
 #endif
@@ -301,6 +328,9 @@ void co_yield() {
 			if (new_co.brother->status == CO_NEW) {
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
 				current = new_co.brother;
+#ifdef BUG
+	printf("###[STACK_SWITCH_CALL]:co %s was put on stack\n",current->name);
+#endif
 			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-16], new_co.brother->func, (uintptr_t)new_co.brother->arg);
 #ifdef DEBUG
 				printf("Haha! I am here\n");
@@ -310,6 +340,9 @@ void co_yield() {
 			else {
 			   current = new_co.brother;
 			   current->status = CO_RUNNING;
+#ifdef BUG
+	printf("###[LONGJMP]:co %s's context was retored\n",current->name);
+#endif
 			   longjmp(current->context, 2); 
 			}
             
@@ -317,6 +350,9 @@ void co_yield() {
         else {
 #ifdef JMP
 			printf("A longjmp returned 2, co %s's context was restored\n", current->name);
+#endif
+#ifdef BUG
+	printf("###[SETJMP]:co %s's context was restored\n",current->name);
 #endif
 			return;
 	    }	

@@ -341,7 +341,7 @@ void co_yield() {
 			   current = new_co.brother;
 			   current->status = CO_RUNNING;
 #ifdef BUG
-	printf("###[LONGJMP]:co %s's context was retored\n",current->name);
+	printf("###[LONGJMP]:co %s's context was restored\n",current->name);
 #endif
 			   longjmp(current->context, 2); 
 			}

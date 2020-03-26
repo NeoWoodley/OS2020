@@ -235,6 +235,7 @@ void co_wait(struct co *co) {
 #ifdef DEBUG
 		printf("co %s was freed\n", co->name);
 #endif
+        co_delete(co);
 		free(co);
 		return;
 		}

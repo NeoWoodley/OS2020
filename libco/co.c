@@ -182,7 +182,8 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 		old->brother = NULL;
 	}
 #ifdef BUG
-	printf("###[CHOOSE]:co %s was chosen\n",candidate->brother->name);
+	printf("###[CHOOSE]:co %s was chosen\n",pool->name);
+
 #endif
 	return;
 }

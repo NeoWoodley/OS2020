@@ -106,7 +106,6 @@ static void test_2() {
     co_wait(thd2);
 
     g_running = 0;
-	printf("????????????????????????????\n");
 
     co_wait(thd3);
     co_wait(thd4);
@@ -122,7 +121,7 @@ int main() {
     setbuf(stdout, NULL);
 
     printf("Test #1. Expect: (X|Y){0, 1, 2, ..., 199}\n");
-    //test_1();
+    test_1();
 
     printf("\n\nTest #2. Expect: (libco-){200, 201, 202, ..., 399}\n");
     test_2();

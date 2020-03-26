@@ -82,6 +82,30 @@ void waiter_append(struct co* prev, struct co* current) {
 	return;
 }
 
+void co_delete(struct co* node) {
+    struct co* temp = co_list_head->next;
+	struct co* before_temp = co_list_head;
+	while(temp != NULL) {
+	    if(!strcmp(temp->name, node->name)) {
+			struct co* next = temp->next;
+			if(next == NULL) {
+			    before_temp->next = NULL;
+				break;
+			}	
+			else {
+				assert(next != NULL);
+				before_temp->next = next;
+				break;
+			}
+		}
+		else {
+		    before_temp = temp;
+			temp = temp->next;
+		}
+	}
+	return;
+}
+
 void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 
 	assert(head != NULL);
@@ -215,6 +239,7 @@ void co_wait(struct co *co) {
 #ifdef DEBUG
 		printf("co %s was freed\n", co->name);
 #endif
+		    co_delete(co);
 			free(co);
 			return;
 		}
@@ -233,6 +258,7 @@ void co_wait(struct co *co) {
 
 	    assert(co != NULL);
 		co->status = CO_DEAD;
+		co_delete(co);
 	    free(co);
 		return;
 	}

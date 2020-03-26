@@ -87,7 +87,7 @@ void co_count() {
 	int count = 0;
 	struct co* temp = co_list_head->next;
 	while(temp != NULL) {
-	    count ++
+	    count ++;
 		temp = temp->next;
 	}
 }

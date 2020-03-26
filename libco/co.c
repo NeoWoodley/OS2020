@@ -7,7 +7,7 @@
 #include <string.h>
 #include <time.h>
 
-#define STACK_SIZE (1<<16)+32
+#define STACK_SIZE (1<<17)
 
 //#define DEBUG
 //#define JMP

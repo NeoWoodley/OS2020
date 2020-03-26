@@ -222,7 +222,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	printf("co %s was created! It's state is %d\n", new_co->name, new_co->status);
 #endif
 #ifdef BUG
-	printf("###[CREATE]:co %s was deleted\n",new_co->name);
+	printf("###[CREATE]:co %s was created\n",new_co->name);
 #endif
     return new_co;
 }

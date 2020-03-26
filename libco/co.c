@@ -90,7 +90,7 @@ void co_count() {
 	    count ++;
 		temp = temp->next;
 	}
-	printf("\n$$$ There are %d co(s) in list\n", count);
+	printf("\n$$$ There are %d co(s) in list\n\n", count);
 }
 
 void waiter_append(struct co* prev, struct co* current) {

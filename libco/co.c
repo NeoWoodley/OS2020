@@ -117,7 +117,7 @@ void co_delete(struct co* node) {
 	printf("co %s was deleted from co_list\n", node->name);
 #endif
 #ifdef BUG
-	printf("###[DELETE]:co %s was deleted\n",co->name);
+	printf("###[DELETE]:co %s was deleted\n",node->name);
 #endif
 	return;
 }

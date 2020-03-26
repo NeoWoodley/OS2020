@@ -12,6 +12,7 @@
 //#define DEBUG
 //#define JMP
 //#define TEST_2
+#define CO_DELETE
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (
@@ -108,6 +109,7 @@ void co_delete(struct co* node) {
 			temp = temp->next;
 		}
 	}
+	printf("co %s was deleted from co_list\n");
 	return;
 }
 

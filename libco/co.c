@@ -67,6 +67,11 @@ void list_append(struct co* head, struct co* new_co) {
 	return;
 }
 
+void co_list_check()
+{
+    assert(co_list_head->next == NULL);
+}
+
 void rand_pool_append(struct co* head, struct co* new_co) {
    	struct co* temp = head;
 	while(temp->brother != NULL) {

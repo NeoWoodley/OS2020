@@ -73,7 +73,7 @@ void list_append(struct co* head, struct co* new_co) {
 void current_chk() {
 #ifdef CURCHK
 	if(current == NULL) {
-	    fprintf(stdout, "***{CURRENT CO}: co main\n");
+	    fprintf(stdout, "Hahahahahahahahahahahahahahahaha\n");
 	}
 	else {
 	    printf("***{CURRENT CO}: co %s\n", current->name);

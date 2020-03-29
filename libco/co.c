@@ -250,7 +250,7 @@ void callback() {
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
-	printf("callback:%p\n", (uintptr_t)callback);
+	printf("callback:%ld\n", (uintptr_t)callback);
 	assert(name != NULL && func != NULL && arg != NULL);
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
 #ifdef TEST_2

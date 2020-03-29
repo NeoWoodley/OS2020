@@ -234,6 +234,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 
 		else {
 		    index = (index + 1) % count + 1;
+	        printf("$$$ Index Again:%d\n", index);
 	        pool = rand_pool_head;
 	        for(int i=0; i < index; i ++) {
 	   	        pool = pool->brother;
@@ -254,7 +255,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	printf("###[CHOOSE]:co %s was chosen\n",pool->name);
 #endif
 
-    assert(strcmp(candidate->brother->name, current->name));
+//    assert(strcmp(candidate->brother->name, current->name));
 	return;
 }
 

@@ -135,6 +135,7 @@ void rand_pool_append(struct co* head, struct co* new_co) {
     	temp = temp->brother;
 	}
 	temp->brother = new_co;
+	return;
 }
 
 void co_count() {
@@ -146,6 +147,7 @@ void co_count() {
 		temp = temp->next;
 	}
 	printf("\n$$$ There are %d co(s) in list\n\n", count);
+	return;
 }
 
 void waiter_append(struct co* prev, struct co* current) {

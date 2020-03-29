@@ -215,7 +215,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	if(count != 0) {
        	index = rand() % count + 1;
 	}
-	printf("$$$ Index:%d\n", index);
+//	printf("$$$ Index:%d\n", index);
 	struct co* pool = rand_pool_head;
 	for(int i=0; i < index; i ++) {
 	   	pool = pool->brother;
@@ -234,7 +234,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 
 		else {
 		    index = (index + 1) % count + 1;
-	        printf("$$$ Index Again:%d\n", index);
+//	        printf("$$$ Index Again:%d\n", index);
 	        pool = rand_pool_head;
 	        for(int i=0; i < index; i ++) {
 	   	        pool = pool->brother;

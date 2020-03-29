@@ -287,7 +287,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
     memcpy(&new_co->stack[STACK_SIZE-16], callback, 8);
     */
 	uint64_t num = (uintptr_t)callback;
-    for(int i = 0; i < 8; i ++) {
+    for(int i = 0; i < 16; i ++) {
 		new_co->stack[STACK_SIZE-24+i] = num % 256;	    
 		num /= 256;
 	}	

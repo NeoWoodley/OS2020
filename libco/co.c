@@ -388,7 +388,7 @@ void co_yield() {
 #ifdef BUG
 	printf("###[SETJMP]:co %s's context was restored\n",current->name);
 #endif
-			return;
+		//	return;
 	    }	
 	}
 }

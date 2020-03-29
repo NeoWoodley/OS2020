@@ -76,8 +76,13 @@ static void producer(void *arg) {
     
 	uintptr_t retaddr;
 	asm volatile (
+#if __x86_64__
 	    "movq %%rsp, %0"
           : : "r"(retaddr)		
+#else 
+	    "movl %%esp, %0"
+          : : "r"(retaddr)		
+#endif
 	);
 	printf("rsp: %p\n", retaddr);
 }
@@ -106,8 +111,13 @@ static void consumer(void *arg) {
     
 	uintptr_t retaddr;
 	asm volatile (
+#if __x86_64__
 	    "movq %%rsp, %0"
           : : "r"(retaddr)		
+#else 
+	    "movl %%esp, %0"
+          : : "r"(retaddr)		
+#endif
 	);
 	printf("rsp: %p\n", retaddr);
 }

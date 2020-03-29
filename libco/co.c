@@ -255,9 +255,9 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
 
 #if __x86_64__
-    memcpy(&new_co->stack[STACK_SZIE-16], callback, 8);    
+    memcpy(&new_co->stack[STACK_SIZE-16], callback, 8);    
 #else
-    memcpy(&new_co->stack[STACK_SZIE-16], callback, 4);    
+    memcpy(&new_co->stack[STACK_SIZE-16], callback, 4);    
 #endif
 
 #ifdef TEST_2

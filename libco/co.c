@@ -344,6 +344,7 @@ void co_yield() {
 	    current->status = CO_WAITING;
 
 		assert(current->context != NULL);
+		assert(current != NULL);
         int val = setjmp(current->context);
         if (val == 0) {
 #ifdef BUG

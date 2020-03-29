@@ -13,9 +13,9 @@
 //#define JMP
 //#define TEST_2
 //#define CO_DELETE
-//#define BUG
+#define BUG
 //#define CURCHK
-//#define STACK
+#define STACK
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (

@@ -74,7 +74,7 @@ static void producer(void *arg) {
     }
 	printf("producer return!\n");
     
-	uintptr_t retaddr = 111;
+	uintptr_t* retaddr;
 	asm volatile (
 #if __x86_64__
 	    "movq %%rsp, %0"
@@ -84,7 +84,7 @@ static void producer(void *arg) {
           : : "r"(retaddr)		
 #endif
 	);
-	printf("rsp: %p\n", retaddr);
+	printf("rsp: %p\n", *retaddr);
 }
 
 static void do_consume(Queue *queue) {
@@ -109,7 +109,7 @@ static void consumer(void *arg) {
     }
 	printf("consumer return!\n");
     
-	uintptr_t retaddr = 222;
+	uintptr_t* retaddr;
 	asm volatile (
 #if __x86_64__
 	    "movq %%rsp, %0"
@@ -119,7 +119,7 @@ static void consumer(void *arg) {
           : : "r"(retaddr)		
 #endif
 	);
-	printf("rsp: %p\n", retaddr);
+	printf("rsp: %p\n", *retaddr);
 }
 
 static void test_2() {

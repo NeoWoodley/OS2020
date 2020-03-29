@@ -62,20 +62,32 @@ struct co *co_list_head = &co_list;
 struct co rand_pool;
 struct co *rand_pool_head = &rand_pool;
 
-/*
 void stack_display(uint8_t* addr, int num) {
+#if __x86_64__
+	for(int i = 0; i < num; ) {
+		if(i % 8 == 0) {
+		    printf("0x%x: ", &addr[i]);
+		}
+		printf("%02x ", addr[i]);
+		if(i % 8 == 0) {
+		    printf("\n");
+		}
+		i ++;
+	}	
+#else
 	for(int i = 0; i < num; ) {
 		if(i % 4 == 0) {
 		    printf("0x%x: ", &addr[i]);
 		}
-		printf("%02x ", *addr[i]);
+		printf("%02x ", addr[i]);
 		if(i % 4 == 0) {
 		    printf("\n");
 		}
 		i ++;
 	}	
+
+#endif
 }
-*/
 
 
 

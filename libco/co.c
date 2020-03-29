@@ -348,7 +348,9 @@ void co_wait(struct co *co) {
 	}
 
 	else {
-		printf("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
+#ifdef BUG
+		printf("###[FREE]:co %s was freed\n",co->name);
+#endif
 		free(co);
 	    return;
 	}

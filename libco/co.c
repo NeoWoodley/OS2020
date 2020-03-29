@@ -15,7 +15,7 @@
 //#define CO_DELETE
 #define BUG
 //#define CURCHK
-//#define STACK
+#define STACK
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (
@@ -273,6 +273,10 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
     memcpy(&new_co->stack[STACK_SIZE-16], callback, 4);    
 #endif
 
+#ifdef STACK
+    stack_display(&new_co->stack[STACK_SIZE-16], 8);	
+#endif
+
 #ifdef TEST_2
 	printf("A new space was distributed!\n");
 #endif
@@ -448,9 +452,6 @@ void co_yield() {
 #endif
 #ifdef BUG
 	printf("###[SETJMP]:co %s's context was restored\n",current->name);
-#endif
-#ifdef STACK
-	printf("----Before stack smashing\n");
 #endif
     			return;
 	    }	

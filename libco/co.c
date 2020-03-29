@@ -252,7 +252,6 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 }
 
 void co_wait(struct co *co) {
-	assert(current != NULL);
 	current_chk();
 #ifdef BUG
 	assert(co->name != NULL);

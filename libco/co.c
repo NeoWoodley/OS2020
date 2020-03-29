@@ -389,7 +389,7 @@ void co_yield() {
 	printf("###[SETJMP]:co %s's context was restored\n",current->name);
 #endif
 	printf("----Before stack smashing\n");
-			return;
+    //			return;
 	    }	
 	}
 }

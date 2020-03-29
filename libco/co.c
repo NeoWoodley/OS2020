@@ -91,8 +91,6 @@ void stack_display(uint8_t* addr, int num) {
 #endif
 }
 
-
-
 void list_append(struct co* head, struct co* new_co) {
     struct co* temp = head;
 	while(temp->next != NULL) {
@@ -270,13 +268,14 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 #if __x86_64__
 	printf("Haha! It's x86-64!\n");
-    memcpy(&new_co->stack[STACK_SIZE-16], (uintptr_t)callback, 8);    
+    memcpy(&new_co->stack[STACK_SIZE-16], callback, 8);    
 #else
 	printf("Haha! It's x86-32!\n");
-    memcpy(&new_co->stack[STACK_SIZE-16], (uintptr_t)callback, 4);    
+    memcpy(&new_co->stack[STACK_SIZE-16], callback, 4);    
 #endif
 
 #ifdef STACK
+	printf("pointer to callback:%p\n", &callback);
 	printf("callback:%p\n", callback);
     stack_display(&new_co->stack[STACK_SIZE-16], 8);	
 #endif

@@ -74,6 +74,7 @@ void stack_display(uint8_t* addr, int num) {
 		}
 		i ++;
 	}	
+	printf("\n");
 #else
 	for(int i = 0; i < num; ) {
 		if(i % 4 == 0) {
@@ -85,6 +86,7 @@ void stack_display(uint8_t* addr, int num) {
 		}
 		i ++;
 	}	
+	printf("\n");
 
 #endif
 }
@@ -262,6 +264,7 @@ void callback() {
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
+
 	assert(name != NULL && func != NULL && arg != NULL);
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
 
@@ -274,6 +277,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 #endif
 
 #ifdef STACK
+	printf("callback:%p\n", callback);
     stack_display(&new_co->stack[STACK_SIZE-16], 8);	
 #endif
 

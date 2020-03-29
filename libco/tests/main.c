@@ -68,6 +68,7 @@ static void producer(void *arg) {
             do_produce(queue);
             i += 1;
         }
+		printf("        producer yield!\n");
         co_yield();
     }
 }
@@ -89,7 +90,7 @@ static void consumer(void *arg) {
         if (!q_is_empty(queue)) {
             do_consume(queue);
         }
-		printf("        %s yield!\n", arg);
+		printf("        consumer yield!\n");
         co_yield();
     }
 }

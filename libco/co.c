@@ -253,6 +253,13 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	printf("callback:%p\n", callback);
 	assert(name != NULL && func != NULL && arg != NULL);
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
+
+#if __x86_64__
+    memcpy(&new_co->stack[STACK_SZIE-16], callback, 8);    
+#else
+    memcpy(&new_co->stack[STACK_SZIE-16], callback, 4);    
+#endif
+
 #ifdef TEST_2
 	printf("A new space was distributed!\n");
 #endif

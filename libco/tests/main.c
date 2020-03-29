@@ -74,7 +74,7 @@ static void producer(void *arg) {
     }
 	printf("producer return!\n");
     
-	uintptr_t retaddr;
+	uintptr_t retaddr = 111;
 	asm volatile (
 #if __x86_64__
 	    "movq %%rsp, %0"
@@ -109,7 +109,7 @@ static void consumer(void *arg) {
     }
 	printf("consumer return!\n");
     
-	uintptr_t retaddr;
+	uintptr_t retaddr = 222;
 	asm volatile (
 #if __x86_64__
 	    "movq %%rsp, %0"

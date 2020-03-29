@@ -253,10 +253,6 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 		temp = temp->brother;
 		old->brother = NULL;
 	}
-#ifdef BUG
-	printf("###[CHOOSE]:co %s was chosen\n",pool->name);
-#endif
-
 //    assert(strcmp(candidate->brother->name, current->name));
 	return;
 }
@@ -457,6 +453,10 @@ void co_yield() {
 #endif
             struct co new_co;
 			rand_choose(co_list_head, &new_co, current);
+#ifdef BUG
+        	printf("###[CHOOSE]:co %s was chosen\n",new_co.brother->name);
+#endif
+
 			assert(new_co.brother != NULL);
 			assert(new_co.brother->status == CO_NEW || new_co.brother->status == CO_WAITING);
 			if (new_co.brother->status == CO_NEW) {

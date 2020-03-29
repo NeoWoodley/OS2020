@@ -66,10 +66,10 @@ void stack_display(uint8_t* addr, int num) {
 #if __x86_64__
 	for(int i = 0; i < num; ) {
 		if(i % 8 == 0) {
-		    printf("0x%p: ", &addr[i]);
+		    printf("%p: ", &addr[i]);
 		}
 		printf("%04d ", addr[i]);
-		if(i % 8 == 0) {
+		if((i+1) % 8 == 0) {
 		    printf("\n");
 		}
 		i ++;
@@ -78,7 +78,7 @@ void stack_display(uint8_t* addr, int num) {
 #else
 	for(int i = 0; i < num; ) {
 		if(i % 4 == 0) {
-		    printf("0x%p: ", &addr[i]);
+		    printf("%p: ", &addr[i]);
 		}
 		printf("%04d ", addr[i]);
 		if(i % 4 == 0) {

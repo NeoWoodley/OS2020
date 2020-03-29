@@ -72,6 +72,13 @@ static void producer(void *arg) {
         co_yield();
     }
 	printf("producer return!\n");
+    
+	uintptr_t retaddr;
+	asm volatile (
+	    "movq %%rsp, %0"
+          : : "r"(retaddr)		
+	);
+	printf("rsp: %p\n", retaddr);
 }
 
 static void do_consume(Queue *queue) {
@@ -95,6 +102,13 @@ static void consumer(void *arg) {
         co_yield();
     }
 	printf("consumer return!\n");
+    
+	uintptr_t retaddr;
+	asm volatile (
+	    "movq %%rsp, %0"
+          : : "r"(retaddr)		
+	);
+	printf("rsp: %p\n", retaddr);
 }
 
 static void test_2() {

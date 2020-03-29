@@ -250,13 +250,14 @@ void callback() {
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
-	printf("callback:%p\n", callback);
 	assert(name != NULL && func != NULL && arg != NULL);
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
 
 #if __x86_64__
+	printf("Haha! It's x86-64!\n");
     memcpy(&new_co->stack[STACK_SIZE-16], callback, 8);    
 #else
+	printf("Haha! It's x86-32!\n");
     memcpy(&new_co->stack[STACK_SIZE-16], callback, 4);    
 #endif
 

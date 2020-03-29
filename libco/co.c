@@ -298,17 +298,17 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	*/
 	uint32_t num = (uintptr_t)callback;
     for(int i = 0; i < 4; i ++) {
-		new_co->stack[STACK_SIZE-36+i] = num % 256;	    
+		new_co->stack[STACK_SIZE-32+i] = num % 256;	    
 		num /= 256;
 	}	
 #endif
 
 #if __x86_64__
 	printf("callback:%p\n", callback);
-    stack_display(&new_co->stack[STACK_SIZE-40], 8);	
+    stack_display(&new_co->stack[STACK_SIZE-24], 8);	
 #else
 	printf("callback:%p\n", callback);
-    stack_display(&new_co->stack[STACK_SIZE-36], 4);	
+    stack_display(&new_co->stack[STACK_SIZE-32], 4);	
 #endif
 
 #ifdef TEST_2

@@ -288,7 +288,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
     */
 	uint64_t num = (uintptr_t)callback;
     for(int i = 0; i < 8; i ++) {
-		new_co->stack[STACK_SIZE-16+i] = num % 256;	    
+		new_co->stack[STACK_SIZE-40+i] = num % 256;	    
 		num /= 256;
 	}	
 #else
@@ -298,14 +298,17 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	*/
 	uint32_t num = (uintptr_t)callback;
     for(int i = 0; i < 4; i ++) {
-		new_co->stack[STACK_SIZE-16+i] = num % 256;	    
+		new_co->stack[STACK_SIZE-36+i] = num % 256;	    
 		num /= 256;
 	}	
 #endif
 
-#ifdef STACK
+#if __x86_64__
 	printf("callback:%p\n", callback);
-    stack_display(&new_co->stack[STACK_SIZE-16], 8);	
+    stack_display(&new_co->stack[STACK_SIZE-40], 8);	
+#else
+	printf("callback:%p\n", callback);
+    stack_display(&new_co->stack[STACK_SIZE-36], 4);	
 #endif
 
 #ifdef TEST_2
@@ -460,7 +463,7 @@ void co_yield() {
 #ifdef BUG
 	printf("###[STACK_SWITCH_CALL]:co %s was put on stack\n",current->name);
 #endif
-			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-16], new_co.brother->func, (uintptr_t)new_co.brother->arg);
+			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-32], new_co.brother->func, (uintptr_t)new_co.brother->arg);
 #ifdef DEBUG
 				printf("Haha! I am here\n");
 #endif

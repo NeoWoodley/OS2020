@@ -282,7 +282,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
 
 #if __x86_64__
-	printf("Haha! It's x86-64!\n");
+	// printf("Haha! It's x86-64!\n");
 	/*
     memcpy(&new_co->stack[STACK_SIZE-16], callback, 8);
     */
@@ -292,7 +292,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 		num /= 256;
 	}	
 #else
-	printf("Haha! It's x86-32!\n");
+	// printf("Haha! It's x86-32!\n");
 	/*
     memcpy(&new_co->stack[STACK_SIZE-16], callback, 4);    
 	*/

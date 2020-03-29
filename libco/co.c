@@ -77,6 +77,8 @@ void stack_display(uint8_t* addr, int num) {
 }
 */
 
+
+
 void list_append(struct co* head, struct co* new_co) {
     struct co* temp = head;
 	while(temp->next != NULL) {
@@ -285,7 +287,7 @@ void co_wait(struct co *co) {
         	current = co;	
 			current_chk();
 			assert(current != NULL);
-
+            
 	    	current->func(current->arg);
 	    	current->status = CO_DEAD;
 	    	current = NULL;
@@ -346,6 +348,8 @@ void co_wait(struct co *co) {
 	}
 
 	else {
+		printf("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\n");
+		free(co);
 	    return;
 	}
 }

@@ -170,7 +170,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
     //co_count();
 
 	int index = 0;
-	srand((unsigned)time(0));
+	srand((unsigned int)time(0));
 	if(count != 0) {
        	index = rand() % count + 1;
 	}

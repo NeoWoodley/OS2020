@@ -15,6 +15,7 @@
 //#define CO_DELETE
 //#define BUG
 //#define CURCHK
+//#define STACK
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (
@@ -388,8 +389,10 @@ void co_yield() {
 #ifdef BUG
 	printf("###[SETJMP]:co %s's context was restored\n",current->name);
 #endif
+#ifdef STACK
 	printf("----Before stack smashing\n");
-    //			return;
+#endif
+    			return;
 	    }	
 	}
 }

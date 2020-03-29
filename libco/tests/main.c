@@ -71,6 +71,7 @@ static void producer(void *arg) {
 	//	printf("        producer yield!\n");
         co_yield();
     }
+	printf("producer return!\n");
 }
 
 static void do_consume(Queue *queue) {
@@ -93,6 +94,7 @@ static void consumer(void *arg) {
 	//	printf("        consumer yield!\n");
         co_yield();
     }
+	printf("consumer return!\n");
 }
 
 static void test_2() {

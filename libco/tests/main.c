@@ -89,7 +89,7 @@ static void consumer(void *arg) {
         if (!q_is_empty(queue)) {
             do_consume(queue);
         }
-		printf("        consumer yield!\n");
+		printf("        %s yield!\n", arg);
         co_yield();
     }
 }

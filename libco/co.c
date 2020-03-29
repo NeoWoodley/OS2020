@@ -270,10 +270,10 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 #if __x86_64__
 	printf("Haha! It's x86-64!\n");
-    memcpy(&new_co->stack[STACK_SIZE-16], callback, 8);    
+    memcpy(&new_co->stack[STACK_SIZE-16], (uintptr_t)callback, 8);    
 #else
 	printf("Haha! It's x86-32!\n");
-    memcpy(&new_co->stack[STACK_SIZE-16], callback, 4);    
+    memcpy(&new_co->stack[STACK_SIZE-16], (uintptr_t)callback, 4);    
 #endif
 
 #ifdef STACK

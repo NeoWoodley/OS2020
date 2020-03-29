@@ -62,6 +62,7 @@ struct co *co_list_head = &co_list;
 struct co rand_pool;
 struct co *rand_pool_head = &rand_pool;
 
+/*
 void stack_display(uint8_t* addr, int num) {
 	for(int i = 0; i < num; ) {
 		if(i % 4 == 0) {
@@ -74,6 +75,7 @@ void stack_display(uint8_t* addr, int num) {
 		i ++;
 	}	
 }
+*/
 
 void list_append(struct co* head, struct co* new_co) {
     struct co* temp = head;

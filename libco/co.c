@@ -39,9 +39,6 @@ char* int_to_str(char* head, int num) {
 	    count ++;
 		temp /= 10;
 	}
-
-        
-
 }
 */
 
@@ -255,8 +252,9 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	}
 #ifdef BUG
 	printf("###[CHOOSE]:co %s was chosen\n",pool->name);
-
 #endif
+
+    assert(strcmp(candidate->brother->name, current->name));
 	return;
 }
 

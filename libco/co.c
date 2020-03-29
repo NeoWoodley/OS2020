@@ -275,7 +275,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 #endif
 
 #ifdef STACK
-	printf("pointer to callback:%p\n", &(*callback));
+	printf("pointer to callback:%p\n", &(&callback));
 	printf("callback:%p\n", callback);
     stack_display(&new_co->stack[STACK_SIZE-16], 8);	
 #endif

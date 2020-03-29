@@ -211,14 +211,14 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	printf("### In rand_choose function, there are %d members in rand pool\n", count);
 #endif
 
-    //co_count();
+    co_count();
 
 	int index = 0;
 	srand((unsigned int)time(0));
 	if(count != 0) {
        	index = rand() % count + 1;
 	}
-	//printf("$$$ Index:%d\n", index);
+	printf("$$$ Index:%d\n", index);
 	struct co* pool = rand_pool_head;
 	for(int i=0; i < index; i ++) {
 	   	pool = pool->brother;
@@ -261,8 +261,6 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 }
 
 void callback() {
-
-    printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
 
 	current->status = CO_DEAD;
     co_delete(current);    

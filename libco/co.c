@@ -96,7 +96,7 @@ void stack_display(uint8_t* addr, int num) {
 		    printf("%p: ", &addr[i]);
 		}
 		printf("%04d ", addr[i]);
-		if(i % 4 == 0) {
+		if((i+1) % 4 == 0) {
 		    printf("\n");
 		}
 		i ++;

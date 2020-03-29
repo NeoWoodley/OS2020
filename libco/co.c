@@ -30,6 +30,21 @@ static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 
 }
 
+/*
+char* int_to_str(char* head, int num) {
+
+	int count = 1;
+	int temp = num;
+	while(temp/10 > 0) {
+	    count ++;
+		temp /= 10;
+	}
+
+        
+
+}
+*/
+
 enum co_status {
 
     CO_NEW = 1,
@@ -268,14 +283,27 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 #if __x86_64__
 	printf("Haha! It's x86-64!\n");
-    memcpy(&new_co->stack[STACK_SIZE-16], callback, 8);    
+	/*
+    memcpy(&new_co->stack[STACK_SIZE-16], callback, 8);
+    */
+	uint64_t num = (uintptr_t)callback;
+    for(int i = 0; i < 8; i ++) {
+		new_co->stack[STACK_SIZE-16+i] = num % 256;	    
+		num /= 256;
+	}	
 #else
 	printf("Haha! It's x86-32!\n");
+	/*
     memcpy(&new_co->stack[STACK_SIZE-16], callback, 4);    
+	*/
+	uint32_t num = (uintptr_t)callback;
+    for(int i = 0; i < 4; i ++) {
+		new_co->stack[STACK_SIZE-16+i] = num % 256;	    
+		num /= 256;
+	}	
 #endif
 
 #ifdef STACK
-	printf("pointer to callback:%p\n", &(&callback));
 	printf("callback:%p\n", callback);
     stack_display(&new_co->stack[STACK_SIZE-16], 8);	
 #endif

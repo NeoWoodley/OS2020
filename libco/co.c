@@ -13,9 +13,9 @@
 //#define JMP
 //#define TEST_2
 //#define CO_DELETE
-#define BUG
+//#define BUG
 //#define CURCHK
-#define STACK
+//#define STACK
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (
@@ -167,7 +167,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	printf("### In rand_choose function, there are %d members in rand pool\n", count);
 #endif
 
-    co_count();
+    //co_count();
 
 	int index = 0;
 	srand((unsigned)time(0));
@@ -180,6 +180,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	}
 	candidate->brother = pool;
 
+	/*
 	if(!strcmp(candidate->brother->name, current->name)) {
 	    if(count == 2) {
 		    index = count + 1 - index;
@@ -199,6 +200,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	        candidate->brother = pool;
 		}
 	}
+    */
 
 	assert(candidate->brother != NULL);
     temp = rand_pool_head->brother;

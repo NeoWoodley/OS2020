@@ -101,6 +101,7 @@ void stack_head_chk() {
 		: 
 	);
 	printf("rsp: 0x%ld\n", head);
+	printf("stack bottom: 0x%ld\n", (uint64_t)current->stack);
 	//assert((uint64_t)current->stack < head);
 #else
     uint32_t head = 0;
@@ -111,6 +112,7 @@ void stack_head_chk() {
 	   	: 
 	);
 	printf("esp: 0x%d\n", head);
+	printf("stack bottom: 0x%d\n", (uint32_t)current->stack);
 	//assert((uint32_t)current->stack < head);
 #endif
 }

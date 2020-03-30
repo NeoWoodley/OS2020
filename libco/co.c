@@ -110,7 +110,7 @@ void stack_head_chk() {
 		:
 	   	: 
 	);
-	printf("esp: 0x%ld\n", head);
+	printf("esp: 0x%d\n", head);
 	//assert((uint32_t)current->stack < head);
 #endif
 }

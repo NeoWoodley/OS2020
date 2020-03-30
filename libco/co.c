@@ -100,7 +100,8 @@ void stack_head_chk() {
 		: 
 		: 
 	);
-	assert((uint64_t)current->stack < head);
+	printf("rsp: 0x%ld\n", head);
+	//assert((uint64_t)current->stack < head);
 #else
     uint32_t head = 0;
 	asm volatile (
@@ -109,7 +110,8 @@ void stack_head_chk() {
 		:
 	   	: 
 	);
-	assert((uint32_t)current->stack < head);
+	printf("esp: 0x%ld\n", head);
+	//assert((uint32_t)current->stack < head);
 #endif
 }
 

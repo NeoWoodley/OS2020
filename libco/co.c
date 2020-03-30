@@ -235,7 +235,6 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 		temp = temp->brother;
 		old->brother = NULL;
 	}
-//    assert(strcmp(candidate->brother->name, current->name));
 	return;
 }
 
@@ -258,7 +257,6 @@ void callback() {
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
-
 	assert(name != NULL && func != NULL && arg != NULL);
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
 
@@ -276,6 +274,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	}	
 #endif
 
+/*
 #if __x86_64__
 	printf("callback:%p\n", callback);
     stack_display(&new_co->stack[STACK_SIZE-32], 8);	
@@ -283,6 +282,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	printf("callback:%p\n", callback);
     stack_display(&new_co->stack[STACK_SIZE-36], 4);	
 #endif
+*/
 
 #ifdef TEST_2
 	printf("A new space was distributed!\n");

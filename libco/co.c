@@ -254,7 +254,7 @@ void callback() {
 		rand_choose(co_list_head, node, current);
 	} while(node->brother->status == CO_NEW || !strcmp(node->brother->name, current->name));
 	assert(node->brother->status == CO_WAITING);
-	printf("co %s\n",node->brother->name);
+	//printf("co %s\n",node->brother->name);
 	longjmp(node->brother->context, 2);
 
 }
@@ -278,7 +278,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 		num /= 256;
 	}	
 #endif
-
+/*
 #if __x86_64__
 	printf("callback:%p\n", callback);
     stack_display(&new_co->stack[STACK_SIZE-32], 8);	
@@ -286,7 +286,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	printf("callback:%p\n", callback);
     stack_display(&new_co->stack[STACK_SIZE-40], 4);	
 #endif
-
+*/
 #ifdef TEST_2
 	printf("A new space was distributed!\n");
 #endif

@@ -98,7 +98,7 @@ void stack_head_chk() {
 		"movq %%rsp %0;"
 		: "=r"(head) 
 		: 
-		: "r"(head)
+		: "r"
 			);
 	assert((uint64_t)current->stack < head);
 #else
@@ -107,7 +107,7 @@ void stack_head_chk() {
 		"movl %%esp %0;"
 		: "=r"(head)
 		:
-	   	: "r"(head)
+	   	: "r"
 			);
 	assert((uint32_t)current->stack < head);
 #endif

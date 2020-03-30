@@ -489,7 +489,7 @@ void co_yield() {
             
 	    }
         else {
-//			printf("old_current:%s\n", old_current->name);
+			printf("old_current:%s\n", old_current->name);
 			current = old_current;
 			assert(old_current != NULL);
 

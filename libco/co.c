@@ -51,7 +51,7 @@ struct co {
 	jmp_buf        context;
 	uint8_t        stack[STACK_SIZE];
 
-}__attribute__ ((aligned (16)));;
+}__attribute__ ((aligned (16)));
 
 struct co *current = NULL;
 

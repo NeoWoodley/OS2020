@@ -13,7 +13,7 @@
 //#define JMP
 //#define TEST_2
 //#define CO_DELETE
-#define BUG
+//#define BUG
 //#define CURCHK
 //#define STACK
 
@@ -241,7 +241,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 
 void callback() {
 
-	printf("HHHHHHHHHHHHHHHHH__co:%s__HHHHHHHHHHHHHHHHHHHHHH\n", current->name);
+//	printf("HHHHHHHHHHHHHHHHH__co:%s__HHHHHHHHHHHHHHHHHHHHHH\n", current->name);
 
 	current->status = CO_DEAD;
     co_delete(current);    

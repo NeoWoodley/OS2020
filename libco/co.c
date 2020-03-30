@@ -192,6 +192,8 @@ void co_delete(struct co* node) {
 
 void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 
+	printf("In random choose\n");
+
 	assert(head != NULL);
 
     int count = 0;
@@ -263,10 +265,10 @@ void callback() {
 
 	current->status = CO_DEAD;
     co_delete(current);    
-    struct co node;
+    struct co* node = (struct co*)malloc(sizeof(struct co));
 	do
 	{
-		rand_choose(co_list_head, &node, current);
+		rand_choose(co_list_head, node, current);
 	} while(node.brother->status == CO_NEW);
 	assert(node.brother->status == CO_WAITING);
 	longjmp(node.brother->context, 2);

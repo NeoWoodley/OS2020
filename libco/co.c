@@ -245,8 +245,8 @@ void callback() {
 
 	current->status = CO_DEAD;
     co_delete(current);    
-	co_count();
-	printf("co %s\n",co_list_head->next->name);
+//	co_count();
+//	printf("co %s\n",co_list_head->next->name);
 	assert(current->status == CO_DEAD);
     struct co* node = (struct co*)malloc(sizeof(struct co));
 	do

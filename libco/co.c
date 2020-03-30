@@ -416,9 +416,11 @@ void co_yield() {
 	}
 	else {
 	    current->status = CO_WAITING;
+		struct co* old_current = current;
 
 		assert(current->context != NULL);
 		assert(current != NULL);
+	
         int val = setjmp(current->context);
         if (val == 0) {
 #ifdef BUG
@@ -460,6 +462,7 @@ void co_yield() {
             
 	    }
         else {
+			current = old_current;
 
 #ifdef JMP
 			printf("A longjmp returned 2, co %s's context was restored\n", current->name);

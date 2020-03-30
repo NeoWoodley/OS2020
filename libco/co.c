@@ -324,9 +324,9 @@ void co_wait(struct co *co) {
 	assert(co->name != NULL);
 	printf("###[WAIT]:co %s was waited\n",co->name);
 #endif
-#ifdef DEBUG
+//#ifdef DEBUG
 	printf("co %s is to be waited, its state is %d\n", co->name, co->status);
-#endif
+//#endif
 	if(current == NULL && co->status != CO_DEAD) {
 		if(co->status == CO_NEW) {
 			co->status = CO_RUNNING;

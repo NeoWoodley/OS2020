@@ -95,7 +95,7 @@ void stack_head_chk() {
 #if __x86_64__
     uint64_t head = 0;
 	asm volatile (
-		"movq %%rsp %0;"
+		"movq %%rsp %0\n"
 		: "=r"(head) 
 		: 
 		: 
@@ -104,7 +104,7 @@ void stack_head_chk() {
 #else
     uint32_t head = 0;
 	asm volatile (
-		"movl %%esp %0;"
+		"movl %%esp %0\n"
 		: "=r"(head)
 		:
 	   	: 

@@ -357,6 +357,7 @@ void co_wait(struct co *co) {
 		if(co->status == CO_NEW) {
 			co->status = CO_RUNNING;
         	current = co;	
+			assert(current == co);
 			current_chk();
 			assert(current != NULL);
             

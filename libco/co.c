@@ -304,10 +304,10 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 #if __x86_64__
 	printf("callback:%p\n", callback);
-    stack_display(&new_co->stack[STACK_SIZE-24], 8);	
+    stack_display(&new_co->stack[STACK_SIZE-32], 8);	
 #else
 	printf("callback:%p\n", callback);
-    stack_display(&new_co->stack[STACK_SIZE-32], 4);	
+    stack_display(&new_co->stack[STACK_SIZE-36], 4);	
 #endif
 
 #ifdef TEST_2

@@ -270,7 +270,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 #else
 	uint32_t num = (uintptr_t)callback;
     for(int i = 0; i < 4; i ++) {
-		new_co->stack[STACK_SIZE-36+i] = num % 256;	    
+		new_co->stack[STACK_SIZE-40+i] = num % 256;	    
 		num /= 256;
 	}	
 #endif
@@ -280,7 +280,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
     stack_display(&new_co->stack[STACK_SIZE-32], 8);	
 #else
 	printf("callback:%p\n", callback);
-    stack_display(&new_co->stack[STACK_SIZE-36], 4);	
+    stack_display(&new_co->stack[STACK_SIZE-40], 4);	
 #endif
 
 #ifdef TEST_2

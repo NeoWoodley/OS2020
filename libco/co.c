@@ -254,6 +254,7 @@ void callback() {
 		rand_choose(co_list_head, node, current);
 	} while(node->brother->status == CO_NEW || !strcmp(node->brother->name, current->name));
 	assert(node->brother->status == CO_WAITING);
+	printf("co %s\n",node->brother->name);
 	longjmp(node->brother->context, 2);
 
 }

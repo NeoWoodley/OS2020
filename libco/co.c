@@ -275,7 +275,6 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	}	
 #endif
 
-/*
 #if __x86_64__
 	printf("callback:%p\n", callback);
     stack_display(&new_co->stack[STACK_SIZE-32], 8);	
@@ -283,7 +282,6 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	printf("callback:%p\n", callback);
     stack_display(&new_co->stack[STACK_SIZE-36], 4);	
 #endif
-*/
 
 #ifdef TEST_2
 	printf("A new space was distributed!\n");

@@ -374,7 +374,6 @@ void co_wait(struct co *co) {
 	    current->status = CO_WAITING;
 	    struct co *old_current = current;
 	    co->status = CO_RUNNING;
-		waiter_append(co, current);
 	    current = co;
 		current_chk();
 

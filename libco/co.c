@@ -210,7 +210,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	printf("### In rand_choose function, there are %d members in rand pool\n", count);
 #endif
 
-    co_count();
+    // co_count();
 
 	int index = 0;
 	srand((unsigned int)time(0));

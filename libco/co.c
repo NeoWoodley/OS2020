@@ -97,6 +97,7 @@ void stack_head_chk() {
 	asm volatile (
 		"movq %%rsp %0"
 		: "=r"(head) 
+		: 
 		: "r"(head)
 			);
 	assert((uint64_t)current->stack < head);
@@ -105,6 +106,7 @@ void stack_head_chk() {
 	asm volatile (
 		"movl %%esp %0"
 		: "=r"(head)
+		:
 	   	: "r"(head)
 			);
 	assert((uint32_t)current->stack < head);

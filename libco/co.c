@@ -449,7 +449,7 @@ void co_yield() {
 	printf("###[SETJMP]:co %s's context was saved\n",current->name);
 #endif
 #ifdef JMP
-			printf("A longjmp returned 0, co %s's context was saved\n", current->name);
+			printf("A setjmp returned 0, co %s's context was saved\n", current->name);
 #endif
             struct co new_co;
 			rand_choose(co_list_head, &new_co, current);

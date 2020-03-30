@@ -187,9 +187,9 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
     }
 	assert(rand_pool_head != NULL);
 
-//#ifdef DEBUG
+#ifdef DEBUG
 	printf("### In rand_choose function, there are %d members in rand pool\n", count);
-//#endif
+#endif
 
     //co_count();
 

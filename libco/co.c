@@ -30,24 +30,6 @@ static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 
 }
 
-void stack_head_chk() {
-#if __x86_64__
-    uint64_t head = 0;
-	asm volatile (
-		"movq %%rsp %0"
-		: : "r"(head)
-			);
-	assert((uint64_t)current->stack < head);
-#else
-    uint32_t head = 0;
-	asm volatile (
-		"movl %%esp %0"
-		: : "r"(head)
-			);
-	assert((uint32_t)current->stack < head);
-#endif
-}
-
 enum co_status {
 
     CO_NEW = 1,
@@ -106,6 +88,24 @@ void stack_display(uint8_t* addr, int num) {
 	}	
 	printf("\n");
 
+#endif
+}
+
+void stack_head_chk() {
+#if __x86_64__
+    uint64_t head = 0;
+	asm volatile (
+		"movq %%rsp %0"
+		: : "r"(head)
+			);
+	assert((uint64_t)current->stack < head);
+#else
+    uint32_t head = 0;
+	asm volatile (
+		"movl %%esp %0"
+		: : "r"(head)
+			);
+	assert((uint32_t)current->stack < head);
 #endif
 }
 

@@ -325,7 +325,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 void co_wait(struct co *co) {
 #ifdef BUG
 	assert(co->name != NULL);
-	printf("###[WAIT]:co %s was waited\n",co->name);
+	//printf("###[WAIT]:co %s was waited\n",co->name);
 #endif
 //#ifdef DEBUG
 	printf("co %s is to be waited, its state is %d\n", co->name, co->status);

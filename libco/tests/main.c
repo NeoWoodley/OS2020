@@ -18,7 +18,7 @@ static int get_count() {
 static void work_loop(void *arg) {
     const char *s = (const char*)arg;
     for (int i = 0; i < 100; ++i) {
-        printf("%s%d ", s, get_count());
+        printf("%s%d \n", s, get_count());
         add_count();
         co_yield();
     }
@@ -93,7 +93,7 @@ static void do_consume(Queue *queue) {
 
     Item *item = q_pop(queue);
     if (item) {
-        printf("%s  ", (char *)item->data);
+        printf("%s  \n", (char *)item->data);
         free(item->data);
         free(item);
     }

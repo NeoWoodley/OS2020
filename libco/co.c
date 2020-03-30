@@ -192,8 +192,6 @@ void co_delete(struct co* node) {
 
 void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 
-	printf("In random choose\n");
-
 	assert(head != NULL);
 
     int count = 0;

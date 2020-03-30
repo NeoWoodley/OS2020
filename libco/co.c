@@ -269,9 +269,9 @@ void callback() {
 	do
 	{
 		rand_choose(co_list_head, node, current);
-	} while(node.brother->status == CO_NEW);
-	assert(node.brother->status == CO_WAITING);
-	longjmp(node.brother->context, 2);
+	} while(node->brother->status == CO_NEW);
+	assert(node->brother->status == CO_WAITING);
+	longjmp(node->brother->context, 2);
 
 }
 

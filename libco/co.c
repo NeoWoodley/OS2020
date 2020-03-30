@@ -268,7 +268,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 
 void callback() {
 
-//	printf("HHHHHHHHHHHHHHHHH__co:%s__HHHHHHHHHHHHHHHHHHHHHH\n", current->name);
+	printf("HHHHHHHHHHHHHHHHH__co:%s__HHHHHHHHHHHHHHHHHHHHHH\n", current->name);
 
 	current->status = CO_DEAD;
     co_delete(current);    
@@ -282,6 +282,7 @@ void callback() {
 	} while(node->brother->status == CO_NEW || !strcmp(node->brother->name, current->name));
 	assert(node->brother->status == CO_WAITING);
 	//printf("co %s\n",node->brother->name);
+	node->brother->status = CO_RUNNING;
 	longjmp(node->brother->context, 2);
 
 }

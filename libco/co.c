@@ -394,7 +394,7 @@ void co_wait(struct co *co) {
 		return;
 	}
 
-	else if (current != NULL && co->status == CO_DEAD){
+	else if (co->status == CO_DEAD){
 #ifdef BUG
 		printf("###[FREE]:co %s was freed\n",co->name);
 #endif

@@ -30,18 +30,6 @@ static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 
 }
 
-/*
-char* int_to_str(char* head, int num) {
-
-	int count = 1;
-	int temp = num;
-	while(temp/10 > 0) {
-	    count ++;
-		temp /= 10;
-	}
-}
-*/
-
 enum co_status {
 
     CO_NEW = 1,
@@ -58,7 +46,6 @@ struct co {
 	void *arg;
 
 	enum co_status status;
-	struct co *    waiter;
 	struct co *    next; // to connect members in list
 	struct co *    brother; // to connect members in rand_pool
 	jmp_buf        context;
@@ -147,13 +134,6 @@ void co_count() {
 		temp = temp->next;
 	}
 	printf("\n$$$ There are %d co(s) in list\n\n", count);
-	return;
-}
-
-void waiter_append(struct co* prev, struct co* current) {
-	assert(prev->waiter == NULL);
-	prev->waiter = current;
-	assert(prev->waiter != NULL);
 	return;
 }
 
@@ -283,20 +263,12 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
 
 #if __x86_64__
-	// printf("Haha! It's x86-64!\n");
-	/*
-    memcpy(&new_co->stack[STACK_SIZE-16], callback, 8);
-    */
 	uint64_t num = (uintptr_t)callback;
     for(int i = 0; i < 16; i ++) {
 		new_co->stack[STACK_SIZE-32+i] = num % 256;	    
 		num /= 256;
 	}	
 #else
-	// printf("Haha! It's x86-32!\n");
-	/*
-    memcpy(&new_co->stack[STACK_SIZE-16], callback, 4);    
-	*/
 	uint32_t num = (uintptr_t)callback;
     for(int i = 0; i < 4; i ++) {
 		new_co->stack[STACK_SIZE-36+i] = num % 256;	    

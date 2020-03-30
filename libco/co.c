@@ -339,9 +339,9 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 #ifdef DEBUG
 	printf("co %s was created! It's state is %d\n", new_co->name, new_co->status);
 #endif
-//#ifdef BUG
+#ifdef BUG
 	printf("###[CREATE]:co %s was created\n",new_co->name);
-//#endif
+#endif
     return new_co;
 }
 
@@ -350,9 +350,9 @@ void co_wait(struct co *co) {
 	assert(co->name != NULL);
 	printf("###[WAIT]:co %s was waited\n",co->name);
 #endif
-//#ifdef DEBUG
+#ifdef DEBUG
 	printf("co %s is to be waited, its state is %d\n", co->name, co->status);
-//#endif
+#endif
 	if(current == NULL && co->status != CO_DEAD) {
 		if(co->status == CO_NEW) {
 			co->status = CO_RUNNING;

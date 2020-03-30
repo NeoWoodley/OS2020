@@ -250,7 +250,7 @@ void callback() {
 	do
 	{
 		rand_choose(co_list_head, node, current);
-	} while(node->brother->status == CO_NEW);
+	} while(node->brother->status == CO_NEW || !strcmp(node->brother->name, current->name));
 	assert(node->brother->status == CO_WAITING);
 	longjmp(node->brother->context, 2);
 

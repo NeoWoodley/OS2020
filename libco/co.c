@@ -453,7 +453,7 @@ void co_yield() {
 	
         int val = setjmp(current->context);
         if (val == 0) {
-			old_current->context = current->context;
+			old_current = current;
 #ifdef BUG
 	printf("###[SETJMP]:co %s's context was saved\n",current->name);
 #endif

@@ -105,7 +105,7 @@ void stack_head_chk() {
     uint32_t head = 0;
 	asm volatile (
 		"movl %%esp %0\n\t"
-		: "=r"(head)
+		: "+r"(head)
 		:
 	   	: 
 			);

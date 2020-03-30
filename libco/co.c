@@ -14,7 +14,7 @@
 //#define TEST_2
 //#define CO_DELETE
 //#define BUG
-//#define CURCHK
+#define CURCHK
 //#define STACK
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
@@ -346,7 +346,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 }
 
 void co_wait(struct co *co) {
-	//current_chk();
+	current_chk();
 #ifdef BUG
 	assert(co->name != NULL);
 	printf("###[WAIT]:co %s was waited\n",co->name);
@@ -358,7 +358,7 @@ void co_wait(struct co *co) {
 		if(co->status == CO_NEW) {
 			co->status = CO_RUNNING;
         	current = co;	
-	//		current_chk();
+			current_chk();
 			assert(current != NULL);
             
 	    	current->func(current->arg);
@@ -383,7 +383,7 @@ void co_wait(struct co *co) {
 			printf("co %s was once run\n", co->name);
 #endif
 			current = co;
-	//		current_chk();
+			current_chk();
 			co_yield();
 #ifdef DEBUG
 		printf("co %s was freed\n", co->name);
@@ -402,12 +402,12 @@ void co_wait(struct co *co) {
 	    co->status = CO_RUNNING;
 		waiter_append(co, current);
 	    current = co;
-	//	current_chk();
+		current_chk();
 
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
 	    current = old_current;
-	//	current_chk();
+		current_chk();
 		current->status = CO_RUNNING;
 
 	    assert(co != NULL);
@@ -435,7 +435,7 @@ void co_yield() {
 	printf("###[YIELD]:co %s was yield\n",current->name);
 #endif
 	if(current == NULL) {
-	//	current_chk();
+		current_chk();
 	    exit(0);
 	}
 	else {
@@ -462,7 +462,7 @@ void co_yield() {
 			if (new_co.brother->status == CO_NEW) {
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
 				current = new_co.brother;
-	//	        current_chk();
+		        current_chk();
 #ifdef BUG
 	printf("###[STACK_SWITCH_CALL]:co %s was put on stack\n",current->name);
 #endif
@@ -474,7 +474,7 @@ void co_yield() {
 
 			else {
 			   current = new_co.brother;
-	//	       current_chk();
+		       current_chk();
 			   current->status = CO_RUNNING;
 #ifdef BUG
 	printf("###[LONGJMP]:co %s's context was restored\n",current->name);

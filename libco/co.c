@@ -10,10 +10,10 @@
 #define STACK_SIZE ((1<<16) + 32)
 
 //#define DEBUG
-//#define JMP
+#define JMP
 //#define TEST_2
 //#define CO_DELETE
-#define BUG
+//#define BUG
 //#define CURCHK
 //#define STACK
 

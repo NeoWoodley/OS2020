@@ -460,11 +460,12 @@ void co_yield() {
             
 	    }
         else {
+
 #ifdef JMP
 			printf("A longjmp returned 2, co %s's context was restored\n", current->name);
 #endif
 #ifdef BUG
-	printf("###[SETJMP]:co %s's context was restored\n",current->name);
+	printf("###[SETJMP]:co %s's context was restored | State: %d\n",current->name, current->status);
 #endif
     			return;
 	    }	

@@ -502,7 +502,7 @@ void co_yield() {
 	    }
         else {
 		       current_chk();
-	           printf("%d\tLONGJMP BACK BEFORE\n",__LINE__);
+	           printf("%d\tLONGJMP BACK AFTER\n",__LINE__);
 //			printf("old_current:%s\n", old_current->name);
 		//	current = old_current;
 		//	assert(old_current != NULL);

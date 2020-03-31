@@ -366,12 +366,14 @@ void co_wait(struct co *co) {
         	current = co;	
 			assert(current == co);
 			current_chk();
-	        printf("%d\n",__LINE__);
+	        printf("%d\tWAIT\n",__LINE__);
 			assert(current != NULL);
             
 	    	current->func(current->arg);
 	    	current->status = CO_DEAD;
 	    	current = NULL;
+			current_chk();
+	        printf("%d\tWAIT RETURNED\n",__LINE__);
 
 		co->status = CO_DEAD;
 		assert(co != NULL);
@@ -392,7 +394,7 @@ void co_wait(struct co *co) {
 #endif
 			current = co;
 			current_chk();
-	        printf("%d\n",__LINE__);
+	        printf("%d\tWAIT\n",__LINE__);
 			co_yield();
 #ifdef DEBUG
 		printf("co %s was freed\n", co->name);
@@ -411,13 +413,13 @@ void co_wait(struct co *co) {
 	    co->status = CO_RUNNING;
 	    current = co;
 		current_chk();
-	    printf("%d\n",__LINE__);
+	    printf("%d\tWAIT\n",__LINE__);
 
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
 	    current = old_current;
 		current_chk();
-	    printf("%d\n",__LINE__);
+	    printf("%d\tWAIT RETURNED\n",__LINE__);
 		current->status = CO_RUNNING;
 
 	    assert(co != NULL);
@@ -443,18 +445,18 @@ void co_wait(struct co *co) {
 }
 
 void co_yield() {
+	current_chk();
+    printf("%d\tYIELD OCCURED\n",__LINE__);
 	assert(current != NULL);
 #ifdef BUG
 	printf("###[YIELD]:co %s was yield\n",current->name);
 #endif
 	if(current == NULL) {
-		current_chk();
-	    printf("%d\n",__LINE__);
 	    exit(0);
 	}
 	else {
 	    current->status = CO_WAITING;
-		struct co* old_current = current;
+		//struct co* old_current = current;
 
 		assert(current->context != NULL);
 		assert(current != NULL);
@@ -476,7 +478,7 @@ void co_yield() {
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
 				current = new_co.brother;
 		        current_chk();
-	            printf("%d\n",__LINE__);
+	            printf("%d\tSTACK_SWITCH\n",__LINE__);
 #ifdef BUG
 	printf("###[STACK_SWITCH_CALL]:co %s was put on stack\n",current->name);
 #endif
@@ -489,7 +491,7 @@ void co_yield() {
 			else {
 			   current = new_co.brother;
 		       current_chk();
-	           printf("%d\n",__LINE__);
+	           printf("%d\tLONGJMP BACK BEFORE\n",__LINE__);
 			   current->status = CO_RUNNING;
 #ifdef BUG
 	printf("###[LONGJMP]:co %s's context was restored\n",current->name);
@@ -499,9 +501,11 @@ void co_yield() {
             
 	    }
         else {
+		       current_chk();
+	           printf("%d\tLONGJMP BACK BEFORE\n",__LINE__);
 //			printf("old_current:%s\n", old_current->name);
-			current = old_current;
-			assert(old_current != NULL);
+		//	current = old_current;
+		//	assert(old_current != NULL);
 
 #ifdef JMP
 			printf("A longjmp returned 2, co %s's context was restored\n", current->name);

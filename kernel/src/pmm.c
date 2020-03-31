@@ -1,7 +1,11 @@
 #include <common.h>
 
 static void *kalloc(size_t size) {
-  return NULL;
+	static uintptr_t brk = 0;
+	brk = brk?
+		ROUNDUP(brk, size) + size :
+		(uintptr_t)_heap.start + size;
+  return (void *)(brk - size);
 }
 
 static void kfree(void *ptr) {

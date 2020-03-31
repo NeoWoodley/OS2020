@@ -502,6 +502,7 @@ void co_yield() {
 		       current_chk();
 	           printf("%d\tLONGJMP BACK BEFORE\n",__LINE__);
 			   current->status = CO_RUNNING;
+			   printf("emmm?\n");
 #ifdef BUG
 	printf("###[LONGJMP]:co %s's context was restored\n",current->name);
 #endif

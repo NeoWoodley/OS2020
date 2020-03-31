@@ -275,7 +275,7 @@ void callback() {
 //	co_count();
 //	printf("co %s\n",co_list_head->next->name);
 	current_chk();
-	printf("%d\n",__LINE__);
+	printf("%d\tCALL BACK BEFORE LONGJMP\n",__LINE__);
 	assert(current->status == CO_DEAD);
     struct co* node = (struct co*)malloc(sizeof(struct co));
 	do
@@ -285,6 +285,9 @@ void callback() {
 	assert(node->brother->status == CO_WAITING);
 	//printf("co %s\n",node->brother->name);
 	node->brother->status = CO_RUNNING;
+	current = node->brother;
+	current_chk();
+	printf("%d\tCALL BACK AFTER LONGJMP\n",__LINE__);
 	longjmp(node->brother->context, 2);
 
 }

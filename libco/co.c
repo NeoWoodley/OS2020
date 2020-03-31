@@ -436,6 +436,8 @@ void co_wait(struct co *co) {
 #ifdef BUG
 		printf("###[FREE]:co %s was freed\n",co->name);
 #endif
+		current_chk();
+	    printf("%d\tWAIT RETURNED\n",__LINE__);
 		free(co);
 	    return;
 	}

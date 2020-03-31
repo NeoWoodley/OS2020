@@ -268,7 +268,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 
 void callback() {
 
-	printf("HHHHHHHHHHHHHHHHH__co:%s__HHHHHHHHHHHHHHHHHHHHHH\n", current->name);
+//	printf("HHHHHHHHHHHHHHHHH__co:%s__HHHHHHHHHHHHHHHHHHHHHH\n", current->name);
 
 	current->status = CO_DEAD;
     co_delete(current);    
@@ -490,7 +490,7 @@ void co_yield() {
             
 	    }
         else {
-			printf("old_current:%s\n", old_current->name);
+//			printf("old_current:%s\n", old_current->name);
 			current = old_current;
 			assert(old_current != NULL);
 

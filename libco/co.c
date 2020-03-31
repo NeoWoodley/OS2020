@@ -423,6 +423,7 @@ void co_wait(struct co *co) {
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
 	    current = old_current;
+		assert(current->name != NULL);
 		current_chk();
 	    printf("%d\tWAIT RETURNED\n",__LINE__);
 		current->status = CO_RUNNING;
@@ -438,6 +439,7 @@ void co_wait(struct co *co) {
 	}
 
 	else if (co->status == CO_DEAD){
+		current = co;
 #ifdef BUG
 		printf("###[FREE]:co %s was freed\n",co->name);
 #endif

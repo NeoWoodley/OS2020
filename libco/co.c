@@ -473,6 +473,7 @@ void co_yield() {
 		assert(current != NULL);
 	
         int val = setjmp(current->context);
+			   printf("*^^&*\n");
         if (val == 0) {
 #ifdef BUG
 	printf("###[SETJMP]:co %s's context was saved\n",current->name);
@@ -513,7 +514,6 @@ void co_yield() {
             
 	    }
         else {
-			   printf("*^^&*\n");
 		       current_chk();
 	           printf("%d\tLONGJMP BACK AFTER\n",__LINE__);
 //			printf("old_current:%s\n", old_current->name);

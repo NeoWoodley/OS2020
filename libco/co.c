@@ -473,7 +473,6 @@ void co_yield() {
 		assert(current != NULL);
 	
         int val = setjmp(current->context);
-			   printf("*^^&*\n");
         if (val == 0) {
 #ifdef BUG
 	printf("###[SETJMP]:co %s's context was saved\n",current->name);

@@ -72,7 +72,7 @@ static void producer(void *arg) {
 	//	printf("        producer yield!\n");
         co_yield();
     }
-	printf("producer return!\n");
+//	printf("producer return!\n");
 /*    
 	uintptr_t* retaddr;
 	asm volatile (
@@ -108,7 +108,7 @@ static void consumer(void *arg) {
 	//	printf("        consumer yield!\n");
         co_yield();
     }
-	printf("consumer return!\n");
+//	printf("consumer return!\n");
     
 /*
 	uintptr_t* retaddr;

@@ -129,10 +129,10 @@ void list_append(struct co* head, struct co* new_co) {
 void current_chk() {
 #ifdef CURCHK
 	if(current == NULL) {
-	    printf("***{CURRENT CO}: co main | LINE: %d\n", __LINE__);
+	    printf("***{CURRENT CO}: co main\n");
 	}
 	else {
-	    printf("***{CURRENT CO}: co %s | LINE: %d\n", current->name, __LINE__);
+	    printf("***{CURRENT CO}: co %s\n", current->name);
 	}
 #endif
 	return;
@@ -274,6 +274,8 @@ void callback() {
     co_delete(current);    
 //	co_count();
 //	printf("co %s\n",co_list_head->next->name);
+	current_chk();
+	printf("%d\n",__LINE__);
 	assert(current->status == CO_DEAD);
     struct co* node = (struct co*)malloc(sizeof(struct co));
 	do
@@ -364,6 +366,7 @@ void co_wait(struct co *co) {
         	current = co;	
 			assert(current == co);
 			current_chk();
+	        printf("%d\n",__LINE__);
 			assert(current != NULL);
             
 	    	current->func(current->arg);
@@ -389,6 +392,7 @@ void co_wait(struct co *co) {
 #endif
 			current = co;
 			current_chk();
+	        printf("%d\n",__LINE__);
 			co_yield();
 #ifdef DEBUG
 		printf("co %s was freed\n", co->name);
@@ -407,11 +411,13 @@ void co_wait(struct co *co) {
 	    co->status = CO_RUNNING;
 	    current = co;
 		current_chk();
+	    printf("%d\n",__LINE__);
 
 	    current->func(current->arg);
 	    current->status = CO_DEAD;
 	    current = old_current;
 		current_chk();
+	    printf("%d\n",__LINE__);
 		current->status = CO_RUNNING;
 
 	    assert(co != NULL);
@@ -443,6 +449,7 @@ void co_yield() {
 #endif
 	if(current == NULL) {
 		current_chk();
+	    printf("%d\n",__LINE__);
 	    exit(0);
 	}
 	else {
@@ -469,6 +476,7 @@ void co_yield() {
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
 				current = new_co.brother;
 		        current_chk();
+	            printf("%d\n",__LINE__);
 #ifdef BUG
 	printf("###[STACK_SWITCH_CALL]:co %s was put on stack\n",current->name);
 #endif
@@ -481,6 +489,7 @@ void co_yield() {
 			else {
 			   current = new_co.brother;
 		       current_chk();
+	           printf("%d\n",__LINE__);
 			   current->status = CO_RUNNING;
 #ifdef BUG
 	printf("###[LONGJMP]:co %s's context was restored\n",current->name);

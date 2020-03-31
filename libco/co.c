@@ -260,9 +260,9 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 		temp = temp->brother;
 		old->brother = NULL;
 	}
-#ifdef BUG
+//#ifdef BUG
         	printf("###[CHOOSE]:co %s was chosen | Index:%d\n",candidate->brother->name, index);
-#endif
+//#endif
 	return;
 }
 

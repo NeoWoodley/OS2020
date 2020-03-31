@@ -513,7 +513,7 @@ void co_yield() {
             
 	    }
         else {
-			   printf("*^%^&*%\n");
+			   printf("*^%^&*\n");
 		       current_chk();
 	           printf("%d\tLONGJMP BACK AFTER\n",__LINE__);
 //			printf("old_current:%s\n", old_current->name);

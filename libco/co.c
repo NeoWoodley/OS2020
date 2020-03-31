@@ -255,8 +255,9 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	assert(candidate->brother != NULL);
     temp = rand_pool_head->brother;
 	rand_pool_head->brother = NULL;
+	struct co* old;
 	while(temp->brother != NULL) {
-	    struct co* old = temp;
+		old = temp;
 		temp = temp->brother;
 		old->brother = NULL;
 	}

@@ -523,8 +523,8 @@ void co_yield() {
 #ifdef BUG
 	printf("###[SETJMP]:co %s's context was restored | State: %d\n",current->name, current->status);
 #endif
-//	stack_head_chk();
 	printf("emmm!\n");
+	stack_head_chk();
     			return;
 	    }	
 	}

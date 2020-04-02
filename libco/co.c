@@ -52,7 +52,7 @@ struct co {
 	jmp_buf        context;
 	uint8_t        stack[STACK_SIZE];
 
-}__attribute__ ((aligned (16)));
+}___attribute__ ((aligned (16)));
 
 struct co *current = NULL;
 
@@ -62,7 +62,7 @@ struct co *co_list_head = &co_list;
 struct co rand_pool;
 struct co *rand_pool_head = &rand_pool;
 
-void stack_display(uint8_t* addr, int num) {
+___attribute__ ((aligned (16))) void stack_display(uint8_t* addr, int num) {
 #if __x86_64__
 	for(int i = 0; i < num; ) {
 		if(i % 8 == 0) {
@@ -117,7 +117,7 @@ void stack_head_chk() {
 #endif
 }
 
-void list_append(struct co* head, struct co* new_co) {
+___attribute__ ((aligned (16))) void list_append(struct co* head, struct co* new_co) {
     struct co* temp = head;
 	while(temp->next != NULL) {
 	   	temp = temp->next;
@@ -138,12 +138,12 @@ void current_chk() {
 	return;
 }
 
-void co_list_check()
+___attribute__ ((aligned (16))) void co_list_check()
 {
     assert(co_list_head->next == NULL);
 }
 
-void rand_pool_append(struct co* head, struct co* new_co) {
+___attribute__ ((aligned (16))) void rand_pool_append(struct co* head, struct co* new_co) {
    	struct co* temp = head;
 	while(temp->brother != NULL) {
     	temp = temp->brother;
@@ -152,7 +152,7 @@ void rand_pool_append(struct co* head, struct co* new_co) {
 	return;
 }
 
-void co_count() {
+___attribute__ ((aligned (16))) void co_count() {
     assert(co_list_head->next != NULL);
 	int count = 0;
 	struct co* temp = co_list_head->next;
@@ -164,7 +164,7 @@ void co_count() {
 	return;
 }
 
-void co_delete(struct co* node) {
+___attribute__ ((aligned (16))) void co_delete(struct co* node) {
 #ifdef CO_DELETE
 	printf("***In co_delete function\n");
 #endif
@@ -197,7 +197,7 @@ void co_delete(struct co* node) {
 	return;
 }
 
-void rand_choose(struct co* head, struct co* candidate, struct co* current) {
+___attribute__ ((aligned (16))) void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 
 	assert(head != NULL);
 
@@ -267,7 +267,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	return;
 }
 
-void callback() {
+___attribute__ ((aligned (16))) void callback() {
 
 //	printf("HHHHHHHHHHHHHHHHH__co:%s__HHHHHHHHHHHHHHHHHHHHHH\n", current->name);
 

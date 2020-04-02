@@ -299,19 +299,6 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	assert(name != NULL && func != NULL && arg != NULL);
 	struct co *new_co = (struct co*)malloc(sizeof(struct co));
 
-#if __x86_64__
-	uint64_t num = (uintptr_t)callback;
-    for(int i = 0; i < 16; i ++) {
-		new_co->stack[STACK_SIZE-32+i] = num % 256;	    
-		num /= 256;
-	}	
-#else
-	uint32_t num = (uintptr_t)callback;
-    for(int i = 0; i < 4; i ++) {
-		new_co->stack[STACK_SIZE-40+i] = num % 256;	    
-		num /= 256;
-	}	
-#endif
 /*
 #if __x86_64__
 	printf("callback:%p\n", callback);
@@ -490,6 +477,21 @@ void co_yield() {
 				current = new_co.brother;
 		        current_chk();
 //*	            printf("%d\tSTACK_SWITCH\n",__LINE__);
+
+#if __x86_64__
+	uint64_t num = (uintptr_t)callback;
+    for(int i = 0; i < 16; i ++) {
+		current->stack[STACK_SIZE-32+i] = num % 256;	    
+		num /= 256;
+	}	
+#else
+	uint32_t num = (uintptr_t)callback;
+    for(int i = 0; i < 4; i ++) {
+		current->stack[STACK_SIZE-40+i] = num % 256;	    
+		num /= 256;
+	}	
+#endif
+
 #ifdef BUG
 	printf("###[STACK_SWITCH_CALL]:co %s was put on stack\n",current->name);
 #endif

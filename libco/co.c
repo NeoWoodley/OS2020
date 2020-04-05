@@ -7,7 +7,7 @@
 #include <string.h>
 #include <time.h>
 
-#define current_chk
+//#define current_chk
 #define STACK_SIZE ((1<<16))
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {

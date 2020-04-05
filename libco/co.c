@@ -117,7 +117,6 @@ void curchk() {
 	}
 #endif
 }
-#endif
 
 void list_append(struct co* head, struct co* new_co) {
     struct co* temp = head;

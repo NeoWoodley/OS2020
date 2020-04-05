@@ -5,15 +5,9 @@
 #include <assert.h>
 #include <setjmp.h>
 #include <string.h>
-#include <stdbool.h>
 #include <time.h>
 
-#define KB (1<<10)
-#define STACK_SIZE 64*KB
-#define POOL_SIZE 128
-
-#define POS
-#define CO_START_CHK
+#define STACK_SIZE ((1<<16))
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (
@@ -25,6 +19,7 @@ static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
       : : "b"((uintptr_t)sp - 8), "d"(entry), "a"(arg)
 #endif
   );
+
 }
 
 enum co_status {
@@ -37,203 +32,351 @@ enum co_status {
 };
 
 struct co {
-    bool tag;
 
 	char *name;
 	void (*func)(void *);
-	//void (*func)(void *);
 	void *arg;
 
 	enum co_status status;
-    struct co*     waiter;
+	struct co *    next; // to connect members in list
+	struct co *    brother; // to connect members in rand_pool
 	jmp_buf        context;
-	uint8_t stack[STACK_SIZE];
+	uint8_t        stack[STACK_SIZE];
 
-};
+}__attribute__ ((aligned (16)));
 
-int pool_member = 0;
-struct co* pool[128];
-struct co current_co = {true, NULL, NULL, NULL, CO_RUNNING, NULL};
-struct co* current = &current_co;
-char main_name[5] = "main";
+struct co *current = NULL;
 
-void co_delete(struct co* co) {
-#ifdef POS
-	printf("#[POS]:In co_delete\n");
+struct co co_list;
+struct co *co_list_head = &co_list;
+
+struct co rand_pool;
+struct co *rand_pool_head = &rand_pool;
+
+void stack_display(uint8_t* addr, int num) {
+#if __x86_64__
+	for(int i = 0; i < num; ) {
+		if(i % 8 == 0) {
+		    printf("%p: ", &addr[i]);
+		}
+		printf("%04d ", addr[i]);
+		if((i+1) % 8 == 0) {
+		    printf("\n");
+		}
+		i ++;
+	}	
+	printf("\n");
+#else
+	for(int i = 0; i < num; ) {
+		if(i % 4 == 0) {
+		    printf("%p: ", &addr[i]);
+		}
+		printf("%04d ", addr[i]);
+		if((i+1) % 4 == 0) {
+		    printf("\n");
+		}
+		i ++;
+	}	
+	printf("\n");
+
 #endif
-    for(int i = 0; i < pool_member; i ++) {
-        if(!strcmp(pool[i]->name, co->name)) {
-            pool[i] = NULL;
-            break;
-        }
-        if(pool[i] == NULL) {
-            continue;
-        }
-    }
 }
 
-struct co* rand_choose() {
-#ifdef POS
-	printf("#[POS]:In rand_choose\n");
+void stack_head_chk() {
+#if __x86_64__
+    uint64_t head = 0;
+	asm volatile (
+		"movq %%rsp, %0;"
+		: "=r"(head) 
+		: 
+		: 
+	);
+	printf("rsp: 0x%ld\n", head);
+	printf("stack bottom: 0x%ld\n", (uint64_t)current->stack);
+#else
+    uint32_t head = 0;
+	asm volatile (
+		"movl %%esp, %0;"
+		: "=r"(head)
+		:
+	   	: 
+	);
+	printf("esp: 0x%d\n", head);
+	printf("stack bottom: 0x%d\n", (uint32_t)current->stack);
 #endif
-    srand((unsigned int)time(0));
-    struct co* co = NULL;
-    int index = 0;
-    do {
-        index = rand() % pool_member;
-        if(pool[index] != NULL && (pool[index]->status == CO_NEW || pool[index]->status == CO_WAITING)) {
-            co = pool[index];
-            break;
-        }
-        else {
-            if(index >= 1 && (pool[index-1] != NULL && (pool[index-1]->status == CO_NEW || pool[index-1]->status == CO_WAITING))) {
-                co = pool[index-1];
-                break;
-            }
+}
 
-            else if(index <= pool_member-2 && (pool[index+1] != NULL && (pool[index+1]->status == CO_NEW || pool[index+1]->status == CO_WAITING))) {
-                co = pool[index+1];
-                break;
-            }
-        }
-    } while(co == NULL);
+void list_append(struct co* head, struct co* new_co) {
+    struct co* temp = head;
+	while(temp->next != NULL) {
+	   	temp = temp->next;
+	}
+	temp->next = new_co;
+	return;
+}
 
-    return co;
+void co_list_check()
+{
+    assert(co_list_head->next == NULL);
+}
+
+void rand_pool_append(struct co* head, struct co* new_co) {
+   	struct co* temp = head;
+	while(temp->brother != NULL) {
+    	temp = temp->brother;
+	}
+	temp->brother = new_co;
+	return;
+}
+
+void co_count() {
+    assert(co_list_head->next != NULL);
+	int count = 0;
+	struct co* temp = co_list_head->next;
+	while(temp != NULL) {
+	    count ++;
+		temp = temp->next;
+	}
+	return;
+}
+
+void co_delete(struct co* node) {
+    struct co* temp = co_list_head->next;
+	struct co* before_temp = co_list_head;
+	while(temp != NULL) {
+	    if(!strcmp(temp->name, node->name)) {
+			struct co* next = temp->next;
+			if(next == NULL) {
+			    before_temp->next = NULL;
+				break;
+			}	
+			else {
+				assert(next != NULL);
+				before_temp->next = next;
+				break;
+			}
+		}
+		else {
+		    before_temp = temp;
+			temp = temp->next;
+		}
+	}
+	return;
+}
+
+void rand_choose(struct co* head, struct co* candidate, struct co* current) {
+
+	assert(head != NULL);
+
+    int count = 0;
+
+    struct co* temp = head;
+    while(temp != NULL) {
+        if(temp->status == CO_NEW || temp->status == CO_WAITING) {
+	        rand_pool_append(rand_pool_head, temp);
+		    count ++;
+	    }
+		temp = temp->next;
+    }
+	assert(rand_pool_head != NULL);
+
+	int index = 0;
+	srand((unsigned int)time(0));
+	if(count != 0) {
+       	index = rand() % count + 1;
+	}
+	struct co* pool = rand_pool_head;
+	for(int i=0; i < index; i ++) {
+	   	pool = pool->brother;
+	}
+	candidate->brother = pool;
+
+	if(!strcmp(candidate->brother->name, current->name)) {
+	    if(count == 2) {
+		    index = count + 1 - index;
+	        pool = rand_pool_head;
+	        for(int i=0; i < index; i ++) {
+	   	        pool = pool->brother;
+	        }
+	        candidate->brother = pool;
+		}
+
+		else {
+		    index = (index + 1) % count + 1;
+	        pool = rand_pool_head;
+	        for(int i=0; i < index; i ++) {
+	   	        pool = pool->brother;
+	        }
+	        candidate->brother = pool;
+		}
+	}
+
+	assert(candidate->brother != NULL);
+    temp = rand_pool_head->brother;
+	rand_pool_head->brother = NULL;
+	struct co* old;
+	while(temp->brother != NULL) {
+		old = temp;
+		temp = temp->brother;
+		old->brother = NULL;
+	}
+	return;
 }
 
 void callback() {
-#ifdef POS
-	printf("#[POS]:In callback\n");
-#endif
-    current->status = CO_DEAD;
-    co_delete(current);
-    struct co* co = NULL;
-    do {
-        co = rand_choose();
-    } while(!strcmp(co->name, current->name));
-    current = co;
-    longjmp(current->context, 2);
+
+	current->status = CO_DEAD;
+    co_delete(current);    
+	current_chk();
+	assert(current->status == CO_DEAD);
+    struct co* node = (struct co*)malloc(sizeof(struct co));
+	do
+	{
+		rand_choose(co_list_head, node, current);
+	} while(node->brother->status == CO_NEW || !strcmp(node->brother->name, current->name));
+	assert(node->brother->status == CO_WAITING);
+	node->brother->status = CO_RUNNING;
+	current = node->brother;
+	current_chk();
+	longjmp(node->brother->context, 2);
 
 }
 
-void set_ret_addr(struct co* co) {
-#ifdef POS
-	printf("#[POS]:In set_ret_addr\n");
-#endif
-#if __x86_64__
-    uint64_t num = (uintptr_t)callback;
-    for(int i = 0; i < 16; i ++) {
-		co->stack[STACK_SIZE-28+i] = num % 256;	    
-		num /= 256;
-	}	
-#else
-    uint32_t num = (uintptr_t)callback;
-    for(int i = 0; i < 4; i ++) {
-		current->stack[STACK_SIZE-36+i] = num % 256;	    
-		num /= 256;
-	}	
-#endif
-}
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
-#ifdef POS
-	printf("#[POS]:In co_start\n");
+
+	assert(name != NULL && func != NULL && arg != NULL);
+	struct co *new_co = (struct co*)malloc(sizeof(struct co));
+/*
+#if __x86_64__
+	printf("callback:%p\n", callback);
+    stack_display(&new_co->stack[STACK_SIZE-32], 8);	
+#else
+	printf("callback:%p\n", callback);
+    stack_display(&new_co->stack[STACK_SIZE-40], 4);	
 #endif
-    assert(name != NULL && func != NULL && arg != NULL);
-
-    struct co* new_co = (struct co*)malloc(sizeof(struct co));
-    new_co->name = name;
-#ifdef CO_START_CHK
-	printf("Everything is OK\n");
-#endif
-    new_co->func = func;
-    new_co->tag = false;
-    new_co->arg = arg;
-    new_co->status = CO_NEW;
-    new_co->waiter = NULL;
-    for(int i = 0; i < STACK_SIZE; i ++) {
-        new_co->stack[i] = 0;
-    }
-
-    pool[pool_member] = new_co;
-    pool_member ++;
-
+*/
+	new_co->name = (char*)malloc(32*sizeof(char));
+	assert(new_co->name != NULL);
+	strcpy(new_co->name, name);
+	new_co->func = func;
+	new_co->arg = arg;
+	new_co->status = CO_NEW;
+	new_co->next = NULL;
+	new_co->brother = NULL;
+    
+	list_append(co_list_head, new_co);
+    assert(co_list_head != NULL);
     return new_co;
 }
 
-void current_xchg(struct co *co) {
-#ifdef POS
-	printf("#[POS]:In current_xchg\n");
-#endif
-
-    struct co* old_current = current;
-    old_current->status = CO_WAITING;
-    current = co;
-    current->waiter = old_current;
-    current->status = CO_RUNNING;
-    return;
-
-}
-
 void co_wait(struct co *co) {
-#ifdef POS
-	printf("#[POS]:In co_wait\n");
-#endif
-    assert(co != NULL);
-    if(co->status != CO_DEAD && co->status != CO_WAITING) {
-        current_xchg(co);
-        current->func(current->arg);
+	if(current == NULL && co->status != CO_DEAD) {
+		if(co->status == CO_NEW) {
+			co->status = CO_RUNNING;
+        	current = co;	
+			assert(current == co);
+			assert(current != NULL);
+            
+	    	current->func(current->arg);
+	    	current->status = CO_DEAD;
+	    	current = NULL;
 
-        current->status = CO_DEAD;
+		co->status = CO_DEAD;
+		assert(co != NULL);
+        co_delete(co);
+		free(co);
+		return;
+		}
 
-        co_delete(current);
+		else if(co->status == CO_WAITING) {
+			current = co;
+			co_yield();
+		    co_delete(co);
+	    	current = NULL;
+			free(co);
+			return;
+		}
+	}
+	else if (current != NULL && co->status != CO_DEAD){
+	    current->status = CO_WAITING;
+	    struct co *old_current = current;
+	    co->status = CO_RUNNING;
+	    current = co;
+	    current->func(current->arg);
+	    current->status = CO_DEAD;
+	    current = old_current;
+		assert(current->name != NULL);
+		current->status = CO_RUNNING;
 
-        current = current->waiter;
-        free(co);
+	    assert(co != NULL);
+		co->status = CO_DEAD;
+		co_delete(co);
+	    free(co);
+		return;
+	}
 
-        assert(current->tag == true);
-
-        return;
-    }
-
-    else if(co->status == CO_DEAD) {
-        free(co);        
-        return;
-    }
-
-    else if(co->status == CO_WAITING) {
-        co_yield();
-        return;
-    }
+	else if (co->status == CO_DEAD){
+		current = co;
+		free(co);
+	    return;
+	}
+	else {
+	    assert(0);
+	}
 }
 
 void co_yield() {
-#ifdef POS
-	printf("#[POS]:In co_yield\n");
+	assert(current != NULL);
+	if(current == NULL) {
+	    exit(0);
+	}
+	else {
+	    current->status = CO_WAITING;
+
+		assert(current->context != NULL);
+		assert(current != NULL);
+	
+        int val = setjmp(current->context);
+        if (val == 0) {
+            struct co new_co;
+			rand_choose(co_list_head, &new_co, current);
+
+			assert(new_co.brother != NULL);
+			assert(new_co.brother->status == CO_NEW || new_co.brother->status == CO_WAITING);
+			if (new_co.brother->status == CO_NEW) {
+				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
+				current = new_co.brother;
+		        current_chk();
+
+#if __x86_64__
+	uint64_t num = (uintptr_t)callback;
+    for(int i = 0; i < 16; i ++) {
+		current->stack[STACK_SIZE-32+i] = num % 256;	    
+		num /= 256;
+	}	
+#else
+	uint32_t num = (uintptr_t)callback;
+    for(int i = 0; i < 4; i ++) {
+		current->stack[STACK_SIZE-40+i] = num % 256;	    
+		num /= 256;
+	}	
 #endif
-    current->status = CO_WAITING;
-//    struct co* old_current = current;
-    int val = setjmp(current->context);
-    if (val == 0) {
-        struct co* choice = rand_choose();
-        if(choice->status == CO_NEW) {
-            set_ret_addr(choice);    
-            current = choice;
-            current->status = CO_RUNNING;
-            stack_switch_call(&choice->stack[STACK_SIZE-32], choice->func, (uintptr_t)choice->arg);
-        }
+			    stack_switch_call(&new_co.brother->stack[STACK_SIZE-32], new_co.brother->func, (uintptr_t)new_co.brother->arg);
+			}
 
-        else if(choice->status == CO_WAITING) {
-            choice->status = CO_RUNNING;
-            current = choice;
-            longjmp(choice->context, 2);
-        }
-
+			else {
+			   current = new_co.brother;
+		       current_chk();
+			   current->status = CO_RUNNING;
+			   longjmp(current->context, 2); 
+			}
+            
+	    }
         else {
-            assert(0);
-        }
-    }
-    else {
-        return;
-    }
+    			return;
+	    }	
+	}
 }
+
+

@@ -34,7 +34,7 @@ enum co_status {
 
 struct co {
 
-	char *name;
+	__attribute__ ((aligned (16))) char *name;
 	void (*func)(void *);
 	void *arg;
 

@@ -13,6 +13,7 @@
 #define POOL_SIZE 128
 
 #define POS
+#define CO_START_CHK
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (
@@ -147,6 +148,9 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
     new_co->arg = arg;
     new_co->status = CO_NEW;
     new_co->waiter = NULL;
+#ifdef CO_START_CHK
+	printf("Everything is OK\n");
+#endif
     for(int i = 0; i < STACK_SIZE; i ++) {
         new_co->stack[i] = 0;
     }

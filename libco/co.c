@@ -345,7 +345,6 @@ void co_yield() {
 			if (new_co.brother->status == CO_NEW) {
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
 				current = new_co.brother;
-		        current_chk();
 
 #if __x86_64__
 	uint64_t num = (uintptr_t)callback;
@@ -365,7 +364,6 @@ void co_yield() {
 
 			else {
 			   current = new_co.brother;
-		       current_chk();
 			   current->status = CO_RUNNING;
 			   longjmp(current->context, 2); 
 			}

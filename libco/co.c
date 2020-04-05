@@ -280,16 +280,16 @@ void co_wait(struct co *co) {
 	    	current->status = CO_DEAD;
 	    	current = NULL;
 
-		co->status = CO_DEAD;
-		assert(co != NULL);
-        co_delete(co);
-		free(co);
-		return;
+		    co->status = CO_DEAD;
+		    assert(co != NULL);
+            co_delete(co);
+		    free(co);
+		    return;
 		}
 
 		else if(co->status == CO_WAITING) {
+			printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo\n")
 			current = co;
-			printf("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\n");
 			co_yield();
 		    co_delete(co);
 	    	current = NULL;
@@ -298,7 +298,6 @@ void co_wait(struct co *co) {
 		}
 	}
 	else if (current != NULL && co->status != CO_DEAD){
-		printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 	    current->status = CO_WAITING;
 	    struct co *old_current = current;
 	    co->status = CO_RUNNING;

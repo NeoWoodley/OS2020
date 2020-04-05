@@ -50,7 +50,7 @@ struct co {
 
 int pool_member = 0;
 struct co* pool[128];
-struct co* current = (struct co*)malloc(sizeof(co));
+struct co* current = (struct co*)malloc(sizeof(struct co));
 char main_name[5] = "main";
 strcpy(current->name, main_name);
 current->main = true;

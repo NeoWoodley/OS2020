@@ -12,6 +12,8 @@
 #define STACK_SIZE 64*KB+32
 #define POOL_SIZE 128
 
+#define POS
+
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
   asm volatile (
 #if __x86_64__
@@ -55,6 +57,9 @@ struct co* current = &current_co;
 char main_name[5] = "main";
 
 void co_delete(struct co* co) {
+#ifdef POS
+	printf("#[POS]:In co_delete\n");
+#endif
     for(int i = 0; i < pool_member; i ++) {
         if(!strcmp(pool[i]->name, co->name)) {
             pool[i] = NULL;
@@ -67,6 +72,9 @@ void co_delete(struct co* co) {
 }
 
 struct co* rand_choose() {
+#ifdef POS
+	printf("#[POS]:In rand_choose\n");
+#endif
     srand((unsigned int)time(0));
     struct co* co = NULL;
     int index = 0;
@@ -93,6 +101,9 @@ struct co* rand_choose() {
 }
 
 void callback() {
+#ifdef POS
+	printf("#[POS]:In callback\n");
+#endif
     current->status = CO_DEAD;
     co_delete(current);
     struct co* co = NULL;
@@ -105,6 +116,9 @@ void callback() {
 }
 
 void set_ret_addr(struct co* co) {
+#ifdef POS
+	printf("#[POS]:In set_ret_addr\n");
+#endif
 #if __x86_64__
     uint64_t num = (uintptr_t)callback;
     for(int i = 0; i < 16; i ++) {
@@ -121,6 +135,9 @@ void set_ret_addr(struct co* co) {
 }
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {
+#ifdef POS
+	printf("#[POS]:In co_start\n");
+#endif
     assert(name != NULL && func != NULL && arg != NULL);
 
     struct co* new_co = (struct co*)malloc(sizeof(struct co));
@@ -141,6 +158,9 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 }
 
 void current_xchg(struct co *co) {
+#ifdef POS
+	printf("#[POS]:In current_xchg\n");
+#endif
 
     struct co* old_current = current;
     old_current->status = CO_WAITING;
@@ -152,6 +172,9 @@ void current_xchg(struct co *co) {
 }
 
 void co_wait(struct co *co) {
+#ifdef POS
+	printf("#[POS]:In co_wait\n");
+#endif
     assert(co != NULL);
     if(co->status != CO_DEAD && co->status != CO_WAITING) {
         current_xchg(co);
@@ -181,6 +204,9 @@ void co_wait(struct co *co) {
 }
 
 void co_yield() {
+#ifdef POS
+	printf("#[POS]:In co_yield\n");
+#endif
     current->status = CO_WAITING;
 //    struct co* old_current = current;
     int val = setjmp(current->context);

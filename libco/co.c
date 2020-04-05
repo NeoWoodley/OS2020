@@ -100,7 +100,7 @@ void callback() {
     co_delete(current);
     struct co* co = NULL;
     do {
-        co = rand_choose()
+        co = rand_choose();
     } while(!strcmp(co->name, current->name));
     current = co;
     longjmp(current->context, 2);

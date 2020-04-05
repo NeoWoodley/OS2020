@@ -251,6 +251,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 }
 
 void callback() {
+	printf("BBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");
     curchk();
 
 	current->status = CO_DEAD;
@@ -303,6 +304,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 void co_wait(struct co *co) {
 	if(current == NULL && co->status != CO_DEAD) {
 		if(co->status == CO_NEW) {
+			printf("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN\n");
 			co->status = CO_RUNNING;
         	current = co;	
 			assert(current == co);
@@ -320,6 +322,7 @@ void co_wait(struct co *co) {
 		}
 
 		else if(co->status == CO_WAITING) {
+			printf("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW\n");
 			assert(current == NULL);
 			current = co_list_head;
 			current->status = CO_WAITING;
@@ -337,6 +340,7 @@ void co_wait(struct co *co) {
 	}
 
 	else if (co->status == CO_DEAD){
+		printf("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\n");
 		curchk();
 		free(co);
 	    return;

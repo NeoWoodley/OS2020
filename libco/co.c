@@ -273,16 +273,17 @@ void callback() {
     struct co* node = (struct co*)malloc(sizeof(struct co));
 	do
 	{ 
-		printf("?")
+		printf("?");
 		rand_choose(co_list_head, node, current);
 	} while(node->brother->status != CO_WAITING || !strcmp(node->brother->name, current->name));
+	printf("\n");
 	assert(node->brother->status == CO_WAITING);
 	node->brother->status = CO_RUNNING;
 	current = node->brother;
 
     curchk();
 
-    printf("LLLLLLLLLLL_%d_LLLLLLLLLLLLLLL\n", count);
+    printf("LLLLLLLLLLLLLLLLLLLLLLLLLL\n");
 	longjmp(node->brother->context, 2);
 
 }

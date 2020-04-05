@@ -319,6 +319,7 @@ void co_wait(struct co *co) {
 		    assert(co != NULL);
             co_delete(co);
 		    free(co);
+			printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n");
 		    return;
 		}
 

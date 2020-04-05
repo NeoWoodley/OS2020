@@ -53,9 +53,9 @@ struct co* pool[128];
 struct co current_co;
 struct co* current = &current_co;
 char main_name[5] = "main";
-strcpy(current_co.name, main_name);
-current_co->main = true;
-current_co->status = CO_RUNNING;
+strcpy((current_co).name, main_name);
+current_co.main = true;
+current_co.status = CO_RUNNING;
 
 void co_delete(struct co* co) {
     for(int i = 0; i < pool_member; i ++) {

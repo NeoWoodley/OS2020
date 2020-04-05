@@ -172,12 +172,12 @@ void co_wait(struct co *co) {
         return;
     }
 
-    else if{co->status == CO_DEAD} {
+    else if(co->status == CO_DEAD) {
         free(co);        
         return;
     }
 
-    else if{co->status == CO_WAITING} {
+    else if(co->status == CO_WAITING) {
         co_yield();
         return;
     }

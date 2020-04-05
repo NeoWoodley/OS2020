@@ -9,7 +9,7 @@
 #include <time.h>
 
 #define KB (1<<10)
-#define STACK_SIZE 64*KB+28
+#define STACK_SIZE 64*KB+32
 #define POOL_SIZE 128
 
 static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {

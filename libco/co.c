@@ -9,7 +9,7 @@
 #include <time.h>
 
 #define KB (1<<10)
-#define STACK_SIZE 64*KB+
+#define STACK_SIZE 64*KB
 #define POOL_SIZE 128
 
 #define POS

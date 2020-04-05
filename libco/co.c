@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <time.h>
 
-#define KB 1<<10
+#define KB (1<<10)
 #define STACK_SIZE 64*KB+28
 #define POOL_SIZE 128
 

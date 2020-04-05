@@ -103,7 +103,7 @@ void callback() {
         co = rand_choose()
     } while(!strcmp(co->name, current->name));
     current = co;
-    longjmp(current->context);
+    longjmp(current->context, 2);
 
 }
 

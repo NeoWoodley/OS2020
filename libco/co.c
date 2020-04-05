@@ -9,7 +9,7 @@
 #include <time.h>
 
 #define KB (1<<10)
-#define STACK_SIZE 64*KB+32
+#define STACK_SIZE 64*KB+
 #define POOL_SIZE 128
 
 #define POS
@@ -39,7 +39,7 @@ enum co_status {
 struct co {
     bool tag;
 
-	char *name;
+	__attribute__ ((aligned (16))) char *name;
 	__attribute__ ((aligned (16))) void (*func)(void *);
 	//void (*func)(void *);
 	void *arg;

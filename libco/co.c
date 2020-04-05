@@ -69,6 +69,18 @@ void co_delete(struct co* co) {
     }
 }
 
+void callback() {
+    current->status = CO_DEAD;
+    co_delete(current);
+    struct co* co = NULL;
+    do {
+        co = rand_choose()
+    } while(!strcmp(co->name, current->name));
+    current = co;
+    longjmp(current->context);
+
+}
+
 void set_ret_addr(struct co* co) {
 #if __x86_64__
     uint64_t num = (uintptr_t)callback;
@@ -83,18 +95,6 @@ void set_ret_addr(struct co* co) {
 		num /= 256;
 	}	
 #endif
-}
-
-void callback() {
-    current->status = CO_DEAD;
-    co_delete(current);
-    struct co* co = NULL;
-    do {
-        co = rand_choose()
-    } while(!strcmp(co->name, current->name));
-    current = co;
-    longjmp(current->context);
-
 }
 
 struct co* rand_choose() {

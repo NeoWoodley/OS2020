@@ -227,7 +227,6 @@ void callback() {
 
 	current->status = CO_DEAD;
     co_delete(current);    
-	current_chk();
 	assert(current->status == CO_DEAD);
     struct co* node = (struct co*)malloc(sizeof(struct co));
 	do

@@ -238,6 +238,7 @@ void callback() {
 	assert(node->brother->status == CO_WAITING);
 	node->brother->status = CO_RUNNING;
 	current = node->brother;
+	printf("co %s\n",co->name);
 	longjmp(node->brother->context, 2);
 
 }

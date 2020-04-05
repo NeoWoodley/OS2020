@@ -142,15 +142,15 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
     assert(name != NULL && func != NULL && arg != NULL);
 
     struct co* new_co = (struct co*)malloc(sizeof(struct co));
+#ifdef CO_START_CHK
+	printf("Everything is OK\n");
+#endif
     strcpy(new_co->name, name);
     new_co->func = func;
     new_co->tag = false;
     new_co->arg = arg;
     new_co->status = CO_NEW;
     new_co->waiter = NULL;
-#ifdef CO_START_CHK
-	printf("Everything is OK\n");
-#endif
     for(int i = 0; i < STACK_SIZE; i ++) {
         new_co->stack[i] = 0;
     }

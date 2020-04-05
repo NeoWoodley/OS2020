@@ -298,6 +298,7 @@ void co_wait(struct co *co) {
 		}
 	}
 	else if (current != NULL && co->status != CO_DEAD){
+		printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 	    current->status = CO_WAITING;
 	    struct co *old_current = current;
 	    co->status = CO_RUNNING;

@@ -34,7 +34,7 @@ enum co_status {
 };
 
 struct co {
-    bool main;
+    bool tag;
 
 	char *name;
 	__attribute__ ((aligned (16))) void (*func)(void *);
@@ -54,7 +54,7 @@ struct co current_co;
 struct co* current = &current_co;
 char main_name[5] = "main";
 strcpy(current->name, &main_name[0]);
-current_co.main = true;
+current_co.tag = true;
 current_co.status = CO_RUNNING;
 
 void co_delete(struct co* co) {
@@ -129,7 +129,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
     struct co* new_co = (struct co*)malloc(sizeof(struct co));
     strcpy(new_co->name, name);
     new_co->func = func;
-    new_co->main = false;
+    new_co->tag = false;
     new_co->arg = arg;
     new_co->status = CO_NEW;
     new_co->waiter = NULL;

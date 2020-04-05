@@ -271,8 +271,8 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 
 void co_wait(struct co *co) {
 	if(current == NULL && co->status != CO_DEAD) {
-		printf("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKk\n");
 		if(co->status == CO_NEW) {
+		printf("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKk\n");
 			co->status = CO_RUNNING;
         	current = co;	
 			assert(current == co);

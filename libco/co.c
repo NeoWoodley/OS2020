@@ -51,6 +51,7 @@ struct co {
 int pool_member = 0;
 struct co* pool[128];
 struct co current_co;
+current_co.tag = true;
 struct co* current = &current_co;
 char main_name[5] = "main";
 //strcpy(current->name, &main_name[0]);

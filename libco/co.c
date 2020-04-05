@@ -167,7 +167,7 @@ void co_wait(struct co *co) {
         current = current->waiter;
         free(co);
 
-        assert(current->main == true);
+        assert(current->tag == true);
 
         return;
     }

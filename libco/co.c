@@ -267,14 +267,13 @@ void callback() {
 	printf("BBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");
     curchk();
 
-    int count = 0;
-	current->status = CO_DEAD;
+    current->status = CO_DEAD;
     co_delete(current);    
 	assert(current->status == CO_DEAD);
     struct co* node = (struct co*)malloc(sizeof(struct co));
 	do
 	{ 
-		count ++;
+		printf("?")
 		rand_choose(co_list_head, node, current);
 	} while(node->brother->status != CO_WAITING || !strcmp(node->brother->name, current->name));
 	assert(node->brother->status == CO_WAITING);

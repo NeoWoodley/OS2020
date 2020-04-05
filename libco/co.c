@@ -290,7 +290,7 @@ void co_wait(struct co *co) {
 		}
 
 		else if(co->status == CO_WAITING) {
-			printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n");
+			printf("OOOOOOOOOOOOOOOOOOOOO__%s__OOOOOOOOOOOOOOOOOO\n", current->name);
 			current = co;
 			co_yield();
 		    co_delete(co);
@@ -298,24 +298,6 @@ void co_wait(struct co *co) {
 			free(co);
 			return;
 		}
-	}
-	else if (current != NULL && co->status != CO_DEAD){
-		printf("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU\n");
-	    current->status = CO_WAITING;
-	    struct co *old_current = current;
-	    co->status = CO_RUNNING;
-	    current = co;
-	    current->func(current->arg);
-	    current->status = CO_DEAD;
-	    current = old_current;
-		assert(current->name != NULL);
-		current->status = CO_RUNNING;
-
-	    assert(co != NULL);
-		co->status = CO_DEAD;
-		co_delete(co);
-	    free(co);
-		return;
 	}
 
 	else if (co->status == CO_DEAD){

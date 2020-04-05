@@ -107,6 +107,18 @@ void stack_head_chk() {
 #endif
 }
 
+void curchk() {
+#ifdef current_chk
+    if(current == NULL) {
+		printf("[#CURRENT]:co main in line %d\n", __LINE__);
+	}
+	else {
+		printf("[#CURRENT]:co %s in line %d\n", current->name, __LINE__);
+	}
+#endif
+}
+#endif
+
 void list_append(struct co* head, struct co* new_co) {
     struct co* temp = head;
 	while(temp->next != NULL) {
@@ -142,6 +154,7 @@ void co_count() {
 }
 
 void co_delete(struct co* node) {
+	curchk();
     struct co* temp = co_list_head->next;
 	struct co* before_temp = co_list_head;
 	while(temp != NULL) {
@@ -166,6 +179,7 @@ void co_delete(struct co* node) {
 }
 
 void rand_choose(struct co* head, struct co* candidate, struct co* current) {
+	curchk();
 
 	assert(head != NULL);
 
@@ -225,7 +239,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 }
 
 void callback() {
-	printf("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");
+    curchk();
 
 	current->status = CO_DEAD;
     co_delete(current);    
@@ -238,7 +252,9 @@ void callback() {
 	assert(node->brother->status == CO_WAITING);
 	node->brother->status = CO_RUNNING;
 	current = node->brother;
-	printf("%s\n", current->name);
+
+    curchk();
+
 	longjmp(node->brother->context, 2);
 
 }
@@ -274,7 +290,6 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 void co_wait(struct co *co) {
 	if(current == NULL && co->status != CO_DEAD) {
 		if(co->status == CO_NEW) {
-		printf("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKk\n");
 			co->status = CO_RUNNING;
         	current = co;	
 			assert(current == co);
@@ -293,10 +308,10 @@ void co_wait(struct co *co) {
 
 		else if(co->status == CO_WAITING) {
 			assert(current == NULL);
-			printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n");
 			current = co;
+			curchk();
 			co_yield();
-			printf("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY\n");
+			curchk();
 		    co_delete(co);
 	    	current = NULL;
 			free(co);
@@ -305,7 +320,7 @@ void co_wait(struct co *co) {
 	}
 
 	else if (co->status == CO_DEAD){
-		printf("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW\n");
+		curchk();
 		free(co);
 	    return;
 	}
@@ -315,6 +330,7 @@ void co_wait(struct co *co) {
 }
 
 void co_yield() {
+	curchk();
 	assert(current != NULL);
 	if(current == NULL) {
 
@@ -337,6 +353,7 @@ void co_yield() {
 				new_co.brother->status = CO_RUNNING;
 				assert(new_co.brother->stack != NULL && new_co.brother->func != NULL && new_co.brother->arg != NULL);
 				current = new_co.brother;
+	            curchk();
 
 #if __x86_64__
 	uint64_t num = (uintptr_t)callback;
@@ -356,12 +373,14 @@ void co_yield() {
 
 			else {
 			   current = new_co.brother;
+	           curchk();
 			   current->status = CO_RUNNING;
 			   longjmp(current->context, 2); 
 			}
             
 	    }
         else {
+	            curchk();
     			return;
 	    }	
 	}

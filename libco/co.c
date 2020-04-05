@@ -315,6 +315,7 @@ void co_wait(struct co *co) {
 void co_yield() {
 	assert(current != NULL);
 	if(current == NULL) {
+
 	    exit(0);
 	}
 	else {

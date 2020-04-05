@@ -53,7 +53,7 @@ struct co* pool[128];
 struct co current_co;
 struct co* current = &current_co;
 char main_name[5] = "main";
-strcpy(current->name, main_name);
+strcpy(&(current->name), &main_name[0]);
 current->main = true;
 current->status = CO_RUNNING;
 

@@ -295,6 +295,7 @@ void co_wait(struct co *co) {
 			printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n");
 			current = co;
 			co_yield();
+			printf("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY\n");
 		    co_delete(co);
 	    	current = NULL;
 			free(co);
@@ -304,7 +305,6 @@ void co_wait(struct co *co) {
 
 	else if (co->status == CO_DEAD){
 		printf("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW\n");
-		current;
 		free(co);
 	    return;
 	}

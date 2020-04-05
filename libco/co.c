@@ -39,8 +39,8 @@ enum co_status {
 struct co {
     bool tag;
 
-	__attribute__ ((aligned (16))) char *name;
-	__attribute__ ((aligned (16))) void (*func)(void *);
+	char *name;
+	void (*func)(void *);
 	//void (*func)(void *);
 	void *arg;
 
@@ -49,7 +49,7 @@ struct co {
 	jmp_buf        context;
 	uint8_t stack[STACK_SIZE];
 
-}__attribute__ ((aligned (16)));
+};
 
 int pool_member = 0;
 struct co* pool[128];

@@ -267,12 +267,14 @@ void callback() {
 	printf("BBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");
     curchk();
 
+    int count = 0;
 	current->status = CO_DEAD;
     co_delete(current);    
 	assert(current->status == CO_DEAD);
     struct co* node = (struct co*)malloc(sizeof(struct co));
 	do
-	{
+	{ 
+		count ++;
 		rand_choose(co_list_head, node, current);
 	} while(node->brother->status != CO_WAITING || !strcmp(node->brother->name, current->name));
 	assert(node->brother->status == CO_WAITING);
@@ -281,7 +283,7 @@ void callback() {
 
     curchk();
 
-    printf("LLLLLLLLLLLLLLLLLLLLLLLLLL\n");
+    printf("LLLLLLLLLLL_%d_LLLLLLLLLLLLLLL\n", count);
 	longjmp(node->brother->context, 2);
 
 }
@@ -345,7 +347,7 @@ void co_wait(struct co *co) {
 			main_in = true;
 			curchk();
 			//while(co->status != CO_DEAD) {
-			//	printf("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ\n");
+				printf("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ\n");
 			    co_yield();
 			//}
 			curchk();

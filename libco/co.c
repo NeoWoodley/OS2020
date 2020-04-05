@@ -288,7 +288,7 @@ void co_wait(struct co *co) {
 		}
 
 		else if(co->status == CO_WAITING) {
-			printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo\n")
+			printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo\n");
 			current = co;
 			co_yield();
 		    co_delete(co);

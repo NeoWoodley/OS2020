@@ -236,7 +236,6 @@ void callback() {
 	assert(node->brother->status == CO_WAITING);
 	node->brother->status = CO_RUNNING;
 	current = node->brother;
-	current_chk();
 	longjmp(node->brother->context, 2);
 
 }

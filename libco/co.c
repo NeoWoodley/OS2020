@@ -69,6 +69,32 @@ void co_delete(struct co* co) {
     }
 }
 
+struct co* rand_choose() {
+    srand((unsigned int)time(0));
+    struct co* co = NULL;
+    int index = 0;
+    do {
+        index = rand() % pool_member;
+        if(pool[index] != NULL && (pool[index]->status == CO_NEW || pool[index]->status == CO_WAITING)) {
+            co = pool[index];
+            break;
+        }
+        else {
+            if(index >= 1 && (pool[index-1] != NULL && (pool[index-1]->status == CO_NEW || pool[index-1]->status == CO_WAITING))) {
+                co = pool[index-1];
+                break;
+            }
+
+            else if(index <= pool_member-2 && (pool[index+1] != NULL && (pool[index+1]->status == CO_NEW || pool[index+1]->status == CO_WAITING))) {
+                co = pool[index+1];
+                break;
+            }
+        }
+    } while(co == NULL);
+
+    return co;
+}
+
 void callback() {
     current->status = CO_DEAD;
     co_delete(current);
@@ -95,32 +121,6 @@ void set_ret_addr(struct co* co) {
 		num /= 256;
 	}	
 #endif
-}
-
-struct co* rand_choose() {
-    srand((unsigned int)time(0));
-    struct co* co = NULL;
-    int index = 0;
-    do {
-        index = rand() % pool_member;
-        if(pool[index] != NULL && (pool[index]->status == CO_NEW || pool[index]->status == CO_WAITING)) {
-            co = pool[index];
-            break;
-        }
-        else {
-            if(index >= 1 && (pool[index-1] != NULL && (pool[index-1]->status == CO_NEW || pool[index-1]->status == CO_WAITING))) {
-                co = pool[index-1];
-                break;
-            }
-
-            else if(index <= pool_member-2 && (pool[index+1] != NULL && (pool[index+1]->status == CO_NEW || pool[index+1]->status == CO_WAITING))) {
-                co = pool[index+1];
-                break;
-            }
-        }
-    } while(co == NULL);
-
-    return co;
 }
 
 struct co *co_start(const char *name, void (*func)(void *), void *arg) {

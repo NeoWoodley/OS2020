@@ -6,6 +6,7 @@
 #include <setjmp.h>
 #include <string.h>
 #include <time.h>
+#include <stdbool.h>
 
 //#define current_chk
 #define STACK_SIZE ((1<<16))
@@ -32,11 +33,14 @@ enum co_status {
 
 };
 
+bool main_in=false;
+
 struct co {
 
 	char *name;
 	void (*func)(void *);
 	void *arg;
+	bool tag;
 
 	enum co_status status;
 	struct co *    next; // to connect members in list
@@ -48,7 +52,8 @@ struct co {
 
 struct co *current = NULL;
 
-struct co co_list;
+char main_name[5] = "main";
+struct co co_list = {main_name, NULL, NULL, true, CO_RUNNING, NULL, NULL};
 struct co *co_list_head = &co_list;
 
 struct co rand_pool;
@@ -224,6 +229,14 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 	        candidate->brother = pool;
 		}
 	}
+    
+	if(main_in == true) {
+		int probility = rand() % 2;
+		if(probility == 2) {
+			candidate->brother = co_list_head;
+		} 
+
+	}
 
 	assert(candidate->brother != NULL);
     temp = rand_pool_head->brother;
@@ -277,6 +290,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
 	strcpy(new_co->name, name);
 	new_co->func = func;
 	new_co->arg = arg;
+	new_co->tag = false;
 	new_co->status = CO_NEW;
 	new_co->next = NULL;
 	new_co->brother = NULL;
@@ -307,9 +321,13 @@ void co_wait(struct co *co) {
 
 		else if(co->status == CO_WAITING) {
 			assert(current == NULL);
-			current = co;
+			current = co_list_head;
+			current->status = CO_WAITING;
+			main_in = true;
 			curchk();
-			co_yield();
+			while(co->status != CO_DEAD) {
+			    co_yield();
+			}
 			curchk();
 		    co_delete(co);
 	    	current = NULL;

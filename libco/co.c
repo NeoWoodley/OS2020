@@ -344,10 +344,10 @@ void co_wait(struct co *co) {
 			current->status = CO_WAITING;
 			main_in = true;
 			curchk();
-			while(co->status != CO_DEAD) {
-				printf("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ\n");
+			//while(co->status != CO_DEAD) {
+			//	printf("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ\n");
 			    co_yield();
-			}
+			//}
 			curchk();
 		    co_delete(co);
 	    	current = NULL;

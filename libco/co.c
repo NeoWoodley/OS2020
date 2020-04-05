@@ -142,7 +142,7 @@ struct co *co_start(const char *name, void (*func)(void *), void *arg) {
     assert(name != NULL && func != NULL && arg != NULL);
 
     struct co* new_co = (struct co*)malloc(sizeof(struct co));
-    strcpy(new_co->name, name);
+    new_co->name = name;
 #ifdef CO_START_CHK
 	printf("Everything is OK\n");
 #endif

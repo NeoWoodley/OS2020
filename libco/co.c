@@ -224,6 +224,7 @@ void rand_choose(struct co* head, struct co* candidate, struct co* current) {
 }
 
 void callback() {
+	printf("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");
 
 	current->status = CO_DEAD;
     co_delete(current);    

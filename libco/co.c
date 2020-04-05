@@ -324,7 +324,7 @@ void co_wait(struct co *co) {
 			assert(current == co);
 			assert(current != NULL);
             
-			stack_xhcg(&current->stack[STACK_SIZE - 4]);
+			stack_xhcg(&current->stack[STACK_SIZE - 8]);
 	    	current->func(current->arg);
 	    	current->status = CO_DEAD;
 	    	current = NULL;

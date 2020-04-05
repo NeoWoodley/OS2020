@@ -24,6 +24,19 @@ static inline void stack_switch_call(void *sp, void *entry, uintptr_t arg) {
 
 }
 
+static inline void stack_xhcg(void *sp) {
+  asm volatile (
+#if __x86_64__
+    "movq %0"
+      : : "b"((uintptr_t)sp)
+#else
+    "movl %0"
+      : : "b"((uintptr_t)sp - 8)
+#endif
+  );
+
+}
+
 enum co_status {
 
     CO_NEW = 1,
@@ -311,6 +324,7 @@ void co_wait(struct co *co) {
 			assert(current == co);
 			assert(current != NULL);
             
+			stack_xhcg(&current->stack[STACK_SIZE-32])
 	    	current->func(current->arg);
 	    	current->status = CO_DEAD;
 	    	current = NULL;

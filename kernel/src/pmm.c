@@ -50,7 +50,7 @@ static void *kalloc(size_t size) {
 	memset(ptr, MAGIC, size-1);
     void* end = (void*)((uintptr_t)ptr+size-1);
 	memset(end, MARK, 1);
-	printf("%c\n",*(char*)(brk));
+	printf("%c\n",*(char*)(brk-1));
   return (void *)(brk - size);
 }
 

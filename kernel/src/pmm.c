@@ -58,6 +58,7 @@ static void kfree(void *ptr) {
 	if(*tmp == MARK) {
 		printf("?\n");
 	    *(char*)tmp = VALID;
+		printf("?\n");
 		end = (uintptr_t)tmp;
 	}
 

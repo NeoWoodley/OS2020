@@ -41,6 +41,7 @@ static void os_init() {
 static void os_run() {
   os->init();
   _mpe_init(smoke_test);
+  while (1) ;
   /*
   for (const char *s = "Hello World from CPU #*\n"; *s; s++) {
     _putc(*s == '*' ? '0' + _cpu() : *s);

@@ -4,35 +4,13 @@
 #define MAGIC '1'
 #define MARK '9'
 
-/*
-struct pointer {
-    uintptr_t addr;
-	size_t size;
-
-	pointer* prev;
-	pointer* next;
-}
-
-struct pointer* head = {0, 0, head, head};
-
-void ptr_add(struct pointer* ptr) {
-   struct pointer* next = head->next;
-   assert(next != NULL);
-   ptr->next = next;
-
-   struct pointer* prev = head->prev;
-
-    
-}
-*/
-
 static uintptr_t brk = 0;
 
 void alloc_chk(void* ptr, size_t size) {
 	char* tmp = (char*)ptr;
 	for(int i = 0; i < size; i ++) {
 	    //printf("%c",*(tmp+i));
-	    assert((*(tmp+i)) == '0');
+	    assert((*(tmp+i)) == VALID);
 	}
 	//printf("\n");
 }
@@ -40,7 +18,7 @@ void alloc_chk(void* ptr, size_t size) {
 void free_chk(uintptr_t begin, uintptr_t end) {
     char* tmp = (char*)begin;
 	for(int i = 0; i <= end-begin; i ++) {
-	    assert((*(tmp+i)) == '0');
+	    assert((*(tmp+i)) == VALID);
 		//printf("%c",*(tmp+i));
 	}
 	//printf("\n");
@@ -60,7 +38,6 @@ static void *kalloc(size_t size) {
   return (void *)(brk - size);
 }
 
-/*
 void brk_down() {
 	uintptr_t tmp = brk;
 	assert(*(char*)tmp == VALID);
@@ -74,7 +51,6 @@ void brk_down() {
 	assert(*(char*)brk == VALID);
   	
 }
-*/
 
 static void kfree(void *ptr) {
 	uintptr_t end = 0;
@@ -97,6 +73,7 @@ static void kfree(void *ptr) {
 	else {
 	    assert(0);
 	}
+	brk_down();
 
 	free_chk((uintptr_t)ptr, end);
 

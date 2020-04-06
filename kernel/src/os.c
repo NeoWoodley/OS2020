@@ -28,7 +28,7 @@ void stress_test() {
 */
 
 void smoke_test() {
-    while(1) {
+    for(int i = 0; i < 10; i ++){
 	    uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
 		printf("ptr: %p\n", ptr);
 	}

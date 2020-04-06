@@ -35,7 +35,7 @@ static void kfree(void *ptr) {
 static void pmm_init() {
   uintptr_t pmsize = ((uintptr_t)_heap.end - (uintptr_t)_heap.start);
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
-  memset((void*)_heap.start, 0, pmsize);
+  memset((void*)_heap.start, '0', pmsize);
 }
 
 MODULE_DEF(pmm) = {

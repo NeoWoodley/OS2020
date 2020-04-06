@@ -48,6 +48,7 @@ void brk_down() {
 	assert(*(char*)tmp != VALID);
 	brk = tmp+1;
 	assert(*(char*)brk == VALID);
+	printf("brk:%p\n",brk);
 	return;
 }
 

@@ -20,8 +20,8 @@ static void *kalloc(size_t size) {
 		ROUNDUP(brk, size) + size :
 		(uintptr_t)_heap.start + size;
 	void* ptr = (void *)(brk - size);
-	memset(ptr, MAGIC, size);
 	assert((uintptr_t)ptr % size == 0);
+	memset(ptr, MAGIC, size);
 	alloc_chk(ptr, size);
   return (void *)(brk - size);
 }

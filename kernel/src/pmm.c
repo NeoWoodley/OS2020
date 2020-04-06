@@ -45,10 +45,10 @@ static void *kalloc(size_t size) {
 		(uintptr_t)_heap.start + size;
 	void* ptr = (void *)(brk - size);
 	assert((uintptr_t)ptr % size == 0);
-	alloc_chk(ptr, size);
 	memset(ptr, MAGIC, size-1);
     void* end = (void*)((uintptr_t)ptr+size-1);
 	memset(end, MARK, 1);
+	alloc_chk(ptr, size);
   return (void *)(brk - size);
 }
 

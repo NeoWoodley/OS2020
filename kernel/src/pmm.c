@@ -1,14 +1,20 @@
 #include <common.h>
 
-#define MAGIC 2
+#define MAGIC 1
+
+struct lib {
+    uintptr_t addr;
+	size_t size;
+};
 
 static void *kalloc(size_t size) {
 	static uintptr_t brk = 0;
-//	printf("[#BRK(I)]:%p\n",brk);
 	brk = brk?
 		ROUNDUP(brk, size) + size :
 		(uintptr_t)_heap.start + size;
-//	printf("[#BRK(II)]:%p\n",brk);
+	void* ptr = (void *)(brk - size);
+	memset(ptr, MAGIC, size);
+	assert((uintptr_t)ptr % size == 0);
   return (void *)(brk - size);
 }
 

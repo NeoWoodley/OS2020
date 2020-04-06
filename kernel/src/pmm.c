@@ -4,7 +4,6 @@
 #define MAGIC '1'
 #define MARK '9'
 
-static uintptr_t brk = 0;
 /*
 uint8_t space[(uintptr_t)_heap.end-(uintptr_t)_heap.start];
 
@@ -41,6 +40,7 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
+static uintptr_t brk = 0;
 	brk = brk?
 		ROUNDUP(brk, size) + size :
 		(uintptr_t)_heap.start + size;
@@ -54,6 +54,7 @@ static void *kalloc(size_t size) {
   return (void *)(brk - size);
 }
 
+/*
 void brk_down() {
 	uintptr_t tmp = brk;
 	assert(*(char*)tmp == VALID);
@@ -67,6 +68,7 @@ void brk_down() {
 	assert(*(char*)brk == VALID);
   	
 }
+*/
 
 static void kfree(void *ptr) {
 	uintptr_t end = 0;
@@ -92,7 +94,7 @@ static void kfree(void *ptr) {
 
 	free_chk((uintptr_t)ptr, end);
 
-	brk_down();
+//	brk_down();
 	//printf("Free Success\n");
 }
 

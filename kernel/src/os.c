@@ -31,15 +31,15 @@ void smoke_test() {
     for(int i = 0; i < 10; i ++){
 		if(i%3 == 0) {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
-		    printf("ptr: %p\n", ptr);
+		    printf("ptr->char: %p\n", ptr);
 		}
 		else if(i%3 == 1) {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(uintptr_t));
-		    printf("ptr: %p\n", ptr);
+		    printf("ptr->uintptr_t: %p\n", ptr);
 		}
 		else {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(double));
-		    printf("ptr: %p\n", ptr);
+		    printf("ptr->double: %p\n", ptr);
 		}
 	}
 }

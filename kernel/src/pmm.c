@@ -56,11 +56,13 @@ static void kfree(void *ptr) {
 	uintptr_t end = 0;
     char* tmp = (char*)ptr;
 	if(*tmp == MARK) {
+		printf("?\n");
 	    *(char*)tmp = VALID;
 		end = (uintptr_t)tmp;
 	}
 
 	else if(*tmp == MAGIC){
+		printf("!\n");
 		while(*tmp == MAGIC) {
 		    *(char*)tmp = VALID;
 			tmp ++;
@@ -71,6 +73,7 @@ static void kfree(void *ptr) {
 	}
 
 	else {
+		printf("*\n");
 	    assert(0);
 	}
 	//brk_down();

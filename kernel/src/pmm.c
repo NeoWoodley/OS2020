@@ -1,6 +1,6 @@
 #include <common.h>
 
-#define MAGIC 1
+#define MAGIC '1'
 
 struct lib {
     uintptr_t addr;
@@ -10,9 +10,7 @@ struct lib {
 void alloc_chk(void* ptr, size_t size) {
 	char* tmp = (char*)ptr;
 	for(int i = 0; i < size; i ++) {
-		printf("%c\t", *(tmp+i));
-		//printf("c\t");
-	    //assert((*(tmp+i)) == 0);
+	    assert((*(tmp+i)) == '0');
 	}
 	printf("\n");
 }

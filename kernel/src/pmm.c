@@ -7,6 +7,13 @@ struct lib {
 	size_t size;
 };
 
+void alloc_chk(void* ptr, size_t size) {
+	char* tmp = (char*)ptr;
+	for(int i = 0; i < size; i ++) {
+	    assert((*tmp) == 0);
+	}
+}
+
 static void *kalloc(size_t size) {
 	static uintptr_t brk = 0;
 	brk = brk?
@@ -15,6 +22,7 @@ static void *kalloc(size_t size) {
 	void* ptr = (void *)(brk - size);
 	memset(ptr, MAGIC, size);
 	assert((uintptr_t)ptr % size == 0);
+	alloc_chk(ptr, size);
   return (void *)(brk - size);
 }
 

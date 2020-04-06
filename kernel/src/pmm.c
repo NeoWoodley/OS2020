@@ -11,7 +11,7 @@ void alloc_chk(void* ptr, size_t size) {
 	char* tmp = (char*)ptr;
 	for(int i = 0; i < size; i ++) {
 		printf("%c\t", *(tmp+i));
-	    assert((*(tmp+i)) == 0);
+	    //assert((*(tmp+i)) == 0);
 	}
 	printf("\n");
 }

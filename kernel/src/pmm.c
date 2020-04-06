@@ -39,6 +39,7 @@ static void *kalloc(size_t size) {
 }
 
 void brk_down() {
+	printf("%p\n",brk);
 	uintptr_t tmp = brk;
 	assert(*(char*)tmp == VALID);
 	tmp -= 1;

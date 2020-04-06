@@ -56,7 +56,7 @@ static void *kalloc(size_t size) {
 
 void brk_down() {
 	uintptr_t tmp = brk;
-	assert(*(char*)tmp == MAGIC);
+	assert(*(char*)tmp == VALID);
 	tmp -= 1;
 	while(*(char*)tmp != MARK && *(char*)tmp != MAGIC) {
 		*(char*)tmp = VALID;

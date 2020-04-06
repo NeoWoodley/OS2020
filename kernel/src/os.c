@@ -58,7 +58,7 @@ static void os_init() {
 }
 
 static void os_run() {
-  os->init();
+//  os->init();
   _mpe_init(smoke_test);
   /*
   for (const char *s = "Hello World from CPU #*\n"; *s; s++) {

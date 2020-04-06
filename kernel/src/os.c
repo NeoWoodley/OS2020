@@ -1,6 +1,7 @@
 #include <common.h>
 #include <klib.h>
 
+
 /*
 enum ops { OP_ALLOC = 1, OP_FREE };
 struct op {
@@ -26,16 +27,26 @@ void stress_test() {
 }
 */
 
+void smoke_test() {
+    while(1) {
+	    uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
+		printf("ptr: %p\n", ptr);
+	}
+}
+
 static void os_init() {
   pmm->init();
 }
 
 static void os_run() {
-  
+  os->init();
+  _mpe_init(smoke_test);
+  /*
   for (const char *s = "Hello World from CPU #*\n"; *s; s++) {
     _putc(*s == '*' ? '0' + _cpu() : *s);
   }
   while (1) ;
+  */
   
 }
 

@@ -10,8 +10,10 @@ struct lib {
 void alloc_chk(void* ptr, size_t size) {
 	char* tmp = (char*)ptr;
 	for(int i = 0; i < size; i ++) {
-	    assert((*tmp) == 0);
+		printf("%c\t", *(tmp+i));
+	    assert((*(tmp+i)) == 0);
 	}
+	printf("\n");
 }
 
 static void *kalloc(size_t size) {

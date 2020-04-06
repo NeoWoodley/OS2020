@@ -42,6 +42,10 @@ void smoke_test() {
 		    printf("ptr->double: %p\n", ptr);
 		}
 	}
+	for(int i = 0; i < 2; i ++) {
+	        uintptr_t ptr = (uintptr_t)pmm->alloc(4096*sizeof(char));
+		    printf("ptr->4096: %p\n", ptr);
+	}
 }
 
 static void os_init() {

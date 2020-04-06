@@ -4,10 +4,11 @@
 
 static void *kalloc(size_t size) {
 	static uintptr_t brk = 0;
-	printf("[#BRK]:%p\n",brk);
+	printf("[#BRK(I)]:%p\n",brk);
 	brk = brk?
 		ROUNDUP(brk, size) + size :
 		(uintptr_t)_heap.start + size;
+	printf("[#BRK(II)]:%p\n",brk);
   return (void *)(brk - size);
 }
 

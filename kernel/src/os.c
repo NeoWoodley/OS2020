@@ -32,18 +32,22 @@ void smoke_test() {
 		if(i%4 == 0) {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
 		    printf("ptr->char: %p\n", ptr);
+		    pmm->free((void*)ptr);	
 		}
 		else if(i%4 == 1) {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(uintptr_t));
 		    printf("ptr->uintptr_t: %p\n", ptr);
+		    pmm->free((void*)ptr);	
 		}
 		else if(i%4 == 2){
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(double));
 		    printf("ptr->double: %p\n", ptr);
+		    pmm->free((void*)ptr);	
 		}
 		else {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(4096*sizeof(char));
 		    printf("ptr->4096: %p\n", ptr);
+		    pmm->free((void*)ptr);	
 		}
 	}
   while (1) ;

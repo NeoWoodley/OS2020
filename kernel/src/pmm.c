@@ -5,8 +5,6 @@
 #define MARK '9'
 
 /*
-uint8_t space[(uintptr_t)_heap.end-(uintptr_t)_heap.start];
-
 struct pointer {
     uintptr_t addr;
 	size_t size;
@@ -15,11 +13,20 @@ struct pointer {
 	pointer* next;
 }
 
-struct *head = {0, 0, head, head};
+struct pointer* head = {0, 0, head, head};
 
-void ptr_add(void* ptr, size_t size) {
+void ptr_add(struct pointer* ptr) {
+   struct pointer* next = head->next;
+   assert(next != NULL);
+   ptr->next = next;
+
+   struct pointer* prev = head->prev;
+
+    
 }
 */
+
+static uintptr_t brk = 0;
 
 void alloc_chk(void* ptr, size_t size) {
 	char* tmp = (char*)ptr;
@@ -40,7 +47,6 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
-static uintptr_t brk = 0;
 	brk = brk?
 		ROUNDUP(brk, size) + size :
 		(uintptr_t)_heap.start + size;
@@ -94,8 +100,6 @@ static void kfree(void *ptr) {
 
 	free_chk((uintptr_t)ptr, end);
 
-//	brk_down();
-	//printf("Free Success\n");
 }
 
 
@@ -103,6 +107,7 @@ static void pmm_init() {
   uintptr_t pmsize = ((uintptr_t)_heap.end - (uintptr_t)_heap.start);
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
   memset((void*)_heap.start, VALID, pmsize);
+  brk = (uintptr_t)_heap.start;
 }
 
 MODULE_DEF(pmm) = {

@@ -40,6 +40,7 @@ static void *kalloc(size_t size) {
 
 void brk_down() {
 	uintptr_t tmp = brk;
+		printf("*\n");
 	assert(*(char*)tmp == VALID);
 	tmp -= 1;
 	while(*(char*)tmp != MARK && *(char*)tmp != MAGIC) {
@@ -56,15 +57,11 @@ static void kfree(void *ptr) {
 	uintptr_t end = 0;
     char* tmp = (char*)ptr;
 	if(*tmp == MARK) {
-		printf("?\n");
 	    *(char*)tmp = VALID;
-		printf("?\n");
 		end = (uintptr_t)tmp;
-		printf("?\n");
 	}
 
 	else if(*tmp == MAGIC){
-		printf("!\n");
 		while(*tmp == MAGIC) {
 		    *(char*)tmp = VALID;
 			tmp ++;
@@ -75,7 +72,6 @@ static void kfree(void *ptr) {
 	}
 
 	else {
-		printf("*\n");
 	    assert(0);
 	}
 	brk_down();

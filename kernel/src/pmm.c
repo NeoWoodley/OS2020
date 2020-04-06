@@ -76,7 +76,7 @@ static void kfree(void *ptr) {
 		printf("*\n");
 	    assert(0);
 	}
-	//brk_down();
+	brk_down();
 
 	free_chk((uintptr_t)ptr, end);
 

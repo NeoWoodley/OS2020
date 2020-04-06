@@ -27,7 +27,7 @@ void alloc_chk(void* ptr, size_t size) {
 	    //printf("%c",*(tmp+i));
 	    assert((*(tmp+i)) == '0');
 	}
-	printf("\n");
+	//printf("\n");
 }
 
 void free_chk(uintptr_t begin, uintptr_t end) {
@@ -36,7 +36,7 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 	    assert((*(tmp+i)) == '0');
 		//printf("%c",*(tmp+i));
 	}
-	printf("\n");
+	//printf("\n");
 }
 
 static void *kalloc(size_t size) {
@@ -75,7 +75,7 @@ static void kfree(void *ptr) {
 	    assert(0);
 	}
 	free_chk((uintptr_t)ptr, end);
-	printf("Free Success\n");
+	//printf("Free Success\n");
 }
 
 

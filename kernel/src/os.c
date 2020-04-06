@@ -1,5 +1,5 @@
-#include "common.h"
-#include "klib.h"
+#include <common.h>
+#include <klib.h>
 
 /*
 enum ops { OP_ALLOC = 1, OP_FREE };

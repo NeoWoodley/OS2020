@@ -60,6 +60,7 @@ static void kfree(void *ptr) {
 	    *(char*)tmp = VALID;
 		printf("?\n");
 		end = (uintptr_t)tmp;
+		printf("?\n");
 	}
 
 	else if(*tmp == MAGIC){

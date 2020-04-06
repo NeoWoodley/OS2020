@@ -43,6 +43,7 @@ void brk_down() {
 	uintptr_t tmp = brk;
 	assert(*(char*)tmp == VALID);
 	tmp -= 1;
+	printf("%p\n",tmp);
 	while(*(char*)tmp != MARK && *(char*)tmp != MAGIC) {
 		*(char*)tmp = VALID;
 	    tmp --;	

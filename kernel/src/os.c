@@ -28,24 +28,25 @@ void stress_test() {
 */
 
 void smoke_test() {
-    for(int i = 0; i < 10; i ++){
-		if(i%3 == 0) {
+    for(int i = 0; i < 20; i ++){
+		if(i%4 == 0) {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
 		    printf("ptr->char: %p\n", ptr);
 		}
-		else if(i%3 == 1) {
+		else if(i%4 == 1) {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(uintptr_t));
 		    printf("ptr->uintptr_t: %p\n", ptr);
 		}
-		else {
+		else if(i%4 == 2){
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(double));
 		    printf("ptr->double: %p\n", ptr);
 		}
-	}
-	for(int i = 0; i < 2; i ++) {
+		else {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(4096*sizeof(char));
 		    printf("ptr->4096: %p\n", ptr);
+		}
 	}
+  while (1) ;
 }
 
 static void os_init() {
@@ -55,7 +56,6 @@ static void os_init() {
 static void os_run() {
   os->init();
   _mpe_init(smoke_test);
-  while (1) ;
   /*
   for (const char *s = "Hello World from CPU #*\n"; *s; s++) {
     _putc(*s == '*' ? '0' + _cpu() : *s);

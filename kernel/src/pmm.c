@@ -4,22 +4,12 @@
 #define MAGIC '1'
 #define MARK '9'
 
-/*
 struct sp {
     uintptr_t brk;
 	
 	struct sp* prev;
 	struct sp* next;
 };
-
-struct sp head;
-
-void sp_add(struct sp* sp) {
-    
-}
-*/
-
-//uint8_t heapsp[(uintptr_t)_heap.end - (uintptr_t)_heap.start];
 
 static uintptr_t brk = 0;
 
@@ -42,8 +32,7 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
-	char *pointer = (char*)malloc(sizeof(char));
-	printf("$$$$$$$$$$$%p\n", pointer);
+	printf("%d\n",sizeof(struct sp));
 	brk = brk?
 		ROUNDUP(brk, size) + size :
 		(uintptr_t)_heap.start + size;

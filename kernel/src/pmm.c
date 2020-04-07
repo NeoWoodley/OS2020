@@ -11,9 +11,9 @@ struct sp {
 	struct sp* next;
 };
 
-typedef struct sp sp;
+typedef struct sp head_t;
 
-sp* head;
+head_t* head;
 
 static uintptr_t brk = 0;
 

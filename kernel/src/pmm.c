@@ -36,7 +36,7 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
-	printf("addr sp:%d\n", head);
+	printf("addr sp:%p\n", head->brk);
 	brk = brk?
 		ROUNDUP(brk, size) + size :
 		(uintptr_t)_heap.start + size;

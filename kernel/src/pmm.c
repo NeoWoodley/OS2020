@@ -18,6 +18,9 @@ void sp_add(struct sp* sp) {
     
 }
 */
+
+//uint8_t heapsp[(uintptr_t)_heap.end - (uintptr_t)_heap.start];
+
 static uintptr_t brk = 0;
 
 void alloc_chk(void* ptr, size_t size) {
@@ -103,6 +106,8 @@ static void pmm_init() {
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
   memset((void*)_heap.start, VALID, pmsize);
   brk = (uintptr_t)_heap.start;
+  
+  
 }
 
 MODULE_DEF(pmm) = {

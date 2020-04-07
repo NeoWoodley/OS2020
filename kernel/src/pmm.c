@@ -102,11 +102,13 @@ static void kfree(void *ptr) {
 
 
 static void pmm_init() {
-  printf("Size:%d\n", sizeof(header_t));
   uintptr_t pmsize = ((uintptr_t)_heap.end - (uintptr_t)_heap.start);
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
   memset((void*)_heap.start, VALID, pmsize);
-  brk = (uintptr_t)_heap.start;
+  header_t head = {(uintptr_t)_heap.start + sizeof(header_t), NULL};
+  memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
+  
+  brk = head.brk;
 }
 
 MODULE_DEF(pmm) = {

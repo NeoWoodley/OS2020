@@ -103,6 +103,7 @@ static void kfree(void *ptr) {
 
 static void pmm_init() {
   uintptr_t pmsize = ((uintptr_t)_heap.end - (uintptr_t)_heap.start);
+  printf("Size of header_t: %d\n", sizeof(header_t));
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
   memset((void*)_heap.start, VALID, pmsize);
   header_t head = {(uintptr_t)_heap.start + sizeof(header_t), NULL};

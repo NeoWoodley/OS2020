@@ -101,7 +101,7 @@ static void pmm_init() {
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
   memset((void*)_heap.start, VALID, pmsize);
   brk = (uintptr_t)_heap.start;
-  head->brk = 0;
+  head->brk = (uintptr_t)_heap.start;
   head->prev = head;
   head->next = head; 
   

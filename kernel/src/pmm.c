@@ -5,7 +5,12 @@
 #define MARK '9'
 
 struct header_t {
-	uintptr_t brk;
+	union {
+	    uintptr_t ptr;
+		uintptr_t brk;
+	};
+
+	size_t size;
 
 	struct header* next;
 };
@@ -106,7 +111,10 @@ static void pmm_init() {
   printf("Size of header_t: %d\n", sizeof(header_t));
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
   memset((void*)_heap.start, VALID, pmsize);
-  header_t head = {(uintptr_t)_heap.start + sizeof(header_t), NULL};
+  header_t head;
+  head.brk = (uintptr_t)_heap.start;
+  head.size = pmsize-sizeof(header_t);
+  head.next =  NULL;
   memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
   
   brk = head.brk;

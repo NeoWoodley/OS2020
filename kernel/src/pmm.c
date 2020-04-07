@@ -4,16 +4,13 @@
 #define MAGIC '1'
 #define MARK '9'
 
-struct sp {
-    uintptr_t brk;
-	
-	struct sp* prev;
-	struct sp* next;
+struct header_t {
+	uintptr_t brk;
+
+	struct header* next;
 };
 
-typedef struct sp head_t;
-
-head_t* head;
+typedef struct header_t header_t;
 
 static uintptr_t brk = 0;
 
@@ -35,8 +32,16 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 	//printf("\n");
 }
 
+/*
+static void *try_alloc(size_t size) {
+	uintptr_t brk = (uintptr_t)_heap.start;
+
+	return NULL;
+
+}
+*/
+
 static void *kalloc(size_t size) {
-	printf("addr sp:%p\n", head->brk);
 	brk = brk?
 		ROUNDUP(brk, size) + size :
 		(uintptr_t)_heap.start + size;
@@ -97,14 +102,11 @@ static void kfree(void *ptr) {
 
 
 static void pmm_init() {
+  printf("Size:%d\n", sizeof(header_t));
   uintptr_t pmsize = ((uintptr_t)_heap.end - (uintptr_t)_heap.start);
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
   memset((void*)_heap.start, VALID, pmsize);
   brk = (uintptr_t)_heap.start;
-  head->brk = (uintptr_t)_heap.start;
-  head->prev = head;
-  head->next = head; 
-  
 }
 
 MODULE_DEF(pmm) = {

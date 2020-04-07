@@ -11,6 +11,10 @@ struct sp {
 	struct sp* next;
 };
 
+typedef struct sp sp;
+
+sp* head;
+
 static uintptr_t brk = 0;
 
 void alloc_chk(void* ptr, size_t size) {
@@ -32,7 +36,7 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
-	printf("%d\n",sizeof(struct sp));
+	printf("addr sp:%d\n", head);
 	brk = brk?
 		ROUNDUP(brk, size) + size :
 		(uintptr_t)_heap.start + size;
@@ -97,7 +101,9 @@ static void pmm_init() {
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
   memset((void*)_heap.start, VALID, pmsize);
   brk = (uintptr_t)_heap.start;
-  
+  head->brk = 0;
+  head->prev = head;
+  head->next = head; 
   
 }
 

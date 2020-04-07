@@ -42,6 +42,8 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
+	char *pointer = (char*)malloc(sizeof(char));
+	printf("$$$$$$$$$$$%p\n", pointer);
 	brk = brk?
 		ROUNDUP(brk, size) + size :
 		(uintptr_t)_heap.start + size;

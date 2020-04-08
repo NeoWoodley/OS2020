@@ -182,6 +182,8 @@ static void pmm_init() {
   head.size = pmsize-sizeof(header_t);
   head.next =  NULL;
   memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
+  printf("Initial brk at :%d\n", head.brk);
+
   
   //brk = head.brk;
 }

@@ -153,6 +153,8 @@ static void kfree(void *ptr) {
 	} 
 
 	next->next = (header_t*)((uintptr_t)tmp);
+
+	printf("Free success !\n");
 		
 }
 

@@ -17,7 +17,9 @@ struct header_t {
 
 typedef struct header_t header_t;
 
-static uintptr_t brk = 0;
+header_t head;
+
+//static uintptr_t brk = 0;
 
 void alloc_chk(void* ptr, size_t size) {
 	char* tmp = (char*)ptr;
@@ -37,26 +39,41 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 	//printf("\n");
 }
 
-/*
-static void *try_alloc(size_t size) {
-	uintptr_t brk = (uintptr_t)_heap.start;
-
-	return NULL;
-
-}
-*/
-
 static void *kalloc(size_t size) {
-	brk = brk?
-		ROUNDUP(brk, size) + size :
-		(uintptr_t)_heap.start + size;
-	void* ptr = (void *)(brk - size);
-	assert((uintptr_t)ptr % size == 0);
-	alloc_chk(ptr, size);
-	memset(ptr, MAGIC, size-1);
-    void* end = (void*)((uintptr_t)ptr+size-1);
-	memset(end, MARK, 1);
-  return (void *)(brk - size);
+//	header_t tmp = head;
+	void* ptr = NULL;
+	header_t header_ptr;  //用于分配出的空间的信息
+	if(head.next == NULL) {
+        header_t tmp = head; //用于保存空闲空间信息
+
+		memset((void*)(head.brk-sizeof(header_t)), VALID, sizeof(header_t));
+
+		head.brk = head.brk?
+			ROUNDUP(head.brk, size) + size :
+			(uintptr_t)_heap.start + size;
+		ptr = (void *)(head.brk - size);
+
+		header_ptr.ptr = (uintptr_t)ptr;
+		header_ptr.size = size;
+		header_ptr.next = NULL;
+
+        memcpy((void*)((uintptr_t)ptr-sizeof(header_t)), &header_ptr, sizeof(header_t));
+		
+		tmp.brk = head.brk+sizeof(header_t);
+		tmp.size = (uintptr_t)_heap.end - tmp.brk;
+		tmp.next = head.next;
+
+		memcpy((void*)(uintptr_t)head.brk, &tmp, sizeof(header_t));
+
+		head.brk = tmp.brk;
+		
+		assert((uintptr_t)ptr % size == 0);
+		alloc_chk(ptr, size);
+		memset(ptr, MAGIC, size-1);
+    	void* end = (void*)((uintptr_t)ptr+size-1);
+		memset(end, MARK, 1);
+	}
+  	return ptr;
 }
 
 /*
@@ -80,6 +97,7 @@ void brk_down() {
 */
 
 static void kfree(void *ptr) {
+	/*
 	uintptr_t end = 0;
     char* tmp = (char*)ptr;
 	if(*tmp == MARK) {
@@ -102,22 +120,22 @@ static void kfree(void *ptr) {
 	}
 
 	free_chk((uintptr_t)ptr, end);
-
+    */
 }
 
 
 static void pmm_init() {
   uintptr_t pmsize = ((uintptr_t)_heap.end - (uintptr_t)_heap.start);
-  printf("Size of header_t: %d\n", sizeof(header_t));
+//  printf("Size of header_t: %d\n", sizeof(header_t));
+//  printf("Size of size_t: %d\n", sizeof(size_t));
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
   memset((void*)_heap.start, VALID, pmsize);
-  header_t head;
   head.brk = (uintptr_t)_heap.start+sizeof(header_t);
   head.size = pmsize-sizeof(header_t);
   head.next =  NULL;
   memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
   
-  brk = head.brk;
+  //brk = head.brk;
 }
 
 MODULE_DEF(pmm) = {

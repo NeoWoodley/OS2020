@@ -52,6 +52,7 @@ static void *kalloc(size_t size) {
         header_t tmp = head; //用于保存空闲空间信息
 
 		memset((void*)(head.brk-sizeof(header_t)), VALID, sizeof(header_t));
+		alloc_chk((void*)(head.brk-sizeof(header_t)), sizeof(header_t));
 
 		head.brk = head.brk?
 			ROUNDUP(head.brk, size) + size :

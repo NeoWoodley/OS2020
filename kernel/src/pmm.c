@@ -137,6 +137,7 @@ static void kfree(void *ptr) {
 	printf("*tmp:%c\n",*(tmp-3));
 	printf("*tmp:%c\n",*(tmp-4));
 	printf("*start:%c\n",*((char*)_heap.start));
+	printf("*start:%c\n",*(char*)((uintptr_t)_heap.start)+1);
 	
 	while(*tmp == VALID && (uintptr_t)tmp >= (uintptr_t)_heap.start) {
 	    tmp --;

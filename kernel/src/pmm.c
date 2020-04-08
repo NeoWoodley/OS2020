@@ -127,21 +127,14 @@ static void kfree(void *ptr) {
 	}
 
 	else {
-		printf("char: %c\n",*tmp);
-		printf("char: %c\n",*(tmp+1));
 	    assert(0);
 	}
 
 	free_chk((uintptr_t)ptr, end);
 
     tmp = (char*)((uintptr_t)ptr-sizeof(header_t));
-	printf("*tmp:%c\n",*(tmp-1));
-	printf("*tmp:%c\n",*(tmp-2));
-	printf("*tmp:%c\n",*(tmp-3));
-	printf("*tmp:%c\n",*(tmp-4));
-	printf("*start:%c\n",*((char*)_heap.start));
-	printf("*start:%c\n",*(char*)((uintptr_t)_heap.start)+1);
 	
+	tmp --;
 	while(*tmp == VALID && (uintptr_t)tmp >= (uintptr_t)_heap.start) {
 	    tmp --;
 	}

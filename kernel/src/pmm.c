@@ -160,6 +160,7 @@ static void kfree(void *ptr) {
 	    printf("addr:%p\n", index->brk);
 		index = index->next;
 	}
+	printf("addr:%p\n", index->brk);
 
 
 }

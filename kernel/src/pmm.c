@@ -156,6 +156,7 @@ static void kfree(void *ptr) {
 
 	next->next = (header_t*)((uintptr_t)tmp);
 
+	/*
 	header_t* index = &head;
 
 	while(index->next != NULL) {
@@ -163,7 +164,7 @@ static void kfree(void *ptr) {
 		index = index->next;
 	}
 	printf("addr:%p\n", index->brk);
-
+    */
 
 }
 

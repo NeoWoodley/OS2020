@@ -12,7 +12,7 @@ struct header_t {
 
 	size_t size;
 
-	struct header* next;
+	struct header_t* next;
 };
 
 typedef struct header_t header_t;
@@ -97,7 +97,9 @@ void brk_down() {
 */
 
 static void kfree(void *ptr) {
-	/*
+
+	header_t free_sp;
+
 	uintptr_t end = 0;
     char* tmp = (char*)ptr;
 	if(*tmp == MARK) {
@@ -120,7 +122,30 @@ static void kfree(void *ptr) {
 	}
 
 	free_chk((uintptr_t)ptr, end);
-    */
+
+    tmp = ((char*)ptr-sizeof(header_t));
+	
+	while(*tmp == VALID && (uintptr_t)tmp >= (uintptr_t)_heap.start) {
+	    tmp --;
+	}
+	tmp ++;
+
+	size_t size = (((header_t*)(ptr-sizeof(header_t)))->size);
+   
+    free_sp.brk = (uintptr_t)tmp + sizeof(header_t);
+	free_sp.size = (uintptr_t)ptr+size - free_sp.brk;
+	free_sp.next = NULL;
+
+    memcpy((void*)tmp, &free_sp, sizeof(header_t));
+	
+	header_t* next = &head;
+
+    while(next->next != NULL) {
+	    next = next->next;
+	} 
+
+	next->next = (header_t*)((uintptr_t)tmp);
+		
 }
 
 

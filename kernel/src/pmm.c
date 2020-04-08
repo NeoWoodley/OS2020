@@ -154,8 +154,14 @@ static void kfree(void *ptr) {
 
 	next->next = (header_t*)((uintptr_t)tmp);
 
-	printf("Free success !\n");
-		
+	header_t* index = &head;
+
+	while(index->next != NULL) {
+	    printf("addr:%p\n", index->brk);
+		index = index->next;
+	}
+
+
 }
 
 

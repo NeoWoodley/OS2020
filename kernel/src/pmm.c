@@ -65,7 +65,7 @@ static void *kalloc(size_t size) {
 
         memcpy((void*)((uintptr_t)ptr-sizeof(header_t)), &header_ptr, sizeof(header_t));
 
-		printf("header_ptr at:%d\n",(uintptr_t)ptr-sizeof(header_t));
+		//printf("header_ptr at:%d\n",(uintptr_t)ptr-sizeof(header_t));
 		
 		tmp.brk = head.brk+sizeof(header_t);
 		tmp.size = (uintptr_t)_heap.end - tmp.brk;
@@ -178,7 +178,7 @@ static void pmm_init() {
   head.size = pmsize-sizeof(header_t);
   head.next =  NULL;
   memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
-  printf("Initial brk at :%d\n", head.brk);
+//  printf("Initial brk at :%d\n", head.brk);
 
   
   //brk = head.brk;

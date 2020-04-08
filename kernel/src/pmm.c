@@ -118,6 +118,7 @@ static void kfree(void *ptr) {
 	}
 
 	else {
+		printf("char: %c\n",*tmp);
 	    assert(0);
 	}
 

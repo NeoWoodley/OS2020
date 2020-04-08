@@ -119,6 +119,7 @@ static void kfree(void *ptr) {
 
 	else {
 		printf("char: %c\n",*tmp);
+		printf("char: %c\n",*(tmp+1));
 	    assert(0);
 	}
 

@@ -4,6 +4,8 @@
 #define MAGIC '1'
 #define MARK '9'
 
+#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
+
 struct header_t {
 	union {
 	    uintptr_t ptr;
@@ -40,10 +42,13 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
-//	header_t tmp = head;
+	uintptr_t capacity = (uintptr_t)_heap.end - head.brk;
 	void* ptr = NULL;
 	header_t header_ptr;  //用于分配出的空间的信息
-	if(head.next == NULL) {
+	if(capacity <= LACK) {
+       assert(0); 	    
+	}
+	else {
         header_t tmp = head; //用于保存空闲空间信息
 
 		memset((void*)(head.brk-sizeof(header_t)), VALID, sizeof(header_t));
@@ -73,6 +78,7 @@ static void *kalloc(size_t size) {
     	void* end = (void*)((uintptr_t)ptr+size-1);
 		memset(end, MARK, 1);
 	}
+
   	return ptr;
 }
 

@@ -64,6 +64,8 @@ static void *kalloc(size_t size) {
 		header_ptr.next = NULL;
 
         memcpy((void*)((uintptr_t)ptr-sizeof(header_t)), &header_ptr, sizeof(header_t));
+
+		printf("header_ptr at:%d\n",(uintptr_t)ptr-sizeof(header_t));
 		
 		tmp.brk = head.brk+sizeof(header_t);
 		tmp.size = (uintptr_t)_heap.end - tmp.brk;

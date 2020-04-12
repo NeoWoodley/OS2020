@@ -391,11 +391,12 @@ static void kfree(void *ptr) {
 #ifdef CUR
         printf("MARK3\n");
 #endif
-	       while(*tmp == VALID && (uintptr_t)tmp >= page+sizeof(page_t)) {
 			   printf("H");
+	       while(*tmp == VALID && (uintptr_t)tmp >= page+sizeof(page_t)) {
 			   tmp --;
 		   }
-	       printf("\n");
+	       //printf("\n");
+			   printf("H");
 #ifdef CUR
         printf("MARK4\n");
 #endif

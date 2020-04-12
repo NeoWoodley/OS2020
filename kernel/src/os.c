@@ -29,7 +29,7 @@ void stress_test() {
 */
 
 void smoke_test() {
-    for(; i < 4; i ++){
+    for(; i < 400; i ++){
 		if(i%4 == 0) {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
 		    printf("ptr->char: %p, I:%d from cpu #%d\n", ptr, i, _cpu());

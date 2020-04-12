@@ -111,7 +111,7 @@ Useful*/
 static void *kalloc(size_t size) {
 	lock();
 #ifdef CUR
-	printf("[#LOCK]:CPU:%d * Acquired!\n", _cpu());
+	printf("[#LOCK]:CPU:%d Alloc * Acquired!\n", _cpu());
 #endif
 	brk = brk ? ROUNDUP(brk, size) + size : (uintptr_t)_heap.start + size;
 	//uintptr_t capacity = (uintptr_t)_heap.end - head.brk;
@@ -168,7 +168,7 @@ static void *kalloc(size_t size) {
 
 	unlock();
 #ifdef CUR
-	printf("[#LOCK]:CPU:%d * Released!\n", _cpu());
+	printf("[#LOCK]:CPU:%d Alloc * Released!\n", _cpu());
 #endif
   	return (void *)(brk - size);
 }
@@ -194,6 +194,10 @@ void brk_down() {
 */
 
 static void kfree(void *ptr) {
+	lock();
+#ifdef CUR
+	printf("[#LOCK]:CPU:%d Free * Acquired!\n", _cpu());
+#endif
 	/*
 	lock();
 #ifdef CUR
@@ -264,6 +268,10 @@ static void kfree(void *ptr) {
 	printf("[#LOCK]:CPU:%d * Released!\n", _cpu());
 #endif
 */
+	unlock();
+#ifdef CUR
+	printf("[#LOCK]:CPU:%d Free * Released!\n", _cpu());
+#endif
 }
 
 

@@ -71,7 +71,7 @@ static void os_init() {
 }
 
 static void os_run() {
-  os->init();
+//  os->init();
   _mpe_init(smoke_test);
   
   /*

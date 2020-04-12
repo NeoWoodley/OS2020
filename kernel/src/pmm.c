@@ -236,11 +236,11 @@ static void kfree(void *ptr) {
 	free_sp.size = (uintptr_t)ptr+size - free_sp.brk;
 	free_sp.next = NULL;
 
+    printf("HHHHHHHHHHHHHHHH\n");
     memcpy((void*)tmp, &free_sp, sizeof(header_t));
 	
 	header_t* next = &head;
 
-    printf("HHHHHHHHHHHHHHHH\n");
     while(next->next != NULL) {
 	    next = next->next;
 	} 

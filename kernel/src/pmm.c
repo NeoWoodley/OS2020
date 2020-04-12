@@ -408,7 +408,7 @@ static void kfree(void *ptr) {
 
 	       tmp --;
 #ifdef CUR
-        printf("MARK3.2\n");
+        printf("MARK3.2:%p\n", tmp);
 #endif
 
 	       while(*tmp == VALID && ((uintptr_t)tmp >= page+sizeof(page_t))) {

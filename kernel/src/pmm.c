@@ -150,6 +150,7 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
+  lock();
   if(size == 4*KiB) {
 
 	  page_t* page = page_head;
@@ -159,6 +160,7 @@ static void *kalloc(size_t size) {
 	  }
 
 	  if((uintptr_t)page == (uintptr_t)_heap.end) {
+		  unlock();
 	      return NULL;
 	  }
 
@@ -167,6 +169,7 @@ static void *kalloc(size_t size) {
 
 	  page->status = FULL;
 
+	  unlock();
 	  return (void*)page;
 
   } 	
@@ -179,6 +182,7 @@ static void *kalloc(size_t size) {
 	  }
 
 	  if((uintptr_t)page == (uintptr_t)_heap.end) {
+		  unlock();
 	      return NULL;
 	  }
 
@@ -195,7 +199,7 @@ static void *kalloc(size_t size) {
 	      page->status = USED;
 	  }
 
-
+      unlock();
 	  return (void*)ptr;
      
   }
@@ -277,6 +281,7 @@ void brk_down() {
 */
 
 static void kfree(void *ptr) {
+	lock();
 	if((uintptr_t)ptr % (4*KiB) == 0) {
 	    page_t* page = page_head;  
 		while((uintptr_t)ptr != (uintptr_t)page) {
@@ -285,6 +290,7 @@ static void kfree(void *ptr) {
 		assert((uintptr_t)page == (uintptr_t)ptr && (uintptr_t)page <= (uintptr_t)_heap.end);
         memset((void*)((uintptr_t)ptr+sizeof(page_t)), VALID, 4*KiB-sizeof(page_t)); 		
         page->status = FREE;
+		unlock();
 	}
 	else {
 	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % 4*KiB);
@@ -321,6 +327,7 @@ static void kfree(void *ptr) {
 	   else {
 	       ((page_t*)page)->status = USED;
 	   }
+	   unlock();
 	}
 	/*
 	lock();

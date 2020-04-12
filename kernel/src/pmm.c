@@ -4,13 +4,22 @@
 #define MAGIC '1'
 #define MARK '9'
 
-#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
+//#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
+
+enum header_type {
+
+	FREE_SPACE = 1,
+	PTR_SPACE,
+
+};
 
 struct header_t {
 	union {
 	    uintptr_t ptr;
 		uintptr_t brk;
 	};
+
+	uintptr_t type;
 
 	size_t size;
 
@@ -22,6 +31,35 @@ typedef struct header_t header_t;
 header_t head;
 
 //static uintptr_t brk = 0;
+
+/*
+void smash_bind() {
+   int count = 0;
+   
+   header_t* upper = head.next; 
+
+   while(upper != NULL) {
+       count ++;
+	   upper = upper->next;
+   }
+
+   upper = head.next;
+
+   if(count < 2) {
+       return;
+   }
+
+   else{
+       while(upper != NULL) {
+           header_t* down=upper->next;
+		   while(down != NULL) {
+		        if()          
+		   }
+       }
+   }
+
+}
+*/
 
 void alloc_chk(void* ptr, size_t size) {
 	char* tmp = (char*)ptr;
@@ -42,13 +80,19 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
-	uintptr_t capacity = (uintptr_t)_heap.end - head.brk;
+	//uintptr_t capacity = (uintptr_t)_heap.end - head.brk;
 	void* ptr = NULL;
 	header_t header_ptr;  //用于分配出的空间的信息
+	/*
 	if(capacity <= LACK) {
-       assert(0); 	    
+        header* prev = head.next;
+		header* now = head.next;
+		while(now != NULL) {
+		    if(now->size )
+		}
 	}
-	else {
+	*/
+	//else {
         header_t tmp = head; //用于保存空闲空间信息
 
 		memset((void*)(head.brk-sizeof(header_t)), VALID, sizeof(header_t));
@@ -62,6 +106,7 @@ static void *kalloc(size_t size) {
 		header_ptr.ptr = (uintptr_t)ptr;
 		header_ptr.size = size;
 		header_ptr.next = NULL;
+		header_ptr.type = PTR_SPACE;
 
         memcpy((void*)((uintptr_t)ptr-sizeof(header_t)), &header_ptr, sizeof(header_t));
 
@@ -69,6 +114,7 @@ static void *kalloc(size_t size) {
 		
 		tmp.brk = head.brk+sizeof(header_t);
 		tmp.size = (uintptr_t)_heap.end - tmp.brk;
+		tmp.type = FREE_SPACE;
 		tmp.next = head.next;
 
 		memcpy((void*)(uintptr_t)head.brk, &tmp, sizeof(header_t));
@@ -80,7 +126,7 @@ static void *kalloc(size_t size) {
 		memset(ptr, MAGIC, size-1);
     	void* end = (void*)((uintptr_t)ptr+size-1);
 		memset(end, MARK, 1);
-	}
+	//}
 
   	return ptr;
 }
@@ -177,6 +223,7 @@ static void pmm_init() {
   memset((void*)_heap.start, VALID, pmsize);
   head.brk = (uintptr_t)_heap.start+sizeof(header_t);
   head.size = pmsize-sizeof(header_t);
+  head.type = FREE_SPACE;
   head.next =  NULL;
   memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
 //  printf("Initial brk at :%d\n", head.brk);

@@ -106,7 +106,7 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 static void *kalloc(size_t size) {
 	lock();
 #ifdef CUR
-	printf("[#LOCK]:Acquired!\n");
+	printf("[#LOCK]:CPU:%d * Acquired!\n", _cpu());
 #endif
 	//uintptr_t capacity = (uintptr_t)_heap.end - head.brk;
 	void* ptr = NULL;
@@ -158,7 +158,7 @@ static void *kalloc(size_t size) {
 
 	unlock();
 #ifdef CUR
-	printf("[#LOCK]:Released!\n");
+	printf("[#LOCK]:CPU:%d * Released!\n", _cpu());
 #endif
   	return ptr;
 }
@@ -185,7 +185,7 @@ void brk_down() {
 
 static void kfree(void *ptr) {
 #ifdef CUR
-	printf("[#LOCK]:Acquired!\n");
+	printf("[#LOCK]:CPU:%d * Acquired!\n", _cpu());
 #endif
 	lock();
 
@@ -239,7 +239,7 @@ static void kfree(void *ptr) {
 	next->next = (header_t*)((uintptr_t)tmp);
 
 #ifdef CUR
-	printf("[#LOCK]:Released!\n");
+	printf("[#LOCK]:CPU:%d * Released!\n", _cpu());
 #endif
 	/*
 	header_t* index = &head;
@@ -271,7 +271,6 @@ static void pmm_init() {
 
   
   //brk = head.brk;
-  unlock();
 }
 
 MODULE_DEF(pmm) = {

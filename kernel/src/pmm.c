@@ -219,6 +219,8 @@ static void kfree(void *ptr) {
 	    assert(0);
 	}
 
+    printf("HHHHHHHHHHHHHHHH\n");
+		
 	free_chk((uintptr_t)ptr, end);
 
     tmp = (char*)((uintptr_t)ptr-sizeof(header_t));

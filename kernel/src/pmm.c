@@ -220,10 +220,16 @@ static void *kalloc(size_t size) {
 		  unlock();
 	      return NULL;
 	  }
+	  uintptr_t backup_brk = page->brk;
       
       page->brk = ROUNDUP(page->brk, size) + size;
 	  uintptr_t ptr = page->brk-size;
-	  alloc_chk((void*)ptr, size);
+	  if(ptr >= page->ptr+4*KiB) {
+		  page->brk = backup_brk;
+	      unlock();
+		  return NULL;
+	  }
+	  //alloc_chk((void*)ptr, size);
 	  memset((void*)ptr, MAGIC, size-1);
 	  memset((void*)ptr+size-1, MARK, 1);
       

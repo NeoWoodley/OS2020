@@ -8,7 +8,7 @@
 
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
-#define CUR
+//#define CUR
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
@@ -166,7 +166,7 @@ static void *kalloc(size_t size) {
 
 	  page_t* page = page_head;
 
-      while(page->status != FREE) {
+      while(page->status != FREE && (uintptr_t)page < (uintptr_t)_heap.end) {
 	      page = page->next;
 	  }
 
@@ -179,7 +179,8 @@ static void *kalloc(size_t size) {
 #endif
 		  unlock();
 	      return NULL;
-	  }
+		      
+     }
 
 	  memset((void*)((uintptr_t)page+sizeof(page_t)), MAGIC, size-sizeof(page_t)-1);
 	  memset((void*)(uintptr_t)page+4*KiB-1, MARK, 1);
@@ -187,7 +188,7 @@ static void *kalloc(size_t size) {
 	  page->status = FULL;
 
 #ifdef CUR
-          printf("The whole page:%d alloced!\n", page->No);
+      printf("The whole page:%d alloced!\n", page->No);
 #endif
 
 	  //assert((uintptr_t)page % size == 0);
@@ -205,7 +206,7 @@ static void *kalloc(size_t size) {
 	  }
 
       page_t* page = page_head;
-	  while(page->status == FULL || page->ptr + 4*KiB <= page->brk+size) {
+	  while((page->status == FULL || page->ptr + 4*KiB <= page->brk+size) && ((uintptr_t)page < (uintptr_t)_heap.end)) {
 	      page = page->next;       
 	  }
 

@@ -176,7 +176,7 @@ static void *kalloc(size_t size) {
           printf("The whole page:%d alloced!\n", page->No);
 #endif
 
-	  assert((uintptr_t)page % size == 0);
+	  //assert((uintptr_t)page % size == 0);
 	  unlock();
 	  return (void*)page;
 
@@ -213,7 +213,7 @@ static void *kalloc(size_t size) {
 #ifdef CUR
       printf("The space in page %d alloced!\n", page->No);
 #endif
-	  assert((uintptr_t)ptr % size == 0);
+	  //assert((uintptr_t)ptr % size == 0);
       unlock();
 	  return (void*)ptr;
      

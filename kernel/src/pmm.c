@@ -6,6 +6,28 @@
 
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
+intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
+    intptr_t result;
+	asm volatile ("lock xchg %0, %1":
+	  "+m"(*addr), "=a"(result) : "1"(newval) : "cc");
+	return result;
+}
+
+intptr_t locked = 0;
+
+static inline void lock() {
+    while(1) {
+	    intptr_t value = atomic_xchg(&locked, 1);
+		if(value == 0) {
+		    break;
+		}
+	}
+}
+
+static inline void unlock() {
+    atomic_xchg(&locked, 0);
+}
+
 enum header_type {
 
 	FREE_SPACE = 1,
@@ -80,6 +102,7 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
+	lock();
 	//uintptr_t capacity = (uintptr_t)_heap.end - head.brk;
 	void* ptr = NULL;
 	header_t header_ptr;  //用于分配出的空间的信息
@@ -128,6 +151,7 @@ static void *kalloc(size_t size) {
 		memset(end, MARK, 1);
 	//}
 
+	unlock();
   	return ptr;
 }
 
@@ -152,6 +176,7 @@ void brk_down() {
 */
 
 static void kfree(void *ptr) {
+	lock();
 
 	header_t free_sp;
 
@@ -220,6 +245,7 @@ static void pmm_init() {
 //  printf("Size of header_t: %d\n", sizeof(header_t));
 //  printf("Size of size_t: %d\n", sizeof(size_t));
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
+  locked = 0;
   memset((void*)_heap.start, VALID, pmsize);
   head.brk = (uintptr_t)_heap.start+sizeof(header_t);
   head.size = pmsize-sizeof(header_t);
@@ -230,6 +256,7 @@ static void pmm_init() {
 
   
   //brk = head.brk;
+  unlock();
 }
 
 MODULE_DEF(pmm) = {

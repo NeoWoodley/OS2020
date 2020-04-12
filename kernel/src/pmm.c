@@ -151,10 +151,17 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 
 static void *kalloc(size_t size) {
   if(size == 4*KiB) {
+
 	  page_t* page = page_head;
+
       while(page->status != FREE) {
 	      page = page->next;
 	  }
+
+	  if((uintptr_t)page == (uintptr_t)_heap.end) {
+	      return NULL;
+	  }
+
 	  memset((void*)((uintptr_t)page+sizeof(page_t)), MAGIC, size-sizeof(page_t)-1);
 	  memset((void*)(uintptr_t)page+4*KiB-1, MARK, 1);
 
@@ -165,10 +172,23 @@ static void *kalloc(size_t size) {
   } 	
 
   else {
+
       page_t* page = page_head;
 	  while(page->status == FULL || page->ptr + 4*KiB <= page->brk+size) {
 	      page = page->next;       
 	  }
+
+	  if((uintptr_t)page == (uintptr_t)_heap.end) {
+	      return NULL;
+	  }
+
+      page->brk = ROUNDUP(page->brk, size) + size;
+	  uintptr_t ptr = page->brk-size;
+	  alloc_chk((void*)ptr, size);
+	  memset((void*)ptr, MAGIC, size-1);
+	  memset((void*)ptr+size-1, MARK, 1);
+
+	  return (void*)ptr;
      
   }
 	/*
@@ -226,7 +246,6 @@ static void *kalloc(size_t size) {
 #endif
 	return ptr;
 */
-	return NULL;
 }
 
 /*

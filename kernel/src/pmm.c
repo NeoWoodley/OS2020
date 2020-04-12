@@ -97,7 +97,6 @@ uintptr_t page_construct() {
 		}
 	}
 	return count;
-	
 }
 
 //static uintptr_t brk = 0;

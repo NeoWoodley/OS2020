@@ -4,6 +4,8 @@
 #define MAGIC '1'
 #define MARK '9'
 
+#define KiB (1 << 12)
+
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
 #define CUR
@@ -16,7 +18,7 @@ intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
 }
 
 intptr_t locked = 0;
-uintptr_t brk = 0;
+uintptr_t page_brk = 0;
 
 static inline void lock() {
     while(1) {
@@ -38,6 +40,13 @@ enum header_type {
 
 };
 
+enum status_type {
+
+	FREE = 1,
+	OCCUPIED,
+
+};
+
 struct header_t {
 	union {
 	    uintptr_t ptr;
@@ -51,9 +60,35 @@ struct header_t {
 	struct header_t* next;
 };
 
+struct page_t {
+    uintptr_t ptr;
+
+	uintptr_t status;
+
+	struct page_t* next;
+};
+
 typedef struct header_t header_t;
+typedef struct page_t page_t;
 
 header_t head;
+page_t page_head;
+
+void page_construct() {
+	uintptr_t size = 4 * KiB;
+	for(int i = 0 ; i < (1<<15)-1; i ++) {
+	    page_brk = page_brk?
+		    ROUNDUP(page_brk, size) + size :
+		    (uintptr_t)_heap.start + size;
+	    void* ptr = (void *)(page_brk - size);	
+    	    
+	    page_t head = {(uintptr_t)ptr, FREE, (page_t*)page_brk};
+
+	    memcpy(ptr, &head, sizeof(page_t));
+		printf("ptr: %x\n", (uintptr_t)ptr);
+	}
+	
+}
 
 //static uintptr_t brk = 0;
 
@@ -105,6 +140,7 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
+	/*
 	lock();
 #ifdef CUR
 	printf("[#LOCK]:CPU:%d Alloc * Acquired!\n", _cpu());
@@ -116,15 +152,6 @@ static void *kalloc(size_t size) {
 	void* ptr = NULL;
 	header_t header_ptr;  //用于分配出的空间的信息
 
-	/*
-	if(capacity <= LACK) {
-        header* prev = head.next;
-		header* now = head.next;
-		while(now != NULL) {
-		    if(now->size )
-		}
-	}
-	*/
 	//else {
 	
         header_t tmp = head; //用于保存空闲空间信息
@@ -167,7 +194,8 @@ static void *kalloc(size_t size) {
 	printf("[#LOCK]:CPU:%d Alloc * Released!\n", _cpu());
 #endif
 	return ptr;
-
+*/
+	return NULL;
 }
 
 /*
@@ -191,6 +219,7 @@ void brk_down() {
 */
 
 static void kfree(void *ptr) {
+	/*
 	lock();
 #ifdef CUR
 	printf("[#LOCK]:CPU:%d Free * Acquired!\n", _cpu());
@@ -226,7 +255,7 @@ static void kfree(void *ptr) {
 	
 	tmp --;
 	while(*tmp == VALID && (uintptr_t)tmp >= (uintptr_t)_heap.start) {
-		printf("tmp:%p\n", (uintptr_t)tmp);
+		//printf("tmp:%p\n", (uintptr_t)tmp);
 	    tmp --;
 	}
 	tmp ++;
@@ -261,6 +290,7 @@ static void kfree(void *ptr) {
 #ifdef CUR
 	printf("[#LOCK]:CPU:%d Free * Released!\n", _cpu());
 #endif
+	*/
 }
 
 
@@ -270,14 +300,15 @@ static void pmm_init() {
 //  printf("Size of size_t: %d\n", sizeof(size_t));
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
   locked = 0;
-  brk = (uintptr_t)_heap.start;
 
   memset((void*)_heap.start, VALID, pmsize);
-  head.brk = (uintptr_t)_heap.start+sizeof(header_t);
-  head.size = pmsize-sizeof(header_t);
-  head.type = FREE_SPACE;
-  head.next =  NULL;
-  memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
+  page_brk = (uintptr_t)_heap.start;
+  page_construct();
+  //head.brk = (uintptr_t)_heap.start+128*sizeof(4096*sizeof(char))+sizeof(header_t);
+  //head.size = (uintptr_t)_heap.end-head.brk;
+  //head.type = FREE_SPACE;
+  //head.next =  NULL;
+  //memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
   
 //  printf("Initial brk at :%d\n", head.brk);
 

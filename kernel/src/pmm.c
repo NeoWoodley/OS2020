@@ -114,7 +114,7 @@ static void *kalloc(size_t size) {
 	printf("[#LOCK]:CPU:%d Alloc * Acquired!\n", _cpu());
 #endif
 	brk = brk ? ROUNDUP(brk, size) + size : (uintptr_t)_heap.start + size;
-	assert(brk >= (uintptr_t)_heap.end);
+	assert(brk <= (uintptr_t)_heap.end);
 	//uintptr_t capacity = (uintptr_t)_heap.end - head.brk;
 	/*Useful
 	void* ptr = NULL;

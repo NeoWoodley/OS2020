@@ -136,8 +136,6 @@ static void *kalloc(size_t size) {
 			ROUNDUP(head.brk, size) + size :
 			(uintptr_t)_heap.start + size;
 		ptr = (void *)(head.brk - size);
-		memset((void*)ptr, MAGIC, size-1);
-		memset((void*)ptr+size-1, MARK, 1);
 
 		header_ptr.ptr = (uintptr_t)ptr;
 		header_ptr.size = size;
@@ -228,6 +226,7 @@ static void kfree(void *ptr) {
 	
 	tmp --;
 	while(*tmp == VALID && (uintptr_t)tmp >= (uintptr_t)_heap.start) {
+		printf("tmp:%p\n", (uintptr_t)tmp);
 	    tmp --;
 	}
 	tmp ++;

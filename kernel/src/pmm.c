@@ -385,12 +385,12 @@ static void kfree(void *ptr) {
         printf("MARK2\n");
 #endif
 	   if(((page_t*)page)->brk > ((page_t*)page)->ptr + sizeof(page_t)) {
-
-	       tmp = (char*)(((page_t*)page)->brk);
-	       tmp --;
 #ifdef CUR
         printf("MARK3\n");
 #endif
+
+	       tmp = (char*)(((page_t*)page)->brk);
+	       tmp --;
 	       while(*tmp == VALID && (uintptr_t)tmp >= page+sizeof(page_t)) {
 			   printf("HHHHHHHHHHHHH");
 			   tmp --;

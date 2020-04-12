@@ -230,13 +230,13 @@ static void kfree(void *ptr) {
 	}
 	tmp ++;
 
+    printf("HHHHHHHHHHHHHHHH\n");
 	size_t size = (((header_t*)(ptr-sizeof(header_t)))->size);
    
     free_sp.brk = (uintptr_t)tmp + sizeof(header_t);
 	free_sp.size = (uintptr_t)ptr+size - free_sp.brk;
 	free_sp.next = NULL;
 
-    printf("HHHHHHHHHHHHHHHH\n");
     memcpy((void*)tmp, &free_sp, sizeof(header_t));
 	
 	header_t* next = &head;

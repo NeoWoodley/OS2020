@@ -43,7 +43,8 @@ enum header_type {
 enum status_type {
 
 	FREE = 1,
-	OCCUPIED,
+	USED,
+	FULL,
 
 };
 
@@ -86,6 +87,9 @@ void page_construct() {
 
 	    memcpy(ptr, &head, sizeof(page_t));
 		printf("ptr: %x\n", (uintptr_t)ptr);
+		page_t* tmp = (page_t*)ptr;
+		printf("ptr->next: %x\n", (uintptr_t)(tmp->next));
+
 		if(page_brk >= (uintptr_t)_heap.end) {
 		    break;
 		}

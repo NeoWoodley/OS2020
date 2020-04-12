@@ -1,7 +1,6 @@
 #include <common.h>
 #include <klib.h>
 
-
 int i = 0;
 /*
 enum ops { OP_ALLOC = 1, OP_FREE };
@@ -29,6 +28,7 @@ void stress_test() {
 */
 
 void smoke_test() {
+	printf("Begin in CPU: %d\n",_cpu());
     for(; i < 400; i ++){
 		if(i%4 == 0) {
 	        //uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
@@ -54,8 +54,8 @@ void smoke_test() {
 //		    printf("ptr->4096: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
 //		    pmm->free((void*)ptr);	
 		}
-		printf("i:%d\n", i);
 	}
+	printf("End in CPU: %d\n",_cpu());
 	//printf("Done From cpu:%d\n", _cpu());
   while (1) ;
 }

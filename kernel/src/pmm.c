@@ -184,10 +184,10 @@ void brk_down() {
 */
 
 static void kfree(void *ptr) {
+	lock();
 #ifdef CUR
 	printf("[#LOCK]:CPU:%d * Acquired!\n", _cpu());
 #endif
-	lock();
 
 	header_t free_sp;
 
@@ -238,9 +238,6 @@ static void kfree(void *ptr) {
 
 	next->next = (header_t*)((uintptr_t)tmp);
 
-#ifdef CUR
-	printf("[#LOCK]:CPU:%d * Released!\n", _cpu());
-#endif
 	/*
 	header_t* index = &head;
 
@@ -252,6 +249,9 @@ static void kfree(void *ptr) {
     */
 
 	unlock();
+#ifdef CUR
+	printf("[#LOCK]:CPU:%d * Released!\n", _cpu());
+#endif
 }
 
 

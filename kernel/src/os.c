@@ -35,7 +35,7 @@ void smoke_test() {
 	*/
 	
 	int i = 0;
-    for(; i < 40; i ++){
+    for(; i < 4; i ++){
 		if(i%4 == 0) {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
 //	        pmm->alloc(sizeof(char));
@@ -49,9 +49,9 @@ void smoke_test() {
 //		    pmm->free((void*)ptr);	
 		}
 		else if(i%4 == 2){
-	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(double));
+	        uintptr_t ptr = (uintptr_t)pmm->alloc(127*sizeof(char));
 //	        pmm->alloc(sizeof(double));
-		    printf("ptr->double: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
+		    printf("ptr->127: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
 //		    pmm->free((void*)ptr);	
 		}
 		else {

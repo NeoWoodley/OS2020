@@ -8,7 +8,7 @@
 
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
-#define CUR
+//#define CUR
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
@@ -120,7 +120,7 @@ void smash_bind() {
    }
 
    else{
-       while(upper != NULL) {
+       WHile(upper != NULL) {
            header_t* down=upper->next;
 		   while(down != NULL) {
 		        if()          
@@ -176,6 +176,7 @@ static void *kalloc(size_t size) {
           printf("The whole page:%d alloced!\n", page->No);
 #endif
 
+	  assert((uintptr_t)page % size == 0);
 	  unlock();
 	  return (void*)page;
 
@@ -212,6 +213,7 @@ static void *kalloc(size_t size) {
 #ifdef CUR
       printf("The space in page %d alloced!\n", page->No);
 #endif
+	  assert((uintptr_t)ptr % size == 0);
       unlock();
 	  return (void*)ptr;
      
@@ -295,7 +297,11 @@ void brk_down() {
 
 static void kfree(void *ptr) {
 	lock();
-	if((uintptr_t)ptr % (4*KiB) == 0) {
+	if(ptr == NULL) {
+	    unlock();
+		return;
+	}
+	else if((uintptr_t)ptr % (4*KiB) == 0) {
 	    page_t* page = page_head;  
 		while((uintptr_t)ptr != (uintptr_t)page) {
 		   page = page->next; 
@@ -307,6 +313,7 @@ static void kfree(void *ptr) {
         printf("The whole page %d was freed!\n", page->No);
 #endif
 		unlock();
+		return;
 	}
 	else {
 	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % 4*KiB);
@@ -347,6 +354,7 @@ static void kfree(void *ptr) {
         printf("The space in page %d was freed!\n", ((page_t*)page)->No);
 #endif
 	   unlock();
+	   return;
 	}
 	/*
 	lock();

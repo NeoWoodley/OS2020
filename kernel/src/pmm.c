@@ -224,9 +224,9 @@ static void kfree(void *ptr) {
 
     tmp = (char*)((uintptr_t)ptr-sizeof(header_t));
 	
-    printf("HHHHHHHHHHHHHHHH\n");
 	tmp --;
 	while(*tmp == VALID && (uintptr_t)tmp >= (uintptr_t)_heap.start) {
+        printf("HHHHHHHHHHHHHHHH\n");
 	    tmp --;
 	}
 	tmp ++;

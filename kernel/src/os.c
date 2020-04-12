@@ -31,24 +31,28 @@ void stress_test() {
 void smoke_test() {
     for(; i < 400; i ++){
 		if(i%4 == 0) {
-	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
+	        //uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
+	        pmm->alloc(sizeof(char));
 //		    printf("ptr->char: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
-		    pmm->free((void*)ptr);	
+//		    pmm->free((void*)ptr);	
 		}
 		else if(i%4 == 1) {
-	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(uintptr_t));
+	        //uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(uintptr_t));
+	        pmm->alloc(sizeof(uintptr_t));
 //		    printf("ptr->uintptr_t: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
-		    pmm->free((void*)ptr);	
+//		    pmm->free((void*)ptr);	
 		}
 		else if(i%4 == 2){
-	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(double));
+	        //uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(double));
+	        pmm->alloc(sizeof(double));
 //		    printf("ptr->double: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
-		    pmm->free((void*)ptr);	
+//		    pmm->free((void*)ptr);	
 		}
 		else {
-	        uintptr_t ptr = (uintptr_t)pmm->alloc(4096*sizeof(char));
+	        //uintptr_t ptr = (uintptr_t)pmm->alloc(4096*sizeof(char));
+	        pmm->alloc(4096*sizeof(char));
 //		    printf("ptr->4096: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
-		    pmm->free((void*)ptr);	
+//		    pmm->free((void*)ptr);	
 		}
 	}
 	//printf("Done From cpu:%d\n", _cpu());

@@ -51,7 +51,7 @@ void smoke_test() {
 		    pmm->free((void*)ptr);	
 		}
 	}
-	printf("Done From cpu:%d\n", _cpu());
+	//printf("Done From cpu:%d\n", _cpu());
   while (1) ;
 }
 

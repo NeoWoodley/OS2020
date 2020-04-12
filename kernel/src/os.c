@@ -35,7 +35,7 @@ void smoke_test() {
 	*/
 	
 	int i = 0;
-    for(; i < 100; i ++){
+    for(; i < 20; i ++){
 		if(i%5 == 0) {
 //	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
 	        pmm->alloc(sizeof(char));

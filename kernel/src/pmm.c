@@ -224,13 +224,13 @@ static void kfree(void *ptr) {
 
     tmp = (char*)((uintptr_t)ptr-sizeof(header_t));
 	
+    printf("HHHHHHHHHHHHHHHH\n");
 	tmp --;
 	while(*tmp == VALID && (uintptr_t)tmp >= (uintptr_t)_heap.start) {
 	    tmp --;
 	}
 	tmp ++;
 
-    printf("HHHHHHHHHHHHHHHH\n");
 	size_t size = (((header_t*)(ptr-sizeof(header_t)))->size);
    
     free_sp.brk = (uintptr_t)tmp + sizeof(header_t);

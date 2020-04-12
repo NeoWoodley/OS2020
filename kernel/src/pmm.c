@@ -83,7 +83,7 @@ uintptr_t page_construct() {
 		    (uintptr_t)_heap.start + size;
 	    void* ptr = (void *)(page_brk - size);	
     	    
-	    page_t head = {(uintptr_t)ptr, (uintptr_t)+sizeof(page_t), FREE, (page_t*)page_brk};
+	    page_t head = {(uintptr_t)ptr, (uintptr_t)ptr+sizeof(page_t), FREE, (page_t*)page_brk};
 
 	    memcpy(ptr, &head, sizeof(page_t));
 //		printf("ptr: %x\n", (uintptr_t)ptr);
@@ -150,7 +150,27 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
-	
+  if(size == 4*KiB) {
+	  page_t* page = page_head;
+      while(page->status != FREE) {
+	      page = page->next;
+	  }
+	  memset((void*)((uintptr_t)page+sizeof(page_t)), MAGIC, size-sizeof(page_t)-1);
+	  memset((void*)(uintptr_t)page+4*KiB-1, MARK, 1);
+
+	  page->status = FULL;
+
+	  return (void*)page;
+
+  } 	
+
+  else {
+      page_t* page = page_head;
+	  while(page->status == FULL || page->ptr + 4*KiB <= page->brk+size) {
+	      page = page->next;       
+	  }
+     
+  }
 	/*
 	lock();
 #ifdef CUR

@@ -335,6 +335,9 @@ static void kfree(void *ptr) {
 #endif
 	if(ptr == NULL) {
 #ifdef CUR
+        printf("MARK-3\n");
+#endif
+#ifdef CUR
         printf("Lock released by #CPU:%d in free\n", _cpu());
 #endif
 	    unlock();
@@ -342,9 +345,15 @@ static void kfree(void *ptr) {
 	}
 	else if((uintptr_t)ptr % (4*KiB) == 0) {
 	    page_t* page = page_head;  
+#ifdef CUR
+        printf("MARK-2\n");
+#endif
 		while((uintptr_t)ptr != (uintptr_t)page) {
 		   page = page->next; 
 		}
+#ifdef CUR
+        printf("MARK-1\n");
+#endif
 		assert((uintptr_t)page == (uintptr_t)ptr && (uintptr_t)page <= (uintptr_t)_heap.end);
         memset((void*)((uintptr_t)ptr+sizeof(page_t)), VALID, 4*KiB-sizeof(page_t)); 		
         page->status = FREE;  
@@ -363,6 +372,9 @@ static void kfree(void *ptr) {
 	   uintptr_t brk = ((page_t*)page)->brk;
 	   uintptr_t size = 0;
 	   char* tmp = (char*)ptr;
+#ifdef CUR
+        printf("MARK-0\n");
+#endif
 	   while(*tmp == MAGIC) {
 	       *tmp = VALID;
 		   size ++;

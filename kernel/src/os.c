@@ -35,23 +35,29 @@ void smoke_test() {
 	*/
 	
 	int i = 0;
-    for(; i < 4; i ++){
-		if(i%4 == 0) {
+    for(; i < 5; i ++){
+		if(i%5 == 0) {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
 //	        pmm->alloc(sizeof(char));
 		    printf("ptr->char: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
 //		    pmm->free((void*)ptr);	
 		}
-		else if(i%4 == 1) {
+		else if(i%5 == 1) {
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(uintptr_t));
 //	        pmm->alloc(sizeof(uintptr_t));
 		    printf("ptr->uintptr_t: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
 //		    pmm->free((void*)ptr);	
 		}
-		else if(i%4 == 2){
+		else if(i%5 == 2){
 	        uintptr_t ptr = (uintptr_t)pmm->alloc(127*sizeof(char));
 //	        pmm->alloc(sizeof(double));
 		    printf("ptr->127: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
+//		    pmm->free((void*)ptr);	
+		}
+		else if(i%5 == 3){
+	        uintptr_t ptr = (uintptr_t)pmm->alloc(63*sizeof(char));
+//	        pmm->alloc(sizeof(double));
+		    printf("ptr->63: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
 //		    pmm->free((void*)ptr);	
 		}
 		else {

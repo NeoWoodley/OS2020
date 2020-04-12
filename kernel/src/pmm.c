@@ -397,7 +397,7 @@ static void kfree(void *ptr) {
 #ifdef CUR
         printf("MARK2:%p\n", tmp);
 #endif
-	   if(((page_t*)page)->brk > ((page_t*)page)->ptr + sizeof(page_t)) {
+	   if(brk > ((page_t*)page)->ptr + sizeof(page_t)) {
 #ifdef CUR
         printf("MARK3\n");
 #endif

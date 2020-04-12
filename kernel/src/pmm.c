@@ -6,7 +6,7 @@
 
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
-#define CUR
+//#define CUR
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
@@ -171,6 +171,7 @@ static void *kalloc(size_t size) {
 #ifdef CUR
 	printf("[#LOCK]:CPU:%d Alloc * Released!\n", _cpu());
 #endif
+	assert((uintptr_t)(brk-size) % size == 0);
   	return (void *)(brk - size);
 }
 

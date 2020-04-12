@@ -368,29 +368,50 @@ static void kfree(void *ptr) {
 		   size ++;
 		   tmp ++;
 	   }
+#ifdef CUR
+        printf("MARK0\n");
+#endif
 	   assert(*tmp == MARK);
 	   *tmp =  VALID;
 	   tmp ++;
 	   size ++;
+#ifdef CUR
+        printf("MARK1\n");
+#endif
 	   if((uintptr_t)tmp == brk) {
 	      ((page_t*)page)->brk = brk - size;	   
 	   }
+#ifdef CUR
+        printf("MARK2\n");
+#endif
 	   if(((page_t*)page)->brk > ((page_t*)page)->ptr + sizeof(page_t)) {
 
 	       tmp = (char*)(((page_t*)page)->brk);
 	       tmp --;
+#ifdef CUR
+        printf("MARK3\n");
+#endif
 	       while(*tmp == VALID && (uintptr_t)tmp >= page+sizeof(page_t)) {
 			   tmp --;
 		   }
+#ifdef CUR
+        printf("MARK4\n");
+#endif
 	       tmp ++;
 	       ((page_t*)page)->brk = (uintptr_t)tmp;
 	   }
+#ifdef CUR
+        printf("MARK5\n");
+#endif
 	   if(((page_t*)page)->brk == ((page_t*)page)->ptr + sizeof(page_t)) {
 	       ((page_t*)page)->status = FREE;
 	   }
 	   else {
 	       ((page_t*)page)->status = USED;
 	   }
+#ifdef CUR
+        printf("MARK7\n");
+#endif
 #ifdef CUR
         printf("The space in page %d was freed!\n", ((page_t*)page)->No);
 #endif

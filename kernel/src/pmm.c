@@ -160,7 +160,7 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 static void *kalloc(size_t size) {
   lock();
 #ifdef CUR
-  printf("Lock acquired by #CPU:%d\n", _cpu());
+  printf("Lock acquired by #CPU:%d in alloc\n", _cpu());
 #endif
   if(size == 4*KiB) {
 
@@ -175,7 +175,7 @@ static void *kalloc(size_t size) {
           printf("Alloc Failed!\n");
 #endif
 #ifdef CUR
-          printf("Lock released by #CPU:%d\n", _cpu());
+          printf("Lock released by #CPU:%d in alloc\n", _cpu());
 #endif
 		  unlock();
 	      return NULL;
@@ -193,7 +193,7 @@ static void *kalloc(size_t size) {
 
 	  //assert((uintptr_t)page % size == 0);
 #ifdef CUR
-      printf("Lock released by #CPU:%d\n", _cpu());
+      printf("Lock released by #CPU:%d in alloc\n", _cpu());
 #endif
 	  unlock();
 	  return (void*)page;
@@ -215,7 +215,7 @@ static void *kalloc(size_t size) {
           printf("Alloc Failed!\n");
 #endif
 #ifdef CUR
-          printf("Lock released by #CPU:%d\n", _cpu());
+          printf("Lock released by #CPU:%d in alloc\n", _cpu());
 #endif
 		  unlock();
 	      return NULL;
@@ -245,7 +245,7 @@ static void *kalloc(size_t size) {
 #endif
 	  //assert((uintptr_t)ptr % size == 0);
 #ifdef CUR
-      printf("Lock released by #CPU:%d\n", _cpu());
+      printf("Lock released by #CPU:%d in alloc\n", _cpu());
 #endif
       unlock();
 	  return (void*)ptr;
@@ -331,11 +331,11 @@ void brk_down() {
 static void kfree(void *ptr) {
 	lock();
 #ifdef CUR
-    printf("Lock acquired by #CPU:%d\n", _cpu());
+    printf("Lock acquired by #CPU:%d in free\n", _cpu());
 #endif
 	if(ptr == NULL) {
 #ifdef CUR
-        printf("Lock released by #CPU:%d\n", _cpu());
+        printf("Lock released by #CPU:%d in free\n", _cpu());
 #endif
 	    unlock();
 		return;
@@ -352,7 +352,7 @@ static void kfree(void *ptr) {
         printf("The whole page %d was freed!\n", page->No);
 #endif
 #ifdef CUR
-        printf("Lock released by #CPU:%d\n", _cpu());
+        printf("Lock released by #CPU:%d in free\n", _cpu());
 #endif
 		unlock();
 		return;
@@ -395,7 +395,7 @@ static void kfree(void *ptr) {
         printf("The space in page %d was freed!\n", ((page_t*)page)->No);
 #endif
 #ifdef CUR
-       printf("Lock released by #CPU:%d\n", _cpu());
+       printf("Lock released by #CPU:%d in free\n", _cpu());
 #endif
 	   unlock();
 	   return;

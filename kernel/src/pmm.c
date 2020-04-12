@@ -63,19 +63,19 @@ struct header_t {
 
 struct page_t {
     uintptr_t ptr;
+    uintptr_t brk;
 
 	uintptr_t status;
 
 	struct page_t* next;
 };
 
-typedef struct header_t header_t;
 typedef struct page_t page_t;
 
-header_t head;
-page_t page_head;
+page_t *page_head;
 
-void page_construct() {
+uintptr_t page_construct() {
+	uintptr_t count = 0;
 	uintptr_t size = 4 * KiB;
 	for(int i = 0 ; i < (1<<13); i ++) {
 	    page_brk = page_brk?
@@ -83,17 +83,20 @@ void page_construct() {
 		    (uintptr_t)_heap.start + size;
 	    void* ptr = (void *)(page_brk - size);	
     	    
-	    page_t head = {(uintptr_t)ptr, FREE, (page_t*)page_brk};
+	    page_t head = {(uintptr_t)ptr, (uintptr_t)+sizeof(page_t), FREE, (page_t*)page_brk};
 
 	    memcpy(ptr, &head, sizeof(page_t));
-		printf("ptr: %x\n", (uintptr_t)ptr);
-		page_t* tmp = (page_t*)ptr;
-		printf("ptr->next: %x\n", (uintptr_t)(tmp->next));
+//		printf("ptr: %x\n", (uintptr_t)ptr);
+//		page_t* tmp = (page_t*)ptr;
+//		printf("ptr->next: %x\n", (uintptr_t)(tmp->next));
+
+		count ++;
 
 		if(page_brk >= (uintptr_t)_heap.end) {
 		    break;
 		}
 	}
+	return count;
 	
 }
 
@@ -147,6 +150,7 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 }
 
 static void *kalloc(size_t size) {
+	
 	/*
 	lock();
 #ifdef CUR
@@ -310,10 +314,9 @@ static void pmm_init() {
 
   memset((void*)_heap.start, VALID, pmsize);
   page_brk = (uintptr_t)_heap.start;
-  page_construct();
-  //head.brk = (uintptr_t)_heap.start+128*sizeof(4096*sizeof(char))+sizeof(header_t);
-  //head.size = (uintptr_t)_heap.end-head.brk;
-  //head.type = FREE_SPACE;
+  page_head = (page_t*)page_brk;
+  uintptr_t page_nums = page_construct();
+  printf("Got %d pages of heap!\n", page_nums);
   //head.next =  NULL;
   //memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
   

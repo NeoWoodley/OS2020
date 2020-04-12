@@ -412,6 +412,9 @@ static void kfree(void *ptr) {
 #endif
 
 	       while(*tmp == VALID && (uintptr_t)tmp >= page+sizeof(page_t)) {
+#ifdef CUR
+        printf("H\n");
+#endif
 			   tmp --;
 		   }
 	       //printf("\n");

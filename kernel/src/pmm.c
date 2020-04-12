@@ -4,7 +4,7 @@
 #define MAGIC '1'
 #define MARK '9'
 
-#define KiB (1 << 12)
+#define KiB (1 << 10)
 
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 

@@ -8,7 +8,7 @@
 
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
-//#define CUR
+#define CUR
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
@@ -367,7 +367,6 @@ static void kfree(void *ptr) {
 	       *tmp = VALID;
 		   size ++;
 		   tmp ++;
-
 	   }
 	   assert(*tmp == MARK);
 	   *tmp =  VALID;

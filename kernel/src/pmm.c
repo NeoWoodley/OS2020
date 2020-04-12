@@ -159,6 +159,9 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 
 static void *kalloc(size_t size) {
   lock();
+#ifdef CUR
+  printf("Lock acquired by #CPU:%d\n", _cpu());
+#endif
   if(size == 4*KiB) {
 
 	  page_t* page = page_head;
@@ -170,6 +173,9 @@ static void *kalloc(size_t size) {
 	  if((uintptr_t)page == (uintptr_t)_heap.end) {
 #ifdef CUR
           printf("Alloc Failed!\n");
+#endif
+#ifdef CUR
+          printf("Lock released by #CPU:%d\n", _cpu());
 #endif
 		  unlock();
 	      return NULL;
@@ -185,6 +191,9 @@ static void *kalloc(size_t size) {
 #endif
 
 	  //assert((uintptr_t)page % size == 0);
+#ifdef CUR
+      printf("Lock released by #CPU:%d\n", _cpu());
+#endif
 	  unlock();
 	  return (void*)page;
 
@@ -203,6 +212,9 @@ static void *kalloc(size_t size) {
 	  if((uintptr_t)page == (uintptr_t)_heap.end) {
 #ifdef CUR
           printf("Alloc Failed!\n");
+#endif
+#ifdef CUR
+          printf("Lock released by #CPU:%d\n", _cpu());
 #endif
 		  unlock();
 	      return NULL;
@@ -225,6 +237,9 @@ static void *kalloc(size_t size) {
       printf("The space in page %d alloced!\n", page->No);
 #endif
 	  //assert((uintptr_t)ptr % size == 0);
+#ifdef CUR
+      printf("Lock released by #CPU:%d\n", _cpu());
+#endif
       unlock();
 	  return (void*)ptr;
      
@@ -308,7 +323,13 @@ void brk_down() {
 
 static void kfree(void *ptr) {
 	lock();
+#ifdef CUR
+    printf("Lock acquired by #CPU:%d\n", _cpu());
+#endif
 	if(ptr == NULL) {
+#ifdef CUR
+        printf("Lock released by #CPU:%d\n", _cpu());
+#endif
 	    unlock();
 		return;
 	}
@@ -322,6 +343,9 @@ static void kfree(void *ptr) {
         page->status = FREE;  
 #ifdef CUR
         printf("The whole page %d was freed!\n", page->No);
+#endif
+#ifdef CUR
+        printf("Lock released by #CPU:%d\n", _cpu());
 #endif
 		unlock();
 		return;
@@ -363,6 +387,9 @@ static void kfree(void *ptr) {
 	   }
 #ifdef CUR
         printf("The space in page %d was freed!\n", ((page_t*)page)->No);
+#endif
+#ifdef CUR
+       printf("Lock released by #CPU:%d\n", _cpu());
 #endif
 	   unlock();
 	   return;

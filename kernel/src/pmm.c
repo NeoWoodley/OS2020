@@ -404,7 +404,7 @@ static void kfree(void *ptr) {
 
 	       tmp = (char*)(((page_t*)page)->brk);
 #ifdef CUR
-        printf("MARK3.1\n");
+        printf("MARK3.1: %p\n", tmp);
 #endif
 
 	       tmp --;

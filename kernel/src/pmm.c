@@ -75,6 +75,14 @@ typedef struct page_t page_t;
 
 page_t *page_head;
 
+uintptr_t bound_aligned(size_t size) {
+    uintptr_t round = 1;
+	while (size > round) {
+	    round = (round << 1);
+	}
+	return round;
+}
+
 uintptr_t page_construct() {
 	uintptr_t count = 0;
 	uintptr_t size = 4 * KiB;
@@ -183,6 +191,9 @@ static void *kalloc(size_t size) {
   } 	
 
   else {
+	  if((size & (size-1)) != 0) {
+	      size = bound_aligned(size);
+	  }
 
       page_t* page = page_head;
 	  while(page->status == FULL || page->ptr + 4*KiB <= page->brk+size) {
@@ -196,7 +207,7 @@ static void *kalloc(size_t size) {
 		  unlock();
 	      return NULL;
 	  }
-
+      
       page->brk = ROUNDUP(page->brk, size) + size;
 	  uintptr_t ptr = page->brk-size;
 	  alloc_chk((void*)ptr, size);

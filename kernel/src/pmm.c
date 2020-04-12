@@ -163,6 +163,10 @@ static void *kalloc(size_t size) {
 	//}
 	
 	return ptr;
+	unlock();
+#ifdef CUR
+	printf("[#LOCK]:CPU:%d Alloc * Released!\n", _cpu());
+#endif
 
 }
 

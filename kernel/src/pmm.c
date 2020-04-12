@@ -219,7 +219,6 @@ static void kfree(void *ptr) {
 	    assert(0);
 	}
 
-    printf("HHHHHHHHHHHHHHHH\n");
 		
 	free_chk((uintptr_t)ptr, end);
 
@@ -241,6 +240,7 @@ static void kfree(void *ptr) {
 	
 	header_t* next = &head;
 
+    printf("HHHHHHHHHHHHHHHH\n");
     while(next->next != NULL) {
 	    next = next->next;
 	} 

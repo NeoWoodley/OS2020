@@ -187,6 +187,14 @@ static void *kalloc(size_t size) {
 	  alloc_chk((void*)ptr, size);
 	  memset((void*)ptr, MAGIC, size-1);
 	  memset((void*)ptr+size-1, MARK, 1);
+      
+	  if(page->brk == page->ptr + 4*KiB) {
+	      page->status = FULL;
+	  }
+	  else {
+	      page->status = USED;
+	  }
+
 
 	  return (void*)ptr;
      
@@ -276,6 +284,7 @@ static void kfree(void *ptr) {
 		}
 		assert((uintptr_t)page == (uintptr_t)ptr && (uintptr_t)page <= (uintptr_t)_heap.end);
         memset((void*)((uintptr_t)ptr+sizeof(page_t)), VALID, 4*KiB-sizeof(page_t)); 		
+        page->status = FREE;
 	}
 	else {
 	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % 4*KiB);
@@ -296,12 +305,22 @@ static void kfree(void *ptr) {
 	   if((uintptr_t)tmp == brk) {
 	      ((page_t*)page)->brk = brk - size;	   
 	   }
+	   if(((page_t*)page)->brk > ((page_t*)page)->ptr + sizeof(page_t)) {
 
-	   tmp = (char*)(((page_t*)page)->brk);
-	   tmp --;
-	   while(*tmp == VALID && (uintptr_t)tmp >= page+sizeof(page_t));
-	   tmp ++;
-	   ((page_t*)page)->brk = (uintptr_t)tmp;
+	       tmp = (char*)(((page_t*)page)->brk);
+	       tmp --;
+	       while(*tmp == VALID && (uintptr_t)tmp >= page+sizeof(page_t)) {
+			   tmp --;
+		   }
+	       tmp ++;
+	       ((page_t*)page)->brk = (uintptr_t)tmp;
+	   }
+	   if(((page_t*)page)->brk == ((page_t*)page)->ptr + sizeof(page_t)) {
+	       ((page_t*)page)->status = FREE;
+	   }
+	   else {
+	       ((page_t*)page)->status = USED;
+	   }
 	}
 	/*
 	lock();

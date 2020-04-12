@@ -191,7 +191,6 @@ void brk_down() {
 */
 
 static void kfree(void *ptr) {
-	/*
 	lock();
 #ifdef CUR
 	printf("[#LOCK]:CPU:%d * Acquired!\n", _cpu());
@@ -260,7 +259,6 @@ static void kfree(void *ptr) {
 #ifdef CUR
 	printf("[#LOCK]:CPU:%d * Released!\n", _cpu());
 #endif
-*/
 }
 
 

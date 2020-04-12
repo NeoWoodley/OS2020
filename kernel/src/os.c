@@ -28,7 +28,8 @@ void stress_test() {
 
 void smoke_test() {
 	while(1) {
-	    pmm->alloc(4096*sizeof(char));
+	    uintptr_t ptr = (uintptr_t)pmm->alloc(4096*sizeof(char));
+		pmm->free((void*)ptr);
 	}
 	/*
 	int i = 0;

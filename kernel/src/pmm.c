@@ -31,7 +31,6 @@ static inline void unlock() {
     atomic_xchg(&locked, 0);
 }
 
-/*Useful
 enum header_type {
 
 	FREE_SPACE = 1,
@@ -55,7 +54,7 @@ struct header_t {
 typedef struct header_t header_t;
 
 header_t head;
-Useful*/
+
 //static uintptr_t brk = 0;
 
 /*
@@ -87,7 +86,6 @@ void smash_bind() {
 }
 */
 
-/*Useful
 void alloc_chk(void* ptr, size_t size) {
 	char* tmp = (char*)ptr;
 	for(int i = 0; i < size; i ++) {
@@ -105,30 +103,19 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 	}
 	//printf("\n");
 }
-Useful*/
-
 
 static void *kalloc(size_t size) {
 	lock();
 #ifdef CUR
 	printf("[#LOCK]:CPU:%d Alloc * Acquired!\n", _cpu());
 #endif
-	if((uintptr_t)brk + size >= (uintptr_t)_heap.end) {
-	    unlock();
-#ifdef CUR
-	    printf("[#LOCK]:CPU:%d Alloc * Released!\n", _cpu());
-#endif
-	    return NULL;
-	}
-	else {
-     	brk = brk ? ROUNDUP(brk, size) + size : (uintptr_t)_heap.start + size;
 	//assert(brk <= (uintptr_t)_heap.end);
 	//assert((uintptr_t)(brk-size) % size == 0);
 	//uintptr_t capacity = (uintptr_t)_heap.end - head.brk;
-	/*Useful
+
 	void* ptr = NULL;
 	header_t header_ptr;  //用于分配出的空间的信息
-	Useful*/
+
 	/*
 	if(capacity <= LACK) {
         header* prev = head.next;
@@ -139,7 +126,7 @@ static void *kalloc(size_t size) {
 	}
 	*/
 	//else {
-	/*Useful
+	
         header_t tmp = head; //用于保存空闲空间信息
 
 		memset((void*)(head.brk-sizeof(header_t)), VALID, sizeof(header_t));
@@ -174,14 +161,9 @@ static void *kalloc(size_t size) {
     	void* end = (void*)((uintptr_t)ptr+size-1);
 		memset(end, MARK, 1);
 	//}
-	Useful*/
+	
+	return ptr;
 
-	    unlock();
-#ifdef CUR
-	    printf("[#LOCK]:CPU:%d Alloc * Released!\n", _cpu());
-#endif
-  	    return (void *)(brk - size);
-	}
 }
 
 /*
@@ -205,10 +187,6 @@ void brk_down() {
 */
 
 static void kfree(void *ptr) {
-	lock();
-#ifdef CUR
-	printf("[#LOCK]:CPU:%d Free * Acquired!\n", _cpu());
-#endif
 	/*
 	lock();
 #ifdef CUR
@@ -279,10 +257,6 @@ static void kfree(void *ptr) {
 	printf("[#LOCK]:CPU:%d * Released!\n", _cpu());
 #endif
 */
-	unlock();
-#ifdef CUR
-	printf("[#LOCK]:CPU:%d Free * Released!\n", _cpu());
-#endif
 }
 
 
@@ -293,14 +267,14 @@ static void pmm_init() {
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);
   locked = 0;
   brk = (uintptr_t)_heap.start;
-  /*
+
   memset((void*)_heap.start, VALID, pmsize);
   head.brk = (uintptr_t)_heap.start+sizeof(header_t);
   head.size = pmsize-sizeof(header_t);
   head.type = FREE_SPACE;
   head.next =  NULL;
   memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
-  */
+  
 //  printf("Initial brk at :%d\n", head.brk);
 
   

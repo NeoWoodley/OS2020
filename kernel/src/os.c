@@ -1,7 +1,6 @@
 #include <common.h>
 #include <klib.h>
 
-int i = 0;
 /*
 enum ops { OP_ALLOC = 1, OP_FREE };
 struct op {
@@ -29,7 +28,8 @@ void stress_test() {
 
 void smoke_test() {
 	printf("Begin in CPU: %d\n",_cpu());
-    for(; i < 400; i ++){
+	int i = 0;
+    for(; i < 40; i ++){
 		if(i%4 == 0) {
 	        //uintptr_t ptr = (uintptr_t)pmm->alloc(sizeof(char));
 	        pmm->alloc(sizeof(char));
@@ -62,7 +62,6 @@ void smoke_test() {
 
 static void os_init() {
   pmm->init();
-  i = 0;
 }
 
 static void os_run() {

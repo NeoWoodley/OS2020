@@ -66,6 +66,7 @@ struct page_t {
     uintptr_t brk;
 
 	uintptr_t status;
+	uintptr_t No;
 
 	struct page_t* next;
 };
@@ -83,7 +84,7 @@ uintptr_t page_construct() {
 		    (uintptr_t)_heap.start + size;
 	    void* ptr = (void *)(page_brk - size);	
     	    
-	    page_t head = {(uintptr_t)ptr, (uintptr_t)ptr+sizeof(page_t), FREE, (page_t*)page_brk};
+	    page_t head = {(uintptr_t)ptr, (uintptr_t)ptr+sizeof(page_t), FREE, count, (page_t*)page_brk};
 
 	    memcpy(ptr, &head, sizeof(page_t));
 //		printf("ptr: %x\n", (uintptr_t)ptr);
@@ -159,6 +160,9 @@ static void *kalloc(size_t size) {
 	  }
 
 	  if((uintptr_t)page == (uintptr_t)_heap.end) {
+#ifdef CUR
+          printf("Alloc Failed!\n");
+#endif
 		  unlock();
 	      return NULL;
 	  }
@@ -167,6 +171,10 @@ static void *kalloc(size_t size) {
 	  memset((void*)(uintptr_t)page+4*KiB-1, MARK, 1);
 
 	  page->status = FULL;
+
+#ifdef CUR
+          printf("The whole page:%d alloced!\n", page->No);
+#endif
 
 	  unlock();
 	  return (void*)page;
@@ -181,6 +189,9 @@ static void *kalloc(size_t size) {
 	  }
 
 	  if((uintptr_t)page == (uintptr_t)_heap.end) {
+#ifdef CUR
+          printf("Alloc Failed!\n");
+#endif
 		  unlock();
 	      return NULL;
 	  }
@@ -198,6 +209,9 @@ static void *kalloc(size_t size) {
 	      page->status = USED;
 	  }
 
+#ifdef CUR
+      printf("The space in page %d alloced!\n", page->No);
+#endif
       unlock();
 	  return (void*)ptr;
      
@@ -288,7 +302,10 @@ static void kfree(void *ptr) {
 		}
 		assert((uintptr_t)page == (uintptr_t)ptr && (uintptr_t)page <= (uintptr_t)_heap.end);
         memset((void*)((uintptr_t)ptr+sizeof(page_t)), VALID, 4*KiB-sizeof(page_t)); 		
-        page->status = FREE;
+        page->status = FREE;  
+#ifdef CUR
+        printf("The whole page %d was freed!\n", page->No);
+#endif
 		unlock();
 	}
 	else {
@@ -326,6 +343,9 @@ static void kfree(void *ptr) {
 	   else {
 	       ((page_t*)page)->status = USED;
 	   }
+#ifdef CUR
+        printf("The space in page %d was freed!\n", ((page_t*)page)->No);
+#endif
 	   unlock();
 	}
 	/*

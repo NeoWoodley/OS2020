@@ -269,6 +269,40 @@ void brk_down() {
 */
 
 static void kfree(void *ptr) {
+	if((uintptr_t)ptr % (4*KiB) == 0) {
+	    page_t* page = page_head;  
+		while((uintptr_t)ptr != (uintptr_t)page) {
+		   page = page->next; 
+		}
+		assert((uintptr_t)page == (uintptr_t)ptr && (uintptr_t)page <= (uintptr_t)_heap.end);
+        memset((void*)((uintptr_t)ptr+sizeof(page_t)), VALID, 4*KiB-sizeof(page_t)); 		
+	}
+	else {
+	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % 4*KiB);
+	   //uintptr_t page_start = (page_t*)page->ptr;
+	   uintptr_t brk = ((page_t*)page)->brk;
+	   uintptr_t size = 0;
+	   char* tmp = (char*)ptr;
+	   while(*tmp == MAGIC) {
+	       *tmp = VALID;
+		   size ++;
+		   tmp ++;
+
+	   }
+	   assert(*tmp == MARK);
+	   *tmp =  VALID;
+	   tmp ++;
+	   size ++;
+	   if((uintptr_t)tmp == brk) {
+	      ((page_t*)page)->brk = brk - size;	   
+	   }
+
+	   tmp = (char*)(((page_t*)page)->brk);
+	   tmp --;
+	   while(*tmp == VALID && (uintptr_t)tmp >= page+sizeof(page_t));
+	   tmp ++;
+	   ((page_t*)page)->brk = (uintptr_t)tmp;
+	}
 	/*
 	lock();
 #ifdef CUR
@@ -354,8 +388,9 @@ static void pmm_init() {
   memset((void*)_heap.start, VALID, pmsize);
   page_brk = (uintptr_t)_heap.start;
   page_head = (page_t*)page_brk;
-  uintptr_t page_nums = page_construct();
-  printf("Got %d pages of heap!\n", page_nums);
+  //uintptr_t page_nums = page_construct();
+  page_construct();
+  //printf("Got %d pages of heap!\n", page_nums);
   //head.next =  NULL;
   //memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
   

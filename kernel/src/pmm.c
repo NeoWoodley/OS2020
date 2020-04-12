@@ -6,7 +6,7 @@
 
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
-#define CUR
+//#define CUR
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
@@ -113,9 +113,17 @@ static void *kalloc(size_t size) {
 #ifdef CUR
 	printf("[#LOCK]:CPU:%d Alloc * Acquired!\n", _cpu());
 #endif
-	brk = brk ? ROUNDUP(brk, size) + size : (uintptr_t)_heap.start + size;
-	assert(brk <= (uintptr_t)_heap.end);
-	assert((uintptr_t)(brk-size) % size == 0);
+	if((uintptr_t)brk + size >= (uintptr_t)_heap.end) {
+	    unlock();
+#ifdef CUR
+	    printf("[#LOCK]:CPU:%d Alloc * Released!\n", _cpu());
+#endif
+	    return NULL;
+	}
+	else {
+     	brk = brk ? ROUNDUP(brk, size) + size : (uintptr_t)_heap.start + size;
+	//assert(brk <= (uintptr_t)_heap.end);
+	//assert((uintptr_t)(brk-size) % size == 0);
 	//uintptr_t capacity = (uintptr_t)_heap.end - head.brk;
 	/*Useful
 	void* ptr = NULL;
@@ -168,11 +176,12 @@ static void *kalloc(size_t size) {
 	//}
 	Useful*/
 
-	unlock();
+	    unlock();
 #ifdef CUR
-	printf("[#LOCK]:CPU:%d Alloc * Released!\n", _cpu());
+	    printf("[#LOCK]:CPU:%d Alloc * Released!\n", _cpu());
 #endif
-  	return (void *)(brk - size);
+  	    return (void *)(brk - size);
+	}
 }
 
 /*

@@ -368,6 +368,9 @@ static void kfree(void *ptr) {
 	}
 	else {
 	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % 4*KiB);
+#ifdef CUR
+        printf("Page:%p\n",page);
+#endif
 	   //uintptr_t page_start = (page_t*)page->ptr;
 	   uintptr_t brk = ((page_t*)page)->brk;
 #ifdef CUR

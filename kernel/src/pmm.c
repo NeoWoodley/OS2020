@@ -76,7 +76,7 @@ page_t page_head;
 
 void page_construct() {
 	uintptr_t size = 4 * KiB;
-	for(int i = 0 ; i < (1<<15)-1; i ++) {
+	for(int i = 0 ; i < (1<<14); i ++) {
 	    page_brk = page_brk?
 		    ROUNDUP(page_brk, size) + size :
 		    (uintptr_t)_heap.start + size;

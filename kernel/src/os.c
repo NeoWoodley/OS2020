@@ -27,7 +27,10 @@ void stress_test() {
 */
 
 void smoke_test() {
-	printf("Begin in CPU: %d\n",_cpu());
+	while(1) {
+	    pmm->alloc(4096*sizeof(char));
+	}
+	/*
 	int i = 0;
     for(; i < 40; i ++){
 		if(i%4 == 0) {
@@ -55,7 +58,7 @@ void smoke_test() {
 //		    pmm->free((void*)ptr);	
 		}
 	}
-	printf("End in CPU: %d\n",_cpu());
+    */
 	//printf("Done From cpu:%d\n", _cpu());
   while (1) ;
 }

@@ -6,6 +6,8 @@
 
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
+#define CUR
+
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
 	asm volatile ("lock xchg %0, %1":
@@ -103,6 +105,9 @@ void free_chk(uintptr_t begin, uintptr_t end) {
 
 static void *kalloc(size_t size) {
 	lock();
+#ifdef CUR
+	printf("[#LOCK]:Acquired!\n");
+#endif
 	//uintptr_t capacity = (uintptr_t)_heap.end - head.brk;
 	void* ptr = NULL;
 	header_t header_ptr;  //用于分配出的空间的信息
@@ -152,6 +157,9 @@ static void *kalloc(size_t size) {
 	//}
 
 	unlock();
+#ifdef CUR
+	printf("[#LOCK]:Released!\n");
+#endif
   	return ptr;
 }
 
@@ -176,6 +184,9 @@ void brk_down() {
 */
 
 static void kfree(void *ptr) {
+#ifdef CUR
+	printf("[#LOCK]:Acquired!\n");
+#endif
 	lock();
 
 	header_t free_sp;
@@ -227,6 +238,9 @@ static void kfree(void *ptr) {
 
 	next->next = (header_t*)((uintptr_t)tmp);
 
+#ifdef CUR
+	printf("[#LOCK]:Released!\n");
+#endif
 	/*
 	header_t* index = &head;
 
@@ -237,6 +251,7 @@ static void kfree(void *ptr) {
 	printf("addr:%p\n", index->brk);
     */
 
+	unlock();
 }
 
 

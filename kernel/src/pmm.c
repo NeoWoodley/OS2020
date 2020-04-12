@@ -370,6 +370,10 @@ static void kfree(void *ptr) {
 	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % 4*KiB);
 	   //uintptr_t page_start = (page_t*)page->ptr;
 	   uintptr_t brk = ((page_t*)page)->brk;
+#ifdef CUR
+        printf("MARK-5\n");
+        printf("brk:%p\n", ((page_t*)page)->brk);
+#endif
 	   uintptr_t size = 0;
 	   char* tmp = (char*)ptr;
 #ifdef CUR

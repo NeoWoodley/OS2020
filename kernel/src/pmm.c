@@ -392,7 +392,7 @@ static void kfree(void *ptr) {
         printf("MARK3\n");
 #endif
 	       while(*tmp == VALID && (uintptr_t)tmp >= page+sizeof(page_t)) {
-			   printf("%c\t",*tmp);
+			   printf("H");
 			   tmp --;
 		   }
 	       printf("\n");

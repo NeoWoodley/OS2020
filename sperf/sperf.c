@@ -2,7 +2,22 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+/*
+   int execve(
+       const char *filename,
+	   char *const argv[],
+	   char *const envp[]
+   );
+*/
+
 int main(int argc, char *argv[]) {
+  
+  printf("-----------------------\n");
+  for(int i = 0; i < agrc; i ++) {
+      printf("%s\n",agrv[i]);
+  }
+  printf("-----------------------\n");
+
   char *exec_argv[] = { "strace", "ls", NULL, };
   char *exec_envp[] = { "PATH=/bin", NULL, };
   execve("strace",          exec_argv, exec_envp);

@@ -8,6 +8,8 @@
 	   char *const argv[],
 	   char *const envp[]
    );
+
+   strace -T 显示系统调用所花时间
 */
 
 int main(int argc, char *argv[]) {
@@ -22,7 +24,7 @@ int main(int argc, char *argv[]) {
   char *exec_envp[] = { "PATH=/bin", NULL, };
   execve("strace",          exec_argv, exec_envp);
   execve("/bin/strace",     exec_argv, exec_envp);
-  execve("/usr/bin/strace", exec_argv, exec_envp);
+//  execve("/usr/bin/strace", exec_argv, exec_envp);
   perror(argv[0]);
   exit(EXIT_FAILURE);
 }

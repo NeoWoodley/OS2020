@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
   for(int i = 0; i < argc-1; i ++) {
       exec_argv[i] = argv[i+1];
   }
+  exec_argv[argc-1] = NULL;
   char *exec_envp[] = { "PATH=/bin", NULL, };
   execve("/usr/bin/strace", exec_argv, exec_envp);
   perror(argv[0]);

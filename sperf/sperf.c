@@ -14,12 +14,14 @@
 
 int main(int argc, char *argv[]) {
 
+  /*
   char *exec_argv[argc];
   for(int i = 0; i < argc-1; i ++) {
       exec_argv[i] = argv[i+1];
   }
   exec_argv[argc-1] = NULL;
   char *exec_envp[] = { "PATH=/bin", NULL, };
+  */
   char *path;
   path = getenv("PATH");
   printf("path:%s\n",path);

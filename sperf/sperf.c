@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
   perror(argv[0]);
   exit(EXIT_FAILURE);
   */
-  printf("-----------------------\n");
+  printf("----------argc:%d------------\n",argc);
   for(int i = 0; i < argc; i ++) {
       printf("i:%d\t%s\n",i, argv[i]);
   }

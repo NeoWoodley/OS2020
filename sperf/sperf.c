@@ -19,10 +19,11 @@ int main(int argc, char *argv[]) {
       exec_argv[i] = argv[i+1];
   }
   exec_argv[argc-1] = NULL;
-//  char *exec_envp[] = { "PATH=/bin", NULL, };
-  char *exec_envp[] = { 0, NULL, };
+  char *exec_envp[] = { "PATH=/bin", NULL, };
+//  char *exec_envp[] = { 0, NULL, };
 
-  execve("/usr/bin/strace", exec_argv, exec_envp);
+//  execve("/usr/bin/strace", exec_argv, exec_envp);
+  execve("strace", exec_argv, exec_envp);
   perror(argv[0]);
   exit(EXIT_FAILURE);
   /*

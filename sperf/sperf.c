@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
   }
   exec_argv[argc-1] = NULL;
   char *exec_envp[] = { "PATH=/bin", NULL, };
-  char path = "";
+  char *path;
   path = getenv("PATH");
   printf("path:%s\n",path);
 //  char *exec_envp[] = { 0, NULL, };

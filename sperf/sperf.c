@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
       printf("i:%d\t%s\n",i, argv[i]);
   }
   printf("-----------------------\n");
-	return 0；
+	return 0;
 
 /*
   char *exec_argv[] = { "strace", "ls", NULL, };

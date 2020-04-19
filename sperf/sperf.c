@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
   for(int i = 0; i < argc-1; i ++) {
       exec_argv[i+2] = argv[i+1];
   }
-  exec_argv[argc-1] = NULL;
+  
 
   for(int i = 0; i < argc - 1 + 2; i ++) {
       printf("i:%d\t%s\n",i, exec_argv[i]);

@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
 
   char *exec_argv[argc + 2];
   exec_argv[0] = "strace";
-  exec_argv[0] = "-T";
+  exec_argv[1] = "-T";
 
   for(int i = 0; i < argc-1; i ++) {
       exec_argv[i+2] = argv[i+1];

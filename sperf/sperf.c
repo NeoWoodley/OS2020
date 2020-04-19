@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.c>
 
 /*
    int execve(
@@ -22,9 +23,14 @@ int main(int argc, char *argv[]) {
   exec_argv[argc-1] = NULL;
   char *exec_envp[] = { "PATH=/bin", NULL, };
   */
-  char *path;
+  char PATH[128] = "";
+  char *path = NULL; 
+  char path_name[6] = "PATH=";
+  strcpy(PATH, path_name);
   path = getenv("PATH");
-  printf("path:%s\n",path);
+  strcat(PATH, path);
+
+  printf("path:%s\n",PATH);
 //  char *exec_envp[] = { 0, NULL, };
 
   /*

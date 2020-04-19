@@ -29,6 +29,11 @@ int main(int argc, char *argv[]) {
   }
   exec_argv[argc-1] = NULL;
 
+  for(int i = 0; i < argc - 1; i ++) {
+      printf("i:%d\t%s\n",i, exec_argv[i]);
+  }
+  printf("-----------------------\n");
+
   char PATH[128] = "";
   char *path = NULL; 
   char path_name[6] = "PATH=";

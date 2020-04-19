@@ -23,17 +23,12 @@ int main(int argc, char *argv[]) {
   char *exec_argv[argc + 2];
   exec_argv[0] = "strace";
   exec_argv[1] = "-T";
+  exec_argv[agrc + 2 - 1] = NULL;
 
   for(int i = 0; i < argc-1; i ++) {
       exec_argv[i+2] = argv[i+1];
   }
   
-
-  for(int i = 0; i < argc - 1 + 2; i ++) {
-      printf("i:%d\t%s\n",i, exec_argv[i]);
-  }
-  printf("-----------------------\n");
-
   char PATH[128] = "";
   char *path = NULL; 
   char path_name[6] = "PATH=";
@@ -43,7 +38,8 @@ int main(int argc, char *argv[]) {
 
   char *exec_envp[] = { PATH, NULL, };
 
-  /*
+  int pipe(int fildes[2]);
+
   if(pipe(fildes) != 0) {
 	  printf("Pipe failed!\n");
       assert(0);
@@ -58,7 +54,6 @@ int main(int argc, char *argv[]) {
 	  //父进程，读取strace输出并统计
   
   }
-*/
 
   execve("/usr/bin/strace", exec_argv, exec_envp);
 //  perror(argv[0]);

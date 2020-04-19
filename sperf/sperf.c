@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 /*
    int execve(
@@ -11,13 +13,18 @@
    );
 
    strace -T 显示系统调用所花时间
+
+
 */
 
 int main(int argc, char *argv[]) {
 
-  char *exec_argv[argc];
+  char *exec_argv[argc + 2];
+  exec_argv[0] = "strace";
+  exec_argv[0] = "-T";
+
   for(int i = 0; i < argc-1; i ++) {
-      exec_argv[i] = argv[i+1];
+      exec_argv[i+2] = argv[i+1];
   }
   exec_argv[argc-1] = NULL;
 
@@ -29,6 +36,23 @@ int main(int argc, char *argv[]) {
   strcat(PATH, path);
 
   char *exec_envp[] = { PATH, NULL, };
+
+  if(pipe(fildes) != 0) {
+	  printf("Pipe failed!\n");
+      assert(0);
+  }
+  /*
+  pid_t pid = fork();
+  if(pid == 0) {
+      //子进程，执行strace命令
+	  execve();
+	  //不应该执行此处代码，否则execve失败，出错处理
+  }
+  else {
+	  //父进程，读取strace输出并统计
+  
+  }
+*/
 
   execve("/usr/bin/strace", exec_argv, exec_envp);
 //  perror(argv[0]);

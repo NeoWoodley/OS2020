@@ -38,11 +38,11 @@ int main(int argc, char *argv[]) {
 
   char *exec_envp[] = { PATH, NULL, };
 
+  /*
   if(pipe(fildes) != 0) {
 	  printf("Pipe failed!\n");
       assert(0);
   }
-  /*
   pid_t pid = fork();
   if(pid == 0) {
       //子进程，执行strace命令

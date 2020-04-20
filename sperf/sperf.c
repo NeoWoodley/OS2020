@@ -39,6 +39,11 @@ void lib_init() {
 void eofsmash() {
     intptr_t len = strlen(read_buf);
 	printf("len: %ld\n", len);
+	for(intptr_t i = 1; i < len; i++) {
+	    if(read_buf[i] == '\n' && read_buf[i-1] != '>') {
+		    read_buf[i] = 32;
+		}
+	}
 }
 
 int main(int argc, char *argv[]) {
@@ -89,7 +94,7 @@ int main(int argc, char *argv[]) {
 
 	  eofsmash();
 	  //printf("%ld\n", read_length);
-	  //fprintf(stderr, "%s\n", &read_buf[0]);
+	  fprintf(stderr, "%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计
   }
 

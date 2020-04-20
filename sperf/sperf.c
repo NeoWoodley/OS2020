@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
   if(pid == 0) {
 	  close(fildes[0]);
 	  close(2);
+	  close(1);
 	  dup2(fildes[1], 2);
       //子进程，执行strace命令
 	  execve("/usr/bin/strace", exec_argv, exec_envp);

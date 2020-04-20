@@ -5,7 +5,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <regex.h>
+//#include <regex.h>
 
 /*
    int execve(
@@ -34,6 +34,11 @@ void lib_init() {
 	    libitem[i].time = 0;
 		memset(libitem[i].name, '\0', 64);
 	}
+}
+
+void eofsmash() {
+    intptr_t len = strlen(read_buf);
+	printf("len: %ld\n", len);
 }
 
 int main(int argc, char *argv[]) {
@@ -79,11 +84,12 @@ int main(int argc, char *argv[]) {
 	  close(fildes[1]);
 	  intptr_t read_length = read(fildes[0], read_buf, 10240);
 
-	  regmatch_t get_match;
-	  regex_t reg;
+	  //regmatch_t get_match;
+	  //regex_t reg;
 
+	  eofsmash();
 	  //printf("%ld\n", read_length);
-	  fprintf(stderr, "%s\n", &read_buf[0]);
+	  //fprintf(stderr, "%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计
   }
 

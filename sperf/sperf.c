@@ -14,8 +14,6 @@
    );
 
    strace -T 显示系统调用所花时间
-
-
 */
 
 int main(int argc, char *argv[]) {
@@ -38,7 +36,7 @@ int main(int argc, char *argv[]) {
 
   char *exec_envp[] = { PATH, NULL, };
 
-  int pipe(int fildes[2]);
+  int fildes[2];
 
   if(pipe(fildes) != 0) {
 	  printf("Pipe failed!\n");
@@ -46,16 +44,19 @@ int main(int argc, char *argv[]) {
   }
   pid_t pid = fork();
   if(pid == 0) {
+	  close(fd[0]);
+	  dup2(stderr, fd[1]);
       //子进程，执行strace命令
-	  execve();
+	  execve("/usr/bin/strace", exec_argv, exec_envp);
 	  //不应该执行此处代码，否则execve失败，出错处理
   }
   else {
+	  close(fd[1]);
 	  //父进程，读取strace输出并统计
   
   }
 
-  execve("/usr/bin/strace", exec_argv, exec_envp);
+//  execve("/usr/bin/strace", exec_argv, exec_envp);
 //  perror(argv[0]);
 //  exit(EXIT_FAILURE);
 //  char *exec_envp[] = { 0, NULL, };

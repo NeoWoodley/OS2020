@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
   else {
 	  sleep(1);
 	  close(fildes[1]);
-	  close(1);
+	  close(2);
 	  intptr_t read_length = read(fildes[0], read_buf, 10240);
 
 

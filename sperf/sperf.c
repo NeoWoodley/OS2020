@@ -5,6 +5,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <regex.h>
 
 /*
    int execve(
@@ -28,7 +29,16 @@ typedef struct item_t item_t;
 
 item_t libitem[128];
 
+void lib_init() {
+    for(int i = 0; i < 128; i ++) {
+	    libitem[i].time = 0;
+		memset(libitem[i].name, '\0', 64);
+	}
+}
+
 int main(int argc, char *argv[]) {
+
+  lib_init();
 
   char *exec_argv[argc + 2];
   exec_argv[0] = "strace";
@@ -67,10 +77,15 @@ int main(int argc, char *argv[]) {
   else {
 	  sleep(1);
 	  close(fildes[1]);
+	  close(1);
 	  intptr_t read_length = read(fildes[0], read_buf, 10240);
 
-	  printf("%ld\n", read_length);
-	  printf("%s\n", &read_buf[0]);
+
+	  regmatch_t get_match;
+	  regex_t reg;
+
+	  //printf("%ld\n", read_length);
+	  //printf("%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计
   }
 

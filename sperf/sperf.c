@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
   pid_t pid = fork();
   if(pid == 0) {
 	  close(fildes[0]);
-	  dup2(stderr, fildes[1]);
+	  dup2(2, fildes[1]);
       //子进程，执行strace命令
 	  execve("/usr/bin/strace", exec_argv, exec_envp);
 	  //不应该执行此处代码，否则execve失败，出错处理

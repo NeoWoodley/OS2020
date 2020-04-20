@@ -16,6 +16,9 @@
    strace -T 显示系统调用所花时间
 */
 
+
+char read_buf[10240];
+
 int main(int argc, char *argv[]) {
 
   char *exec_argv[argc + 2];
@@ -46,14 +49,15 @@ int main(int argc, char *argv[]) {
   if(pid == 0) {
 	  close(fildes[0]);
 	  //close(2);
-	  //dup2(fildes[1], 2);
-	  dup2(2, fildes[1]);
+	  dup2(fildes[1], 2);
       //子进程，执行strace命令
 	  execve("/usr/bin/strace", exec_argv, exec_envp);
 	  //不应该执行此处代码，否则execve失败，出错处理
   }
   else {
 	  close(fildes[1]);
+	  size_t read_length = read(fildes[0], read_buf, sizeof(read_buf));
+	  printf("Read %d chars\n", read_length);
 	  //父进程，读取strace输出并统计
   
   }

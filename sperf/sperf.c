@@ -44,14 +44,14 @@ int main(int argc, char *argv[]) {
   }
   pid_t pid = fork();
   if(pid == 0) {
-	  close(fd[0]);
-	  dup2(stderr, fd[1]);
+	  close(fildes[0]);
+	  dup2(stderr, fildes[1]);
       //子进程，执行strace命令
 	  execve("/usr/bin/strace", exec_argv, exec_envp);
 	  //不应该执行此处代码，否则execve失败，出错处理
   }
   else {
-	  close(fd[1]);
+	  close(fildes[1]);
 	  //父进程，读取strace输出并统计
   
   }

@@ -49,19 +49,18 @@ int main(int argc, char *argv[]) {
   if(pid == 0) {
 	  close(fildes[0]);
 	  //close(2);
-	  dup2(fildes[1], 2);
+	  //dup2(fildes[1], 2);
       //子进程，执行strace命令
 	  execve("/usr/bin/strace", exec_argv, exec_envp);
 	  //不应该执行此处代码，否则execve失败，出错处理
   }
   else {
 	  close(fildes[1]);
-	  intptr_t read_length = read(fildes[0], &read_buf[0],10240);
+	  //intptr_t read_length = read(fildes[0], &read_buf[0],10240);
 
-	  printf("%ld\n", read_length);
-	  printf("%s\n", &read_buf[0]);
+	  //printf("%ld\n", read_length);
+	  //printf("%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计
-  
   }
 
 //  execve("/usr/bin/strace", exec_argv, exec_envp);

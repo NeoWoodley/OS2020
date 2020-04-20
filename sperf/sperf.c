@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 	  dup2(fildes[1], 2);
       //子进程，执行strace命令
 	  char* test = "execve(\"/bin/ls\", [\"ls\"], 0x7ffe725f1fd8 /* 1 var */)";
-	  write(fildes[1], );
+	  write(fildes[1], test strlen(test) );
 	  execve("/usr/bin/strace", exec_argv, exec_envp);
 	  //不应该执行此处代码，否则execve失败，出错处理
   }

@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
   if(pid == 0) {
 	  close(fildes[0]);
 	  //close(2);
-	  char *test = "Something Wrong Happened!\n"
+	  char *test = "Something Wrong Happened!\n";
 	  dup2(fildes[1], 2);
 	  write(fildes[1], test, strlen(test));
       //子进程，执行strace命令

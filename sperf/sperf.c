@@ -19,6 +19,15 @@
 
 char read_buf[10240];
 
+struct item_t {
+    char name[64];
+	double time;
+};
+
+typedef struct item_t item_t;
+
+item_t libitem[128];
+
 int main(int argc, char *argv[]) {
 
   char *exec_argv[argc + 2];
@@ -60,7 +69,7 @@ int main(int argc, char *argv[]) {
 	  close(fildes[1]);
 	  intptr_t read_length = read(fildes[0], read_buf, 10240);
 
-	  //printf("%ld\n", read_length);
+	  printf("%ld\n", read_length);
 	  printf("%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计
   }

@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
   else {
 	  sleep(1);
 	  close(fildes[1]);
-	  close(2);
+	  close(1);
 	  intptr_t read_length = read(fildes[0], read_buf, 10240);
 
 
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
 	  regex_t reg;
 
 	  //printf("%ld\n", read_length);
-	  printf("%s\n", &read_buf[0]);
+	  fprintf(stderr, "%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计
   }
 

@@ -57,6 +57,9 @@ int main(int argc, char *argv[]) {
   else {
 	  close(fildes[1]);
 	  size_t read_length = read(fildes[0], &read_buf[0], 10240);
+	  size_t len = strlen(read_buf);
+
+	  printf("%d\n", len);
 	  printf("%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计
   

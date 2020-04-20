@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
   }
   else {
 	  close(fildes[1]);
-	  uintptr_t read_length = read(fildes[0], &read_buf[0],10240);
+	  intptr_t read_length = read(fildes[0], &read_buf[0],10240);
 
 	  printf("%ld\n", read_length);
 	  printf("%s\n", &read_buf[0]);

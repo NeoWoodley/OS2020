@@ -170,8 +170,6 @@ int main(int argc, char *argv[]) {
 
   lib_init();
 
-  printf("e-6:%f\n", e-6);
-
   char *exec_argv[argc + 2];
   exec_argv[0] = "strace";
   exec_argv[1] = "-T";

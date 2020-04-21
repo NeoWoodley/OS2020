@@ -83,7 +83,7 @@ int my_strcmp(char *str1, char* str2) {
 }
 
 int readline() {
-    char exit[6] = "exit_"
+    char exit[6] = "exit_";
 
     linebufsmash();
 	char *tmp = read_buf;
@@ -114,7 +114,7 @@ void search_insert(item_t *item) {
 		}
 	}
 
-	strcpy(libtem[end].name, item->name);
+	strcpy(libitem[end].name, item->name);
 	libitem[end].time = item->time;
     
 	end ++;

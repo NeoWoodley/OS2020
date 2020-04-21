@@ -5,7 +5,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-//#include <regex.h>
+#include <regex.h>
 
 /*
    int execve(
@@ -17,8 +17,11 @@
    strace -T 显示系统调用所花时间
 */
 
+#define e-6 0.000001
 
 char read_buf[10240];
+
+char line_buf[256];
 
 struct item_t {
     char name[64];
@@ -36,9 +39,15 @@ void lib_init() {
 	}
 }
 
+void linebufsmash() {
+    for(int i = 0; i < 256; i ++) {
+	    line_buf[i] = '\0';
+	}
+}
+
 void eofsmash() {
     intptr_t len = strlen(read_buf);
-	printf("len: %ld\n", len);
+	//printf("len: %ld\n", len);
 	for(intptr_t i = 1; i < len; i++) {
 	    if(read_buf[i] == '\n' && read_buf[i-1] != '>') {
 		    read_buf[i] = 32;
@@ -46,9 +55,57 @@ void eofsmash() {
 	}
 }
 
+void readline() {
+    linebufsmash();
+	char *tmp = read_buf;
+	while(*tmp == '\0') {
+	    tmp ++;
+	}
+	int i = 0;
+	while(*tmp != '\n') {
+	    line_buf[i] = *tmp;
+		*tmp = '\0';
+		i ++;
+		tmp ++;
+	}
+	*tmp = '\0';
+}
+
+void info_extract() {
+    item* tmp = (item*)malloc(sizeof(item));
+	char *buf = read_buf;
+	int i = 0;
+	while(*buf != '(') {
+	   tmp->name[i] = *buf;
+	   i ++;
+	   buf ++;
+	}
+
+	while(*buf != '<') {
+	    buf ++
+	}
+	buf ++;
+    
+	int i = 0;
+	char time[10];
+	for( ; i < 10; i ++) {
+	    time[i] = '\0';
+	}
+
+    i = 0;
+	while(*buf != '>') {
+	   time[i] = *buf;
+	   buf ++;
+	   i ++ 
+	}
+
+}
+
 int main(int argc, char *argv[]) {
 
   lib_init();
+
+  printf("e-6:%f\n", e-6);
 
   char *exec_argv[argc + 2];
   exec_argv[0] = "strace";
@@ -94,7 +151,7 @@ int main(int argc, char *argv[]) {
 
 	  eofsmash();
 	  //printf("%ld\n", read_length);
-	  fprintf(stderr, "%s\n", &read_buf[0]);
+	  //fprintf(stderr, "%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计
   }
 

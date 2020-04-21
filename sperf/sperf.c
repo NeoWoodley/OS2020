@@ -132,7 +132,7 @@ void info_extract() {
 	tmp->name[i] = '\0';
 
 	while(*buf != '<') {
-	    buf ++
+	    buf ++;
 	}
 	buf ++;
     

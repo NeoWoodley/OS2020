@@ -7,6 +7,8 @@
 #include <sys/wait.h>
 #include <regex.h>
 
+#define DEBUG
+
 /*
    int execve(
        const char *filename,
@@ -83,6 +85,11 @@ int my_strcmp(char *str1, char* str2) {
 }
 
 int readline() {
+
+#ifdef DEBUG
+	printf("Readline() Begin!\n");
+#endif
+
     char exit[6] = "exit_";
 
     linebufsmash();
@@ -100,16 +107,31 @@ int readline() {
 	*tmp = '\0';
 
 	if(my_strcmp(read_buf, exit) == 0) {
+
+#ifdef DEBUG
+	    printf("Readline() End!\n");
+#endif
 	    return 1;
 	}
+
+#ifdef DEBUG
+	printf("Readline() End!\n");
+#endif
 
 	return 0;
 }
 
 void search_insert(item_t *item) {
+#ifdef DEBUG
+	    printf("Search_insert() Begin!\n");
+#endif
 	for(int i = 0; i < end; i ++) {
 		if(my_strcmp(item->name, libitem[i].name) == 0) {
 			libitem[i].time += item->time;
+
+#ifdef DEBUG
+	    printf("Search_insert() End!\n");
+#endif
 			return;
 		}
 	}
@@ -118,9 +140,16 @@ void search_insert(item_t *item) {
 	libitem[end].time = item->time;
     
 	end ++;
+
+#ifdef DEBUG
+	    printf("Search_insert() End!\n");
+#endif
 }
 
 void info_extract() {
+#ifdef DEBUG
+	    printf("Info_extract() Begin!\n");
+#endif
     item_t* tmp = (item_t*)malloc(sizeof(item_t));
 	char *buf = read_buf;
 	int i = 0;
@@ -164,6 +193,9 @@ void info_extract() {
 	tmp->time = factor * base;
 
 	search_insert(tmp);
+#ifdef DEBUG
+	    printf("Info_extract() End!\n");
+#endif
 }
 
 int main(int argc, char *argv[]) {
@@ -198,7 +230,7 @@ int main(int argc, char *argv[]) {
   if(pid == 0) {
 	  close(fildes[0]);
 	  close(2);
-	   close(1);
+	  close(1);
 	  dup2(fildes[1], 2);
       //子进程，执行strace命令
 	  execve("/usr/bin/strace", exec_argv, exec_envp);

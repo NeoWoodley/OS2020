@@ -146,7 +146,7 @@ void info_extract() {
 	while(*buf != '>') {
 	   time[i] = *buf;
 	   buf ++;
-	   i ++ 
+	   i ++;
 	}
 
 	double base = 0.000001;
@@ -154,7 +154,7 @@ void info_extract() {
 	double factor = 0.0;
 
     while(*mark == '0' || *mark == '.') {
-		*mark ++	
+		*mark ++;	
 	}
 	while(*mark != '\0') {
 		factor *= 10;

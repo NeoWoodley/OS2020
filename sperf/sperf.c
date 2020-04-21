@@ -115,6 +115,7 @@ int readline() {
 	}
 
 #ifdef DEBUG
+	printf("red_buf content:%s\n", redbuf);
 	printf("Readline() End!\n");
 #endif
 

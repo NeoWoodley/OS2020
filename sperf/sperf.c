@@ -17,8 +17,6 @@
    strace -T 显示系统调用所花时间
 */
 
-#define e-6 0.000001
-
 char read_buf[10240];
 
 char line_buf[256];
@@ -31,6 +29,8 @@ struct item_t {
 typedef struct item_t item_t;
 
 item_t libitem[128];
+
+int end = 0;
 
 void lib_init() {
     for(int i = 0; i < 128; i ++) {
@@ -55,7 +55,36 @@ void eofsmash() {
 	}
 }
 
-void readline() {
+int my_strcmp(char *str1, char* str2) {
+    size_t len_str1 = strlen(str1);
+    size_t len_str2 = strlen(str2);
+
+	if(len_str1 > len_str2) {
+	    return 1;
+	}
+
+	else if(len_str1 < len_str2) {
+	    return -1;
+	}
+
+	else {
+		for(int i = 0; i < len_str1; i ++) {
+		    if( str1[i] > str2[i] ) {
+			    return 1;
+			}
+
+			if( str1[i] < str2[i] ) {
+			    return -1;
+			} 
+		}
+
+		return 0;
+	}
+}
+
+int readline() {
+    char exit[6] = "exit_"
+
     linebufsmash();
 	char *tmp = read_buf;
 	while(*tmp == '\0') {
@@ -69,6 +98,26 @@ void readline() {
 		tmp ++;
 	}
 	*tmp = '\0';
+
+	if(my_strcmp(read_buf, exit) == 0) {
+	    return 1;
+	}
+
+	return 0;
+}
+
+void search_insert(item_t *item) {
+	for(int i = 0; i < end; i ++) {
+		if(my_strcmp(item->name, libitem[i].name) == 0) {
+			libitem[i].time += item->time;
+			return;
+		}
+	}
+
+	strcpy(libtem[end].name, item->name);
+	libitem[end].time = item->time;
+    
+	end ++;
 }
 
 void info_extract() {
@@ -80,6 +129,7 @@ void info_extract() {
 	   i ++;
 	   buf ++;
 	}
+	tmp->name[i] = '\0';
 
 	while(*buf != '<') {
 	    buf ++
@@ -99,6 +149,21 @@ void info_extract() {
 	   i ++ 
 	}
 
+	double base = 0.000001;
+	char *mark = time;
+	double factor = 0.0;
+
+    while(*mark == '0' || *mark == '.') {
+		*mark ++	
+	}
+	while(*mark != '\0') {
+		factor *= 10;
+	    factor += (*mark - '0');
+	}
+
+	tmp->time = factor * base;
+
+	search_insert(tmp);
 }
 
 int main(int argc, char *argv[]) {
@@ -135,7 +200,7 @@ int main(int argc, char *argv[]) {
   if(pid == 0) {
 	  close(fildes[0]);
 	  close(2);
-	  close(1);
+	   close(1);
 	  dup2(fildes[1], 2);
       //子进程，执行strace命令
 	  execve("/usr/bin/strace", exec_argv, exec_envp);
@@ -150,6 +215,14 @@ int main(int argc, char *argv[]) {
 	  //regex_t reg;
 
 	  eofsmash();
+
+	  while(readline() == 0) {
+	      info_extract();
+	  }
+
+	  for(int i = 0; i < 128; i ++) {
+	      printf("Name: %s, Time elapsed: %f\n", libitem[i].name, libitem[i].time);
+	  }
 	  //printf("%ld\n", read_length);
 	  //fprintf(stderr, "%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计
@@ -157,7 +230,7 @@ int main(int argc, char *argv[]) {
 
 //  execve("/usr/bin/strace", exec_argv, exec_envp);
 //  perror(argv[0]);
-//  exit(EXIT_FAILURE);
+//  Exit(EXIT_FAILURE);
 //  char *exec_envp[] = { 0, NULL, };
 
   /*

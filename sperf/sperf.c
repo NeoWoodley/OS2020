@@ -121,7 +121,7 @@ void search_insert(item_t *item) {
 }
 
 void info_extract() {
-    item* tmp = (item*)malloc(sizeof(item));
+    item_t* tmp = (item_t*)malloc(sizeof(item_t));
 	char *buf = read_buf;
 	int i = 0;
 	while(*buf != '(') {

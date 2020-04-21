@@ -136,7 +136,7 @@ void info_extract() {
 	}
 	buf ++;
     
-	int i = 0;
+	i = 0;
 	char time[10];
 	for( ; i < 10; i ++) {
 	    time[i] = '\0';

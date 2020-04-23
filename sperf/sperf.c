@@ -157,7 +157,7 @@ void info_extract() {
 #endif
 	char *buf = line_buf;
 #ifdef DEBUG
-	    printf("Buf Got %c!\n", *buf);
+	    printf("Buf Got!\n");
 #endif
 	int i = 0;
 	while(*buf != '(') {
@@ -268,6 +268,7 @@ int main(int argc, char *argv[]) {
 	  eofsmash();
 
 	  while(readline() == 0) {
+		  printf("Line_buf:%s\n", line_buf);
 	      info_extract();
 	  }
 

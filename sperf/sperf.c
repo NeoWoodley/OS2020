@@ -354,6 +354,7 @@ int main(int argc, char *argv[]) {
 	  int read_length = 0;
 	  read_length = read(fildes[0], read_buf, 10240);
 	  printf("Len:%d\n", read_length);
+	  printf("%s\n", read_buf);
 	  /*
 	  for(int i = 0; i < 5; i ++ ) {
 		  read_length = read(fildes[0], read_buf, 10240);

@@ -182,7 +182,7 @@ int readline() {
 	}
 
 	if(bound_test(tmp) == 1) {
-		printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+//		printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 	    strcpy(left_buf, line_buf);
 	    return 3;
 	}
@@ -400,7 +400,7 @@ int main(int argc, char *argv[]) {
 		  else if(read_line == 3) {
 			  read_length = read(fildes[0], read_buf, 10240);
 	          eofsmash();
-			  printf("==============================================================================================\n");
+	//		  printf("==============================================================================================\n");
 		      continue;
 		  }
 		  else {

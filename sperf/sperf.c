@@ -8,8 +8,8 @@
 #include <sys/wait.h>
 #include <regex.h>
 
-#define DEBUG
-
+//#define DEBUG
+#define TEST
 /*
    int execve(
        const char *filename,
@@ -156,6 +156,7 @@ int readline() {
     //printf("read_buf:%ld\n", (uintptr_t)&read_buf[10239]);
 	assert(bound_test(tmp) == 0);
     while(*tmp != '\n' && i < 256 && bound_test(tmp) == 0) {
+		printf("?\n");
         line_buf[i] = *tmp;
 	    *tmp = '\0';
 	    i ++;

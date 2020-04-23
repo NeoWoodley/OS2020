@@ -92,11 +92,30 @@ int readline() {
 
     char exit[6] = "exit_";
 
+#ifdef DEBUG
+	printf("Is here?\n");
+#endif
+
     linebufsmash();
+
+#ifdef DEBUG
+	printf("Or here?\n");
+#endif
+
 	char *tmp = read_buf;
+
+#ifdef DEBUG
+	printf("And here?\n");
+#endif
+
 	while(*tmp == '\0') {
 	    tmp ++;
 	}
+
+#ifdef DEBUG
+	printf("Maybe here?\n");
+#endif
+
 	int i = 0;
 	while(*tmp != '\n') {
 	    line_buf[i] = *tmp;
@@ -104,6 +123,11 @@ int readline() {
 		i ++;
 		tmp ++;
 	}
+
+#ifdef DEBUG
+	printf("Then here?\n");
+#endif
+
 	*tmp = '\0';
 
 	if(my_strcmp(read_buf, exit) == 0) {

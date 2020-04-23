@@ -362,7 +362,7 @@ int main(int argc, char *argv[]) {
 	  //不应该执行此处代码，否则execve失败，出错处理
   }
   else {
-	  sleep(60);
+	  sleep(3);
 	  close(fildes[1]);
 	  int read_length = 0;
 	  read_length = read(fildes[0], read_buf, 10240);

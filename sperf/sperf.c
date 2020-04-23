@@ -9,7 +9,7 @@
 #include <regex.h>
 
 //#define DEBUG
-//#define TEST
+#define TEST
 /*
    int execve(
        const char *filename,

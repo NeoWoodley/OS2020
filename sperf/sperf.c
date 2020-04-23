@@ -418,7 +418,7 @@ int main(int argc, char *argv[]) {
                   ratio = ((timeset[i] / total_time) * 100);
 		          //printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
 	          }
-	          printf("====================\n");
+	          printf("=======%s======%f=======\n", name, ratio);
 			  fflush(NULL);
 
 			  sleep(1);

@@ -166,6 +166,7 @@ void info_extract() {
 	   i ++;
 	   buf ++;
 	}
+	printf("??????\n");
 	tmp->name[i] = '\0';
 
 #ifdef DEBUG

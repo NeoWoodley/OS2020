@@ -36,11 +36,11 @@ item_t libitem[128];
 
 int end = 0;
 
-double cmp_descend(const void* a, const void* b) {
+int cmp_descend(const void* a, const void* b) {
 	double* A = (double*)a;
 	double* B = (double*)b;
 
-	return (*B - *A);
+	return *B > *A ? 1 : -1;
 }
 
 void lib_init() {

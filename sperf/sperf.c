@@ -128,7 +128,7 @@ int readline() {
 	printf("Then here? %s\n", line_buf);
 #endif
 
-	printf("%s\n", line_buf);
+	//printf("%s\n", line_buf);
 
 	*tmp = '\0';
 

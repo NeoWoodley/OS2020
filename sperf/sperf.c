@@ -20,8 +20,6 @@
    strace -T 显示系统调用所花时间
 */
 
-#define bound_test(tmp) upper_bound >= tmp ? 0 : 1
-
 char read_buf[10240];
 
 char left_buf[256];
@@ -52,6 +50,15 @@ int cmp_descend(const void* a, const void* b) {
 	double* B = (double*)b;
 
 	return *B > *A ? 1 : -1;
+}
+
+int bound_test(char* tmp) {
+    uintptr_t ptr = (uintptr_t)tmp;
+    uintptr_t end = (uintptr_t)&read_buf[10239];	
+
+	int ret = end >= ptr ? 0 : 1;
+
+	return ret;
 }
 
 void lib_init() {

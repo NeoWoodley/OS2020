@@ -166,6 +166,7 @@ int readline() {
 	printf("Then here?\n");
 #endif
 
+
 	printf("%s\n", line_buf);
 
 	if(*tmp == '\n') {
@@ -181,8 +182,9 @@ int readline() {
 	}
 
 	if(bound_test(tmp) == 1) {
+		printf("?????????\n");
 	    strcpy(left_buf, line_buf);
-	 return 3;
+	    return 3;
 	}
 
 	if(left_buf[0] != '\0') {

@@ -370,14 +370,14 @@ int main(int argc, char *argv[]) {
 	  printf("%d\n", read_length);
       */
 
-	  int readline = 0;
+	  int read_line = 0;
 	  while(1) {
 //		  printf("Line_buf:%s\n", line_buf);
-		  readline = readline();
-		  if(readline == 0) {
+		  read_line = readline();
+		  if(read_line == 0) {
 	          info_extract()
 		  }
-		  else if(readline == 3) {
+		  else if(read_line == 3) {
 		      continue;
 		  }
 		  else {

@@ -127,28 +127,28 @@ int readline() {
 
     char exit[6] = "exit_";
 
-#ifdef DEBUG
-//	printf("Is here?\n");
+#ifdef TEST
+	printf("Is here?\n");
 #endif
 
     linebufsmash();
 
-#ifdef DEBUG
-//    printf("Or here?\n");
+#ifdef TEST
+    printf("Or here?\n");
 #endif
 
     char *tmp = read_buf;
 
-#ifdef DEBUG
-//    printf("And here?\n");
+#ifdef TEST
+    printf("And here?\n");
 #endif
 
     while(*tmp == '\0') {
         tmp ++;
     }
 
-#ifdef DEBUG
-//    printf("Maybe here?\n");
+#ifdef TEST
+	printf("Maybe here?\n");
 #endif
 
     int i = 0;
@@ -156,15 +156,14 @@ int readline() {
     //printf("read_buf:%ld\n", (uintptr_t)&read_buf[10239]);
 	assert(bound_test(tmp) == 0);
     while(*tmp != '\n' && i < 256 && bound_test(tmp) == 0) {
-		printf("?\n");
         line_buf[i] = *tmp;
 	    *tmp = '\0';
 	    i ++;
 	    tmp ++;
     }
 
-#ifdef DEBUG
-	//printf("Then here? %s\n", line_buf);
+#ifdef TEST
+	printf("Then here?\n");
 #endif
 
 	printf("%s\n", line_buf);

@@ -352,6 +352,7 @@ int main(int argc, char *argv[]) {
 	  sleep(1);
 	  close(fildes[1]);
 	  int read_length = 0;
+	  read_length = read(fildes[0], read_buf, 10240);
 	  /*
 	  for(int i = 0; i < 5; i ++ ) {
 		  read_length = read(fildes[0], read_buf, 10240);

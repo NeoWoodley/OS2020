@@ -187,7 +187,7 @@ void search_insert(item_t *item) {
 #endif
 }
 
-char* index(double time) {
+char* index_name(double time) {
 	assert(time != 0);
 	char *ret;
     for(int i = 0; i < 128; i ++) {
@@ -357,7 +357,7 @@ int main(int argc, char *argv[]) {
 	  char* name;
 	  double ratio;
 	  for(int i = 0; i < 5; i ++) {
-          name = index(timeset[i]);
+          name = index_name(timeset[i]);
           ratio = (timeset[i] / total_time) * 100;
           
 		  printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);

@@ -36,7 +36,7 @@ item_t libitem[128];
 
 int end = 0;
 
-void compare_descend(const void* a, const void* b) {
+double compare_descend(const void* a, const void* b) {
 	double* A = (double*)a;
 	double* B = (double*)b;
 

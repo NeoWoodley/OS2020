@@ -181,7 +181,7 @@ int readline() {
 	}
 
 	if(bound_test(tmp) == 1) {
-		printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+	//	printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 	    strcpy(left_buf, line_buf);
 	    return 3;
 	}
@@ -376,6 +376,7 @@ int main(int argc, char *argv[]) {
 		  printf("%s\n", read_buf); 
 		  printf("++++++++++++++++++++++++++++++++++++++++++++++\n");
 	  } 
+	  printf("^*^&*^*&^*&^&%&%$&$^&%*^*(*&(&)&)(&()&*^&*%&$^%$^\n");
 	  exit(0);
 	  //regmatch_t get_match;
 	  //regex_t reg;

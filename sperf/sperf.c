@@ -118,16 +118,14 @@ int readline() {
 
 	int i = 0;
 	while(*tmp != '\n') {
-		printf("%c\n", *tmp);
 	    line_buf[i] = *tmp;
 		*tmp = '\0';
 		i ++;
 		tmp ++;
 	}
-	printf("End---------------------\n");
 
 #ifdef DEBUG
-	printf("Then here?\n");
+	printf("Then here? %s\n", line_buf);
 #endif
 
 	*tmp = '\0';

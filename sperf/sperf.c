@@ -123,8 +123,8 @@ int readline() {
 		*tmp = '\0';
 		i ++;
 		tmp ++;
-		printf("End?\n");
 	}
+	printf("End---------------------\n");
 
 #ifdef DEBUG
 	printf("Then here?\n");

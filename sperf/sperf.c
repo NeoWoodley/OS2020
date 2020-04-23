@@ -305,6 +305,9 @@ int main(int argc, char *argv[]) {
 	  }
 
 	  for(int i = 0; i < 128; i ++) {
+		  if(libitem[i].time == 0.0) {
+		      break;
+		  }
 	      printf("Name: %s, Time elapsed: %f\n", libitem[i].name, libitem[i].time);
 	  }
 	  //printf("%ld\n", read_length);

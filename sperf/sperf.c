@@ -153,18 +153,14 @@ void info_extract() {
 #endif
     item_t* tmp = (item_t*)malloc(sizeof(item_t));
 #ifdef DEBUG
-	    printf("Malloc Success!\n");
+//	    printf("Malloc Success!\n");
 #endif
 	char *buf = line_buf;
 #ifdef DEBUG
-	    printf("Buf Got!\n");
+//	    printf("Buf Got!\n");
 #endif
 	int i = 0;
 	while(*buf != '(') {
-#ifdef DEBUG
-	    //printf("%c\t", *buf);
-	    printf("?\t");
-#endif
 	   tmp->name[i] = *buf;
 	   i ++;
 	   buf ++;

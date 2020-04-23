@@ -169,9 +169,7 @@ void info_extract() {
 	tmp->name[i] = '\0';
 	printf("??????\n");
 
-#ifdef DEBUG
     printf("Name Got!");
-#endif
 
 	while(*buf != '<') {
 	    buf ++;

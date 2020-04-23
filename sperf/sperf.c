@@ -57,7 +57,8 @@ void eofsmash() {
 	}
 }
 
-int my_strcmp(char *str1, char* str2, int len) {
+/*
+int special_strcmp(char *str1, char* str2, int len) {
     size_t len_str1 = strlen(str1);
     size_t len_str2 = strlen(str2);
 
@@ -81,6 +82,7 @@ int my_strcmp(char *str1, char* str2, int len) {
 
 	return 0;
 }
+*/
 
 int readline() {
 
@@ -130,7 +132,7 @@ int readline() {
 
 	*tmp = '\0';
 
-	if(my_strcmp(read_buf, exit) == 0) {
+	if(strncmp(read_buf, exit, 5) == 0) {
 
 #ifdef DEBUG
 	    printf("Readline() End!\n");
@@ -151,7 +153,7 @@ void search_insert(item_t *item) {
 	    printf("Search_insert() Begin!\n");
 #endif
 	for(int i = 0; i < end; i ++) {
-		if(my_strcmp(item->name, libitem[i].name) == 0) {
+		if(strcmp(item->name, libitem[i].name) == 0) {
 			libitem[i].time += item->time;
 
 #ifdef DEBUG

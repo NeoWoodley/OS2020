@@ -161,6 +161,7 @@ void info_extract() {
 #endif
 	int i = 0;
 	while(*buf != '(') {
+	   printf("?\n");
 	   tmp->name[i] = *buf;
 	   i ++;
 	   buf ++;

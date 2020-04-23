@@ -201,10 +201,19 @@ void info_extract() {
     while(*mark == '0' || *mark == '.') {
 		*mark ++;	
 	}
+
+#ifdef DEBUG
+    printf("Digit Found!\n");
+#endif
+
 	while(*mark != '\0') {
 		factor *= 10;
 	    factor += (*mark - '0');
 	}
+
+#ifdef DEBUG
+    printf("Digit Got!\n");
+#endif
 
 	tmp->time = factor * base;
 

@@ -324,7 +324,7 @@ int main(int argc, char *argv[]) {
   else {
 	  sleep(1);
 	  close(fildes[1]);
-	  intptr_t read_length = read(fildes[0], read_buf, 10240);
+	  int read_length = read(fildes[0], read_buf, 65535);
 
 	  //regmatch_t get_match;
 	  //regex_t reg;
@@ -334,6 +334,7 @@ int main(int argc, char *argv[]) {
 	  printf("_____________________________________________\n");
 	  printf("%s\n", read_buf);
 	  printf("_____________________________________________\n");
+	  printf("%d\n", read_length);
 
 	  while(readline() == 0) {
 //		  printf("Line_buf:%s\n", line_buf);

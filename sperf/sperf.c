@@ -19,7 +19,7 @@
    strace -T 显示系统调用所花时间
 */
 
-char read_buf[10240];
+char read_buf[65535];
 
 char line_buf[256];
 

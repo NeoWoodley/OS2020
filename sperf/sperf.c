@@ -144,7 +144,7 @@ int readline() {
 #endif
 
     int i = 0;
-	assert(bound_test(tmp) == 1);
+	assert(bound_test(tmp) == 0);
     while(*tmp != '\n' && i < 256 && bound_test(tmp) == 0) {
         line_buf[i] = *tmp;
 		printf("%c?\n", *tmp);

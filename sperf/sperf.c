@@ -402,10 +402,12 @@ int main(int argc, char *argv[]) {
 	          info_extract();
 		  }
 		  else if(read_line == 3) {
+			  total_time = 0;
 	          for(int i = 0; i < 128; i ++) {
 		          if(libitem[i].time == 0.0) {
 		              break;
 		          }
+				  //TODO():Total_time需要刷新
 		          total_time += libitem[i].time;
 		          timeset[i] = libitem[i].time;
 	              //printf("Name: %s, Time elapsed: %f\n", libitem[i].name, libitem[i].time);

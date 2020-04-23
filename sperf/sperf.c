@@ -274,7 +274,7 @@ int main(int argc, char *argv[]) {
 	  eofsmash();
 
 	  while(readline() == 0) {
-		  printf("Line_buf:%s\n", line_buf);
+//		  printf("Line_buf:%s\n", line_buf);
 	      info_extract();
 	  }
 

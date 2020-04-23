@@ -363,20 +363,19 @@ int main(int argc, char *argv[]) {
 	  //不应该执行此处代码，否则execve失败，出错处理
   }
   else {
-	  sleep(3);
+	  sleep(1);
 	  close(fildes[1]);
 	  int read_length = 0;
 	  read_length = read(fildes[0], read_buf, 10240);
 	  printf("Len:%d\n", read_length);
 	  //printf("%s\n", read_buf);
-	  /*
-	  for(int i = 0; i < 5; i ++ ) {
+	  for(int i = 0; i < 50; i ++ ) {
 		  read_length = read(fildes[0], read_buf, 10240);
 		  printf("____________________%d________________________\n", read_length);
 		  printf("%s\n", read_buf); 
 		  printf("++++++++++++++++++++++++++++++++++++++++++++++\n");
 	  } 
-	 */ 
+	  exit(0);
 	  //regmatch_t get_match;
 	  //regex_t reg;
 

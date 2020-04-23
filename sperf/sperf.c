@@ -154,7 +154,7 @@ int readline() {
     int i = 0;
     //printf("tmp:%ld\n", (uintptr_t)tmp);
     //printf("read_buf:%ld\n", (uintptr_t)&read_buf[10239]);
-	assert(bound_test(tmp) == 0);
+
     while(*tmp != '\n' && i < 256 && bound_test(tmp) == 0) {
         line_buf[i] = *tmp;
 	    *tmp = '\0';
@@ -182,6 +182,7 @@ int readline() {
 	}
 
 	if(bound_test(tmp) == 1) {
+		printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
 	    strcpy(left_buf, line_buf);
 	    return 3;
 	}

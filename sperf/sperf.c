@@ -21,7 +21,7 @@
 
 char read_buf[10240];
 
-char left buf[256];
+char left_buf[256];
 
 char* upper_bound = &read_buf[10239];
 

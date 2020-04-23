@@ -155,7 +155,7 @@ void info_extract() {
 #ifdef DEBUG
 	    printf("Malloc Success!\n");
 #endif
-	char *buf = linebuf;
+	char *buf = line_buf;
 #ifdef DEBUG
 	    printf("Buf Got %c!\n", *buf);
 #endif

@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 #include <regex.h>
 
-#define DEBUG
+//#define DEBUG
 
 /*
    int execve(
@@ -206,7 +206,6 @@ void info_extract() {
 #endif
 
 	while(*mark != '\0') {
-	//	printf("?\n");
 		factor *= 10;
 	    factor += (*mark - '0');
 		mark ++;

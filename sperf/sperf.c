@@ -375,9 +375,10 @@ int main(int argc, char *argv[]) {
 //		  printf("Line_buf:%s\n", line_buf);
 		  read_line = readline();
 		  if(read_line == 0) {
-	          info_extract()
+	          info_extract();
 		  }
 		  else if(read_line == 3) {
+			  read_length = read(fildes[0], read_buf, 10240);
 		      continue;
 		  }
 		  else {

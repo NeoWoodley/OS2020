@@ -155,6 +155,9 @@ void info_extract() {
 	char *buf = read_buf;
 	int i = 0;
 	while(*buf != '(') {
+#ifdef DEBUG
+	    printf("%c\t", *buf);
+#endif
 	   tmp->name[i] = *buf;
 	   i ++;
 	   buf ++;
@@ -202,6 +205,8 @@ void info_extract() {
 	tmp->time = factor * base;
 
 	search_insert(tmp);
+
+	free(tmp);
 #ifdef DEBUG
 	    printf("Info_extract() End!\n");
 #endif

@@ -19,7 +19,7 @@
    strace -T 显示系统调用所花时间
 */
 
-#define bound_test(tmp) upper_bound > tmp ? 0 : 1
+#define bound_test(tmp) upper_bound >= tmp ? 0 : 1
 
 char read_buf[10240];
 
@@ -59,11 +59,18 @@ void lib_init() {
 	    libitem[i].time = 0;
 		memset(libitem[i].name, '\0', 64);
 	}
+	memset(left_buf, '\0', 256);
 }
 
 void linebufsmash() {
     for(int i = 0; i < 256; i ++) {
 	    line_buf[i] = '\0';
+	}
+}
+
+void leftbufsmash() {
+    for(int i = 0; i < 256; i ++) {
+	    left_buf[i] = '\0';
 	}
 }
 
@@ -119,30 +126,30 @@ int readline() {
     linebufsmash();
 
 #ifdef DEBUG
-	printf("Or here?\n");
+    printf("Or here?\n");
 #endif
 
-	char *tmp = read_buf;
+    char *tmp = read_buf;
 
 #ifdef DEBUG
-	printf("And here?\n");
+    printf("And here?\n");
 #endif
 
-	while(*tmp == '\0') {
+    while(*tmp == '\0') {
+        tmp ++;
+    }
+
+#ifdef DEBUG
+    printf("Maybe here?\n");
+#endif
+
+    int i = 0;
+    while(*tmp != '\n' && i < 256 && upper_bound(tmp) == 0) {
+        line_buf[i] = *tmp;
+	    *tmp = '\0';
+	    i ++;
 	    tmp ++;
-	}
-
-#ifdef DEBUG
-	printf("Maybe here?\n");
-#endif
-
-	int i = 0;
-	while(*tmp != '\n' && i < 256) {
-	    line_buf[i] = *tmp;
-		*tmp = '\0';
-		i ++;
-		tmp ++;
-	}
+    }
 
 #ifdef DEBUG
 	printf("Then here? %s\n", line_buf);
@@ -150,7 +157,9 @@ int readline() {
 
 	//printf("%s\n", line_buf);
 
-	*tmp = '\0';
+	if(*tmp == '\n') {
+	    *tmp = '\0';
+	}
 
 	if(strncmp(line_buf, exit, 5) == 0) {
 
@@ -160,12 +169,24 @@ int readline() {
 	    return 1;
 	}
 
+	if(upper_bound(tmp) == 1) {
+	    strcpy(left_buf, line_buf);
+	 return 3;
+	}
+
+	if(left_buf[0] != '\0') {
+	    strcat(left_buf, line_buf);
+		strcpy(line_buf, left_buf);
+		leftbufsmash();
+		return 0;
+	}
+
 #ifdef DEBUG
-//	printf("red_buf content:%s\n", line_buf);
-	printf("Readline() End!\n");
+//	    printf("red_buf content:%s\n", line_buf);
+	    printf("Readline() End!\n");
 #endif
 
-	return 0;
+	    return 0;
 }
 
 void search_insert(item_t *item) {

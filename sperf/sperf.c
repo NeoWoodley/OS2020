@@ -328,7 +328,8 @@ int main(int argc, char *argv[]) {
 	  for(int i = 0; i < 5; i ++ ) {
 		  read_length = read(fildes[0], read_buf, 10240);
 		  printf("____________________%d________________________\n", read_length);
-		  fflush(stderr);
+		  printf("%s\n", read_buf); 
+		  printf("++++++++++++++++++++++++++++++++++++++++++++++\n");
 	  }  
 	  //regmatch_t get_match;
 	  //regex_t reg;

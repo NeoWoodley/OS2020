@@ -21,6 +21,10 @@
 
 char read_buf[10240];
 
+char left buf[256];
+
+char* upper_bound = &read_buf[10239];
+
 char line_buf[256];
 
 char* topfive[5];
@@ -59,6 +63,10 @@ void linebufsmash() {
     for(int i = 0; i < 256; i ++) {
 	    line_buf[i] = '\0';
 	}
+}
+
+int bound_test(char* tmp) {
+    
 }
 
 void eofsmash() {

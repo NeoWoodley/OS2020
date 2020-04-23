@@ -128,19 +128,19 @@ int readline() {
     char exit[6] = "exit_";
 
 #ifdef DEBUG
-	printf("Is here?\n");
+//	printf("Is here?\n");
 #endif
 
     linebufsmash();
 
 #ifdef DEBUG
-    printf("Or here?\n");
+//    printf("Or here?\n");
 #endif
 
     char *tmp = read_buf;
 
 #ifdef DEBUG
-    printf("And here?\n");
+//    printf("And here?\n");
 #endif
 
     while(*tmp == '\0') {
@@ -148,7 +148,7 @@ int readline() {
     }
 
 #ifdef DEBUG
-    printf("Maybe here?\n");
+//    printf("Maybe here?\n");
 #endif
 
     int i = 0;

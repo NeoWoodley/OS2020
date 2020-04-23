@@ -57,31 +57,29 @@ void eofsmash() {
 	}
 }
 
-int my_strcmp(char *str1, char* str2) {
+int my_strcmp(char *str1, char* str2, int len) {
     size_t len_str1 = strlen(str1);
     size_t len_str2 = strlen(str2);
 
-	if(len_str1 > len_str2) {
-	    return 1;
+	int compare_len = len_str1;
+	if(len_str2 < compare_len) {
+		compare_len = len_str2;	    
+	}
+	if(len < compare_len) {
+	    compare_len = len;
 	}
 
-	else if(len_str1 < len_str2) {
-	    return -1;
-	}
-
-	else {
-		for(int i = 0; i < len_str1; i ++) {
-		    if( str1[i] > str2[i] ) {
-			    return 1;
-			}
-
-			if( str1[i] < str2[i] ) {
-			    return -1;
-			} 
+	for(int i = 0; i < compare_len; i ++) {
+	    if( str1[i] > str2[i] ) {
+		    return 1;
 		}
 
-		return 0;
+		if( str1[i] < str2[i] ) {
+		    return -1;
+		} 
 	}
+
+	return 0;
 }
 
 int readline() {

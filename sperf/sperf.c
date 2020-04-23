@@ -246,7 +246,7 @@ char* index_name(double time) {
 }
 
 void info_extract() {
-//	printf("%s\n", line_buf);
+	printf("%s\n", line_buf);
 #ifdef DEBUG
 	    printf("Info_extract() Begin!\n");
 #endif
@@ -416,7 +416,7 @@ int main(int argc, char *argv[]) {
 	          for(int i = 0; i < 5; i ++) {
                   name = index_name(timeset[i]);
                   ratio = ((timeset[i] / total_time) * 100);
-		          printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
+		          //printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
 	          }
 	          printf("====================\n");
 			  fflush(NULL);

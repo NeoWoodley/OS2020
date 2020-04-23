@@ -207,6 +207,7 @@ void info_extract() {
 #endif
 
 	while(*mark != '\0') {
+		printf("?\n");
 		factor *= 10;
 	    factor += (*mark - '0');
 	}

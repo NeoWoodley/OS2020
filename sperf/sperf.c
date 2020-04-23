@@ -246,7 +246,7 @@ char* index_name(double time) {
 }
 
 void info_extract() {
-	printf("%s\n", line_buf);
+//	printf("%s\n", line_buf);
 #ifdef DEBUG
 	    printf("Info_extract() Begin!\n");
 #endif

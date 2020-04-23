@@ -451,6 +451,7 @@ int main(int argc, char *argv[]) {
 		  printf("%f\n", timeset[i]);
 	  }
 	  */
+	  /*
 
 	  char* name;
 	  double ratio;
@@ -460,6 +461,7 @@ int main(int argc, char *argv[]) {
 		  printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
 	  }
 	  printf("====================\n");
+      */
 
 	  for(int i = 0; i < 80; i ++) {
 	      printf("%c", '\0');

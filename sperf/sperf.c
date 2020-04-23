@@ -365,7 +365,7 @@ int main(int argc, char *argv[]) {
 	  printf("====================\n");
 
 	  for(int i = 0; i < 80; i ++) {
-	      printf("%c\n", '\0');
+	      printf("%c", '\0');
 	  }
 
 

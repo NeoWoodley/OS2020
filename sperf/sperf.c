@@ -197,6 +197,7 @@ int readline() {
 	    printf("Readline() End!\n");
 #endif
 
+		printf("?\n");
 	    return 0;
 }
 

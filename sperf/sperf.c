@@ -128,6 +128,8 @@ int readline() {
 	printf("Then here? %s\n", line_buf);
 #endif
 
+	printf("%s\n", line_buf);
+
 	*tmp = '\0';
 
 	if(my_strcmp(read_buf, exit) == 0) {

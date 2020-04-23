@@ -415,7 +415,7 @@ int main(int argc, char *argv[]) {
 
 	          for(int i = 0; i < 5; i ++) {
                   name = index_name(timeset[i]);
-                  ratio = (timeset[i] / total_time) * 100;
+                  ratio = (timeset[i] / total_time);
 		          printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
 	          }
 	          printf("====================\n");

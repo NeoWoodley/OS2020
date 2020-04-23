@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 #include <regex.h>
 
-#define DEBUG
+//#define DEBUG
 
 /*
    int execve(
@@ -142,7 +142,7 @@ int readline() {
 	printf("Then here? %s\n", line_buf);
 #endif
 
-	printf("%s\n", line_buf);
+	//printf("%s\n", line_buf);
 
 	*tmp = '\0';
 
@@ -330,6 +330,8 @@ int main(int argc, char *argv[]) {
 	  //regex_t reg;
 
 	  eofsmash();
+
+	  printf("%s\n", read_buf);
 
 	  while(readline() == 0) {
 //		  printf("Line_buf:%s\n", line_buf);

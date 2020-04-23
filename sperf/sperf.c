@@ -121,7 +121,7 @@ int special_strcmp(char *str1, char* str2, int len) {
 
 int readline() {
 
-#ifdef DEBUG
+#ifdef TEST
 	printf("Readline() Begin!\n");
 #endif
 
@@ -175,7 +175,7 @@ int readline() {
 
 	if(strncmp(line_buf, exit, 5) == 0) {
 
-#ifdef DEBUG
+#ifdef TEST
 	    printf("Readline() End!\n");
 #endif
 	    return 1;
@@ -193,7 +193,7 @@ int readline() {
 		return 0;
 	}
 
-#ifdef DEBUG
+#ifdef TEST
 	    printf("red_buf content:%s\n", line_buf);
 	    printf("Readline() End!\n");
 #endif

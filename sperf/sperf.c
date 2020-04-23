@@ -161,7 +161,6 @@ void info_extract() {
 #endif
 	int i = 0;
 	while(*buf != '(') {
-	   printf("%d\n", i);
 	   tmp->name[i] = *buf;
 	   i ++;
 	   buf ++;
@@ -210,6 +209,7 @@ void info_extract() {
 	//	printf("?\n");
 		factor *= 10;
 	    factor += (*mark - '0');
+		mark ++;
 	}
 
 #ifdef DEBUG

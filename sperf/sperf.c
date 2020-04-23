@@ -182,7 +182,7 @@ int readline() {
 	}
 
 	if(bound_test(tmp) == 1) {
-		printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+		printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 	    strcpy(left_buf, line_buf);
 	    return 3;
 	}

@@ -117,7 +117,7 @@ int readline() {
 #endif
 
 	int i = 0;
-	while(*tmp != '\n') {
+	while(*tmp != '\n' && i < 128) {
 	    line_buf[i] = *tmp;
 		*tmp = '\0';
 		i ++;

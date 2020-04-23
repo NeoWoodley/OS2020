@@ -36,7 +36,7 @@ item_t libitem[128];
 
 int end = 0;
 
-double compare_descend(const void* a, const void* b) {
+double cmp_descend(const void* a, const void* b) {
 	double* A = (double*)a;
 	double* B = (double*)b;
 
@@ -321,6 +321,8 @@ int main(int argc, char *argv[]) {
 		  timeset[i] = libitem[i].time;
 	      printf("Name: %s, Time elapsed: %f\n", libitem[i].name, libitem[i].time);
 	  }
+
+	  qsort(timeset, 128, sizeof(timeset[0]), cmp_descend);
 
 
 	  //printf("%ld\n", read_length);

@@ -23,10 +23,14 @@ char read_buf[10240];
 
 char line_buf[256];
 
+char* topfive[5];
+
 struct item_t {
     char name[64];
 	double time;
 };
+
+double total_time = 0;
 
 double timeset[128];
 
@@ -183,6 +187,24 @@ void search_insert(item_t *item) {
 #endif
 }
 
+char* index(double time) {
+	assert(time != 0);
+	char *ret;
+    for(int i = 0; i < 128; i ++) {
+	    if(libitem[i].time == 0) {
+		    break;
+		}
+		if(time == libitem[i].time) {
+		    ret = libitem[i].name; 
+			break;
+		}
+	}
+
+	assert(ret != NULL);
+    
+	return ret;
+}
+
 void info_extract() {
 #ifdef DEBUG
 	    printf("Info_extract() Begin!\n");
@@ -318,8 +340,9 @@ int main(int argc, char *argv[]) {
 		  if(libitem[i].time == 0.0) {
 		      break;
 		  }
+		  total_time += libitem[i].time;
 		  timeset[i] = libitem[i].time;
-	      printf("Name: %s, Time elapsed: %f\n", libitem[i].name, libitem[i].time);
+	      //printf("Name: %s, Time elapsed: %f\n", libitem[i].name, libitem[i].time);
 	  }
 
 	  qsort(timeset, 128, sizeof(timeset[0]), cmp_descend);
@@ -330,6 +353,21 @@ int main(int argc, char *argv[]) {
 		  }
 		  printf("%f\n", timeset[i]);
 	  }
+
+	  char* name;
+	  double ratio;
+	  for(int i = 0; i < 5; i ++) {
+          name = index(timeset[i]);
+          ratio = (timeset[i] / total_time) * 100;
+          
+		  printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
+	  }
+	  printf("====================\n");
+
+	  for(int i = 0; i < 80; i ++) {
+	      printf("%c\n", '\0');
+	  }
+
 
 
 	  //printf("%ld\n", read_length);

@@ -7,7 +7,7 @@
 #include <sys/wait.h>
 #include <regex.h>
 
-//#define DEBUG
+#define DEBUG
 
 /*
    int execve(

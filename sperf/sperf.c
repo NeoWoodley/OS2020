@@ -144,7 +144,7 @@ int readline() {
 #endif
 
     int i = 0;
-    while(*tmp != '\n' && i < 256 && upper_bound(tmp) == 0) {
+    while(*tmp != '\n' && i < 256 && bound_test(tmp) == 0) {
         line_buf[i] = *tmp;
 	    *tmp = '\0';
 	    i ++;
@@ -169,7 +169,7 @@ int readline() {
 	    return 1;
 	}
 
-	if(upper_bound(tmp) == 1) {
+	if(bound_test(tmp) == 1) {
 	    strcpy(left_buf, line_buf);
 	 return 3;
 	}

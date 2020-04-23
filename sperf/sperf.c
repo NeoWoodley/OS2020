@@ -324,6 +324,13 @@ int main(int argc, char *argv[]) {
 
 	  qsort(timeset, 128, sizeof(timeset[0]), cmp_descend);
 
+	  for(int i = 0; i < 128; i ++) {
+	      if(timeset[i] == 0) {
+		      break;
+		  }
+		  printf("%f\n", timeset[i]);
+	  }
+
 
 	  //printf("%ld\n", read_length);
 	  //fprintf(stderr, "%s\n", &read_buf[0]);

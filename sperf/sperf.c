@@ -45,7 +45,7 @@ double compare_descend(const void* a, const void* b) {
 
 void lib_init() {
     for(int i = 0; i < 128; i ++) {
-		timeste[i] = 0;
+		timeset[i] = 0;
 	    libitem[i].time = 0;
 		memset(libitem[i].name, '\0', 64);
 	}

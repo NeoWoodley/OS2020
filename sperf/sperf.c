@@ -167,9 +167,9 @@ void info_extract() {
 	   buf ++;
 	}
 	tmp->name[i] = '\0';
-	printf("??????");
+	printf("??????\n");
 
-    printf("Name Got!");
+    printf("Name Got!\n");
 
 	while(*buf != '<') {
 	    buf ++;
@@ -190,7 +190,7 @@ void info_extract() {
 	}
 
 #ifdef DEBUG
-    printf("Time string Got!");
+    printf("Time string Got!\n");
 #endif
 
 	double base = 0.000001;

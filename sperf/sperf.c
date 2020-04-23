@@ -8,8 +8,8 @@
 #include <sys/wait.h>
 #include <regex.h>
 
-#define DEBUG
-#define TEST
+//#define DEBUG
+//#define TEST
 /*
    int execve(
        const char *filename,

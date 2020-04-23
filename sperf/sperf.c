@@ -157,7 +157,7 @@ void info_extract() {
 #endif
 	char *buf = read_buf;
 #ifdef DEBUG
-	    printf("Buf Got!\n");
+	    printf("Buf Got %c!\n", *buf);
 #endif
 	int i = 0;
 	while(*buf != '(') {

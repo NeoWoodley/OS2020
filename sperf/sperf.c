@@ -28,14 +28,24 @@ struct item_t {
 	double time;
 };
 
+double timeset[128];
+
 typedef struct item_t item_t;
 
 item_t libitem[128];
 
 int end = 0;
 
+void compare_descend(const void* a, const void* b) {
+	double* A = (double*)a;
+	double* B = (double*)b;
+
+	return (*B - *A);
+}
+
 void lib_init() {
     for(int i = 0; i < 128; i ++) {
+		timeste[i] = 0;
 	    libitem[i].time = 0;
 		memset(libitem[i].name, '\0', 64);
 	}
@@ -308,8 +318,11 @@ int main(int argc, char *argv[]) {
 		  if(libitem[i].time == 0.0) {
 		      break;
 		  }
+		  timeset[i] = libitem[i].time;
 	      printf("Name: %s, Time elapsed: %f\n", libitem[i].name, libitem[i].time);
 	  }
+
+
 	  //printf("%ld\n", read_length);
 	  //fprintf(stderr, "%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计

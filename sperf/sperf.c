@@ -132,7 +132,7 @@ int readline() {
 
 	*tmp = '\0';
 
-	if(strncmp(read_buf, exit, 5) == 0) {
+	if(strncmp(line_buf, exit, 5) == 0) {
 
 #ifdef DEBUG
 	    printf("Readline() End!\n");

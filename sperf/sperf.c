@@ -144,6 +144,7 @@ int readline() {
 #endif
 
     while(*tmp == '\0') {
+		printf("%c\n", *tmp);
         tmp ++;
     }
 

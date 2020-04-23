@@ -370,7 +370,7 @@ int main(int argc, char *argv[]) {
 	  printf("Len:%d\n", read_length);
 	  //printf("%s\n", read_buf);
 	  for(int i = 0; i < 500; i ++ ) {
-		  sleep(0.5);
+		  sleep(1);
 		  read_length = read(fildes[0], read_buf, 10240);
 		  printf("____________________%u________________________\n", read_length);
 		  printf("%s\n", read_buf); 

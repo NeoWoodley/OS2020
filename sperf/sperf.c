@@ -155,7 +155,7 @@ int readline() {
 	printf("Then here? %s\n", line_buf);
 #endif
 
-	//printf("%s\n", line_buf);
+	printf("%s\n", line_buf);
 
 	if(*tmp == '\n') {
 	    *tmp = '\0';

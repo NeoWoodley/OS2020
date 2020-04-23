@@ -203,7 +203,7 @@ void info_extract() {
 	}
 
 #ifdef DEBUG
-    printf("Digit Found!\n");
+    printf("Digit Found! %s\n", mark);
 #endif
 
 	while(*mark != '\0') {

@@ -19,7 +19,7 @@
    strace -T 显示系统调用所花时间
 */
 
-char read_buf[131069];
+char read_buf[10240];
 
 char line_buf[256];
 
@@ -324,17 +324,19 @@ int main(int argc, char *argv[]) {
   else {
 	  sleep(1);
 	  close(fildes[1]);
-	  int read_length = read(fildes[0], read_buf, 131069);
+	  int read_length = read(fildes[0], read_buf, 10240);
 
 	  //regmatch_t get_match;
 	  //regex_t reg;
 
 	  eofsmash();
 
+	  /*
 	  printf("_____________________________________________\n");
 	  printf("%s\n", read_buf);
 	  printf("_____________________________________________\n");
 	  printf("%d\n", read_length);
+      */
 
 	  while(readline() == 0) {
 //		  printf("Line_buf:%s\n", line_buf);

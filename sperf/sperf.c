@@ -331,7 +331,9 @@ int main(int argc, char *argv[]) {
 
 	  eofsmash();
 
+	  printf("_____________________________________________\n");
 	  printf("%s\n", read_buf);
+	  printf("_____________________________________________\n");
 
 	  while(readline() == 0) {
 //		  printf("Line_buf:%s\n", line_buf);

@@ -156,7 +156,8 @@ void info_extract() {
 	int i = 0;
 	while(*buf != '(') {
 #ifdef DEBUG
-	    printf("%c\t", *buf);
+	    //printf("%c\t", *buf);
+	    printf("?\t");
 #endif
 	   tmp->name[i] = *buf;
 	   i ++;

@@ -117,8 +117,8 @@ int readline() {
 #endif
 
 	int i = 0;
-	printf("%s\n", tmp);
 	while(*tmp != '\n') {
+		printf("?\n");
 	    line_buf[i] = *tmp;
 		*tmp = '\0';
 		i ++;

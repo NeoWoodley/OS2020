@@ -19,7 +19,7 @@
    strace -T 显示系统调用所花时间
 */
 
-#define bound_test(char* tmp) upper_bound > tmp ? 0 : 1
+#define bound_test(tmp) upper_bound > tmp ? 0 : 1
 
 char read_buf[10240];
 

@@ -189,7 +189,7 @@ void search_insert(item_t *item) {
 
 char* index_name(double time) {
 	assert(time != 0);
-	char *ret;
+	char *ret = NULL;
     for(int i = 0; i < 128; i ++) {
 	    if(libitem[i].time == 0) {
 		    break;

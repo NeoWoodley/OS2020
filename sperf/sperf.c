@@ -143,8 +143,7 @@ int readline() {
     printf("And here?\n");
 #endif
 
-    while(*tmp == '\0') {
-		printf("%c\n", *tmp);
+    while(*tmp == '\0' && bound_test(tmp) == 0) {
         tmp ++;
     }
 

@@ -480,7 +480,7 @@ int main(int argc, char *argv[]) {
 			  fflush(stdout);
 
 			  sleep(1);
-			  read_length = read(fildes[0], read_buf, 10240);
+			  read_length = read(fildes[0], read_buf, 512);
 	          eofsmash();
 	          //printf("%s\n", read_buf);
 		      continue;

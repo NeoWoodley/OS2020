@@ -385,6 +385,7 @@ int main(int argc, char *argv[]) {
 		//	}
 		  read(fildes[0], read_buf, 10240);
 		  printf("%s\n", read_buf);
+		  printf("============================================================================================\n");
 	  }
 	  /*
 	  unsigned read_length = 0;

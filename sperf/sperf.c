@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-extern **char environ
+extern **char environ;
 //#define DEBUG
 //#define TEST
 /*

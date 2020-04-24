@@ -371,7 +371,7 @@ int main(int argc, char *argv[]) {
 	  while(execve(args, exec_argv, exec_envp) == -1) {
 	      pwd = strtok(NULL, ":");
 	      memset(args, '\0', 64);
-	      strcpy(args, pwd);
+	      strncpy(args, pwd, 64*sizeof(char));
 	      strcat(args, exe_name);
 	  }
 	  //不应该执行此处代码，否则execve失败，出错处理

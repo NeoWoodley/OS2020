@@ -527,7 +527,7 @@ int main(int argc, char *argv[]) {
 	  //printf("%ld\n", read_length);
 	  //fprintf(stderr, "%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计
- // }
+  }
 
 //  execve("/usr/bin/strace", exec_argv, exec_envp);
 //  perror(argv[0]);

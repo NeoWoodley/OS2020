@@ -391,7 +391,7 @@ int main(int argc, char *argv[]) {
 		  read(fildes[0], read_buf, 10240);
 		  printf("%s\n", read_buf);
 		  printf("============================================================================================\n");
-//		  exit(0);
+		  exit(0);
 	  }
 	  /*
 	  unsigned read_length = 0;

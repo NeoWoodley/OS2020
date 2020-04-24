@@ -428,7 +428,7 @@ int main(int argc, char *argv[]) {
 	          }
 	          printf("====================\n");
 	          //printf("====%s=========%f=======\n", name, ratio);
-			  //fflush(NULL);
+			  fflush(stdout);
 
 			  sleep(1);
 			  read_length = read(fildes[0], read_buf, 10240);

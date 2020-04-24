@@ -384,21 +384,20 @@ int main(int argc, char *argv[]) {
   else {
 	  sleep(1);
 	  close(fildes[1]);
-	  for(int i = 0; i < 100; i ++) {
+	  //for(int i = 0; i < 100; i ++) {
 		  //if(read(fildes[0], read_buf, 10240) == 0) {
 		  //  break;		  
 		//	}
 	     // sleep(1);
-		  read(fildes[0], read_buf, 10240);
-		  printf("%s", read_buf);
+		//  read(fildes[0], read_buf, 10240);
+		 // printf("%s", read_buf);
 		  //printf("============================================================================================\n");
-	  }
-	  exit(0);
-	  /*
+	  //}
+	  //exit(0);
+
 	  unsigned read_length = 0;
 	  read_length = read(fildes[0], read_buf, 10240);
 	  assert(read_length != 0);
-	  */
 	  //printf("Len:%d\n", read_length);
 	  //printf("%s\n", read_buf);
 	  /*
@@ -426,7 +425,6 @@ int main(int argc, char *argv[]) {
 	  printf("%d\n", read_length);
       */
 
-	  /*
 	  int read_line = 0;
 	  char* name;
 	  double ratio;
@@ -475,7 +473,6 @@ int main(int argc, char *argv[]) {
 		      break;
 		  }
 	  }
-	  */
 	  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	  /*
 	  for(int i = 0; i < 128; i ++) {

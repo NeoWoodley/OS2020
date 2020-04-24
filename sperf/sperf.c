@@ -10,8 +10,8 @@
 #include <fcntl.h>
 
 extern char** environ;
-//#define DEBUG
-//#define TEST
+#define DEBUG
+#define TEST
 /*
    int execve(
        const char *filename,

@@ -360,8 +360,10 @@ int main(int argc, char *argv[]) {
   pid_t pid = fork();
   if(pid == 0) {
 	  close(fildes[0]);
+	  int trash = open("/dev/null", O_RDWR);
+	  dup2(trash, 1);
 	  //close(2);
-	  close(1);
+	  //close(1);
 	  dup2(fildes[1], 2);
 	  char* pwd = strtok(path, ":");
 	  memset(args, '\0', 64);
@@ -387,6 +389,7 @@ int main(int argc, char *argv[]) {
 		  read(fildes[0], read_buf, 10240);
 		  printf("%s\n", read_buf);
 		  printf("============================================================================================\n");
+		  exit(0);
 	  }
 	  /*
 	  unsigned read_length = 0;

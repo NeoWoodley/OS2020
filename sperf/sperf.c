@@ -22,13 +22,11 @@ extern char** environ;
    strace -T 显示系统调用所花时间
 */
 
-#define CAP (1 << 20)
-
-char read_buf[CAP];
+char read_buf[10240];
 
 char left_buf[256];
 
-char* upper_bound = &read_buf[CAP-1];
+char* upper_bound = &read_buf[10239];
 
 char line_buf[256];
 
@@ -387,11 +385,11 @@ int main(int argc, char *argv[]) {
 	  sleep(1);
 	  close(fildes[1]);
 	  for(int i = 0; i < 100; i ++) {
-		  if(read(fildes[0], read_buf, CAP) == 0) {
+		  if(read(fildes[0], read_buf, 10240) == 0) {
 		    break;		  
 		}
 	      sleep(1);
-		  read(fildes[0], read_buf, CAP);
+		  read(fildes[0], read_buf, 10240);
 		  printf("%s", read_buf);
 		  printf("============================================================================================\n");
 	  }

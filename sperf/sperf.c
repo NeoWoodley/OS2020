@@ -384,6 +384,7 @@ int main(int argc, char *argv[]) {
   else {
 	  sleep(1);
 	  close(fildes[1]);
+	  /*
 	  int len = 0;
 	  //for(int i = 0; i < 1; i ++) {
 	  while(1){
@@ -402,19 +403,17 @@ int main(int argc, char *argv[]) {
 		  //read(fildes[0], read_buf, 10240);
 		  //printf("============================================================================================\n");
 	  }
+	  */
 
-	  /*
-	  int len = read(fildes[0], read_buf, 10240);
-	  printf("==================%d===================\n", len);
-	  printf("%s", read_buf);
-      */
+	  //int len = read(fildes[0], read_buf, 10240);
+	  //printf("==================%d===================\n", len);
+	  //printf("%s", read_buf);
 	  //exit(0);
 
-	  /*
 	  unsigned read_length = 0;
-	  read_length = read(fildes[0], read_buf, CAP);
+	  read_length = read(fildes[0], read_buf, 512);
 	  assert(read_length != 0);
-	  */
+
 	  //printf("Len:%d\n", read_length);
 	  //printf("%s\n", read_buf);
 	  /*
@@ -442,7 +441,6 @@ int main(int argc, char *argv[]) {
 	  printf("%d\n", read_length);
       */
 
-	  /*+++++++++++++++++++++++++++++++++++++++++
 	  int read_line = 0;
 	  char* name;
 	  double ratio;
@@ -491,7 +489,6 @@ int main(int argc, char *argv[]) {
 		      break;
 		  }
 	  }
-	  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 	  /*
 	  for(int i = 0; i < 128; i ++) {
 		  if(libitem[i].time == 0.0) {

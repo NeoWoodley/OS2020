@@ -373,7 +373,7 @@ int main(int argc, char *argv[]) {
 	  strcpy(args, pwd);
 	  strcat(args, exe_name);
       //子进程，执行strace命令
-	  while(execve(args, exec_argv, NULL) == -1) {
+	  while(execve(args, exec_argv, exec_envp) == -1) {
 	      pwd = strtok(NULL, ":");
 	      memset(args, '\0', 64);
 	      strncpy(args, pwd, 64*sizeof(char));

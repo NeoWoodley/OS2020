@@ -384,12 +384,17 @@ int main(int argc, char *argv[]) {
   else {
 	  sleep(1);
 	  close(fildes[1]);
+	  int len = 0;
 	  for(int i = 0; i < 1; i ++) {
-		  if(read(fildes[0], read_buf, 10240) == 0) {
-		    break;		  
+		  len = read(fildes[0], read_buf, 10240);
+		  if(len == 0) {
+		      break;
+		  }
+		  //if(read(fildes[0], read_buf, 10240) == 0) {
+		  //  break;		  
 		}
 	      //sleep(1);
-		  read(fildes[0], read_buf, 10240);
+		  //read(fildes[0], read_buf, 10240);
 		  printf("%s\n", read_buf);
 		  //printf("============================================================================================\n");
 	  }

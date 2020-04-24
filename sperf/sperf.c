@@ -387,7 +387,7 @@ int main(int argc, char *argv[]) {
 	  int len = 0;
 	  //for(int i = 0; i < 1; i ++) {
 	  while(1){
-		  sleep(1);
+		  sleep(0.5);
 		  len = read(fildes[0], read_buf, 512);
 		  if(len == 0) {
 		      break;

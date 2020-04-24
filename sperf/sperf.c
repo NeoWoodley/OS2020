@@ -7,8 +7,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-//#define DEBUG
-//#define TEST
+#define DEBUG
+#define TEST
 /*
    int execve(
        const char *filename,
@@ -418,9 +418,10 @@ int main(int argc, char *argv[]) {
 	          for(int i = 0; i < 5; i ++) {
                   name = index_name(timeset[i]);
                   ratio = ((timeset[i] / total_time) * 100);
-		          printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
+		  //        printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
 	          }
-	          printf("====================\n");
+	      //    printf("====================\n");
+	          printf("====%s=========%f=======\n", name, ratio);
 			  fflush(NULL);
 
 			  sleep(1);

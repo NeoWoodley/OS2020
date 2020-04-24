@@ -442,6 +442,9 @@ int main(int argc, char *argv[]) {
 	          }
 	          printf("====================\n");
 	          //printf("====%s=========%f=======\n", name, ratio);
+	          for(int i = 0; i < 80; i ++) {
+	              printf("%c", '\0');
+	          }
 			  fflush(stdout);
 
 			  sleep(1);
@@ -487,9 +490,6 @@ int main(int argc, char *argv[]) {
 	  printf("====================\n");
       */
 
-	  for(int i = 0; i < 80; i ++) {
-	      printf("%c", '\0');
-	  }
 
 
 

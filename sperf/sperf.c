@@ -363,13 +363,13 @@ int main(int argc, char *argv[]) {
 	  close(2);
 	  close(1);
 	  dup2(fildes[1], 2);
-	  char* pwd = strtok(path, ':');
+	  char* pwd = strtok(path, ":");
 	  memset(args, '\0', 64);
 	  strcpy(args, pwd);
 	  strcat(args, exe_name);
       //子进程，执行strace命令
 	  while(execve(args, exec_argv, exec_envp) == -1) {
-	      pwd = strtok(NULL, ':');
+	      pwd = strtok(NULL, ":");
 	      memset(args, '\0', 64);
 	      strcpy(args, pwd);
 	      strcat(args, exe_name);

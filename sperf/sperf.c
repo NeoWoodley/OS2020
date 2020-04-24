@@ -391,12 +391,12 @@ int main(int argc, char *argv[]) {
 		  if(len == 0) {
 		      break;
 		  }
+		  printf("%s\n", read_buf);
 		  //if(read(fildes[0], read_buf, 10240) == 0) {
 		  //  break;		  
 		}
 	      //sleep(1);
 		  //read(fildes[0], read_buf, 10240);
-		  printf("%s\n", read_buf);
 		  //printf("============================================================================================\n");
 	  }
 

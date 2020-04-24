@@ -445,7 +445,8 @@ int main(int argc, char *argv[]) {
 	  char* name;
 	  double ratio;
 	  int count = 0;
-	  while(1) {
+//	  while(1) {
+	  for(int i = 0; i < 50; i ++) {
 //		  printf("Line_buf:%s\n", line_buf);
 		  read_line = readline();
 		  if(read_line == 0) {

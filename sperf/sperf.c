@@ -22,7 +22,7 @@ extern char** environ;
    strace -T 显示系统调用所花时间
 */
 
-#define CAP 1 << 20
+#define CAP (1 << 20)
 
 char read_buf[CAP];
 

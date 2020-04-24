@@ -367,7 +367,7 @@ int main(int argc, char *argv[]) {
 	  dup2(trash, fileno(stdout));
 	  close(trash);
 	  //close(fildes[0]);
-	  //dup2(fildes[1], fileno(stderr));
+	  dup2(fildes[1], fileno(stderr));
 	  char* pwd = strtok(path, ":");
 	  memset(args, '\0', 64);
 	  strcpy(args, pwd);
@@ -390,7 +390,7 @@ int main(int argc, char *argv[]) {
 		}
 	      sleep(1);
 		  read(fildes[0], read_buf, 1024);
-		  //printf("%s", read_buf);
+		  printf("%s", read_buf);
 		  //printf("============================================================================================\n");
 	  }
 	  exit(0);

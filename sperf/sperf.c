@@ -392,6 +392,7 @@ int main(int argc, char *argv[]) {
 		      break;
 		  }
 		  printf("%s\n=====================================================================================\n", read_buf);
+		  memset(read_buf, '\0', 512);
 		  fflush(stdout);
 		  //if(read(fildes[0], read_buf, 10240) == 0) {
 		  //  break;		  

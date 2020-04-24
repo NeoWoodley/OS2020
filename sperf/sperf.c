@@ -343,6 +343,8 @@ int main(int argc, char *argv[]) {
   char PATH[128] = "";
   char *path = NULL; 
   char path_name[6] = "PATH=";
+  char exe_name[8] = "/strace";
+  char args[64] = "";
   strcpy(PATH, path_name);
   path = getenv("PATH");
   strcat(PATH, path);
@@ -361,8 +363,17 @@ int main(int argc, char *argv[]) {
 	  close(2);
 	  close(1);
 	  dup2(fildes[1], 2);
+	  char* pwd = strtok(path, ':');
+	  memset(args, '\0', 64);
+	  strcpy(args, pwd);
+	  strcat(args, exe_name);
       //子进程，执行strace命令
-	  execve("/usr/bin/strace", exec_argv, exec_envp);
+	  while(execve(args, exec_argv, exec_envp) == -1) {
+	      pwd = strtok(NULL, ':');
+	      memset(args, '\0', 64);
+	      strcpy(args, pwd);
+	      strcat(args, exe_name);
+	  }
 	  //不应该执行此处代码，否则execve失败，出错处理
   }
   else {

@@ -56,7 +56,7 @@ int cmp_descend(const void* a, const void* b) {
 
 int bound_test(char* tmp) {
     uintptr_t ptr = (uintptr_t)tmp;
-    uintptr_t end = (uintptr_t)&read_buf[CAP-1];	
+    uintptr_t end = (uintptr_t)&read_buf[10240];	
 
 	int ret = end >= ptr ? 0 : 1;
 

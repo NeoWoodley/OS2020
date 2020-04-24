@@ -383,6 +383,7 @@ int main(int argc, char *argv[]) {
 		  //if(read(fildes[0], read_buf, 10240) == 0) {
 		  //  break;		  
 		//	}
+	      sleep(1);
 		  read(fildes[0], read_buf, 10240);
 		  printf("%s\n", read_buf);
 		  printf("============================================================================================\n");

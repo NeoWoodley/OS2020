@@ -22,11 +22,13 @@ extern char** environ;
    strace -T 显示系统调用所花时间
 */
 
-char read_buf[10240];
+#define CAP 1 << 20
+
+char read_buf[CAP];
 
 char left_buf[256];
 
-char* upper_bound = &read_buf[10239];
+char* upper_bound = &read_buf[CAP-1];
 
 char line_buf[256];
 
@@ -56,7 +58,7 @@ int cmp_descend(const void* a, const void* b) {
 
 int bound_test(char* tmp) {
     uintptr_t ptr = (uintptr_t)tmp;
-    uintptr_t end = (uintptr_t)&read_buf[10239];	
+    uintptr_t end = (uintptr_t)&read_buf[CAP-1];	
 
 	int ret = end >= ptr ? 0 : 1;
 

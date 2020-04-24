@@ -380,9 +380,10 @@ int main(int argc, char *argv[]) {
 	  sleep(1);
 	  close(fildes[1]);
 	  while(1) {
-		  if(read(fildes[0], read_buf, 10240) == 0) {
-		    break;		  
-			}
+		  //if(read(fildes[0], read_buf, 10240) == 0) {
+		  //  break;		  
+		//	}
+		  read(fildes[0], read_buf, 10240);
 		  printf("%s\n", read_buf);
 	  }
 	  /*

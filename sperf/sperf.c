@@ -391,7 +391,7 @@ int main(int argc, char *argv[]) {
 		  if(len == 0) {
 		      break;
 		  }
-		  printf("%s", read_buf);
+		  printf("%s\n=====================================================================================\n", read_buf);
 		  fflush(stdout);
 		  //if(read(fildes[0], read_buf, 10240) == 0) {
 		  //  break;		  

@@ -383,7 +383,7 @@ int main(int argc, char *argv[]) {
   else {
 	  sleep(1);
 	  close(fildes[1]);
-	  while(1) {
+	  for(int i = 0; i < 20; i ++) {
 		  //if(read(fildes[0], read_buf, 10240) == 0) {
 		  //  break;		  
 		//	}
@@ -391,8 +391,8 @@ int main(int argc, char *argv[]) {
 		  read(fildes[0], read_buf, 10240);
 		  printf("%s\n", read_buf);
 		  printf("============================================================================================\n");
-		  exit(0);
 	  }
+	  exit(0);
 	  /*
 	  unsigned read_length = 0;
 	  read_length = read(fildes[0], read_buf, 10240);

@@ -84,6 +84,9 @@ void leftbufsmash() {
 void eofsmash() {
     intptr_t len = strlen(read_buf);
 	//printf("len: %ld\n", len);
+	if(read_buf[0] == '\n') {
+	    read_buf[0] = 32;
+	}
 	for(intptr_t i = 1; i < len; i++) {
 	    if(read_buf[i] == '\n' && read_buf[i-1] != '>') {
 		    read_buf[i] = 32;

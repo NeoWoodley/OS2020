@@ -47,8 +47,6 @@ item_t libitem[128];
 
 int end = 0;
 
-char exit[5] = "exit";
-
 int cmp_descend(const void* a, const void* b) {
 	double* A = (double*)a;
 	double* B = (double*)b;
@@ -63,11 +61,6 @@ int bound_test(char* tmp) {
 	int ret = end >= ptr ? 0 : 1;
 
 	return ret;
-}
-
-int exit_test() {
-	return 0;
-
 }
 
 void lib_init() {

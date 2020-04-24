@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+extern **char environ
 //#define DEBUG
 //#define TEST
 /*
@@ -351,7 +352,7 @@ int main(int argc, char *argv[]) {
   path = getenv("PATH");
   strcat(PATH, path);
 
-  char *exec_envp[] = { PATH, NULL, };
+  char *exec_envp[] = { environ, NULL, };
 
   int fildes[2];
 

@@ -389,7 +389,7 @@ int main(int argc, char *argv[]) {
 
 	  eofsmash();
 
-	  printf("%s\n", read_buf);
+	  //printf("%s\n", read_buf);
 
 	  /*
 	  printf("_____________________________________________\n");
@@ -424,16 +424,16 @@ int main(int argc, char *argv[]) {
 	          for(int i = 0; i < 5; i ++) {
                   name = index_name(timeset[i]);
                   ratio = ((timeset[i] / total_time) * 100);
-		  //        printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
+		          printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
 	          }
-	      //    printf("====================\n");
-	          printf("====%s=========%f=======\n", name, ratio);
+	          printf("====================\n");
+	          //printf("====%s=========%f=======\n", name, ratio);
 			  fflush(NULL);
 
 			  sleep(1);
 			  read_length = read(fildes[0], read_buf, 10240);
 	          eofsmash();
-	          printf("%s\n", read_buf);
+	          //printf("%s\n", read_buf);
 		      continue;
 		  }
 		  else {

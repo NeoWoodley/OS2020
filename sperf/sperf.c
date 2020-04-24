@@ -390,7 +390,7 @@ int main(int argc, char *argv[]) {
 		//	}
 	     // sleep(1);
 		  read(fildes[0], read_buf, 10240);
-		  //printf("%s", read_buf);
+		  printf("%s", read_buf);
 		  //printf("============================================================================================\n");
 	  }
 	  exit(0);

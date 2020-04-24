@@ -360,7 +360,7 @@ int main(int argc, char *argv[]) {
   pid_t pid = fork();
   if(pid == 0) {
 	  close(fildes[0]);
-	  close(2);
+	  //close(2);
 	  close(1);
 	  dup2(fildes[1], 2);
 	  char* pwd = strtok(path, ":");

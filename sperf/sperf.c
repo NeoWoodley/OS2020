@@ -246,7 +246,7 @@ char* index_name(double time) {
 }
 
 void info_extract() {
-	printf("%s\n", line_buf);
+//	printf("%s\n", line_buf);
 #ifdef DEBUG
 	    printf("Info_extract() Begin!\n");
 #endif
@@ -386,6 +386,8 @@ int main(int argc, char *argv[]) {
 
 	  eofsmash();
 
+	  printf("%s\n", read_buf);
+
 	  /*
 	  printf("_____________________________________________\n");
 	  printf("%s\n", read_buf);
@@ -428,6 +430,7 @@ int main(int argc, char *argv[]) {
 			  sleep(1);
 			  read_length = read(fildes[0], read_buf, 10240);
 	          eofsmash();
+	          printf("%s\n", read_buf);
 		      continue;
 		  }
 		  else {

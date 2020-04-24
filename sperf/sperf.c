@@ -194,7 +194,7 @@ int readline() {
 	}
 
 #ifdef TEST
-	    printf("red_buf content:%s\n", line_buf);
+//	    printf("red_buf content:%s\n", line_buf);
 	    printf("Readline() End!\n");
 #endif
 
@@ -246,7 +246,7 @@ char* index_name(double time) {
 }
 
 void info_extract() {
-//	printf("%s\n", line_buf);
+	printf("%s\n", line_buf);
 #ifdef DEBUG
 	    printf("Info_extract() Begin!\n");
 #endif
@@ -407,7 +407,7 @@ int main(int argc, char *argv[]) {
 		          if(libitem[i].time == 0.0) {
 		              break;
 		          }
-				  //TODO():Total_time需要刷新
+				  //Total_time需要刷新
 		          total_time += libitem[i].time;
 		          timeset[i] = libitem[i].time;
 	              //printf("Name: %s, Time elapsed: %f\n", libitem[i].name, libitem[i].time);

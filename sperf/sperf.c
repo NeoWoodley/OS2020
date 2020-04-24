@@ -386,7 +386,7 @@ int main(int argc, char *argv[]) {
 	  close(fildes[1]);
 	  int len = 0;
 	  //for(int i = 0; i < 1; i ++) {
-	  while(1);
+	  while(1){
 		  len = read(fildes[0], read_buf, 10240);
 		  if(len == 0) {
 		      break;

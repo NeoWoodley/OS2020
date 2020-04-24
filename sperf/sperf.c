@@ -383,7 +383,7 @@ int main(int argc, char *argv[]) {
   else {
 	  sleep(1);
 	  close(fildes[1]);
-	  for(int i = 0; i < 20; i ++) {
+	  for(int i = 0; i < 100; i ++) {
 		  //if(read(fildes[0], read_buf, 10240) == 0) {
 		  //  break;		  
 		//	}

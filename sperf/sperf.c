@@ -412,6 +412,7 @@ int main(int argc, char *argv[]) {
 	  int read_line = 0;
 	  char* name;
 	  double ratio;
+	  int count = 0;
 	  while(1) {
 //		  printf("Line_buf:%s\n", line_buf);
 		  read_line = readline();
@@ -431,11 +432,13 @@ int main(int argc, char *argv[]) {
 	          }
 
 	          qsort(timeset, 128, sizeof(timeset[0]), cmp_descend);
+			  count ++;
 
+			  printf("Time #%d\n", count);
 	          for(int i = 0; i < 5; i ++) {
                   name = index_name(timeset[i]);
                   ratio = ((timeset[i] / total_time) * 100);
-		          printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
+		          printf("%s (%f%%)\n", (i+1), name, ratio);
 	          }
 	          printf("====================\n");
 	          //printf("====%s=========%f=======\n", name, ratio);

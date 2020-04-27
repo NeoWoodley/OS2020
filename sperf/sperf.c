@@ -136,11 +136,19 @@ int readline() {
 
     linebufsmash();
 
+#ifdef DETAIL
+    printf("MARK 1\n");
+#endif
+
     char *tmp = read_buf;
 
     while(*tmp == '\0' && bound_test(tmp) == 0) {
         tmp ++;
     }
+
+#ifdef DETAIL
+    printf("MARK 2\n");
+#endif
 
     int i = 0;
 
@@ -151,10 +159,17 @@ int readline() {
 	    tmp ++;
     }
 
+#ifdef DETAIL
+    printf("MARK 3\n");
+#endif
 
 	if(*tmp == '\n') {
 	    *tmp = '\0';
 	}
+
+#ifdef DETAIL
+    printf("MARK 4\n");
+#endif
 
 	if(strncmp(line_buf, exit, 5) == 0) {
 
@@ -164,6 +179,10 @@ int readline() {
 	    return 1;
 	}
 
+#ifdef DETAIL
+    printf("MARK 5\n");
+#endif
+
 	if(bound_test(tmp) == 1) {
 	    strcpy(left_buf, line_buf);
 #ifdef CRAZY
@@ -171,6 +190,10 @@ int readline() {
 #endif
 	    return 3;
 	}
+
+#ifdef DETAIL
+    printf("MARK 6\n");
+#endif
 
 	if(leftbufemptytest() == false) {
 	    strcat(left_buf, line_buf);

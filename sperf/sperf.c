@@ -326,7 +326,7 @@ int main(int argc, char *argv[]) {
 	  //exit(0);
 
 	  // ========================================================
-	  unsigned read_length = NULL;
+	  unsigned read_length = 0;
 	  //read_length = fgets(test_buf, 300, stdin);
 	  read_length = read(fildes[0], test_buf, 128);
 	  assert(read_length != 0);

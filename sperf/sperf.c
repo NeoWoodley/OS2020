@@ -100,6 +100,15 @@ void leftbufsmash() {
 #endif
 }
 
+bool leftbufemptytest() {
+    for(int i = 0; i < 128; i ++) {
+	    if(left_buf[i] != '\0') {
+		    return false;
+		}
+	}
+	return true;
+}
+
 void eofsmash() {
 #ifdef CRAZY
     printf("[#eofsmash] Begin!\n");
@@ -163,7 +172,7 @@ int readline() {
 	    return 3;
 	}
 
-	if(left_buf[0] != '\0') {
+	if(leftbufemptytest() == false) {
 	    strcat(left_buf, line_buf);
 		strcpy(line_buf, left_buf);
 		leftbufsmash();

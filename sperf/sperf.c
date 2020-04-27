@@ -389,7 +389,7 @@ int main(int argc, char *argv[]) {
 	  assert(read_length != 0);
 
 	  //printf("Len:%d\n", read_length);
-	  //eofsmash();
+	  eofsmash();
 	  //printf("%s\n", test_buf);
 	  //memset(test_buf, '\0', 128);
 

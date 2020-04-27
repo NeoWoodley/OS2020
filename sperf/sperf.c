@@ -547,21 +547,16 @@ int main(int argc, char *argv[]) {
 //	  for(int i = 0; i < 8; i ++) {
 //		  printf("Line_buf:%s\n", line_buf);
 			  //memset(read_buf, '\0', 128);
-		  }
-		  else if(read_line == 3) {
-
-
-
 			  //sleep(1);
-			  memset(read_buf, '\0', 200);
-			  read_length = read(fildes[0], read_buf, 200);
-	          eofsmash();
+			  //memset(read_buf, '\0', 200);
+			  //read_length = read(fildes[0], read_buf, 200);
+	          //eofsmash();
 	          //printf("%s\n", read_buf);
-		      continue;
-		  }
-		  else {
-		      break;
-		  }
+		      //continue;
+		  //}
+		  //else {
+		   //   break;
+		  //}
 	  //父进程，读取strace输出并统计
      }
   }

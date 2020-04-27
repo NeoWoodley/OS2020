@@ -297,6 +297,8 @@ int main(int argc, char *argv[]) {
   else {
 	  sleep(1);
 	  close(fildes[1]);
+
+	  dup2(fildes[0], fileno(stdin));
 	  /*
 	  int len = 0;
 	  //for(int i = 0; i < 1; i ++) {
@@ -325,7 +327,7 @@ int main(int argc, char *argv[]) {
 
 	  // ========================================================
 	  char* read_length = NULL;
-	  read_length = fgets(test_buf, 300, fildes[0]);
+	  read_length = fgets(test_buf, 300, stdin);
 	  assert(read_length != 0);
 
 	  //printf("Len:%d\n", read_length);
@@ -335,7 +337,7 @@ int main(int argc, char *argv[]) {
 	  //for(int i = 0; i < 1000; i ++ ) {
 	  while(read_length != NULL) {
 		  //sleep(1);
-		  read_length = fgets(test_buf, 300, fildes[0]);
+		  read_length = fgets(test_buf, 300, stdin);
 	      printf("%s\n", test_buf);
 	      memset(testbuf, '\0', 300);
 		  //printf("____________________%u________________________\n", read_length);

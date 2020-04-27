@@ -185,6 +185,7 @@ int readline() {
 
 	if(bound_test(tmp) == 1) {
 	    strcpy(left_buf, line_buf);
+		printf("Left:%s\n", left_buf);
 #ifdef CRAZY
         printf("[*readline] Over!\n");
 #endif

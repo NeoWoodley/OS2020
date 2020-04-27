@@ -260,10 +260,10 @@ int main(int argc, char *argv[]) {
   if(pid == 0) {
 	  close(fildes[0]);
 	  int trash = open("/dev/null", O_RDWR);
-	  //dup2(trash, fileno(stdout));
-	  //close(trash);
-	  //close(fildes[0]);
-	  dup2(fildes[1], fileno(stderr));
+	  dup2(trash, fileno(stdout));
+	  close(trash);
+	  close(fildes[0]);
+	  //dup2(fildes[1], fileno(stderr));
 	  char* pwd = strtok(path, ":");
 	  memset(args, '\0', 64);
 	  strcpy(args, pwd);

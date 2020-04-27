@@ -389,7 +389,7 @@ int main(int argc, char *argv[]) {
 	  assert(read_length != 0);
 
 	  //printf("Len:%d\n", read_length);
-	  eofsmash();
+	  //eofsmash();
 	  //printf("%s\n", test_buf);
 	  //memset(test_buf, '\0', 128);
 
@@ -424,6 +424,7 @@ int main(int argc, char *argv[]) {
 		  read_line = readline();
 		  if(read_line == 0) {
 	          info_extract();
+			  memset(read_buf, '\0', 128);
 		  }
 		  else if(read_line == 3) {
 			  total_time = 0;

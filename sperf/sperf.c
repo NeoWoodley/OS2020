@@ -12,8 +12,8 @@
 #include <stdbool.h>
 
 extern char** environ;
-#define DETAIL
-#define CRAZY
+//#define DETAIL
+//#define CRAZY
 /*
    int execve(
        const char *filename,

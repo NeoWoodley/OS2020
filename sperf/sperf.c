@@ -11,7 +11,7 @@
 
 extern char** environ;
 //#define DEBUG
-#define CRAZY
+//#define CRAZY
 /*
    int execve(
        const char *filename,

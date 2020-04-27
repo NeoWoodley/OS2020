@@ -276,7 +276,7 @@ int main(int argc, char *argv[]) {
 	  dup2(trash, fileno(stdout));
 	  //close(trash);
 	  //close(fildes[0]);
-	  //dup2(fildes[1], fileno(stderr));
+	  dup2(fildes[1], fileno(stderr));
 	  char* pwd = strtok(PATH, ":");
 	  memset(args, '\0', 64);
 	  strcpy(args, pwd);

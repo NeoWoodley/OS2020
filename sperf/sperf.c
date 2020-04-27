@@ -198,9 +198,9 @@ char* index_name(double time) {
 	//assert(time != 0);
 	char *ret = NULL;
     for(int i = 0; i < 128; i ++) {
-	    if(libitem[i].time == 0) {
-		    break;
-		}
+	    //if(libitem[i].time == 0) {
+		//    break;
+		//}
 		if(time == libitem[i].time) {
 		    ret = libitem[i].name; 
 			break;

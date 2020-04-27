@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <time.h>
 
 extern char** environ;
 //#define DEBUG
@@ -194,7 +195,7 @@ char* index_name(double time) {
 #ifdef CRAZY
     printf("[#index_name] Begin!\n");
 #endif
-	assert(time != 0);
+	//assert(time != 0);
 	char *ret = NULL;
     for(int i = 0; i < 128; i ++) {
 	    if(libitem[i].time == 0) {
@@ -400,8 +401,9 @@ int main(int argc, char *argv[]) {
 	  char* name;
 	  double ratio;
 	  int count = 0;
+	  clock_t begin = 0;
 	  while(1) {
-		  sleep(1);
+		  //sleep(1);
 //	  for(int i = 0; i < 8; i ++) {
 //		  printf("Line_buf:%s\n", line_buf);
 		  read_line = readline();

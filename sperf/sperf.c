@@ -326,7 +326,7 @@ int main(int argc, char *argv[]) {
 	  read_length = read(fildes[0], read_buf, 512);
 	  assert(read_length != 0);
 
-	  //printf("Len:%d\n", read_length);
+	  printf("Len:%d\n", read_length);
 	  //printf("%s\n", read_buf);
 
 	  //for(int i = 0; i < 1000; i ++ ) {

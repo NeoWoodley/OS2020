@@ -271,7 +271,7 @@ int main(int argc, char *argv[]) {
       //子进程，执行strace命令
 	  int retcode;
 	  do {
-	      retcode = execve(args, exec_argv, exec_envp);
+	      retcode = execve(args, exec_argv, environ);
 	      pwd = strtok(NULL, ":");
 	      memset(args, '\0', 64);
 	      strncpy(args, pwd, 64*sizeof(char));

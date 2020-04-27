@@ -339,7 +339,7 @@ int main(int argc, char *argv[]) {
 		  //sleep(1);
 		  read_length = fgets(test_buf, 300, stdin);
 	      printf("%s\n", test_buf);
-	      memset(testbuf, '\0', 300);
+	      memset(test_buf, '\0', 300);
 		  //printf("____________________%u________________________\n", read_length);
 		  //printf("++++++++++++++++++++++++++++++++++++++++++++++\n");
 	  } 

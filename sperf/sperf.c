@@ -24,15 +24,15 @@ extern char** environ;
    strace -T 显示系统调用所花时间
 */
 
-char read_buf[128];
+char read_buf[200];
 
 //char test_buf[128];
 
-char left_buf[128];
+char left_buf[200];
 
-char* upper_bound = &read_buf[127];
+char* upper_bound = &read_buf[199];
 
-char line_buf[128];
+char line_buf[200];
 
 char* topfive[5];
 
@@ -73,14 +73,14 @@ void lib_init() {
 	    libitem[i].time = 0;
 		memset(libitem[i].name, '\0', 64);
 	}
-	memset(left_buf, '\0', 128);
+	memset(left_buf, '\0', 200);
 }
 
 void linebufsmash() {
 #ifdef CRAZY
     printf("[#linebufsmash] Begin!\n");
 #endif
-    for(int i = 0; i < 128; i ++) {
+    for(int i = 0; i < 200; i ++) {
 	    line_buf[i] = '\0';
 	}
 #ifdef CRAZY
@@ -92,7 +92,7 @@ void leftbufsmash() {
 #ifdef CRAZY
     printf("[#linebufsmash] Begin!\n");
 #endif
-    for(int i = 0; i < 128; i ++) {
+    for(int i = 0; i < 200; i ++) {
 	    left_buf[i] = '\0';
 	}
 #ifdef CRAZY
@@ -101,7 +101,7 @@ void leftbufsmash() {
 }
 
 bool leftbufemptytest() {
-    for(int i = 0; i < 128; i ++) {
+    for(int i = 0; i < 200; i ++) {
 	    if(left_buf[i] != '\0') {
 		    return false;
 		}
@@ -152,7 +152,7 @@ int readline() {
 
     int i = 0;
 
-    while(*tmp != '\n' && i < 128 && bound_test(tmp) == 0) {
+    while(*tmp != '\n' && i < 200 && bound_test(tmp) == 0) {
         line_buf[i] = *tmp;
 	    *tmp = '\0';
 	    i ++;
@@ -426,7 +426,7 @@ int main(int argc, char *argv[]) {
 	  // ========================================================
 	  unsigned read_length = 0;
 	  //read_length = fgets(test_buf, 300, stdin);
-	  read_length = read(fildes[0], read_buf, 128);
+	  read_length = read(fildes[0], read_buf, 200);
 	  assert(read_length != 0);
 
 	  //printf("Len:%d\n", read_length);
@@ -507,8 +507,8 @@ int main(int argc, char *argv[]) {
 			  }
 
 			  //sleep(1);
-			  memset(read_buf, '\0', 128);
-			  read_length = read(fildes[0], read_buf, 128);
+			  memset(read_buf, '\0', 200);
+			  read_length = read(fildes[0], read_buf, 200);
 	          eofsmash();
 	          //printf("%s\n", read_buf);
 		      continue;

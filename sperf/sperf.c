@@ -327,7 +327,7 @@ int main(int argc, char *argv[]) {
 	  assert(read_length != 0);
 
 	  printf("Len:%d\n", read_length);
-	  //printf("%s\n", read_buf);
+	  printf("%s\n", read_buf);
 
 	  //for(int i = 0; i < 1000; i ++ ) {
 	  while(read_length == 512) {

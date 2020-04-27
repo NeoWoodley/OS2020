@@ -10,7 +10,7 @@
 #include <fcntl.h>
 
 extern char** environ;
-//#define DEBUG
+#define DEBUG
 //#define TEST
 /*
    int execve(
@@ -238,6 +238,12 @@ int main(int argc, char *argv[]) {
   for(int i = 0; i < argc-1; i ++) {
       exec_argv[i+2] = argv[i+1];
   }
+
+#ifdef DEBUG
+ for(int i = 0; i < argc + 2; i ++) {
+     printf("%s\t", exec_argv[i]);
+ }
+#endif
   
   char PATH[128] = "";
   char *path = NULL; 

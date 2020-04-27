@@ -238,6 +238,7 @@ char* index_name(double time) {
 }
 
 void info_extract() {
+	printf("Line_buf%s\n", line_buf);
 #ifdef CRAZY
             printf("[#info_extract] Begin!\n");
 #endif
@@ -430,7 +431,7 @@ int main(int argc, char *argv[]) {
 		  //sleep(1);
 //	  for(int i = 0; i < 8; i ++) {
 		  read_line = readline();
-		  printf("Line_buf:%s\n", line_buf);
+//		  printf("Line_buf:%s\n", line_buf);
 		  if(read_line == 0) {
 	          info_extract();
 			  //memset(read_buf, '\0', 128);

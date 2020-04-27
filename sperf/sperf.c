@@ -461,6 +461,7 @@ int main(int argc, char *argv[]) {
 		      break;
 		  }
 	  //父进程，读取strace输出并统计
+     }
   }
 
 //  execve("/usr/bin/strace", exec_argv, exec_envp);

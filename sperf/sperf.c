@@ -335,7 +335,7 @@ int main(int argc, char *argv[]) {
 	  //for(int i = 0; i < 1000; i ++ ) {
 	  while(read_length != NULL) {
 		  //sleep(1);
-		  read_length = read(test_buf, 300, fildes[0]);
+		  read_length = fgets(test_buf, 300, fildes[0]);
 	      printf("%s\n", test_buf);
 	      memset(testbuf, '\0', 300);
 		  //printf("____________________%u________________________\n", read_length);

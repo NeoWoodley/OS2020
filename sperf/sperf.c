@@ -243,18 +243,25 @@ int main(int argc, char *argv[]) {
  for(int i = 0; i < argc + 2; i ++) {
      printf("%s\t", exec_argv[i]);
  }
+ 
+ printf("\n");
 #endif
   
-  char PATH[128] = "";
   char *path = NULL; 
-  char path_name[6] = "PATH=";
+  //char path_name[6] = "PATH=";
   char exe_name[8] = "/strace";
   char args[64] = "";
-  strcpy(PATH, path_name);
+  //strcpy(PATH, path_name);
   path = getenv("PATH");
-  strcat(PATH, path);
+  char PATH[strlen(path) + 1];
+  strcpy(PATH, path);
+ 
+#ifdef DEBUG
+    printf("PATH:%s\n", PATH);
+#endif
+  //strcat(PATH, path);
 
-  char *exec_envp[] = { PATH, NULL, };
+  //char *exec_envp[] = { PATH, NULL, };
 
   int fildes[2];
 

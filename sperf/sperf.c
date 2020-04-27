@@ -276,6 +276,11 @@ void info_extract() {
     item_t* tmp = (item_t*)malloc(sizeof(item_t));
 	char *buf = line_buf;
 	int i = 0;
+
+#ifdef DETAIL
+    printf("MARK A\n");
+#endif
+
 	while(*buf != '(') {
 	   tmp->name[i] = *buf;
 	   i ++;
@@ -283,10 +288,18 @@ void info_extract() {
 	}
 	tmp->name[i] = '\0';
 
+#ifdef DETAIL
+    printf("MARK B\n");
+#endif
+
 	while(*buf != '<') {
 	    buf ++;
 	}
 	buf ++;
+
+#ifdef DETAIL
+    printf("MARK C\n");
+#endif
     
 	i = 0;
 	char time[10];
@@ -294,12 +307,20 @@ void info_extract() {
 	    time[i] = '\0';
 	}
 
+#ifdef DETAIL
+    printf("MARK D\n");
+#endif
+
     i = 0;
 	while(*buf != '>') {
 	   time[i] = *buf;
 	   buf ++;
 	   i ++;
 	}
+
+#ifdef DETAIL
+    printf("MARK E\n");
+#endif
 
 	double base = 0.000001;
 	char *mark = time;
@@ -309,15 +330,27 @@ void info_extract() {
 		*mark ++;	
 	}
 
+#ifdef DETAIL
+    printf("MARK F\n");
+#endif
+
 	while(*mark != '\0') {
 		factor *= 10;
 	    factor += (*mark - '0');
 		mark ++;
 	}
 
+#ifdef DETAIL
+    printf("MARK G\n");
+#endif
+
 	tmp->time = factor * base;
 
 	search_insert(tmp);
+
+#ifdef DETAIL
+    printf("MARK H\n");
+#endif
 
 	free(tmp);
 

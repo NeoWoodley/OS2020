@@ -282,7 +282,7 @@ int main(int argc, char *argv[]) {
 	  strcpy(args, pwd);
 	  strcat(args, exe_name);
 #ifdef DEBUG
-	  printf("args:%s\n");
+	  printf("args:%s\n", args);
 #endif
       //子进程，执行strace命令
 	  int retcode;

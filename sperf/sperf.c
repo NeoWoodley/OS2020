@@ -196,6 +196,10 @@ int readline() {
 #endif
 
 	if(leftbufemptytest() == false) {
+
+#ifdef DETAIL
+    printf("MARK 6\n");
+#endif
 	    strcat(left_buf, line_buf);
 		strcpy(line_buf, left_buf);
 		leftbufsmash();

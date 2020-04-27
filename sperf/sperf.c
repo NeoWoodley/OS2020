@@ -24,6 +24,8 @@ extern char** environ;
 
 char read_buf[512];
 
+char test_buf[300];
+
 char left_buf[256];
 
 char* upper_bound = &read_buf[511];
@@ -323,18 +325,18 @@ int main(int argc, char *argv[]) {
 
 	  // ========================================================
 	  unsigned read_length = 0;
-	  read_length = read(fildes[0], read_buf, 512);
+	  read_length = read(fildes[0], test_buf, 300);
 	  assert(read_length != 0);
 
 	  printf("Len:%d\n", read_length);
-	  printf("%s\n", read_buf);
+	  printf("%s\n", test_buf);
 
 	  //for(int i = 0; i < 1000; i ++ ) {
-	  while(read_length == 512) {
-		  sleep(1);
-		  read_length = read(fildes[0], read_buf, 512);
+	  while(read_length == 300) {
+		  //sleep(1);
+		  read_length = read(fildes[0], test_buf, 300);
 		  //printf("____________________%u________________________\n", read_length);
-		  printf("%s", read_buf); 
+		  printf("%s", test_buf); 
 		  //printf("++++++++++++++++++++++++++++++++++++++++++++++\n");
 	  } 
 	  printf("^*^&*^*&^*&^&&$&$^&*^*(*&(&)&)(&()&*^&*&$^$^\n");

@@ -324,19 +324,21 @@ int main(int argc, char *argv[]) {
 	  //exit(0);
 
 	  // ========================================================
-	  unsigned read_length = 0;
-	  read_length = read(fildes[0], test_buf, 300);
+	  char* read_length = NULL;
+	  read_length = fgets(test_buf, 300, fildes[0]);
 	  assert(read_length != 0);
 
-	  printf("Len:%d\n", read_length);
+	  //printf("Len:%d\n", read_length);
 	  printf("%s\n", test_buf);
+	  memset(testbuf, '\0', 300);
 
 	  //for(int i = 0; i < 1000; i ++ ) {
-	  while(read_length == 300) {
+	  while(read_length != NULL) {
 		  //sleep(1);
-		  read_length = read(fildes[0], test_buf, 300);
+		  read_length = read(test_buf, 300, fildes[0]);
+	      printf("%s\n", test_buf);
+	      memset(testbuf, '\0', 300);
 		  //printf("____________________%u________________________\n", read_length);
-		  printf("%s", test_buf); 
 		  //printf("++++++++++++++++++++++++++++++++++++++++++++++\n");
 	  } 
 	  printf("^*^&*^*&^*&^&&$&$^&*^*(*&(&)&)(&()&*^&*&$^$^\n");

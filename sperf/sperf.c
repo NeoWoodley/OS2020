@@ -293,7 +293,7 @@ int main(int argc, char *argv[]) {
 	  //不应该执行此处代码，否则execve失败，出错处理
   }
   else {
-	  sleep(1);
+	  //sleep(1);
 	  close(fildes[1]);
 	  /*
 	  int len = 0;
@@ -321,7 +321,7 @@ int main(int argc, char *argv[]) {
 	  //printf("%s", read_buf);
 	  //exit(0);
 
-	  /*========================================================
+	  ========================================================
 	  unsigned read_length = 0;
 	  read_length = read(fildes[0], read_buf, 512);
 	  assert(read_length != 0);
@@ -339,7 +339,7 @@ int main(int argc, char *argv[]) {
 	  } 
 	  printf("^*^&*^*&^*&^&&$&$^&*^*(*&(&)&)(&()&*^&*&$^$^\n");
 	  exit(0);
-	  =========================================================*/
+	  =========================================================
 
 	  //eofsmash();
 

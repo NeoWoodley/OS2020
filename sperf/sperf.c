@@ -277,10 +277,13 @@ int main(int argc, char *argv[]) {
 	  //close(trash);
 	  //close(fildes[0]);
 	  //dup2(fildes[1], fileno(stderr));
-	  char* pwd = strtok(path, ":");
+	  char* pwd = strtok(PATH, ":");
 	  memset(args, '\0', 64);
 	  strcpy(args, pwd);
 	  strcat(args, exe_name);
+#ifdef DEBUG
+	  printf("args:%s\n");
+#endif
       //子进程，执行strace命令
 	  int retcode;
 	  do {

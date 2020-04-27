@@ -261,20 +261,22 @@ int main(int argc, char *argv[]) {
 	  close(fildes[0]);
 	  int trash = open("/dev/null", O_RDWR);
 	  dup2(trash, fileno(stdout));
-	  close(trash);
-	  close(fildes[0]);
+	  //close(trash);
+	  //close(fildes[0]);
 	  //dup2(fildes[1], fileno(stderr));
 	  char* pwd = strtok(path, ":");
 	  memset(args, '\0', 64);
 	  strcpy(args, pwd);
 	  strcat(args, exe_name);
       //子进程，执行strace命令
-	  while(execve(args, exec_argv, exec_envp) == -1) {
+	  int retcode;
+	  do {
+	      retcode = execve(args, exec_argv, exec_envp);
 	      pwd = strtok(NULL, ":");
 	      memset(args, '\0', 64);
 	      strncpy(args, pwd, 64*sizeof(char));
 	      strcat(args, exe_name);
-	  }
+	  } while( retcode == -1);
 	  //不应该执行此处代码，否则execve失败，出错处理
   }
   else {

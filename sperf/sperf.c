@@ -205,6 +205,7 @@ int readline() {
 	printf("line_buf:%lu\n", strlen(line_buf));
 #endif
 	    strcat(left_buf, line_buf);
+		linebufsmash();
 		strcpy(line_buf, left_buf);
 		leftbufsmash();
 #ifdef CRAZY
@@ -492,6 +493,7 @@ int main(int argc, char *argv[]) {
 
 	  while(1) {
 	      bool output = false;
+		  
 		  //sleep(1);
 //	  for(int i = 0; i < 8; i ++) {
 		  read_line = readline();

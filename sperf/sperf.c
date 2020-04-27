@@ -11,7 +11,7 @@
 
 extern char** environ;
 //#define DEBUG
-//#define TEST
+#define CRAZY
 /*
    int execve(
        const char *filename,
@@ -26,11 +26,11 @@ char read_buf[128];
 
 //char test_buf[128];
 
-char left_buf[256];
+char left_buf[128];
 
-char* upper_bound = &read_buf[511];
+char* upper_bound = &read_buf[127];
 
-char line_buf[256];
+char line_buf[128];
 
 char* topfive[5];
 
@@ -58,7 +58,7 @@ int cmp_descend(const void* a, const void* b) {
 
 int bound_test(char* tmp) {
     uintptr_t ptr = (uintptr_t)tmp;
-    uintptr_t end = (uintptr_t)&read_buf[511];	
+    uintptr_t end = (uintptr_t)&read_buf[127];	
 
 	int ret = end >= ptr ? 0 : 1;
 
@@ -71,22 +71,25 @@ void lib_init() {
 	    libitem[i].time = 0;
 		memset(libitem[i].name, '\0', 64);
 	}
-	memset(left_buf, '\0', 256);
+	memset(left_buf, '\0', 128);
 }
 
 void linebufsmash() {
-    for(int i = 0; i < 256; i ++) {
+    for(int i = 0; i < 128; i ++) {
 	    line_buf[i] = '\0';
 	}
 }
 
 void leftbufsmash() {
-    for(int i = 0; i < 256; i ++) {
+    for(int i = 0; i < 128; i ++) {
 	    left_buf[i] = '\0';
 	}
 }
 
 void eofsmash() {
+#ifdef CRAZY
+    printf("[#eofsmash] Begin!\n");
+#endif
     intptr_t len = strlen(read_buf);
 	if(read_buf[0] == '\n') {
 	    read_buf[0] = 32;
@@ -96,9 +99,15 @@ void eofsmash() {
 		    read_buf[i] = 32;
 		}
 	}
+#ifdef CRAZY
+    printf("[*eofsmash] Over!\n");
+#endif
 }
 
 int readline() {
+#ifdef CRAZY
+    printf("[#readline] Begin!\n");
+#endif
 
     char exit[6] = "exit_";
 
@@ -112,7 +121,7 @@ int readline() {
 
     int i = 0;
 
-    while(*tmp != '\n' && i < 256 && bound_test(tmp) == 0) {
+    while(*tmp != '\n' && i < 128 && bound_test(tmp) == 0) {
         line_buf[i] = *tmp;
 	    *tmp = '\0';
 	    i ++;
@@ -126,11 +135,17 @@ int readline() {
 
 	if(strncmp(line_buf, exit, 5) == 0) {
 
+#ifdef CRAZY
+        printf("[*readline] Over!\n");
+#endif
 	    return 1;
 	}
 
 	if(bound_test(tmp) == 1) {
 	    strcpy(left_buf, line_buf);
+#ifdef CRAZY
+        printf("[*readline] Over!\n");
+#endif
 	    return 3;
 	}
 
@@ -138,17 +153,29 @@ int readline() {
 	    strcat(left_buf, line_buf);
 		strcpy(line_buf, left_buf);
 		leftbufsmash();
+#ifdef CRAZY
+        printf("[*readline] Over!\n");
+#endif
 		return 0;
 	}
 
+#ifdef CRAZY
+    printf("[*readline] Over!\n");
+#endif
 	return 0;
 }
 
 void search_insert(item_t *item) {
+#ifdef CRAZY
+    printf("[#search_insert] Begin!\n");
+#endif
 	for(int i = 0; i < end; i ++) {
 		if(strcmp(item->name, libitem[i].name) == 0) {
 			libitem[i].time += item->time;
 
+#ifdef CRAZY
+            printf("[*search_insert] Over!\n");
+#endif
 			return;
 		}
 	}
@@ -157,10 +184,16 @@ void search_insert(item_t *item) {
 	libitem[end].time = item->time;
     
 	end ++;
+#ifdef CRAZY
+            printf("[*search_insert] Over!\n");
+#endif
 
 }
 
 char* index_name(double time) {
+#ifdef CRAZY
+    printf("[#index_name] Begin!\n");
+#endif
 	assert(time != 0);
 	char *ret = NULL;
     for(int i = 0; i < 128; i ++) {
@@ -175,10 +208,16 @@ char* index_name(double time) {
 
 	assert(ret != NULL);
     
+#ifdef CRAZY
+            printf("[*index_name] Over!\n");
+#endif
 	return ret;
 }
 
 void info_extract() {
+#ifdef CRAZY
+            printf("[#info_extract] Begin!\n");
+#endif
     item_t* tmp = (item_t*)malloc(sizeof(item_t));
 	char *buf = line_buf;
 	int i = 0;
@@ -226,6 +265,10 @@ void info_extract() {
 	search_insert(tmp);
 
 	free(tmp);
+
+#ifdef CRAZY
+            printf("[*info_extract] Over!\n");
+#endif
 }
 
 int main(int argc, char *argv[]) {

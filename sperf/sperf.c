@@ -98,39 +98,17 @@ void eofsmash() {
 
 int readline() {
 
-#ifdef TEST
-	printf("Readline() Begin!\n");
-#endif
-
     char exit[6] = "exit_";
-
-#ifdef TEST
-	printf("Is here?\n");
-#endif
 
     linebufsmash();
 
-#ifdef TEST
-    printf("Or here?\n");
-#endif
-
     char *tmp = read_buf;
-
-#ifdef TEST
-    printf("And here?\n");
-#endif
 
     while(*tmp == '\0' && bound_test(tmp) == 0) {
         tmp ++;
     }
 
-#ifdef TEST
-	printf("Maybe here?\n");
-#endif
-
     int i = 0;
-    //printf("tmp:%ld\n", (uintptr_t)tmp);
-    //printf("read_buf:%ld\n", (uintptr_t)&read_buf[10239]);
 
     while(*tmp != '\n' && i < 256 && bound_test(tmp) == 0) {
         line_buf[i] = *tmp;
@@ -139,12 +117,6 @@ int readline() {
 	    tmp ++;
     }
 
-#ifdef TEST
-	printf("Then here?\n");
-#endif
-
-
-	//printf("%s\n", line_buf);
 
 	if(*tmp == '\n') {
 	    *tmp = '\0';
@@ -152,9 +124,6 @@ int readline() {
 
 	if(strncmp(line_buf, exit, 5) == 0) {
 
-#ifdef TEST
-	    printf("Readline() End!\n");
-#endif
 	    return 1;
 	}
 
@@ -170,26 +139,14 @@ int readline() {
 		return 0;
 	}
 
-#ifdef TEST
-//	    printf("red_buf content:%s\n", line_buf);
-	    printf("Readline() End!\n");
-#endif
-
-	//	printf("?\n");
-	    return 0;
+	return 0;
 }
 
 void search_insert(item_t *item) {
-#ifdef DEBUG
-	    printf("Search_insert() Begin!\n");
-#endif
 	for(int i = 0; i < end; i ++) {
 		if(strcmp(item->name, libitem[i].name) == 0) {
 			libitem[i].time += item->time;
 
-#ifdef DEBUG
-	    printf("Search_insert() End!\n");
-#endif
 			return;
 		}
 	}
@@ -199,9 +156,6 @@ void search_insert(item_t *item) {
     
 	end ++;
 
-#ifdef DEBUG
-	    printf("Search_insert() End!\n");
-#endif
 }
 
 char* index_name(double time) {
@@ -223,18 +177,8 @@ char* index_name(double time) {
 }
 
 void info_extract() {
-//	printf("%s\n", line_buf);
-#ifdef DEBUG
-	    printf("Info_extract() Begin!\n");
-#endif
     item_t* tmp = (item_t*)malloc(sizeof(item_t));
-#ifdef DEBUG
-//	    printf("Malloc Success!\n");
-#endif
 	char *buf = line_buf;
-#ifdef DEBUG
-//	    printf("Buf Got!\n");
-#endif
 	int i = 0;
 	while(*buf != '(') {
 	   tmp->name[i] = *buf;
@@ -242,10 +186,6 @@ void info_extract() {
 	   buf ++;
 	}
 	tmp->name[i] = '\0';
-
-#ifdef DEBUG
-    printf("Name Got!\n");
-#endif
 
 	while(*buf != '<') {
 	    buf ++;
@@ -265,10 +205,6 @@ void info_extract() {
 	   i ++;
 	}
 
-#ifdef DEBUG
-    printf("Time string Got!\n");
-#endif
-
 	double base = 0.000001;
 	char *mark = time;
 	double factor = 0.0;
@@ -277,28 +213,17 @@ void info_extract() {
 		*mark ++;	
 	}
 
-#ifdef DEBUG
-    printf("Digit Found! %s\n", mark);
-#endif
-
 	while(*mark != '\0') {
 		factor *= 10;
 	    factor += (*mark - '0');
 		mark ++;
 	}
 
-#ifdef DEBUG
-    printf("Digit Got!\n");
-#endif
-
 	tmp->time = factor * base;
 
 	search_insert(tmp);
 
 	free(tmp);
-#ifdef DEBUG
-	    printf("Info_extract() End!\n");
-#endif
 }
 
 int main(int argc, char *argv[]) {
@@ -335,8 +260,8 @@ int main(int argc, char *argv[]) {
   if(pid == 0) {
 	  close(fildes[0]);
 	  int trash = open("/dev/null", O_RDWR);
-	  dup2(trash, fileno(stdout));
-	  close(trash);
+	  //dup2(trash, fileno(stdout));
+	  //close(trash);
 	  //close(fildes[0]);
 	  dup2(fildes[1], fileno(stderr));
 	  char* pwd = strtok(path, ":");
@@ -381,6 +306,7 @@ int main(int argc, char *argv[]) {
 	  //printf("%s", read_buf);
 	  //exit(0);
 
+	  /*========================================================
 	  unsigned read_length = 0;
 	  read_length = read(fildes[0], read_buf, 512);
 	  assert(read_length != 0);
@@ -398,6 +324,7 @@ int main(int argc, char *argv[]) {
 	  } 
 	  printf("^*^&*^*&^*&^&&$&$^&*^*(*&(&)&)(&()&*^&*&$^$^\n");
 	  exit(0);
+	  =========================================================*/
 
 	  //eofsmash();
 

@@ -167,7 +167,7 @@ int readline() {
 	    *tmp = '\0';
 	}
 
-	printf("Temp_linebuf:%s\n", read_buf);
+	printf("Temp_linebuf:%s\n", line_buf);
 
 #ifdef DETAIL
     printf("MARK 4\n");

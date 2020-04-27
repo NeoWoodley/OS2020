@@ -13,7 +13,7 @@
 
 extern char** environ;
 //#define DEBUG
-#define CRAZY
+//#define CRAZY
 /*
    int execve(
        const char *filename,
@@ -229,6 +229,7 @@ char* index_name(double time) {
 }
 
 void info_extract() {
+	printf("%s");
 #ifdef CRAZY
             printf("[#info_extract] Begin!\n");
 #endif

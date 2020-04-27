@@ -281,9 +281,6 @@ int main(int argc, char *argv[]) {
 	  memset(args, '\0', 64);
 	  strcpy(args, pwd);
 	  strcat(args, exe_name);
-#ifdef DEBUG
-	  printf("args:%s\n", args);
-#endif
       //子进程，执行strace命令
 	  int retcode;
 	  do {

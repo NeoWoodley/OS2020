@@ -77,15 +77,27 @@ void lib_init() {
 }
 
 void linebufsmash() {
+#ifdef CRAZY
+    printf("[#linebufsmash] Begin!\n");
+#endif
     for(int i = 0; i < 128; i ++) {
 	    line_buf[i] = '\0';
 	}
+#ifdef CRAZY
+    printf("[*linebufsmash] Over!\n");
+#endif
 }
 
 void leftbufsmash() {
+#ifdef CRAZY
+    printf("[#linebufsmash] Begin!\n");
+#endif
     for(int i = 0; i < 128; i ++) {
 	    left_buf[i] = '\0';
 	}
+#ifdef CRAZY
+    printf("[*leftbufsmash] Over!\n");
+#endif
 }
 
 void eofsmash() {

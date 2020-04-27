@@ -86,7 +86,6 @@ void leftbufsmash() {
 
 void eofsmash() {
     intptr_t len = strlen(read_buf);
-	//printf("len: %ld\n", len);
 	if(read_buf[0] == '\n') {
 	    read_buf[0] = 32;
 	}
@@ -96,33 +95,6 @@ void eofsmash() {
 		}
 	}
 }
-
-/*
-int special_strcmp(char *str1, char* str2, int len) {
-    size_t len_str1 = strlen(str1);
-    size_t len_str2 = strlen(str2);
-
-	int compare_len = len_str1;
-	if(len_str2 < compare_len) {
-		compare_len = len_str2;	    
-	}
-	if(len < compare_len) {
-	    compare_len = len;
-	}
-
-	for(int i = 0; i < compare_len; i ++) {
-	    if( str1[i] > str2[i] ) {
-		    return 1;
-		}
-
-		if( str1[i] < str2[i] ) {
-		    return -1;
-		} 
-	}
-
-	return 0;
-}
-*/
 
 int readline() {
 
@@ -187,7 +159,6 @@ int readline() {
 	}
 
 	if(bound_test(tmp) == 1) {
-	//	printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 	    strcpy(left_buf, line_buf);
 	    return 3;
 	}
@@ -416,7 +387,7 @@ int main(int argc, char *argv[]) {
 
 	  //printf("Len:%d\n", read_length);
 	  //printf("%s\n", read_buf);
-	  /*
+
 	  for(int i = 0; i < 500; i ++ ) {
 		  sleep(1);
 		  read_length = read(fildes[0], read_buf, 10240);
@@ -426,7 +397,7 @@ int main(int argc, char *argv[]) {
 	  } 
 	  printf("^*^&*^*&^*&^&&$&$^&*^*(*&(&)&)(&()&*^&*&$^$^\n");
 	  exit(0);
-	  */
+
 	  //regmatch_t get_match;
 	  //regex_t reg;
 
@@ -489,44 +460,6 @@ int main(int argc, char *argv[]) {
 		  else {
 		      break;
 		  }
-	  }
-	  /*
-	  for(int i = 0; i < 128; i ++) {
-		  if(libitem[i].time == 0.0) {
-		      break;
-		  }
-		  total_time += libitem[i].time;
-		  timeset[i] = libitem[i].time;
-	      //printf("Name: %s, Time elapsed: %f\n", libitem[i].name, libitem[i].time);
-	  }
-
-	  qsort(timeset, 128, sizeof(timeset[0]), cmp_descend);
-*/
-	  /*
-	  for(int i = 0; i < 128; i ++) {
-	      if(timeset[i] == 0) {
-		      break;
-		  }
-		  printf("%f\n", timeset[i]);
-	  }
-	  */
-	  /*
-
-	  char* name;
-	  double ratio;
-	  for(int i = 0; i < 5; i ++) {
-          name = index_name(timeset[i]);
-          ratio = (timeset[i] / total_time) * 100;
-		  printf("Time #%d\n%s (%f%%)\n", (i+1), name, ratio);
-	  }
-	  printf("====================\n");
-      */
-
-
-
-
-	  //printf("%ld\n", read_length);
-	  //fprintf(stderr, "%s\n", &read_buf[0]);
 	  //父进程，读取strace输出并统计
   }
 

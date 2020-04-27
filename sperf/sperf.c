@@ -393,7 +393,7 @@ int main(int argc, char *argv[]) {
 			  fflush(stdout);
 
 //			  sleep(1);
-			  read_length = read(fildes[0], read_buf, 512);
+			  read_length = read(fildes[0], read_buf, 128);
 	          eofsmash();
 	          //printf("%s\n", read_buf);
 		      continue;

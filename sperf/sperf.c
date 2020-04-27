@@ -401,6 +401,7 @@ int main(int argc, char *argv[]) {
 	  double ratio;
 	  int count = 0;
 	  while(1) {
+		  sleep(1);
 //	  for(int i = 0; i < 8; i ++) {
 //		  printf("Line_buf:%s\n", line_buf);
 		  read_line = readline();

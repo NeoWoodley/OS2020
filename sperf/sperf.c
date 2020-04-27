@@ -390,7 +390,7 @@ int main(int argc, char *argv[]) {
 
 	  for(int i = 0; i < 500; i ++ ) {
 		  sleep(1);
-		  read_length = read(fildes[0], read_buf, 10240);
+		  read_length = read(fildes[0], read_buf, 512);
 		  printf("____________________%u________________________\n", read_length);
 		  printf("%s\n", read_buf); 
 		  printf("++++++++++++++++++++++++++++++++++++++++++++++\n");

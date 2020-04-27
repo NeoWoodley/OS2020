@@ -229,7 +229,7 @@ char* index_name(double time) {
 }
 
 void info_extract() {
-	printf("%s", read_buf);
+	printf("%s\n", read_buf);
 #ifdef CRAZY
             printf("[#info_extract] Begin!\n");
 #endif

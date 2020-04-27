@@ -475,7 +475,7 @@ int main(int argc, char *argv[]) {
 				  begin = clock();
 			  }
 
-//			  sleep(1);
+			  sleep(1);
 			  //memset(read_buf, '\0', 128);
 			  read_length = read(fildes[0], read_buf, 128);
 	          eofsmash();

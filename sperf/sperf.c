@@ -24,7 +24,7 @@ extern char** environ;
 
 char read_buf[128];
 
-char test_buf[128];
+//char test_buf[128];
 
 char left_buf[256];
 
@@ -328,14 +328,15 @@ int main(int argc, char *argv[]) {
 	  // ========================================================
 	  unsigned read_length = 0;
 	  //read_length = fgets(test_buf, 300, stdin);
-	  read_length = read(fildes[0], test_buf, 128);
+	  read_length = read(fildes[0], read_buf, 128);
 	  assert(read_length != 0);
 
-	  printf("Len:%d\n", read_length);
+	  //printf("Len:%d\n", read_length);
 	  //eofsmash();
-	  printf("%s\n", test_buf);
-	  memset(test_buf, '\0', 128);
+	  //printf("%s\n", test_buf);
+	  //memset(test_buf, '\0', 128);
 
+	  /*
 	  //for(int i = 0; i < 1000; i ++ ) {
 	  while(read_length != 0) {
 		  //sleep(1);
@@ -348,16 +349,16 @@ int main(int argc, char *argv[]) {
 	  printf("^*^&*^*&^*&^&&$&$^&*^*(*&(&)&)(&()&*^&*&$^$^\n");
 	  exit(0);
 	  // =========================================================
+      */
 
-	  //eofsmash();
+	  eofsmash();
 
-	  /*
 	  int read_line = 0;
 	  char* name;
 	  double ratio;
 	  int count = 0;
-//	  while(1) {
-	  for(int i = 0; i < 8; i ++) {
+	  while(1) {
+//	  for(int i = 0; i < 8; i ++) {
 //		  printf("Line_buf:%s\n", line_buf);
 		  read_line = readline();
 		  if(read_line == 0) {
@@ -391,7 +392,7 @@ int main(int argc, char *argv[]) {
 	          }
 			  fflush(stdout);
 
-			  sleep(1);
+//			  sleep(1);
 			  read_length = read(fildes[0], read_buf, 512);
 	          eofsmash();
 	          //printf("%s\n", read_buf);
@@ -402,7 +403,6 @@ int main(int argc, char *argv[]) {
 		  }
 	  //父进程，读取strace输出并统计
      }
-	 */
   }
 
 //  execve("/usr/bin/strace", exec_argv, exec_envp);

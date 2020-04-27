@@ -332,7 +332,7 @@ int main(int argc, char *argv[]) {
 
 	  //printf("Len:%d\n", read_length);
 	  printf("%s\n", test_buf);
-	  memset(testbuf, '\0', 300);
+	  memset(test_buf, '\0', 300);
 
 	  //for(int i = 0; i < 1000; i ++ ) {
 	  while(read_length != NULL) {

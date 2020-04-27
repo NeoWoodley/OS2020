@@ -398,20 +398,9 @@ int main(int argc, char *argv[]) {
 	  printf("^*^&*^*&^*&^&&$&$^&*^*(*&(&)&)(&()&*^&*&$^$^\n");
 	  exit(0);
 
-	  //regmatch_t get_match;
-	  //regex_t reg;
-
 	  //eofsmash();
 
-	  //printf("%s\n", read_buf);
-
 	  /*
-	  printf("_____________________________________________\n");
-	  printf("%s\n", read_buf);
-	  printf("_____________________________________________\n");
-	  printf("%d\n", read_length);
-      */
-
 	  int read_line = 0;
 	  char* name;
 	  double ratio;
@@ -462,6 +451,7 @@ int main(int argc, char *argv[]) {
 		  }
 	  //父进程，读取strace输出并统计
      }
+	 */
   }
 
 //  execve("/usr/bin/strace", exec_argv, exec_envp);

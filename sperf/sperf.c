@@ -424,7 +424,7 @@ int main(int argc, char *argv[]) {
 		  printf("Line_buf:%s\n", line_buf);
 		  if(read_line == 0) {
 	          info_extract();
-			  memset(read_buf, '\0', 128);
+			  //memset(read_buf, '\0', 128);
 		  }
 		  else if(read_line == 3) {
 			  total_time = 0;
@@ -466,7 +466,7 @@ int main(int argc, char *argv[]) {
 			  }
 
 //			  sleep(1);
-			  memset(read_buf, '\0', 128);
+			  //memset(read_buf, '\0', 128);
 			  read_length = read(fildes[0], read_buf, 128);
 	          eofsmash();
 	          //printf("%s\n", read_buf);

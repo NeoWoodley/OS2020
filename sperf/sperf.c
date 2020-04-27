@@ -331,7 +331,7 @@ int main(int argc, char *argv[]) {
 
 	  //for(int i = 0; i < 1000; i ++ ) {
 	  while(read_length == 512) {
-		  //sleep(1);
+		  sleep(1);
 		  read_length = read(fildes[0], read_buf, 512);
 		  //printf("____________________%u________________________\n", read_length);
 		  printf("%s", read_buf); 

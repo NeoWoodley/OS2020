@@ -199,6 +199,8 @@ int readline() {
 
 #ifdef DETAIL
     printf("MARK 7\n");
+	printf("left_buf:%s\n", left_buf);
+	printf("line_buf:%s\n", line_buf);
 	printf("left_buf:%lu\n", strlen(left_buf));
 	printf("line_buf:%lu\n", strlen(line_buf));
 #endif

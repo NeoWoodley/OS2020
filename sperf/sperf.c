@@ -113,13 +113,13 @@ void eofsmash() {
 #ifdef CRAZY
     printf("[#eofsmash] Begin!\n");
 #endif
-    intptr_t len = strlen(line_buf);
-	if(line_buf[0] == '\n') {
-	    line_buf[0] = 32;
+    intptr_t len = strlen(read_buf);
+	if(read_buf[0] == '\n') {
+	    read_buf[0] = 32;
 	}
 	for(intptr_t i = 1; i < len; i++) {
-	    if(line_buf[i] == '\n' && line_buf[i-1] != '>') {
-		    line_buf[i] = 32;
+	    if(read_buf[i] == '\n' && read_buf[i-1] != '>') {
+		    read_buf[i] = 32;
 		}
 	}
 #ifdef CRAZY

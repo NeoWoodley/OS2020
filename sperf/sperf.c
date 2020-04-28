@@ -352,7 +352,6 @@ int main(int argc, char *argv[]) {
 	  clock_t begin =  clock();
 	  while(fgets(read_buf, 511, stdin) != NULL) {
 		  if(terminate_detect() == false) {
-			  printf("??????\n");
 		      break;
 			  goto OUT;
 		  }
@@ -372,6 +371,7 @@ int main(int argc, char *argv[]) {
          
 		  if(output == true) {
 OUT:
+			  printf("??????\n");
 		  
 			  total_time = 0.0;
 

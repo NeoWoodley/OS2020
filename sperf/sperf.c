@@ -127,6 +127,7 @@ void eofsmash() {
 #endif
 }
 
+/*
 int readline() {
 #ifdef CRAZY
     printf("[#readline] Begin!\n");
@@ -221,6 +222,10 @@ int readline() {
     printf("[*readline] Over!\n");
 #endif
 	return 0;
+}*/
+
+char* readline() {
+    
 }
 
 void search_insert(item_t *item) {
@@ -485,7 +490,7 @@ int main(int argc, char *argv[]) {
 	  // =========================================================
       */
 
-
+/*-----------------------------------------------------------
 	  char* read_length = NULL;
 	  int read_line = 0;
 	  char* name;
@@ -543,6 +548,7 @@ int main(int argc, char *argv[]) {
 
 			  begin = clock();
 		  }
+------------------------------------------------------------------*/
 		  //sleep(1);
 //	  for(int i = 0; i < 8; i ++) {
 //		  printf("Line_buf:%s\n", line_buf);
@@ -558,7 +564,7 @@ int main(int argc, char *argv[]) {
 		   //   break;
 		  //}
 	  //父进程，读取strace输出并统计
-     }
+  //   }
   }
 
 //  execve("/usr/bin/strace", exec_argv, exec_envp);

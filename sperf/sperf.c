@@ -443,7 +443,7 @@ int main(int argc, char *argv[]) {
 
 	  while(fgets(read_buf, 199, stdin) != NULL) {
 		  eofsmash();
-	      printf("%s\n", read_buf);
+	      printf("%s", read_buf);
 		  memset(read_buf, '\0', 200);
 	  }
 	  /*

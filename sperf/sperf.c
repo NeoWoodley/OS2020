@@ -353,6 +353,7 @@ int main(int argc, char *argv[]) {
 	  while(fgets(read_buf, 511, stdin) != NULL) {
 		  if(terminate_detect() == false) {
 		      break;
+			  goto OUT;
 		  }
 		  bool output = false;
 		  eofsmash();
@@ -369,6 +370,7 @@ int main(int argc, char *argv[]) {
 		  }
          
 		  if(output == true) {
+OUT:
 		  
 			  total_time = 0.0;
 

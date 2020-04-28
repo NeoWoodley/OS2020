@@ -461,7 +461,7 @@ int main(int argc, char *argv[]) {
 			  strcat(read_buf, left_buf);
 		  }
 		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-	      printf("%ld  %c", strlen(read_buf), read_buf[strlen(read_buf)-2]);
+	      printf("%ld  %s", strlen(read_buf), read_buf);
 		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 		  info_extract();
 		  for(int i = 0; i < end; i ++) {

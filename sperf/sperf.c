@@ -24,15 +24,15 @@ extern char** environ;
    strace -T 显示系统调用所花时间
 */
 
-char read_buf[200];
+char read_buf[512];
 
 //char test_buf[128];
 
-char left_buf[200];
+char left_buf[512];
 
-char* upper_bound = &read_buf[199];
+char* upper_bound = &read_buf[511];
 
-char line_buf[200];
+char line_buf[512];
 
 char* topfive[5];
 
@@ -60,7 +60,7 @@ int cmp_descend(const void* a, const void* b) {
 
 int bound_test(char* tmp) {
     uintptr_t ptr = (uintptr_t)tmp;
-    uintptr_t end = (uintptr_t)&read_buf[127];	
+    uintptr_t end = (uintptr_t)&read_buf[511];	
 
 	int ret = end >= ptr ? 0 : 1;
 
@@ -73,14 +73,14 @@ void lib_init() {
 	    libitem[i].time = 0;
 		memset(libitem[i].name, '\0', 64);
 	}
-	memset(left_buf, '\0', 200);
+	memset(left_buf, '\0', 512);
 }
 
 void linebufsmash() {
 #ifdef CRAZY
     printf("[#linebufsmash] Begin!\n");
 #endif
-    for(int i = 0; i < 200; i ++) {
+    for(int i = 0; i < 512; i ++) {
 	    line_buf[i] = '\0';
 	}
 #ifdef CRAZY
@@ -92,7 +92,7 @@ void leftbufsmash() {
 #ifdef CRAZY
     printf("[#linebufsmash] Begin!\n");
 #endif
-    for(int i = 0; i < 200; i ++) {
+    for(int i = 0; i < 512; i ++) {
 	    left_buf[i] = '\0';
 	}
 #ifdef CRAZY
@@ -101,7 +101,7 @@ void leftbufsmash() {
 }
 
 bool leftbufemptytest() {
-    for(int i = 0; i < 200; i ++) {
+    for(int i = 0; i < 512; i ++) {
 	    if(left_buf[i] != '\0') {
 		    return false;
 		}
@@ -442,7 +442,7 @@ int main(int argc, char *argv[]) {
 
 	  dup2(fildes[0], fileno(stdin));
 
-	  while(fgets(read_buf, 199, stdin) != NULL) {
+	  while(fgets(read_buf, 511, stdin) != NULL) {
 		  eofsmash();
 		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 	      printf("%s", read_buf);
@@ -452,7 +452,7 @@ int main(int argc, char *argv[]) {
 		      printf("#Name:[%s]--#Time:[%f]\n", libitem[i].name, libitem[i].time);
 		  }
 		  printf("=========================================================\n");
-		  memset(read_buf, '\0', 200);
+		  memset(read_buf, '\0', 512);
 	  }
 	  /*
 	  int len = 0;

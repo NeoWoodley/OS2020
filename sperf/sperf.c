@@ -138,6 +138,20 @@ bool end_detect() {
 	}
 }
 
+bool terminate_detect() {
+
+    char exit[6] = "exit_";
+
+	if(strncmp(read_buf, exit, 5) == 0) {
+	    return false;
+	}
+
+	else {
+	    return true;
+	}
+    
+}
+
 /*
 int readline() {
 #ifdef CRAZY
@@ -453,21 +467,63 @@ int main(int argc, char *argv[]) {
 
 	  dup2(fildes[0], fileno(stdin));
 
+      double total_time = 0;
+      char* name;
+      double ratio;
+      int count = 0;
+	  clock_t begin =  clock();
 	  while(fgets(read_buf, 511, stdin) != NULL) {
+		  if(terminate_detect() == false) {
+		      break;
+		  }
+		  bool output = false;
 		  eofsmash();
 		  if(end_detect() == false) {
 		      char* left = fgets(left_buf, 511, stdin); 
 			  assert(left != NULL);
 			  strcat(read_buf, left_buf);
 		  }
-		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-	      printf("%ld  %s", strlen(read_buf), read_buf);
-		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 		  info_extract();
-		  for(int i = 0; i < end; i ++) {
-		      printf("#Name:[%s]--#Time:[%f]\n", libitem[i].name, libitem[i].time);
+          clock_t current = clock();
+
+		  if((current - begin) / 1000 > 1) {
+		      output = true;
 		  }
-		  printf("=========================================================\n");
+         
+		  if(output == true) {
+		  
+			  total_time = 0.0;
+
+              for(int i = 0; i < 128; i ++) {
+	              if(libitem[i].time == 0.0) {
+	                  break;
+	              }
+			      //Total_time需要刷新
+	              total_time += libitem[i].time;
+	              timeset[i] = libitem[i].time;
+                  //printf("Name: %s, Time elapsed: %f\n", libitem[i].name, libitem[i].time);
+              }
+
+              qsort(timeset, 128, sizeof(timeset[0]), cmp_descend);
+		      count ++;
+
+		      printf("Time #%d\n", count);
+              
+			  for(int i = 0; i < 5; i ++) {
+                  name = index_name(timeset[i]);
+                  ratio = ((timeset[i] / total_time) * 100);
+	              printf("%s (%f%%)\n", name, ratio);
+              }
+              printf("====================\n");
+              //printf("====%s=========%f=======\n", name, ratio);
+              for(int i = 0; i < 80; i ++) {
+                  printf("%c", '\0');
+              }
+		      fflush(stdout);
+
+			  begin = clock();
+		  }
+
 		  memset(read_buf, '\0', 512);
 	  }
 	  /*

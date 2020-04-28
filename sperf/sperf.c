@@ -486,7 +486,7 @@ int main(int argc, char *argv[]) {
 		  info_extract();
           clock_t current = clock();
 
-		  if((current - begin) / CLOCKS_PER_SEC >= 1) {
+		  if((current - begin) / CLOCKS_PER_SEC >= 0.5) {
 		      output = true;
 		  }
          

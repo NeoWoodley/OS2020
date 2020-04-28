@@ -401,6 +401,34 @@ int main(int argc, char *argv[]) {
 
 		  memset(read_buf, '\0', 512);
 	  }
+	  if(count == 0) {
+			  total_time = 0.0;
+
+              for(int i = 0; i < 128; i ++) {
+	              if(libitem[i].time == 0.0) {
+	                  break;
+	              }
+	              total_time += libitem[i].time;
+	              timeset[i] = libitem[i].time;
+              }
+
+              qsort(timeset, 128, sizeof(timeset[0]), cmp_descend);
+		      count ++;
+
+		      printf("Time #%d\n", count);
+              
+			  for(int i = 0; i < 5; i ++) {
+                  name = index_name(timeset[i]);
+                  ratio = ((timeset[i] / total_time) * 100);
+	              printf("%s (%f%%)\n", name, ratio);
+              }
+              printf("====================\n");
+              for(int i = 0; i < 80; i ++) {
+                  printf("%c", 0);
+              }
+		      fflush(stdout);
+      
+	  }
 	  //父进程，读取strace输出并统计
   }
 

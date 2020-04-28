@@ -314,7 +314,7 @@ void info_extract() {
 #endif
 
 	while(*buf != '<') {
-		printf("?\n");
+//		printf("?\n");
 	    buf ++;
 	}
 	buf ++;

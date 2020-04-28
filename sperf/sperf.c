@@ -226,6 +226,7 @@ int readline() {
 
 char* readline() {
     
+	return NULL;
 }
 
 void search_insert(item_t *item) {
@@ -439,6 +440,12 @@ int main(int argc, char *argv[]) {
 	  close(fildes[1]);
 
 	  dup2(fildes[0], fileno(stdin));
+
+	  while(fgets(read_buf, 199, stdin) != NULL) {
+		  eofsmash();
+	      printf("%s\n", read_buf);
+		  memset(read_buf, '\0', 200);
+	  }
 	  /*
 	  int len = 0;
 	  //for(int i = 0; i < 1; i ++) {

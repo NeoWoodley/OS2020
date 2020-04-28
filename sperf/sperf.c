@@ -284,7 +284,7 @@ void info_extract() {
             printf("[#info_extract] Begin!\n");
 #endif
     item_t* tmp = (item_t*)malloc(sizeof(item_t));
-	char *buf = line_buf;
+	char *buf = read_buf;
 	int i = 0;
 
 #ifdef DETAIL
@@ -443,7 +443,11 @@ int main(int argc, char *argv[]) {
 
 	  while(fgets(read_buf, 199, stdin) != NULL) {
 		  eofsmash();
-	      printf("%s", read_buf);
+		  info_extract();
+		  for(int i = 0; i < end; i ++) {
+		      printf("#Name%s--#Time%f\n", libitem[i].name, libitem[i].time);
+		  }
+	      //printf("%s", read_buf);
 		  memset(read_buf, '\0', 200);
 	  }
 	  /*

@@ -303,6 +303,7 @@ void info_extract() {
 #endif
 
 	while(*buf != '<') {
+		printf("?\n");
 	    buf ++;
 	}
 	buf ++;

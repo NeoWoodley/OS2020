@@ -447,7 +447,9 @@ int main(int argc, char *argv[]) {
 		  for(int i = 0; i < end; i ++) {
 		      printf("#Name:[%s]--#Time:[%f]\n", libitem[i].name, libitem[i].time);
 		  }
-	      //printf("%s", read_buf);
+		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+	      printf("%s", read_buf);
+		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 		  printf("=========================================================\n");
 		  memset(read_buf, '\0', 200);
 	  }

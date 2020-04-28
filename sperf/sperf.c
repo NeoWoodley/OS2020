@@ -516,9 +516,6 @@ int main(int argc, char *argv[]) {
               }
               printf("====================\n");
               //printf("====%s=========%f=======\n", name, ratio);
-              for(int i = 0; i < 80; i ++) {
-                  printf("%c", '\0');
-              }
 		      fflush(stdout);
 
 			  begin = clock();
@@ -526,6 +523,9 @@ int main(int argc, char *argv[]) {
 
 		  memset(read_buf, '\0', 512);
 	  }
+      for(int i = 0; i < 80; i ++) {
+          printf("%c", '\0');
+      }
 	  /*
 	  int len = 0;
 	  //for(int i = 0; i < 1; i ++) {

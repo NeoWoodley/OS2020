@@ -445,7 +445,7 @@ int main(int argc, char *argv[]) {
 	  while(fgets(read_buf, 511, stdin) != NULL) {
 		  eofsmash();
 		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-	      printf("%d  %s", strlen(read_buf), read_buf);
+	      printf("%ld  %s", strlen(read_buf), read_buf);
 		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 		  info_extract();
 		  for(int i = 0; i < end; i ++) {

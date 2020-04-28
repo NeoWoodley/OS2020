@@ -352,6 +352,7 @@ int main(int argc, char *argv[]) {
 	  clock_t begin =  clock();
 	  while(fgets(read_buf, 511, stdin) != NULL) {
 		  if(terminate_detect() == false) {
+			  printf("??????\n");
 		      break;
 			  goto OUT;
 		  }

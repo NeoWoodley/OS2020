@@ -127,6 +127,17 @@ void eofsmash() {
 #endif
 }
 
+bool end_detect() {
+
+	if(read_buf[strlen(read_buf)-2] != '>') {
+	    return false;
+	}
+
+	else {
+	    return true;
+	}
+}
+
 /*
 int readline() {
 #ifdef CRAZY
@@ -444,6 +455,11 @@ int main(int argc, char *argv[]) {
 
 	  while(fgets(read_buf, 511, stdin) != NULL) {
 		  eofsmash();
+		  if(end_detect() == false) {
+		      char* left = fgets(left_buf, 511, stdio); 
+			  assert(left != NULL);
+			  strcat(read_buf, left_buf);
+		  }
 		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 	      printf("%ld  %c", strlen(read_buf), read_buf[strlen(read_buf)-2]);
 		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");

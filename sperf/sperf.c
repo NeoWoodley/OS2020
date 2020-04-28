@@ -12,7 +12,7 @@
 #include <stdbool.h>
 
 extern char** environ;
-//#define DETAIL
+#define DETAIL
 //#define CRAZY
 /*
    int execve(

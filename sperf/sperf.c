@@ -456,7 +456,7 @@ int main(int argc, char *argv[]) {
 	  while(fgets(read_buf, 511, stdin) != NULL) {
 		  eofsmash();
 		  if(end_detect() == false) {
-		      char* left = fgets(left_buf, 511, stdio); 
+		      char* left = fgets(left_buf, 511, stdin); 
 			  assert(left != NULL);
 			  strcat(read_buf, left_buf);
 		  }

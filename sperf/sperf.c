@@ -444,13 +444,13 @@ int main(int argc, char *argv[]) {
 
 	  while(fgets(read_buf, 199, stdin) != NULL) {
 		  eofsmash();
+		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+	      printf("%s", read_buf);
+		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 		  info_extract();
 		  for(int i = 0; i < end; i ++) {
 		      printf("#Name:[%s]--#Time:[%f]\n", libitem[i].name, libitem[i].time);
 		  }
-		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-	      printf("%s", read_buf);
-		  printf("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 		  printf("=========================================================\n");
 		  memset(read_buf, '\0', 200);
 	  }

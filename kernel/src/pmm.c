@@ -86,7 +86,7 @@ uintptr_t bound_aligned(size_t size) {
 uintptr_t page_construct() {
 	uintptr_t count = 0;
 	uintptr_t size = 4 * KiB;
-	for(int i = 0 ; i < (1<<13); i ++) {
+	for(int i = 0 ; i < (1<<15); i ++) {
 	    page_brk = page_brk?
 		    ROUNDUP(page_brk, size) + size :
 		    (uintptr_t)_heap.start + size;

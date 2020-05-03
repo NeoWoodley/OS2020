@@ -541,9 +541,9 @@ static void pmm_init() {
   memset((void*)_heap.start, VALID, pmsize);
   page_brk = (uintptr_t)_heap.start;
   page_head = (page_t*)page_brk;
-  //uintptr_t page_nums = page_construct();
-  page_construct();
-  //printf("Got %d pages of heap!\n", page_nums);
+  uintptr_t page_nums = page_construct();
+  //page_construct();
+  printf("Got %d pages of heap!\n", page_nums);
   //head.next =  NULL;
   //memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));
   

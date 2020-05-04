@@ -9,7 +9,7 @@
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
 #define CUR
-#define DET
+//#define DET
 #define PRE
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {

@@ -398,7 +398,7 @@ static void kfree(void *ptr) {
 #ifdef DET
 		printf("[#]This is a < one page\n");
 #endif
-	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % 4*KiB);
+	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % (4*KiB));
 	   page_t* page_ptr = (page_t*)page;
 	   
 	   show_page_head(page_ptr);

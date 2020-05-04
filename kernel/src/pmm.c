@@ -411,7 +411,8 @@ static void kfree(void *ptr) {
 
 	       tmp --;
 
-	       while(*tmp == VALID && ((uintptr_t)tmp >= page+sizeof(page_t))) {
+	       //while(*tmp == VALID && ((uintptr_t)tmp >= page+sizeof(page_t))) {
+	       while(*tmp == VALID && *tmp != '#') {
 			   tmp --;
 		   }
 	       //printf("\n");

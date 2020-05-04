@@ -101,7 +101,7 @@ uintptr_t page_construct() {
 		    (uintptr_t)_heap.start + size;
 	    void* ptr = (void *)(page_brk - size);	
     	    
-	    page_t head = {(uintptr_t)ptr, (uintptr_t)ptr+sizeof(page_t), FREE, count, (page_t*)page_brk, };
+	    page_t head = {(uintptr_t)ptr, (uintptr_t)ptr+sizeof(page_t), FREE, count, (page_t*)page_brk, {'#','#','#','#','#','#','#','#'}};
 
 
 	    memcpy(ptr, &head, sizeof(page_t));

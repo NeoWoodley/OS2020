@@ -8,9 +8,9 @@
 
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
-//#define CUR
-//#define DET
-//#define PRE
+#define CUR
+#define DET
+#define PRE
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
@@ -399,9 +399,9 @@ static void kfree(void *ptr) {
 		printf("[#]This is a < one page\n");
 #endif
 	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % (4*KiB));
-	   //page_t* page_ptr = (page_t*)page;
 	   
 #ifdef DET
+	   page_t* page_ptr = (page_t*)page;
 	   show_page_head(page_ptr);
 #endif
 

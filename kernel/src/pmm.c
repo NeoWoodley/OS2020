@@ -75,6 +75,9 @@ typedef struct page_t page_t;
 
 page_t *page_head;
 
+
+uintptr_t pmsize;
+
 uintptr_t bound_aligned(size_t size) {
     uintptr_t round = 1;
 	while (size > round) {
@@ -86,7 +89,7 @@ uintptr_t bound_aligned(size_t size) {
 uintptr_t page_construct() {
 	uintptr_t count = 0;
 	uintptr_t size = 4 * KiB;
-	for(int i = 0 ; i < (1<<15); i ++) {
+	for(int i = 0 ; i < (pmsize / (4*KiB)); i ++) {
 	    page_brk = page_brk?
 		    ROUNDUP(page_brk, size) + size :
 		    (uintptr_t)_heap.start + size;
@@ -532,7 +535,7 @@ static void kfree(void *ptr) {
 
 
 static void pmm_init() {
-  uintptr_t pmsize = ((uintptr_t)_heap.end - (uintptr_t)_heap.start);
+  pmsize = ((uintptr_t)_heap.end - (uintptr_t)_heap.start);
 //  printf("Size of header_t: %d\n", sizeof(header_t));
 //  printf("Size of size_t: %d\n", sizeof(size_t));
   printf("Got %d MiB heap: [%p, %p)\n", pmsize >> 20, _heap.start, _heap.end);

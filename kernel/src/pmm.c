@@ -10,6 +10,7 @@
 
 #define CUR
 #define DET
+#define PRE
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
@@ -110,6 +111,9 @@ uintptr_t page_construct() {
 		count ++;
 
 	}
+#ifdef PRE
+    printf("Page Construct Done!\n");
+#endif
 	return count;
 }
 
@@ -236,9 +240,8 @@ static void *kalloc(size_t size) {
 	      unlock();
 		  return NULL;
 	  }
-#ifdef CHK 
+
 	  alloc_chk_before((void*)ptr, size);
-#endif
 	  memset((void*)ptr, MAGIC, size-1);
 	  memset((void*)ptr+size-1, MARK, 1);
       
@@ -340,9 +343,6 @@ static void kfree(void *ptr) {
     printf("Lock acquired by #CPU:%d in free\n", _cpu());
 #endif
 	if(ptr == NULL) {
-#ifdef DET
-        printf("MARK-3\n");
-#endif
 #ifdef CUR
         printf("Lock released by #CPU:%d in free\n", _cpu());
 #endif
@@ -351,15 +351,9 @@ static void kfree(void *ptr) {
 	}
 	else if((uintptr_t)ptr % (4*KiB) == 0) {
 	    page_t* page = page_head;  
-#ifdef DET
-        printf("MARK-2\n");
-#endif
 		while((uintptr_t)ptr != (uintptr_t)page) {
 		   page = page->next; 
 		}
-#ifdef DET
-        printf("MARK-1\n");
-#endif
 		assert((uintptr_t)page == (uintptr_t)ptr && (uintptr_t)page <= (uintptr_t)_heap.end);
         memset((void*)((uintptr_t)ptr+sizeof(page_t)), VALID, 4*KiB-sizeof(page_t)); 		
         page->status = FREE;  
@@ -374,85 +368,42 @@ static void kfree(void *ptr) {
 	}
 	else {
 	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % 4*KiB);
-#ifdef DET
-        printf("Page:%p\n",page);
-#endif
 	   //uintptr_t page_start = (page_t*)page->ptr;
 	   uintptr_t brk = ((page_t*)page)->brk;
-#ifdef DET
-        printf("MARK-5\n");
-        printf("brk:%p\n", ((page_t*)page)->brk);
-#endif
 	   uintptr_t size = 0;
 	   char* tmp = (char*)ptr;
-#ifdef DET
-        printf("MARK-0\n");
-#endif
 	   while(*tmp == MAGIC) {
 	       *tmp = VALID;
 		   size ++;
 		   tmp ++;
 	   }
-#ifdef DET
-        printf("MARK0\n");
-#endif
 	   assert(*tmp == MARK);
 	   *tmp =  VALID;
 	   tmp ++;
 	   size ++;
-#ifdef DET
-        printf("MARK1\n");
-        printf("brk:%p\n", ((page_t*)page)->brk);
-#endif
 	   if((uintptr_t)tmp == brk) {
 	      ((page_t*)page)->brk = brk - size;	   
 	//	  printf("brk: %d\n",((page_t*)page)->brk);
 	   }
-#ifdef DET
-        printf("MARK2:%p\n", tmp);
-        printf("brk:%p\n", ((page_t*)page)->brk);
-#endif
 	   if(brk > ((page_t*)page)->ptr + sizeof(page_t)) {
-#ifdef DET
-        printf("MARK3\n");
-#endif
 
 	       tmp = (char*)(((page_t*)page)->brk);
-#ifdef DET
-        printf("MARK3.1: %p\n", tmp);
-        printf("brk:%p\n", ((page_t*)page)->brk);
-#endif
 
 	       tmp --;
-#ifdef DET
-        printf("MARK3.2: %p\n", tmp);
-#endif
 
 	       while(*tmp == VALID && ((uintptr_t)tmp >= page+sizeof(page_t))) {
-#ifdef DET
-        printf("H\n");
-#endif
 			   tmp --;
 		   }
 	       //printf("\n");
-#ifdef DET
-        printf("MARK4\n");
-#endif
 	       tmp ++;
 	       ((page_t*)page)->brk = (uintptr_t)tmp;
 	   }
-#ifdef DET
-        printf("MARK5\n");
-#endif
 	   if(((page_t*)page)->brk == ((page_t*)page)->ptr + sizeof(page_t)) {
 	       ((page_t*)page)->status = FREE;
 	   }
 	   else {
 	       ((page_t*)page)->status = USED;
 	   }
-#ifdef DET
-        printf("MARK7\n");
-#endif
 #ifdef CUR
         printf("The space in page %d was freed!\n", ((page_t*)page)->No);
 #endif

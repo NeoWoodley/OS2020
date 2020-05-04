@@ -401,6 +401,9 @@ static void kfree(void *ptr) {
 #endif
 	   }
 	   if(brk > ((page_t*)page)->ptr + sizeof(page_t)) {
+#ifdef DET
+		   printf("[*]before brk adjusted pro!\n");
+#endif
 
 	       tmp = (char*)(((page_t*)page)->brk);
 

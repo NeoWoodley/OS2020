@@ -71,6 +71,7 @@ struct page_t {
 	uintptr_t No;
 
 	struct page_t* next;
+	uint8_t fence[8];
 };
 
 typedef struct page_t page_t;
@@ -100,7 +101,8 @@ uintptr_t page_construct() {
 		    (uintptr_t)_heap.start + size;
 	    void* ptr = (void *)(page_brk - size);	
     	    
-	    page_t head = {(uintptr_t)ptr, (uintptr_t)ptr+sizeof(page_t), FREE, count, (page_t*)page_brk};
+	    page_t head = {(uintptr_t)ptr, (uintptr_t)ptr+sizeof(page_t), FREE, count, (page_t*)page_brk, };
+
 
 	    memcpy(ptr, &head, sizeof(page_t));
 		memset(ptr+sizeof(page_t), VALID, 4*KiB-sizeof(page_t));

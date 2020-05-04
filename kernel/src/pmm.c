@@ -113,12 +113,19 @@ uintptr_t page_construct() {
 		    ROUNDUP(page_brk, size) + size :
 		    (uintptr_t)_heap.start + size;
 	    void* ptr = (void *)(page_brk - size);	
+
+		if(page_brk == (uintptr_t)_heap.end) {
+	        page_t head = {(uintptr_t)ptr, (uintptr_t)ptr+sizeof(page_t), FREE, count, NULL, {'#','#','#','#','#','#','#','#'}};
+	        memcpy(ptr, &head, sizeof(page_t));
+		    memset(ptr+sizeof(page_t), VALID, 4*KiB-sizeof(page_t));
+		}
     	    
-	    page_t head = {(uintptr_t)ptr, (uintptr_t)ptr+sizeof(page_t), FREE, count, (page_t*)page_brk, {'#','#','#','#','#','#','#','#'}};
+		else{
+	        page_t head = {(uintptr_t)ptr, (uintptr_t)ptr+sizeof(page_t), FREE, count, (page_t*)page_brk, {'#','#','#','#','#','#','#','#'}};
+	        memcpy(ptr, &head, sizeof(page_t));
+		    memset(ptr+sizeof(page_t), VALID, 4*KiB-sizeof(page_t));
+		}
 
-
-	    memcpy(ptr, &head, sizeof(page_t));
-		memset(ptr+sizeof(page_t), VALID, 4*KiB-sizeof(page_t));
 //		printf("ptr: %x\n", (uintptr_t)ptr);
 //		page_t* tmp = (page_t*)ptr;
 //		printf("ptr->next: %x\n", (uintptr_t)(tmp->next));

@@ -411,7 +411,7 @@ static void kfree(void *ptr) {
 
 	       tmp --;
 
-		   printf("Wait\n");
+		   printf("Wait Brk:%p\n", ((page_t*)page)->brk);
 	       //while(*tmp == VALID && ((uintptr_t)tmp >= page+sizeof(page_t))) {
 	       while(*tmp == VALID && *tmp != '#') {
 		       printf("?\n");

@@ -417,6 +417,7 @@ static void kfree(void *ptr) {
 		       printf("?\n");
 			   tmp --;
 		   }
+		   printf("Wait Again\n");
 	       //printf("\n");
 	       tmp ++;
 	       ((page_t*)page)->brk = (uintptr_t)tmp;

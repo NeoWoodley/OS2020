@@ -90,6 +90,9 @@ uintptr_t page_construct() {
 	uintptr_t count = 0;
 	uintptr_t size = 4 * KiB;
 	for(int i = 0 ; i < (pmsize / (4*KiB)); i ++) {
+		if(page_brk >= (uintptr_t)_heap.end) {
+		    break;
+		}
 	    page_brk = page_brk?
 		    ROUNDUP(page_brk, size) + size :
 		    (uintptr_t)_heap.start + size;
@@ -105,9 +108,6 @@ uintptr_t page_construct() {
 
 		count ++;
 
-		if(page_brk >= (uintptr_t)_heap.end) {
-		    break;
-		}
 	}
 	return count;
 }
@@ -143,7 +143,7 @@ void smash_bind() {
 }
 */
 
-void alloc_chk(void* ptr, size_t size) {
+void alloc_chk_before(void* ptr, size_t size) { //用于检查是否这些要分配的区域都是VALID的
 	char* tmp = (char*)ptr;
 	for(int i = 0; i < size; i ++) {
 	    //printf("%c",*(tmp+i));
@@ -152,7 +152,17 @@ void alloc_chk(void* ptr, size_t size) {
 	//printf("\n");
 }
 
-void free_chk(uintptr_t begin, uintptr_t end) {
+void alloc_chk_after(void* ptr, size_t size) { //用于检查是否这些要分配的区域都是VALID的
+	char* tmp = (char*)ptr;
+	for(int i = 0; i < size - 1; i ++) {
+	    //printf("%c",*(tmp+i));
+	    assert((*(tmp+i)) == MAGIC);
+	}
+	assert((*(tmp+size-1)) == MARK);
+	//printf("\n");
+}
+
+void free_chk_after(uintptr_t begin, uintptr_t end) { //用于检查这些释放了的区域都是有效的
     char* tmp = (char*)begin;
 	for(int i = 0; i <= end-begin; i ++) {
 	    assert((*(tmp+i)) == VALID);
@@ -174,11 +184,9 @@ static void *kalloc(size_t size) {
 	      page = page->next;
 	  }
 
-	  if((uintptr_t)page == (uintptr_t)_heap.end) {
+	  if((uintptr_t)page >= (uintptr_t)_heap.end) {
 #ifdef CUR
           printf("Alloc Failed!\n");
-#endif
-#ifdef CUR
           printf("Lock released by #CPU:%d in alloc\n", _cpu());
 #endif
 		  unlock();
@@ -193,10 +201,6 @@ static void *kalloc(size_t size) {
 
 #ifdef CUR
       printf("The whole page:%d alloced!\n", page->No);
-#endif
-
-	  //assert((uintptr_t)page % size == 0);
-#ifdef CUR
       printf("Lock released by #CPU:%d in alloc\n", _cpu());
 #endif
 	  unlock();
@@ -214,11 +218,9 @@ static void *kalloc(size_t size) {
 	      page = page->next;       
 	  }
 
-	  if((uintptr_t)page == (uintptr_t)_heap.end) {
+	  if((uintptr_t)page >= (uintptr_t)_heap.end) {
 #ifdef CUR
           printf("Alloc Failed!\n");
-#endif
-#ifdef CUR
           printf("Lock released by #CPU:%d in alloc\n", _cpu());
 #endif
 		  unlock();
@@ -228,12 +230,14 @@ static void *kalloc(size_t size) {
       
       page->brk = ROUNDUP(page->brk, size) + size;
 	  uintptr_t ptr = page->brk-size;
-	  if(ptr >= page->ptr+4*KiB) {
+	  if(page->brk >= page->ptr+4*KiB) {
 		  page->brk = backup_brk;
 	      unlock();
 		  return NULL;
 	  }
-	  //alloc_chk((void*)ptr, size);
+#ifdef CHK 
+	  alloc_chk_before((void*)ptr, size);
+#endif
 	  memset((void*)ptr, MAGIC, size-1);
 	  memset((void*)ptr+size-1, MARK, 1);
       
@@ -245,10 +249,7 @@ static void *kalloc(size_t size) {
 	  }
 
 #ifdef CUR
-      printf("The space in page %d alloced!\n", page->No);
-#endif
-	  //assert((uintptr_t)ptr % size == 0);
-#ifdef CUR
+      printf("%d space in page %d alloced!\n", size, page->No);
       printf("Lock released by #CPU:%d in alloc\n", _cpu());
 #endif
       unlock();
@@ -338,7 +339,7 @@ static void kfree(void *ptr) {
     printf("Lock acquired by #CPU:%d in free\n", _cpu());
 #endif
 	if(ptr == NULL) {
-#ifdef CUR
+#ifdef DET
         printf("MARK-3\n");
 #endif
 #ifdef CUR
@@ -349,13 +350,13 @@ static void kfree(void *ptr) {
 	}
 	else if((uintptr_t)ptr % (4*KiB) == 0) {
 	    page_t* page = page_head;  
-#ifdef CUR
+#ifdef DET
         printf("MARK-2\n");
 #endif
 		while((uintptr_t)ptr != (uintptr_t)page) {
 		   page = page->next; 
 		}
-#ifdef CUR
+#ifdef DET
         printf("MARK-1\n");
 #endif
 		assert((uintptr_t)page == (uintptr_t)ptr && (uintptr_t)page <= (uintptr_t)_heap.end);
@@ -372,18 +373,18 @@ static void kfree(void *ptr) {
 	}
 	else {
 	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % 4*KiB);
-#ifdef CUR
+#ifdef DET
         printf("Page:%p\n",page);
 #endif
 	   //uintptr_t page_start = (page_t*)page->ptr;
 	   uintptr_t brk = ((page_t*)page)->brk;
-#ifdef CUR
+#ifdef DET
         printf("MARK-5\n");
         printf("brk:%p\n", ((page_t*)page)->brk);
 #endif
 	   uintptr_t size = 0;
 	   char* tmp = (char*)ptr;
-#ifdef CUR
+#ifdef DET
         printf("MARK-0\n");
 #endif
 	   while(*tmp == MAGIC) {
@@ -391,55 +392,55 @@ static void kfree(void *ptr) {
 		   size ++;
 		   tmp ++;
 	   }
-#ifdef CUR
+#ifdef DET
         printf("MARK0\n");
 #endif
 	   assert(*tmp == MARK);
 	   *tmp =  VALID;
 	   tmp ++;
 	   size ++;
-#ifdef CUR
+#ifdef DET
         printf("MARK1\n");
         printf("brk:%p\n", ((page_t*)page)->brk);
 #endif
 	   if((uintptr_t)tmp == brk) {
 	      ((page_t*)page)->brk = brk - size;	   
-		  printf("brk: %d\n",((page_t*)page)->brk);
+	//	  printf("brk: %d\n",((page_t*)page)->brk);
 	   }
-#ifdef CUR
+#ifdef DET
         printf("MARK2:%p\n", tmp);
         printf("brk:%p\n", ((page_t*)page)->brk);
 #endif
 	   if(brk > ((page_t*)page)->ptr + sizeof(page_t)) {
-#ifdef CUR
+#ifdef DET
         printf("MARK3\n");
 #endif
 
 	       tmp = (char*)(((page_t*)page)->brk);
-#ifdef CUR
+#ifdef DET
         printf("MARK3.1: %p\n", tmp);
         printf("brk:%p\n", ((page_t*)page)->brk);
 #endif
 
 	       tmp --;
-#ifdef CUR
+#ifdef DET
         printf("MARK3.2: %p\n", tmp);
 #endif
 
 	       while(*tmp == VALID && ((uintptr_t)tmp >= page+sizeof(page_t))) {
-#ifdef CUR
+#ifdef DET
         printf("H\n");
 #endif
 			   tmp --;
 		   }
 	       //printf("\n");
-#ifdef CUR
+#ifdef DET
         printf("MARK4\n");
 #endif
 	       tmp ++;
 	       ((page_t*)page)->brk = (uintptr_t)tmp;
 	   }
-#ifdef CUR
+#ifdef DET
         printf("MARK5\n");
 #endif
 	   if(((page_t*)page)->brk == ((page_t*)page)->ptr + sizeof(page_t)) {
@@ -448,7 +449,7 @@ static void kfree(void *ptr) {
 	   else {
 	       ((page_t*)page)->status = USED;
 	   }
-#ifdef CUR
+#ifdef DET
         printf("MARK7\n");
 #endif
 #ifdef CUR

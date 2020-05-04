@@ -343,6 +343,9 @@ static void kfree(void *ptr) {
     printf("Lock acquired by #CPU:%d in free\n", _cpu());
 #endif
 	if(ptr == NULL) {
+#ifdef DET
+		printf("[#]Ptr is NULL\n");
+#endif
 #ifdef CUR
         printf("Lock released by #CPU:%d in free\n", _cpu());
 #endif
@@ -350,6 +353,9 @@ static void kfree(void *ptr) {
 		return;
 	}
 	else if((uintptr_t)ptr % (4*KiB) == 0) {
+#ifdef DET
+		printf("[#]This is a whole page\n");
+#endif
 	    page_t* page = page_head;  
 		while((uintptr_t)ptr != (uintptr_t)page) {
 		   page = page->next; 
@@ -367,6 +373,9 @@ static void kfree(void *ptr) {
 		return;
 	}
 	else {
+#ifdef DET
+		printf("[#]This is a < one page\n");
+#endif
 	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % 4*KiB);
 	   //uintptr_t page_start = (page_t*)page->ptr;
 	   uintptr_t brk = ((page_t*)page)->brk;
@@ -377,6 +386,9 @@ static void kfree(void *ptr) {
 		   size ++;
 		   tmp ++;
 	   }
+#ifdef DET
+		printf("[*]Magic cleared\n");
+#endif
 	   assert(*tmp == MARK);
 	   *tmp =  VALID;
 	   tmp ++;
@@ -384,6 +396,9 @@ static void kfree(void *ptr) {
 	   if((uintptr_t)tmp == brk) {
 	      ((page_t*)page)->brk = brk - size;	   
 	//	  printf("brk: %d\n",((page_t*)page)->brk);
+#ifdef DET
+		  printf("[*]brk adjusted!\n");
+#endif
 	   }
 	   if(brk > ((page_t*)page)->ptr + sizeof(page_t)) {
 
@@ -397,12 +412,21 @@ static void kfree(void *ptr) {
 	       //printf("\n");
 	       tmp ++;
 	       ((page_t*)page)->brk = (uintptr_t)tmp;
+#ifdef DET
+		  printf("[*]brk adjusted pro!\n");
+#endif
 	   }
 	   if(((page_t*)page)->brk == ((page_t*)page)->ptr + sizeof(page_t)) {
 	       ((page_t*)page)->status = FREE;
+#ifdef DET
+		   printf("[*]status adjusted!\n");
+#endif
 	   }
 	   else {
 	       ((page_t*)page)->status = USED;
+#ifdef DET
+		   printf("[*]status adjusted!\n");
+#endif
 	   }
 #ifdef CUR
         printf("The space in page %d was freed!\n", ((page_t*)page)->No);

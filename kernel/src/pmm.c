@@ -557,11 +557,13 @@ static void pmm_init() {
   page_head = (page_t*)page_brk;
   //uintptr_t page_nums = page_construct();
   page_construct();
+  /*
   page_t* tnp = page_head; 
   while(tnp != NULL) {
 	  show_page_head(tnp);
 	tnp = tnp->next;  
   }
+  */
   //printf("Got %d pages of heap!\n", page_nums);
   //head.next =  NULL;
   //memcpy((void*)_heap.start, (void*)(&head), sizeof(header_t));

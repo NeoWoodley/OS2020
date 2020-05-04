@@ -399,9 +399,11 @@ static void kfree(void *ptr) {
 		printf("[#]This is a < one page\n");
 #endif
 	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % (4*KiB));
-	   page_t* page_ptr = (page_t*)page;
+	   //page_t* page_ptr = (page_t*)page;
 	   
+#ifdef DET
 	   show_page_head(page_ptr);
+#endif
 
 	   //uintptr_t page_start = (page_t*)page->ptr;
 	   uintptr_t brk = ((page_t*)page)->brk;
@@ -435,13 +437,13 @@ static void kfree(void *ptr) {
 
 	       tmp --;
 
-		   printf("Wait Brk:%p\n", ((page_t*)page)->brk);
+	//	   printf("Wait Brk:%p\n", ((page_t*)page)->brk);
 	       //while(*tmp == VALID && ((uintptr_t)tmp >= page+sizeof(page_t))) {
 	       while(*tmp == VALID && *tmp != '#') {
-		       printf("?\n");
+	//	       printf("?\n");
 			   tmp --;
 		   }
-		   printf("Wait Again\n");
+	//	   printf("Wait Again\n");
 	       //printf("\n");
 	       tmp ++;
 	       ((page_t*)page)->brk = (uintptr_t)tmp;

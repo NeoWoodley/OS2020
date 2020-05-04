@@ -94,7 +94,7 @@ void show_page_head(page_t* ptr) {
     printf("{@}Page ptr:%p\n", ptr->ptr);
     printf("{@}Page brk:%p\n", ptr->brk);
     printf("{@}Page status:%p\n", ptr->status);
-    printf("{@}Page no:%p\n", ptr->No);
+    printf("{@}Page no:%d\n", ptr->No);
     printf("{@}Page next:%p\n", ptr->next);
 	for(int i = 0; i < 8; i ++) {
 	    printf("%c", ptr->fence[i]);

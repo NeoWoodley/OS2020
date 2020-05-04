@@ -89,6 +89,19 @@ uintptr_t bound_aligned(size_t size) {
 	return round;
 }
 
+void show_page_head(page_t* ptr) {
+	printf("==================================\n");
+    printf("{@}Page ptr:%p\n", ptr->ptr);
+    printf("{@}Page brk:%p\n", ptr->brk);
+    printf("{@}Page status:%p\n", ptr->status);
+    printf("{@}Page no:%p\n", ptr->No);
+    printf("{@}Page next:%p\n", ptr->next);
+	for(int i = 0; i < 8; i ++) {
+	    printf("%c", ptr->fence[i]);
+	}
+	printf("\n==================================\n");
+}
+
 uintptr_t page_construct() {
 	uintptr_t count = 0;
 	uintptr_t size = 4 * KiB;
@@ -379,6 +392,10 @@ static void kfree(void *ptr) {
 		printf("[#]This is a < one page\n");
 #endif
 	   uintptr_t page = (uintptr_t)ptr - ((uintptr_t)ptr % 4*KiB);
+	   page_t* page_ptr = (page_t*)page;
+	   
+	   show_page_head(page_ptr);
+
 	   //uintptr_t page_start = (page_t*)page->ptr;
 	   uintptr_t brk = ((page_t*)page)->brk;
 	   uintptr_t size = 0;

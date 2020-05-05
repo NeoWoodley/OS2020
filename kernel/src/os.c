@@ -36,7 +36,6 @@ void stress_test() {
 int count = 0;
 
 void smoke_test() {
-	count ++;
 	void* cur = pmm->alloc(45*sizeof(char));
 	lib[0].cur = cur;
 	for(int i = 1; i < 32; i ++) {
@@ -114,6 +113,7 @@ void smoke_test() {
     
 	//printf("Done From cpu:%d\n", _cpu());
   */
+	count ++;
   printf("Done From cpu:%d Time:%d\n", _cpu(), count);
   while (1) ;
 }

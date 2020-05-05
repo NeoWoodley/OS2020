@@ -112,6 +112,7 @@ void smoke_test() {
     
 	//printf("Done From cpu:%d\n", _cpu());
   */
+  printf("Done From cpu:%d\n", _cpu());
   while (1) ;
 }
 

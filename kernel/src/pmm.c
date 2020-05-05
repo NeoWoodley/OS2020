@@ -411,6 +411,7 @@ static void kfree(void *ptr) {
 	   uintptr_t size = 0;
 	   char* tmp = (char*)ptr;
 	   while(*tmp == MAGIC) {
+		   printf("?\n");
 	       *tmp = VALID;
 		   size ++;
 		   tmp ++;

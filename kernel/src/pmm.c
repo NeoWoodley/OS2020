@@ -8,10 +8,10 @@
 
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
-#define CUR
+//#define CUR
 //#define DET
-#define PRE
-#define SPA
+//#define PRE
+//#define SPA
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
@@ -376,7 +376,6 @@ static void kfree(void *ptr) {
 		return;
 	}
 	else if((uintptr_t)ptr % (4*KiB) == 0) {
-		printf("?????????\n");
 #ifdef DET
 		printf("[#]This is a whole page\n");
 #endif

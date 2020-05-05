@@ -1,6 +1,14 @@
 #include <common.h>
 #include <klib.h>
 
+struct node {
+    void* cur;
+	void* next;
+};
+
+typedef struct node node;
+
+node lib[128];
 /*
 enum ops { OP_ALLOC = 1, OP_FREE };
 struct op {
@@ -27,6 +35,32 @@ void stress_test() {
 */
 
 void smoke_test() {
+	void* cur = pmm->alloc(45*sizeof(char));
+	lib[0].cur = cur;
+	for(int i = 1; i < 32; i ++) {
+		cur = pmm->alloc(78*sizeof(char)); 
+		lib[i-1].next = cur;
+		lib[i].cur = cur;
+	}
+	for(int i = 32; i < 78; i ++) {
+		cur = pmm->alloc(127*sizeof(char)); 
+		lib[i-1].next = cur;
+		lib[i].cur = cur;
+	}
+	for(int i = 78; i < 100; i ++) {
+		cur = pmm->alloc(4096*sizeof(char)); 
+		lib[i-1].next = cur;
+		lib[i].cur = cur;
+	}
+	for(int i = 100; i < 128; i ++) {
+		cur = pmm->alloc(201*sizeof(char)); 
+		lib[i-1].next = cur;
+		lib[i].cur = cur;
+	}
+
+	for(int i = 0; i < 128; i ++) {
+	    pmm->free(lib[i].cur);
+	}
 	/*
 	while(1) {
 	    uintptr_t ptr = (uintptr_t)pmm->alloc(4096*sizeof(char));
@@ -36,6 +70,7 @@ void smoke_test() {
 	
 //	int i = 0;
    // for(; i < 20; i ++){
+	/*
 	while(1) {
 //		if(i%5 == 0) {
 	        void* ptr1 = pmm->alloc(sizeof(char));
@@ -76,6 +111,7 @@ void smoke_test() {
 	}
     
 	//printf("Done From cpu:%d\n", _cpu());
+  */
   while (1) ;
 }
 

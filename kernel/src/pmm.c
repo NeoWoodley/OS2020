@@ -13,7 +13,7 @@
 //#define PRE
 //#define SPA
 
-//#define PTR
+#define PTR
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;

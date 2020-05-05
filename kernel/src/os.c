@@ -8,7 +8,7 @@ struct node {
 
 typedef struct node node;
 
-node lib[128];
+node lib[28];
 /*
 enum ops { OP_ALLOC = 1, OP_FREE };
 struct op {
@@ -38,28 +38,28 @@ int count = 0;
 void smoke_test() {
 	void* cur = pmm->alloc(45*sizeof(char));
 	lib[0].cur = cur;
-	for(int i = 1; i < 32; i ++) {
+	for(int i = 1; i < 7; i ++) {
 		cur = pmm->alloc(78*sizeof(char)); 
 		lib[i-1].next = cur;
 		lib[i].cur = cur;
 	}
-	for(int i = 32; i < 78; i ++) {
+	for(int i = 7; i < 12; i ++) {
 		cur = pmm->alloc(127*sizeof(char)); 
 		lib[i-1].next = cur;
 		lib[i].cur = cur;
 	}
-	for(int i = 78; i < 100; i ++) {
+	for(int i = 12; i < 19; i ++) {
 		cur = pmm->alloc(4096*sizeof(char)); 
 		lib[i-1].next = cur;
 		lib[i].cur = cur;
 	}
-	for(int i = 100; i < 128; i ++) {
+	for(int i = 19; i < 28; i ++) {
 		cur = pmm->alloc(201*sizeof(char)); 
 		lib[i-1].next = cur;
 		lib[i].cur = cur;
 	}
 
-	for(int i = 0; i < 128; i ++) {
+	for(int i = 0; i < 28; i ++) {
 	    pmm->free(lib[i].cur);
 	}
 	/*

@@ -362,6 +362,7 @@ void brk_down() {
 
 static void kfree(void *ptr) {
 	lock();
+	assert(*(char*)ptr == MARK || *(char*)ptr == MAGIC || ((uintptr_t)ptr%(4*KiB)==0));
 
 #ifdef CUR
     printf("Lock acquired by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);

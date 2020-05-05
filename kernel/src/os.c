@@ -113,7 +113,7 @@ void smoke_test() {
     
 	//printf("Done From cpu:%d\n", _cpu());
   */
-	count ++;
+  count ++;
   printf("Done From cpu:%d Time:%d\n", _cpu(), count);
   while (1) ;
 }

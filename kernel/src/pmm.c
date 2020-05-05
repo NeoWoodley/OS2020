@@ -362,8 +362,10 @@ void brk_down() {
 
 static void kfree(void *ptr) {
 	lock();
+
 #ifdef CUR
     printf("Lock acquired by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
+	printf("Ptr to br freed: %p | LINE:%d\n", (uintptr_t)ptr, __LINE__);
 #endif
 	if(ptr == NULL) {
 #ifdef DET

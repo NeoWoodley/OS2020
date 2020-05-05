@@ -276,7 +276,7 @@ static void *kalloc(size_t size) {
 	  }
 
 #ifdef CUR
-      printf("%d space in page %d alloced! | Original brk:%u Now brk:%u\n", size, page->No, backup_brk, page->brk);
+      printf("%d space in page %d alloced! | Original brk:%p Now brk:%p\n", size, page->No, backup_brk, page->brk);
       printf("Lock released by #CPU:%d in alloc\n", _cpu());
 #endif
       unlock();
@@ -465,7 +465,7 @@ static void kfree(void *ptr) {
 #endif
 	   }
 #ifdef CUR
-        printf("The space in page %d was freed! | Old brk:%u Now brk:%u\n", ((page_t*)page)->No, brk, ((page_t*)page)->brk);
+        printf("The space in page %d was freed! | Old brk:%p Now brk:%p\n", ((page_t*)page)->No, brk, ((page_t*)page)->brk);
 #endif
 #ifdef CUR
        printf("Lock released by #CPU:%d in free\n", _cpu());

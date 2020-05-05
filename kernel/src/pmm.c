@@ -418,7 +418,9 @@ static void kfree(void *ptr) {
 #ifdef DET
 		printf("[*]Magic cleared\n");
 #endif
+	   printf("%c\n", *(tmp-1));
 	   printf("%c\n", *tmp);
+	   printf("%c\n", *(tmp+1));
 	   assert(*tmp == MARK);
 	   *tmp =  VALID;
 	   tmp ++;

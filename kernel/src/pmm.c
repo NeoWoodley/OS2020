@@ -411,7 +411,7 @@ static void kfree(void *ptr) {
 	   uintptr_t size = 0;
 	   char* tmp = (char*)ptr;
 	   while(*tmp == MAGIC) {
-		   printf("?\n");
+		//   printf("?\n");
 	       *tmp = VALID;
 		   size ++;
 		   tmp ++;
@@ -419,9 +419,9 @@ static void kfree(void *ptr) {
 #ifdef DET
 		printf("[*]Magic cleared\n");
 #endif
-	   printf("%c\n", *(tmp-1));
-	   printf("%c\n", *tmp);
-	   printf("%c\n", *(tmp+1));
+	   //printf("%c\n", *(tmp-1));
+	   //printf("%c\n", *tmp);
+	   //printf("%c\n", *(tmp+1));
 	   //assert(*tmp == MARK);
 	   *tmp =  VALID;
 	   tmp ++;

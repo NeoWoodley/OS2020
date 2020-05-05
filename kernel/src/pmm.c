@@ -235,7 +235,7 @@ static void *kalloc(size_t size) {
 #endif
 
 #ifdef PTR
-    printf("[#Alloced] ptr:%p | size:%d\n", page, size);
+    printf("[#Alloced](CPU%d) ptr:%p | size:%d\n",_cpu(), page, size);
 #endif
 	  unlock();
 	  return (void*)page;
@@ -288,7 +288,7 @@ static void *kalloc(size_t size) {
 #endif
       unlock();
 #ifdef PTR
-    printf("[#Alloced] ptr:%p | size:%d\n", ptr, size);
+    printf("[#Alloced](CPU%d) ptr:%p | size:%d\n",_cpu(), ptr, size);
 #endif
 	  return (void*)ptr;
      
@@ -407,7 +407,7 @@ static void kfree(void *ptr) {
         printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
 #endif
 #ifdef PTR
-    printf("[#Freed] ptr:%p\n", ptr);
+    printf("[#Freed](CPU%d) ptr:%p\n",_cpu(), ptr);
 #endif
 		unlock();
 		return;
@@ -429,7 +429,7 @@ static void kfree(void *ptr) {
 	   char* tmp = (char*)ptr;
 	   if(*tmp == VALID) {
 #ifdef PTR
-    printf("(*Error) ptr:%p\n", ptr);
+    printf("(*Error)(CPU%d) ptr:%p\n",_cpu(), ptr);
 #endif
 	       unlock();
 		   return;
@@ -499,7 +499,7 @@ static void kfree(void *ptr) {
        printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
 #endif
 #ifdef PTR
-    printf("[#Freed] ptr:%p\n", ptr);
+    printf("[#Freed](CPU%d) ptr:%p\n",_cpu(), ptr);
 #endif
 	   unlock();
 	   return;

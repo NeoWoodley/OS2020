@@ -71,7 +71,7 @@ void smoke_test() {
 //	        uintptr_t ptr = (uintptr_t)pmm->alloc(4096*sizeof(char));
 	        ptr = pmm->alloc(4096*sizeof(char));
 //		    printf("ptr->4096: %p, I:%d from cpu #%d\n", ptr, i, _cpu());
-//		    pmm->free((void*)ptr);	
+		    pmm->free((void*)ptr);	
 //		}
 	}
     

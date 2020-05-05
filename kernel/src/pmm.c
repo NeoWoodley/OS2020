@@ -376,6 +376,7 @@ static void kfree(void *ptr) {
 		return;
 	}
 	else if((uintptr_t)ptr % (4*KiB) == 0) {
+		printf("?????????\n");
 #ifdef DET
 		printf("[#]This is a whole page\n");
 #endif

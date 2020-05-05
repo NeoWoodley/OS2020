@@ -422,7 +422,7 @@ static void kfree(void *ptr) {
 	   printf("%c\n", *(tmp-1));
 	   printf("%c\n", *tmp);
 	   printf("%c\n", *(tmp+1));
-	   assert(*tmp == MARK);
+	   //assert(*tmp == MARK);
 	   *tmp =  VALID;
 	   tmp ++;
 	   size ++;

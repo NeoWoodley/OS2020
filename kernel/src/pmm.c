@@ -11,6 +11,7 @@
 #define CUR
 //#define DET
 #define PRE
+#define SPA
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
@@ -267,7 +268,7 @@ static void *kalloc(size_t size) {
 	  memset((void*)ptr, MAGIC, size-1);
 	  memset((void*)ptr+size-1, MARK, 1);
       
-	  if(page->brk >= page->ptr + 4*KiB - 128) {
+	  if(page->brk >= page->ptr + 4*KiB - 32) {
 	      page->status = FULL;
 	  }
 	  else {
@@ -275,7 +276,7 @@ static void *kalloc(size_t size) {
 	  }
 
 #ifdef CUR
-      printf("%d space in page %d alloced!\n", size, page->No);
+      printf("%d space in page %d alloced! | Original brk:%u Now brk:%u\n", size, page->No, backup_brk, page->brk);
       printf("Lock released by #CPU:%d in alloc\n", _cpu());
 #endif
       unlock();
@@ -402,7 +403,7 @@ static void kfree(void *ptr) {
 	   
 #ifdef DET
 	   page_t* page_ptr = (page_t*)page;
-	   show_page_head(page_ptr);
+	   //show_page_head(page_ptr);
 #endif
 
 	   //uintptr_t page_start = (page_t*)page->ptr;
@@ -464,7 +465,7 @@ static void kfree(void *ptr) {
 #endif
 	   }
 #ifdef CUR
-        printf("The space in page %d was freed!\n", ((page_t*)page)->No);
+        printf("The space in page %d was freed! | Old brk:%u Now brk:%u\n", ((page_t*)page)->No, brk, ((page_t*)page)->brk);
 #endif
 #ifdef CUR
        printf("Lock released by #CPU:%d in free\n", _cpu());

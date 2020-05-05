@@ -362,6 +362,7 @@ void brk_down() {
 
 static void kfree(void *ptr) {
 	lock();
+	printf("%c\n", *(char*)ptr);
 	assert(*(char*)ptr == MARK || *(char*)ptr == MAGIC || ((uintptr_t)ptr%(4*KiB)==0));
 
 #ifdef CUR

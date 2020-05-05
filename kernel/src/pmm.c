@@ -410,7 +410,11 @@ static void kfree(void *ptr) {
 	   uintptr_t brk = ((page_t*)page)->brk;
 	   uintptr_t size = 0;
 	   char* tmp = (char*)ptr;
-	   printf("%c\n", *tmp);
+	   if(*tmp == VALID) {
+	       unlock();
+		   return;
+	   }
+	   //printf("%c\n", *tmp);
 	   while(*tmp == MAGIC) {
 	       *tmp = VALID;
 		   size ++;

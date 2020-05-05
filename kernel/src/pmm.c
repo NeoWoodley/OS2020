@@ -8,10 +8,12 @@
 
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
-#define CUR
+//#define CUR
 //#define DET
 //#define PRE
 //#define SPA
+
+#define PTR
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
@@ -231,6 +233,10 @@ static void *kalloc(size_t size) {
       printf("The whole page:%d alloced!\n", page->No);
       printf("Lock released by #CPU:%d in alloc | LINE:%d\n", _cpu(), __LINE__);
 #endif
+
+#ifdef PTR
+    printf("[#Alloced] ptr:%p | size:%d\n", page, size);
+#endif
 	  unlock();
 	  return (void*)page;
 
@@ -280,6 +286,9 @@ static void *kalloc(size_t size) {
       printf("Lock released by #CPU:%d in alloc | LINE:%d\n", _cpu(), __LINE__);
 #endif
       unlock();
+#ifdef PTR
+    printf("[#Alloced] ptr:%p | size:%d\n", ptr, size);
+#endif
 	  return (void*)ptr;
      
   }
@@ -362,8 +371,8 @@ void brk_down() {
 
 static void kfree(void *ptr) {
 	lock();
-	printf("%c\n", *(char*)ptr);
-	assert(*(char*)ptr == MARK || *(char*)ptr == MAGIC || ((uintptr_t)ptr%(4*KiB)==0));
+	//printf("%c\n", *(char*)ptr);
+	//assert(*(char*)ptr == MARK || *(char*)ptr == MAGIC || ((uintptr_t)ptr%(4*KiB)==0));
 
 #ifdef CUR
     printf("Lock acquired by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
@@ -396,6 +405,9 @@ static void kfree(void *ptr) {
 #ifdef CUR
         printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
 #endif
+#ifdef PTR
+    printf("[#Freed] ptr:%p\n", ptr);
+#endif
 		unlock();
 		return;
 	}
@@ -415,6 +427,9 @@ static void kfree(void *ptr) {
 	   uintptr_t size = 0;
 	   char* tmp = (char*)ptr;
 	   if(*tmp == VALID) {
+#ifdef PTR
+    printf("(*Error) ptr:%p\n", ptr);
+#endif
 	       unlock();
 		   return;
 	   }
@@ -481,6 +496,9 @@ static void kfree(void *ptr) {
 #endif
 #ifdef CUR
        printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
+#endif
+#ifdef PTR
+    printf("[#Freed] ptr:%p\n", ptr);
 #endif
 	   unlock();
 	   return;

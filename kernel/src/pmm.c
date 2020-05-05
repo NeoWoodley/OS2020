@@ -273,6 +273,7 @@ static void *kalloc(size_t size) {
 	  alloc_chk_before((void*)ptr, size);
 	  memset((void*)ptr, MAGIC, size-1);
 	  memset((void*)ptr+size-1, MARK, 1);
+	  alloc_chk_after((void*)ptr, size);
       
 	  if(page->brk >= page->ptr + 4*KiB - 32) {
 	      page->status = FULL;

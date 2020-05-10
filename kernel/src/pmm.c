@@ -174,14 +174,15 @@ static void *kalloc(size_t size) {
 
 	  page->status = FULL;
 
+#ifdef PTR
+    printf("[#Alloced](CPU%d) ptr:%p | size:%d\n",_cpu(), page, size);
+#endif
+
 #ifdef CUR
       printf("The whole page:%d alloced!\n", page->No);
       printf("Lock released by #CPU:%d in alloc | LINE:%d\n", _cpu(), __LINE__);
 #endif
 
-#ifdef PTR
-    printf("[#Alloced](CPU%d) ptr:%p | size:%d\n",_cpu(), page, size);
-#endif
 	  unlock();
 	  return (void*)page;
 
@@ -226,15 +227,15 @@ static void *kalloc(size_t size) {
 	  else {
 	      page->status = USED;
 	  }
+#ifdef PTR
+    printf("[#Alloced](CPU%d) ptr:%p | size:%d\n",_cpu(), ptr, size);
+#endif
 
 #ifdef CUR
       printf("%d space in page %d alloced! | Original brk:%p Now brk:%p\n", size, page->No, backup_brk, page->brk);
       printf("Lock released by #CPU:%d in alloc | LINE:%d\n", _cpu(), __LINE__);
 #endif
       unlock();
-#ifdef PTR
-    printf("[#Alloced](CPU%d) ptr:%p | size:%d\n",_cpu(), ptr, size);
-#endif
 	  return (void*)ptr;
      
   }
@@ -273,11 +274,13 @@ static void kfree(void *ptr) {
 #ifdef CUR
         printf("The whole page %d was freed!\n", page->No);
 #endif
-#ifdef CUR
-        printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
-#endif
+
 #ifdef PTR
     printf("[#Freed](CPU%d) ptr:%p\n",_cpu(), ptr);
+#endif
+
+#ifdef CUR
+        printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
 #endif
 		unlock();
 		return;
@@ -366,17 +369,18 @@ static void kfree(void *ptr) {
 #ifdef CUR
         printf("The space in page %d was freed! | Old brk:%p Now brk:%p\n", ((page_t*)page)->No, brk, ((page_t*)page)->brk);
 #endif
-#ifdef CUR
-       printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
-#endif
+
 #ifdef PTR
     printf("[#Freed](CPU%d) ptr:%p\n",_cpu(), ptr);
+#endif
+
+#ifdef CUR
+       printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
 #endif
 	   unlock();
 	   return;
 	}
 }
-
 
 static void pmm_init() {
   pmsize = ((uintptr_t)_heap.end - (uintptr_t)_heap.start);

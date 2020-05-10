@@ -164,6 +164,9 @@ static void *kalloc(size_t size) {
           printf("Alloc Failed!\n");
           printf("Lock released by #CPU:%d in alloc | LINE:%d\n", _cpu(), __LINE__);
 #endif
+          
+		  for(volatile int i = 0; i < 1000000000; i ++);
+
 		  unlock();
 	      return NULL;
 		      
@@ -182,6 +185,8 @@ static void *kalloc(size_t size) {
       printf("The whole page:%d alloced!\n", page->No);
       printf("Lock released by #CPU:%d in alloc | LINE:%d\n", _cpu(), __LINE__);
 #endif
+          
+	  for(volatile int i = 0; i < 1000000000; i ++);
 
 	  unlock();
 	  return (void*)page;
@@ -235,6 +240,9 @@ static void *kalloc(size_t size) {
       printf("%d space in page %d alloced! | Original brk:%p Now brk:%p\n", size, page->No, backup_brk, page->brk);
       printf("Lock released by #CPU:%d in alloc | LINE:%d\n", _cpu(), __LINE__);
 #endif
+
+	  for(volatile int i = 0; i < 1000000000; i ++);
+
       unlock();
 	  return (void*)ptr;
      
@@ -282,6 +290,9 @@ static void kfree(void *ptr) {
 #ifdef CUR
         printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
 #endif
+
+	    for(volatile int i = 0; i < 1000000000; i ++) {}
+
 		unlock();
 		return;
 	}
@@ -304,6 +315,9 @@ static void kfree(void *ptr) {
 #ifdef PTR
     printf("(*Error)(CPU%d) ptr:%p\n",_cpu(), ptr);
 #endif
+
+	       for(volatile int i = 0; i < 1000000000; i ++) {}
+
 	       unlock();
 		   return;
 	   }
@@ -377,6 +391,9 @@ static void kfree(void *ptr) {
 #ifdef CUR
        printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
 #endif
+
+	  for(volatile int i = 0; i < 1000000000; i ++) {}
+
 	   unlock();
 	   return;
 	}

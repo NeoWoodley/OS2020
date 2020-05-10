@@ -38,32 +38,12 @@ static inline void unlock() {
     atomic_xchg(&locked, 0);
 }
 
-enum header_type {
-
-	FREE_SPACE = 1,
-	PTR_SPACE,
-
-};
-
 enum status_type {
 
 	FREE = 1,
 	USED,
 	FULL,
 
-};
-
-struct header_t {
-	union {
-	    uintptr_t ptr;
-		uintptr_t brk;
-	};
-
-	uintptr_t type;
-
-	size_t size;
-
-	struct header_t* next;
 };
 
 struct page_t {
@@ -129,10 +109,6 @@ uintptr_t page_construct() {
 		    memset(ptr+sizeof(page_t), VALID, 4*KiB-sizeof(page_t));
 		}
 
-//		printf("ptr: %x\n", (uintptr_t)ptr);
-//		page_t* tmp = (page_t*)ptr;
-//		printf("ptr->next: %x\n", (uintptr_t)(tmp->next));
-
 		count ++;
 
 	}
@@ -141,37 +117,6 @@ uintptr_t page_construct() {
 #endif
 	return count;
 }
-
-//static uintptr_t brk = 0;
-
-/*
-void smash_bind() {
-   int count = 0;
-   
-   header_t* upper = head.next; 
-
-   while(upper != NULL) {
-       count ++;
-	   upper = upper->next;
-   }
-
-   upper = head.next;
-
-   if(count < 2) {
-       return;
-   }
-
-   else{
-       WHile(upper != NULL) {
-           header_t* down=upper->next;
-		   while(down != NULL) {
-		        if()          
-		   }
-       }
-   }
-
-}
-*/
 
 void alloc_chk_before(void* ptr, size_t size) { //用于检查是否这些要分配的区域都是VALID的
 	char* tmp = (char*)ptr;
@@ -185,11 +130,11 @@ void alloc_chk_before(void* ptr, size_t size) { //用于检查是否这些要分
 void alloc_chk_after(void* ptr, size_t size) { //用于检查是否这些要分配的区域都是VALID的
 	char* tmp = (char*)ptr;
 	for(int i = 0; i < size - 1; i ++) {
-	    //printf("%c",*(tmp+i));
+	    printf("%c",*(tmp+i));
 	    assert((*(tmp+i)) == MAGIC);
 	}
 	assert((*(tmp+size-1)) == MARK);
-	//printf("\n");
+	printf("%c\n", *(tmp+size-1));
 }
 
 void free_chk_after(uintptr_t begin, uintptr_t end) { //用于检查这些释放了的区域都是有效的
@@ -293,82 +238,7 @@ static void *kalloc(size_t size) {
 	  return (void*)ptr;
      
   }
-	/*
-	lock();
-#ifdef CUR
-	printf("[#LOCK]:CPU:%d Alloc * Acquired!\n", _cpu());
-#endif
-	//assert(brk <= (uintptr_t)_heap.end);
-	//assert((uintptr_t)(brk-size) % size == 0);
-	//uintptr_t capacity = (uintptr_t)_heap.end - head.brk;
-
-	void* ptr = NULL;
-	header_t header_ptr;  //用于分配出的空间的信息
-
-	//else {
-	
-        header_t tmp = head; //用于保存空闲空间信息
-
-		memset((void*)(head.brk-sizeof(header_t)), VALID, sizeof(header_t));
-		alloc_chk((void*)(head.brk-sizeof(header_t)), sizeof(header_t));
-
-		head.brk = head.brk?
-			ROUNDUP(head.brk, size) + size :
-			(uintptr_t)_heap.start + size;
-		ptr = (void *)(head.brk - size);
-
-		header_ptr.ptr = (uintptr_t)ptr;
-		header_ptr.size = size;
-		header_ptr.next = NULL;
-		header_ptr.type = PTR_SPACE;
-
-        memcpy((void*)((uintptr_t)ptr-sizeof(header_t)), &header_ptr, sizeof(header_t));
-
-		//printf("header_ptr at:%d\n",(uintptr_t)ptr-sizeof(header_t));
-		
-		tmp.brk = head.brk+sizeof(header_t);
-		tmp.size = (uintptr_t)_heap.end - tmp.brk;
-		tmp.type = FREE_SPACE;
-		tmp.next = head.next;
-
-		memcpy((void*)(uintptr_t)head.brk, &tmp, sizeof(header_t));
-
-		head.brk = tmp.brk;
-		
-		assert((uintptr_t)ptr % size == 0);
-		alloc_chk(ptr, size);
-		memset(ptr, MAGIC, size-1);
-    	void* end = (void*)((uintptr_t)ptr+size-1);
-		memset(end, MARK, 1);
-	//}
-	
-	unlock();
-#ifdef CUR
-	printf("[#LOCK]:CPU:%d Alloc * Released!\n", _cpu());
-#endif
-	return ptr;
-*/
 }
-
-/*
-void brk_down() {
-	uintptr_t tmp = brk;
-	assert(*(char*)tmp == VALID);
-	tmp -= 1;
-	if(*(char*)tmp == MARK && *(char*)(tmp-1) == MARK) {
-		brk = tmp;
-		return;
-	}
-	while(*(char*)tmp != MARK && *(char*)tmp != MAGIC) {
-	    tmp --;	
-	}
-	assert(*(char*)tmp != VALID);
-	brk = tmp+1;
-	assert(*(char*)brk == VALID);
-	printf("brk:%p\n",brk);
-	return;
-}
-*/
 
 static void kfree(void *ptr) {
 	lock();
@@ -448,6 +318,7 @@ static void kfree(void *ptr) {
 	   //printf("%c\n", *(tmp+1));
 	   assert(*tmp == MARK);
 	   *tmp =  VALID;
+	   free_chk_after((uintptr_t)ptr, (uintptr_t)tmp);
 	   tmp ++;
 	   size ++;
 	   if((uintptr_t)tmp == brk) {
@@ -504,78 +375,6 @@ static void kfree(void *ptr) {
 	   unlock();
 	   return;
 	}
-	/*
-	lock();
-#ifdef CUR
-	printf("[#LOCK]:CPU:%d Free * Acquired!\n", _cpu());
-#endif
-
-	header_t free_sp;
-
-	uintptr_t end = 0;
-    char* tmp = (char*)ptr;
-	if(*tmp == MARK) {
-	    *(char*)tmp = VALID;
-		end = (uintptr_t)tmp;
-	}
-
-	else if(*tmp == MAGIC){
-		while(*tmp == MAGIC) {
-		    *(char*)tmp = VALID;
-			tmp ++;
-		}	
-		assert(*tmp == MARK);
-		*(char*)tmp = VALID;
-		end = (uintptr_t)tmp;
-	}
-
-	else {
-	    assert(0);
-	}
-
-		
-	free_chk((uintptr_t)ptr, end);
-
-    tmp = (char*)((uintptr_t)ptr-sizeof(header_t));
-	
-	tmp --;
-	while(*tmp == VALID && (uintptr_t)tmp >= (uintptr_t)_heap.start) {
-		//printf("tmp:%p\n", (uintptr_t)tmp);
-	    tmp --;
-	}
-	tmp ++;
-
-	size_t size = (((header_t*)(ptr-sizeof(header_t)))->size);
-   
-    free_sp.brk = (uintptr_t)tmp + sizeof(header_t);
-	free_sp.size = (uintptr_t)ptr+size - free_sp.brk;
-	free_sp.next = NULL;
-
-    memcpy((void*)tmp, &free_sp, sizeof(header_t));
-	
-	header_t* next = &head;
-
-    while(next->next != NULL) {
-	    next = next->next;
-	} 
-
-	next->next = (header_t*)((uintptr_t)tmp);
-
-	
-//	header_t* index = &head;
-//
-//	while(index->next != NULL) {
-//	    printf("addr:%p\n", index->brk);
-//		index = index->next;
-//	}
-//	printf("addr:%p\n", index->brk);
-//  
-
-	unlock();
-#ifdef CUR
-	printf("[#LOCK]:CPU:%d Free * Released!\n", _cpu());
-#endif
-	*/
 }
 
 

@@ -141,9 +141,9 @@ void free_chk_after(uintptr_t begin, uintptr_t end) { //用于检查这些释放
     char* tmp = (char*)begin;
 	for(int i = 0; i <= end-begin; i ++) {
 	    assert((*(tmp+i)) == VALID);
-		//printf("%c",*(tmp+i));
+		printf("%c",*(tmp+i));
 	}
-	//printf("\n");
+	printf("\n");
 }
 
 static void *kalloc(size_t size) {

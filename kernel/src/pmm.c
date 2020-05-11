@@ -186,7 +186,7 @@ static void *kalloc(size_t size) {
       printf("Lock released by #CPU:%d in alloc | LINE:%d\n", _cpu(), __LINE__);
 #endif
           
-	  for(volatile int i = 0; i < 20000000000; i ++) {}
+	  for(volatile int i = 0; i < 2000000000; i ++) {}
 
 	  unlock();
 	  return (void*)page;

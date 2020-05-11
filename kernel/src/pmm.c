@@ -13,6 +13,8 @@
 //#define PRE
 //#define SPA
 
+//#define CHK
+
 //#define PTR
 
 intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
@@ -130,20 +132,28 @@ void alloc_chk_before(void* ptr, size_t size) { //用于检查是否这些要分
 void alloc_chk_after(void* ptr, size_t size) { //用于检查是否这些要分配的区域都是VALID的
 	char* tmp = (char*)ptr;
 	for(int i = 0; i < size - 1; i ++) {
+#ifdef CHK
 	    printf("%c",*(tmp+i));
+#endif
 	    assert((*(tmp+i)) == MAGIC);
 	}
 	assert((*(tmp+size-1)) == MARK);
+#ifdef CHK
 	printf("%c\n", *(tmp+size-1));
+#endif
 }
 
 void free_chk_after(uintptr_t begin, uintptr_t end) { //用于检查这些释放了的区域都是有效的
     char* tmp = (char*)begin;
 	for(int i = 0; i <= end-begin; i ++) {
 	    assert((*(tmp+i)) == VALID);
+#ifdef CHK
 		printf("%c",*(tmp+i));
+#endif
 	}
+#ifdef CHK
 	printf("\n");
+#endif
 }
 
 static void *kalloc(size_t size) {

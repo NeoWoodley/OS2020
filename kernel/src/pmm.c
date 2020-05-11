@@ -165,7 +165,7 @@ static void *kalloc(size_t size) {
           printf("Lock released by #CPU:%d in alloc | LINE:%d\n", _cpu(), __LINE__);
 #endif
           
-		  for(volatile int i = 0; i < 100000000000000; i ++) {}
+		  for(volatile int i = 0; i < 2000000000; i ++) {}
 
 		  unlock();
 	      return NULL;
@@ -186,7 +186,7 @@ static void *kalloc(size_t size) {
       printf("Lock released by #CPU:%d in alloc | LINE:%d\n", _cpu(), __LINE__);
 #endif
           
-	  for(volatile int i = 0; i < 1000000000000000; i ++) {}
+	  for(volatile int i = 0; i < 20000000000; i ++) {}
 
 	  unlock();
 	  return (void*)page;
@@ -241,7 +241,7 @@ static void *kalloc(size_t size) {
       printf("Lock released by #CPU:%d in alloc | LINE:%d\n", _cpu(), __LINE__);
 #endif
 
-	  for(volatile int i = 0; i < 100000000000000; i ++) {}
+	  for(volatile int i = 0; i < 2000000000; i ++) {}
 
       unlock();
 	  return (void*)ptr;
@@ -291,7 +291,7 @@ static void kfree(void *ptr) {
         printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
 #endif
 
-	    for(volatile int i = 0; i < 100000000000000; i ++) {}
+	    for(volatile int i = 0; i < 2000000000; i ++) {}
 
 		unlock();
 		return;
@@ -316,7 +316,7 @@ static void kfree(void *ptr) {
     printf("(*Error)(CPU%d) ptr:%p\n",_cpu(), ptr);
 #endif
 
-	       for(volatile int i = 0; i < 100000000000000; i ++) {}
+	       for(volatile int i = 0; i < 2000000000; i ++) {}
 
 	       unlock();
 		   return;
@@ -392,7 +392,7 @@ static void kfree(void *ptr) {
        printf("Lock released by #CPU:%d in free | LINE:%d\n", _cpu(), __LINE__);
 #endif
 
-	  for(volatile int i = 0; i < 100000000000000; i ++) {}
+	  for(volatile int i = 0; i < 2000000000; i ++) {}
 
 	   unlock();
 	   return;

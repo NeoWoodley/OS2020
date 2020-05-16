@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     if (!fgets(line, sizeof(line), stdin)) {
       break;
     }
-	if(strncmp(func, line 3) == 0) {
+	if(strncmp(func, line, 3) == 0) {
 	    printf("Func!\n");
 	}
 	else {

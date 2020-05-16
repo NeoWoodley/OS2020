@@ -6,6 +6,9 @@
 int main(int argc, char *argv[]) {
   static char line[4096];
   static char func[4] = "int";
+  char* tmplib[100];
+
+
   while (1) {
     printf("crepl> ");
     fflush(stdout);
@@ -13,7 +16,7 @@ int main(int argc, char *argv[]) {
       break;
     }
 	if(strncmp(func, line, 3) == 0) {
-		char template[] = "tmp-XXXXXX";
+		char template[] = "/tmp/tmp-XXXXXX";
 		int tmp_file = mkstemp(template);
 		write(tmp_file, line, strlen(line));
 	    printf("%s\n", template);

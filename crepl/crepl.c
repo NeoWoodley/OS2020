@@ -3,12 +3,19 @@
 
 int main(int argc, char *argv[]) {
   static char line[4096];
+  static char func[4] = "int";
   while (1) {
     printf("crepl> ");
     fflush(stdout);
     if (!fgets(line, sizeof(line), stdin)) {
       break;
     }
-    printf("Got %zu chars.\n", strlen(line)); // WTF?
+	if(strncmp(func, line 3) == 0) {
+	    printf("Func!\n");
+	}
+	else {
+	    printf("Expr!\n");
+	}
+    // printf("Got %zu chars.\n", strlen(line)); // WTF?
   }
 }

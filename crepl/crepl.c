@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 
 int main(int argc, char *argv[]) {
@@ -14,7 +15,7 @@ int main(int argc, char *argv[]) {
 	if(strncmp(func, line, 3) == 0) {
 		char template[] = "tmp-XXXXXX";
 		int tmp_file = mkstemp(template);
-		write();
+		write(tmp_file, line, strlen(line));
 	    //printf("Func!\n");
 	}
 	else {

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 int main(int argc, char *argv[]) {
@@ -11,7 +12,10 @@ int main(int argc, char *argv[]) {
       break;
     }
 	if(strncmp(func, line, 3) == 0) {
-	    printf("Func!\n");
+		char template[] = "tmp-XXXXXX";
+		int tmp_file = mkstemp(template);
+		write();
+	    //printf("Func!\n");
 	}
 	else {
 	    printf("Expr!\n");

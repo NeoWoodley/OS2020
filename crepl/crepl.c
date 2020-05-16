@@ -15,9 +15,8 @@ int main(int argc, char *argv[]) {
 	if(strncmp(func, line, 3) == 0) {
 		char template[] = "tmp-XXXXXX";
 		int tmp_file = mkstemp(template);
-		printf("line:%s\n",line);
 		write(tmp_file, line, strlen(line));
-	    //printf("Func!\n");
+	    printf("%s\n", template);
 	}
 	else {
 	    printf("Expr!\n");

@@ -12,6 +12,10 @@ int main(int argc, char *argv[]) {
   int tmp_file = mkstemps(template, 2);
   printf("%s\n", template);
 
+  char libname[64] = "/tmp/lib";
+  char suffix[3] = "so";
+  strncat(libname, &template[5], 11);
+  strcat(libname, suffix);
 
   while (1) {
     printf("crepl> ");
@@ -25,12 +29,6 @@ int main(int argc, char *argv[]) {
 		char exec_file[] = "gcc";
 		int pid = fork();
 		if(pid == 0) {
-			char libname[64] = "/tmp/lib";
-			char suffix[3] = "so";
-		    strncat(libname, &template[5], 11);
-			strcat(libname, suffix);
-	        //printf(".c file: %s\n", template);
-	        //printf(".so file: %s\n", libname);
 		    execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 		}
 		else {
@@ -53,6 +51,16 @@ int main(int argc, char *argv[]) {
 
 		lseek(tmp_file, 0, SEEK_END);
 		write(tmp_file, funcbody, strlen(funcbody));
+
+		int pid = fork();
+		if(pid == 0) {
+		    execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+		}
+		else {
+			sleep(1);
+		    void* handle = dlopen(libname, RTLD_LAZY);
+			assert(handle != NULL);
+		}
 	    //printf("Expr!\n");
 		count ++;
 	}

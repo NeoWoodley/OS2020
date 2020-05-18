@@ -63,6 +63,7 @@ int main(int argc, char *argv[]) {
 		if(prepid == 0) {
 			close(fildes[0]);
 			dup2(fildes[1], fileno(stderr));
+			printf("??????????????????????????");
 		    execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
 		}
 		else {

@@ -84,6 +84,9 @@ int main(int argc, char *argv[]) {
 		strncat(funcbody, line, strlen(line)-1);
 		strcat(funcbody, funcend);
 
+		printf("funcbody:%s\n", funcbody);
+		printf("funcname:%s\n", func_name);
+
 		lseek(tmp_file, 0, SEEK_END);
 		write(tmp_file, funcbody, strlen(funcbody));
 

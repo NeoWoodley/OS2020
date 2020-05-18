@@ -95,6 +95,7 @@ int main(int argc, char *argv[]) {
 	    }
 
 		else{
+			printf("Compile Error.\n");
             continue;
 		}
 	}

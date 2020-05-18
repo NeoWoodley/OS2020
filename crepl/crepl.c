@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 
   char exec_file[] = "gcc";
 
-  char func_name[32];
+  char func_name[32] = "__expr_wrapper_";
 
   while (1) {
     printf("crepl> ");
@@ -75,11 +75,9 @@ int main(int argc, char *argv[]) {
 			tmp %= base;
 		}
 
-		printf("count:%d\n",count);
-		printf("str:%s\n", index_str);
-		
 		
 		strcat(funcbody, index_str);
+		strcat(funcname, index_str);
 		char funcpart[32] = "() { return ";
 		char funcend[4] = ";}\n";
 		strcat(funcbody, funcpart);
@@ -98,11 +96,11 @@ int main(int argc, char *argv[]) {
 		    void* handle = dlopen(libname, RTLD_LAZY);
 			assert(handle != NULL);
 
-//			void (*func)();
+			void (*func)();
 
-//			func = dlsym(handle, );
+			func = dlsym(handle, funcname);
 		}
-	    //printf("Expr!\n");
+	    printf("%d\n", func());
 		count ++;
 	}
     // printf("Got %zu chars.\n", strlen(line)); // WTF?

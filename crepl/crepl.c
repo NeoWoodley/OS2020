@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 			int pid = fork();
 
 			if(pid == 0) {
-		        execlp(exec_file, "gcc","-o", "-fPIC", "-shared", template, libname, NULL);
+		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 			}
 		}
 

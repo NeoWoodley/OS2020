@@ -99,7 +99,10 @@ int main(int argc, char *argv[]) {
 			void (*callfunc)();
 
 			callfunc = dlsym(handle, func_name);
-	        printf("%d\n", callfunc());
+
+			int result = callfunc();
+
+	        printf("%d\n", result);
 		    count ++;
 		}
 	}

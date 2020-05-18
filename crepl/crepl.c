@@ -10,6 +10,7 @@ int main(int argc, char *argv[]) {
   static int count = 0;
   char template[] = "/tmp/tmp-XXXXXX.c";
   int tmp_file = mkstemps(template, 2);
+  printf("%s\n", template);
 
 
   while (1) {
@@ -47,7 +48,7 @@ int main(int argc, char *argv[]) {
 		char funcpart[32] = "() { return ";
 		char funcend[3] = ";}";
 		strcat(funcbody, funcpart);
-		strcat(funcbody, line);
+		strncat(funcbody, line, strlen(line)-1);
 		strcat(funcbody, funcend);
 
 		lseek(tmp_file, 0, SEEK_END);

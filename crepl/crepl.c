@@ -31,7 +31,6 @@ int main(int argc, char *argv[]) {
 			strcat(libname, suffix);
 	        //printf(".c file: %s\n", template);
 	        //printf(".so file: %s\n", libname);
-			printf("?????????????%c\n", eval(1+2));
 
 			pid_t pid = fork();
 
@@ -43,11 +42,17 @@ int main(int argc, char *argv[]) {
 
 			}
 		}
-
-
-	    //printf("%s\n", template);
 	}
 	else {
+		char template[] = "/tmp/expr-XXXXXX.c";
+		int tmp_file = mkstemps(template, 2);
+		char funcbody[256] = "int __expr_wrapper_4() { return ";
+		char funcend[3] = ";}"
+		strcat(funcbody, line);
+		strcat(funcbody, funcend);
+		printf("func %s\n", funcbody);
+
+
 	    printf("Expr!\n");
 	}
     // printf("Got %zu chars.\n", strlen(line)); // WTF?

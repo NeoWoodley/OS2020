@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
   static int count = 0;
   char template[] = "/tmp/tmp-XXXXXX.c";
   int tmp_file = mkstemps(template, 2);
-  printf("%s\n", template);
+//  printf("%s\n", template);
 
   char libname[64] = "/tmp/lib";
   char suffix[3] = "so";
@@ -39,6 +39,30 @@ int main(int argc, char *argv[]) {
       break;
     }
 	if(strncmp(func, line, 3) == 0) {
+        char testfile[] = "/tmp/test-XXXXXX.c";
+        int test_file = mkstemps(testfile, 2);
+		write(tmp_file, line, strlen(line));
+
+		char testlibname[64] = "/tmp/lib";
+		char testsuffix[3] = "so";
+		strncat(testlibname, &testfile[5], 12);
+		strcat(testlibname, testsuffix);
+
+		int fildes[2];
+
+		if(pipe(fildes) != 0) {
+		    printf("Pipe failde!\n");
+			assert(0);
+		}
+
+		int prepid = fork();
+		if(prepid == 0) {
+		    execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname,m NULL);
+		}
+		else {
+		    sleep(1);
+		}
+
 		lseek(tmp_file, 0, SEEK_END);
 		write(tmp_file, line, strlen(line));
 		int pid = fork();

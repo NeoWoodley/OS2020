@@ -4,11 +4,10 @@
 #include <string.h>
 #include <dlfcn.h>
 
-#define eval(expr)  expr
-
 int main(int argc, char *argv[]) {
   static char line[4096];
   static char func[4] = "int";
+  static int count = 0;
 
 
   while (1) {
@@ -36,14 +35,22 @@ int main(int argc, char *argv[]) {
 	else {
 		char template[] = "/tmp/expr-XXXXXX.c";
 		int tmp_file = mkstemps(template, 2);
-		char funcbody[256] = "int __expr_wrapper_4() { return ";
+		char funcbody[256] = "int __expr_wrapper_";
+		char index = '0'+ count;
+		char index_str[2];
+		index_str[0] = index;
+		index_str[1] = '\0';
+		strcat(funcbody, index_str);
+		char funcpart[32] = "() { return ";
 		char funcend[3] = ";}";
+		strcat(funcbody, funcpart);
 		strcat(funcbody, line);
 		strcat(funcbody, funcend);
-		//printf("func %s\n", funcbody);
+		printf("func %s\n", funcbody);
 
 
 	    //printf("Expr!\n");
+		count ++:
 	}
     // printf("Got %zu chars.\n", strlen(line)); // WTF?
   }

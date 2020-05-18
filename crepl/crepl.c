@@ -104,6 +104,8 @@ int main(int argc, char *argv[]) {
 
 	        printf("%d\n", result);
 		    count ++;
+
+			dlclose(handle);
 		}
 	}
     // printf("Got %zu chars.\n", strlen(line)); // WTF?

@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
 		    execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
 		}
 		else {
-		    sleep(1);
+		    usleep(200);
 			close(fildes[1]);
             
 			int readlen = read(fildes[0], buf, 511);
@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
 		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 		    }
 		    else {
-			    sleep(1);
+			    usleep(200);
 		        printf("OK.\n");
 		    }
 	    }
@@ -170,7 +170,7 @@ int main(int argc, char *argv[]) {
 
 		}
 		else {
-		    sleep(1);
+		    usleep(200);
 			close(fildes[1]);
             
 			int readlen = read(fildes[0], buf, 511);
@@ -190,7 +190,7 @@ int main(int argc, char *argv[]) {
 		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 		    }
 		    else {
-			    sleep(1);
+			    usleep(200);
 		        void* handle = dlopen(libname, RTLD_LAZY);
 			    assert(handle != NULL);
 

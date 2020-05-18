@@ -78,6 +78,7 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
+		sleep(1);
         if(flag == 0) {
 
 		    lseek(tmp_file, 0, SEEK_END);

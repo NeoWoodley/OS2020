@@ -32,6 +32,9 @@ int main(int argc, char *argv[]) {
 
   char func_name[32] = "__expr_wrapper_";
 
+  char buf[512];
+  memset(buf, '\0', 512);
+
   while (1) {
     printf("crepl> ");
     fflush(stdout);
@@ -39,6 +42,7 @@ int main(int argc, char *argv[]) {
       break;
     }
 	if(strncmp(func, line, 3) == 0) {
+		int flag = 0;
         char testfile[] = "/tmp/test-XXXXXX.c";
         int test_file = mkstemps(testfile, 2);
 		write(tmp_file, line, strlen(line));
@@ -57,22 +61,34 @@ int main(int argc, char *argv[]) {
 
 		int prepid = fork();
 		if(prepid == 0) {
+			close(fildes[0]);
+			dup2(fildes[1], fileno(stderr));
 		    execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
 		}
 		else {
 		    sleep(1);
+			close(fildes[1]);
+
+			dup2(fildes[0], fileno(stdin));
+
+			if(fgets(buf, 511, stdin) != NULL) {
+			    flag = 1;
+			}
 		}
 
-		lseek(tmp_file, 0, SEEK_END);
-		write(tmp_file, line, strlen(line));
-		int pid = fork();
-		if(pid == 0) {
-		    execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
-		}
-		else {
-			sleep(1);
-		    printf("OK.\n");
-		}
+        if(flag == 0) {
+
+		    lseek(tmp_file, 0, SEEK_END);
+		    write(tmp_file, line, strlen(line));
+		    int pid = fork();
+		    if(pid == 0) {
+		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+		    }
+		    else {
+			    sleep(1);
+		        printf("OK.\n");
+		    }
+	    }
 	}
 	else {
 		char funcbody[256] = "int __expr_wrapper_";

@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 			strcat(libname, suffix);
 	        //printf(".c file: %s\n", template);
 	        //printf(".so file: %s\n", libname);
-			printf("%c\n", eval(1+2));
+			printf("?????????????%c\n", eval(1+2));
 
 			pid_t pid = fork();
 

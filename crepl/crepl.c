@@ -50,10 +50,10 @@ int main(int argc, char *argv[]) {
 		char funcend[3] = ";}";
 		strcat(funcbody, line);
 		strcat(funcbody, funcend);
-		printf("func %s\n", funcbody);
+		//printf("func %s\n", funcbody);
 
 
-	    printf("Expr!\n");
+	    //printf("Expr!\n");
 	}
     // printf("Got %zu chars.\n", strlen(line)); // WTF?
   }

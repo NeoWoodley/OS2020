@@ -72,6 +72,7 @@ int main(int argc, char *argv[]) {
 			dup2(fildes[0], fileno(stdin));
 
 			if(fgets(buf, 511, stdin) != NULL) {
+				printf("%s\n", buf);
 			    flag = 1;
 			}
 		printf("Done.\n");

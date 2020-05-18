@@ -99,9 +99,9 @@ int main(int argc, char *argv[]) {
 			void (*callfunc)();
 
 			callfunc = dlsym(handle, func_name);
+	        printf("%d\n", callfunc());
+		    count ++;
 		}
-	    printf("%d\n", callfunc());
-		count ++;
 	}
     // printf("Got %zu chars.\n", strlen(line)); // WTF?
   }

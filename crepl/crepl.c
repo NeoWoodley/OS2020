@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 
 		int prepid = fork();
 		if(prepid == 0) {
-		    execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname,m NULL);
+		    execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
 		}
 		else {
 		    sleep(1);

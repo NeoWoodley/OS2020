@@ -22,12 +22,10 @@ int main(int argc, char *argv[]) {
 		char exec_file[] = "gcc";
 		int pid = fork();
 		if(pid == 0) {
-			char libname[32] = "/tmp/lib";
-			char tmp[16];
+			char libname[64] = "/tmp/lib";
 			char suffix[4] = ".so";
-		    strncat(tmp, &template[5], 11);
-			strcat(tmp, suffix);
-			strcat(libname, tmp);
+		    strncat(libname, &template[5], 11);
+			strcat(libname, suffix);
 	        printf(".c file: %s\n", template);
 	        printf(".so file: %s\n", libname);
 

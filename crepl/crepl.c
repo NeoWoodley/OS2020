@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
 		char template[] = "/tmp/expr-XXXXXX.c";
 		int tmp_file = mkstemps(template, 2);
 		char funcbody[256] = "int __expr_wrapper_4() { return ";
-		char funcend[3] = ";}"
+		char funcend[3] = ";}";
 		strcat(funcbody, line);
 		strcat(funcbody, funcend);
 		printf("func %s\n", funcbody);

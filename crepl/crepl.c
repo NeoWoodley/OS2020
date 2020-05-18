@@ -98,9 +98,9 @@ int main(int argc, char *argv[]) {
 		    void* handle = dlopen(libname, RTLD_LAZY);
 			assert(handle != NULL);
 
-			void (*func)();
+//			void (*func)();
 
-			func = dlsym(handle, );
+//			func = dlsym(handle, );
 		}
 	    //printf("Expr!\n");
 		count ++;

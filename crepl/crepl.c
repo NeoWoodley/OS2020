@@ -74,6 +74,7 @@ int main(int argc, char *argv[]) {
 			if(fgets(buf, 511, stdin) != NULL) {
 			    flag = 1;
 			}
+		printf("Done.\n");
 		}
 
         if(flag == 0) {

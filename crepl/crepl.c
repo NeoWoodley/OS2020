@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
 			tmp %= base;
 		}
 
-		printf("num:%s\n", index_str);
+//		printf("num:%s\n", index_str);
 
 		
 		strcat(funcbody, index_str);
@@ -86,8 +86,8 @@ int main(int argc, char *argv[]) {
 		strncat(funcbody, line, strlen(line)-1);
 		strcat(funcbody, funcend);
 
-		printf("funcbody:%s\n", funcbody);
-		printf("funcname:%s\n", func_name);
+//		printf("funcbody:%s\n", funcbody);
+//		printf("funcname:%s\n", func_name);
 
 		lseek(tmp_file, 0, SEEK_END);
 		write(tmp_file, funcbody, strlen(funcbody));
@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
 		    execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 		}
 		else {
-			sleep(2);
+			sleep(1);
 		    void* handle = dlopen(libname, RTLD_LAZY);
 			assert(handle != NULL);
 

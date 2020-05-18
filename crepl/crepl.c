@@ -71,11 +71,11 @@ int main(int argc, char *argv[]) {
 
 			dup2(fildes[0], fileno(stdin));
 
-			if(fgets(buf, 511, stdin) != NULL) {
-				printf("??????????????????????\n");
-			    flag = 1;
-			}
-		printf("Done.\n");
+			char* errorfile = fgets(buf, 511, stdin);
+			
+			assert(error == NULL);
+			
+		    printf("Done.\n");
 		}
 
         if(flag == 0) {

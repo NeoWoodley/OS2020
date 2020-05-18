@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 		}
 		else {
 			sleep(1);
-		    printf("[Added!]:%s line\n", line);
+		    printf("OK.\n");
 		}
 	}
 	else {

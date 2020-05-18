@@ -17,6 +17,8 @@ int main(int argc, char *argv[]) {
   strncat(libname, &template[5], 11);
   strcat(libname, suffix);
 
+  char exec_file[] = "gcc";
+
   while (1) {
     printf("crepl> ");
     fflush(stdout);
@@ -26,7 +28,6 @@ int main(int argc, char *argv[]) {
 	if(strncmp(func, line, 3) == 0) {
 		lseek(tmp_file, 0, SEEK_END);
 		write(tmp_file, line, strlen(line));
-		char exec_file[] = "gcc";
 		int pid = fork();
 		if(pid == 0) {
 		    execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);

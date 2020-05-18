@@ -35,7 +35,11 @@ int main(int argc, char *argv[]) {
 			pid_t pid = fork();
 
 			if(pid == 0) {
+				printf("?????????????????????\n");
 		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+			}
+			else {
+			    
 			}
 		}
 	}

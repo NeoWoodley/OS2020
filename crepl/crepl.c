@@ -92,7 +92,7 @@ int main(int argc, char *argv[]) {
 		    execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 		}
 		else {
-			sleep(1);
+			sleep(2);
 		    void* handle = dlopen(libname, RTLD_LAZY);
 			assert(handle != NULL);
 

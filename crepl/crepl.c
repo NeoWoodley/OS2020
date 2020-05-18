@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
 
 			char* errorfile = fgets(buf, 511, stdin);
 			
-			assert(error == NULL);
+			assert(errorfile == NULL);
 			
 		    printf("Done.\n");
 		}

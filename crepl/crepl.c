@@ -26,13 +26,17 @@ int main(int argc, char *argv[]) {
 			char suffix[3] = "so";
 		    strncat(libname, &template[5], 11);
 			strcat(libname, suffix);
-	        printf(".c file: %s\n", template);
-	        printf(".so file: %s\n", libname);
+	        //printf(".c file: %s\n", template);
+	        //printf(".so file: %s\n", libname);
 
-			int pid = fork();
+			pid_t pid = fork();
 
 			if(pid == 0) {
 		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+			}
+			else {
+			    sleep(1);
+
 			}
 		}
 

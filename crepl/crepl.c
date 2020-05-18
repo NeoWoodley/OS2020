@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 		int pid = fork();
 		if(pid == 0) {
 			char libname[64] = "/tmp/lib";
-			char suffix[4] = ".so";
+			char suffix[3] = "so";
 		    strncat(libname, &template[5], 11);
 			strcat(libname, suffix);
 	        printf(".c file: %s\n", template);

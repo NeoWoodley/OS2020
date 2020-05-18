@@ -9,7 +9,6 @@
 int main(int argc, char *argv[]) {
   static char line[4096];
   static char func[4] = "int";
-  char* tmplib[100];
 
 
   while (1) {
@@ -37,6 +36,7 @@ int main(int argc, char *argv[]) {
 			if(pid == 0) {
 				printf("?????????????????????\n");
 		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+				_exit(0);
 			}
 			else {
 			    

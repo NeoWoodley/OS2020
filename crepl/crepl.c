@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 		index_str[1] = '\0';
 		strcat(funcbody, index_str);
 		char funcpart[32] = "() { return ";
-		char funcend[3] = ";}";
+		char funcend[4] = ";}\n";
 		strcat(funcbody, funcpart);
 		strncat(funcbody, line, strlen(line)-1);
 		strcat(funcbody, funcend);

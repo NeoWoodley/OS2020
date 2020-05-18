@@ -5,6 +5,8 @@
 #include <dlfcn.h>
 #include <assert.h>
 
+#define T 500
+
 char file_buf[65535];
 
 int fac(int base, int time) {
@@ -68,7 +70,7 @@ int main(int argc, char *argv[]) {
 		    execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
 		}
 		else {
-		    usleep(200);
+		    usleep(T);
 			close(fildes[1]);
             
 			int readlen = read(fildes[0], buf, 511);
@@ -87,7 +89,7 @@ int main(int argc, char *argv[]) {
 		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 		    }
 		    else {
-			    usleep(200);
+			    usleep(T);
 		        printf("OK.\n");
 		    }
 	    }
@@ -170,7 +172,7 @@ int main(int argc, char *argv[]) {
 
 		}
 		else {
-		    usleep(200);
+		    usleep(T);
 			close(fildes[1]);
             
 			int readlen = read(fildes[0], buf, 511);
@@ -190,7 +192,7 @@ int main(int argc, char *argv[]) {
 		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 		    }
 		    else {
-			    usleep(200);
+			    usleep(T);
 		        void* handle = dlopen(libname, RTLD_LAZY);
 			    assert(handle != NULL);
 

@@ -37,10 +37,6 @@ int main(int argc, char *argv[]) {
 			if(pid == 0) {
 		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 			}
-			else {
-			    sleep(1);
-
-			}
 		}
 	}
 	else {

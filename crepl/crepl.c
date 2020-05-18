@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
         */
 
 
-	    //printf("%s\n", template);
+	    printf("%s\n", template);
 	}
 	else {
 	    printf("Expr!\n");

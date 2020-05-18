@@ -31,6 +31,9 @@ int main(int argc, char *argv[]) {
 	        //printf(".so file: %s\n", libname);
 		    execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 		}
+		else {
+		    printf("[Added!]:%s line\n");
+		}
 	}
 	else {
 		char template[] = "/tmp/expr-XXXXXX.c";
@@ -46,8 +49,6 @@ int main(int argc, char *argv[]) {
 		strcat(funcbody, funcpart);
 		strcat(funcbody, line);
 		strcat(funcbody, funcend);
-		printf("func %s\n", funcbody);
-
 
 	    //printf("Expr!\n");
 		count ++;

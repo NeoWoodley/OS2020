@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
 		    void* handle = dlopen(libname, RTLD_LAZY);
 			assert(handle != NULL);
 
-			void (*callfunc)();
+			int (*callfunc)();
 
 			callfunc = dlsym(handle, func_name);
 

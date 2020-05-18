@@ -73,9 +73,9 @@ int main(int argc, char *argv[]) {
 
 			char* errorfile = fgets(buf, 511, stdin);
 			
-			assert(errorfile == NULL);
-			
-		    printf("Done.\n");
+			if(errorfile != NULL) {
+			    flag = 1;
+			}
 		}
 
         if(flag == 0) {

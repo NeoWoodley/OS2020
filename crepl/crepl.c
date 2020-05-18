@@ -96,11 +96,11 @@ int main(int argc, char *argv[]) {
 		    void* handle = dlopen(libname, RTLD_LAZY);
 			assert(handle != NULL);
 
-			void (*func)();
+			void (*callfunc)();
 
-			func = dlsym(handle, func_name);
+			callfunc = dlsym(handle, func_name);
 		}
-	    printf("%d\n", func());
+	    printf("%d\n", callfunc());
 		count ++;
 	}
     // printf("Got %zu chars.\n", strlen(line)); // WTF?

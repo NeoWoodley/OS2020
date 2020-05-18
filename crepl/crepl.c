@@ -32,7 +32,8 @@ int main(int argc, char *argv[]) {
 		    execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 		}
 		else {
-		    printf("[Added!]:%s line\n");
+			sleep(1);
+		    printf("[Added!]:%s line\n", line);
 		}
 	}
 	else {

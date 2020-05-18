@@ -29,7 +29,11 @@ int main(int argc, char *argv[]) {
 	        printf(".c file: %s\n", template);
 	        printf(".so file: %s\n", libname);
 
-		    //execlp(exec_file, "gcc","-o", "-fPIC", "-shared", template,  );
+			int pid = fork();
+
+			if(pid == 0) {
+		        execlp(exec_file, "gcc","-o", "-fPIC", "-shared", template, libname, NULL);
+			}
 		}
 
 

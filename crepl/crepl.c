@@ -4,7 +4,7 @@
 #include <string.h>
 #include <dlfcn.h>
 
-#define eval(expr)  return expr
+#define eval(expr)  expr
 
 int main(int argc, char *argv[]) {
   static char line[4096];

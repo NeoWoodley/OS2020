@@ -16,10 +16,19 @@ int main(int argc, char *argv[]) {
       break;
     }
 	if(strncmp(func, line, 3) == 0) {
-		char template[] = "/tmp/tmp-XXXXXX";
-		int tmp_file = mkstemp(template);
+		char template[] = "/tmp/tmp-XXXXXX.c";
+		int tmp_file = mkstemps(template);
 		write(tmp_file, line, strlen(line));
-	    printf("%s\n", template);
+		char exec_file[] = "gcc";
+		/*
+		int pid = fork();
+		if(pid == 0) {
+		    execlp(exec_file, "gcc", "-fPIC", "-shared", );
+		}
+        */
+
+
+	    //printf("%s\n", template);
 	}
 	else {
 	    printf("Expr!\n");

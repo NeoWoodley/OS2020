@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     }
 	if(strncmp(func, line, 3) == 0) {
 		char template[] = "/tmp/tmp-XXXXXX.c";
-		int tmp_file = mkstemps(template);
+		int tmp_file = mkstemps(template, 2);
 		write(tmp_file, line, strlen(line));
 		char exec_file[] = "gcc";
 		/*

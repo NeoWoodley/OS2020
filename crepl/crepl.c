@@ -81,7 +81,6 @@ int main(int argc, char *argv[]) {
 		sleep(1);
         if(flag == 0) {
 
-            printf("!!!!!!!!!!!!!!!!!!!!!!\n");
              
 		    lseek(tmp_file, 0, SEEK_END);
 		    write(tmp_file, line, strlen(line));
@@ -94,6 +93,10 @@ int main(int argc, char *argv[]) {
 		        printf("OK.\n");
 		    }
 	    }
+
+		else{
+            continue;
+		}
 	}
 	else {
 		printf("???????????????????????????\n");

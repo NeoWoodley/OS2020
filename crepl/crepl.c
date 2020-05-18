@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <dlfcn.h>
 
 int main(int argc, char *argv[]) {
   static char line[4096];

@@ -30,17 +30,7 @@ int main(int argc, char *argv[]) {
 			strcat(libname, suffix);
 	        //printf(".c file: %s\n", template);
 	        //printf(".so file: %s\n", libname);
-
-			pid_t pid = fork();
-
-			if(pid == 0) {
-				printf("?????????????????????\n");
-		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
-				_exit(0);
-			}
-			else {
-			    
-			}
+		    execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
 		}
 	}
 	else {

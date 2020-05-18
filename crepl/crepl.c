@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
 
 
 	    //printf("Expr!\n");
-		count ++:
+		count ++;
 	}
     // printf("Got %zu chars.\n", strlen(line)); // WTF?
   }

@@ -5,10 +5,6 @@
 #include <dlfcn.h>
 #include <assert.h>
 
-void func_name_restore() {
-    memset(&func_name[15], '\0', 17);
-}
-
 int fac(int base, int time) {
    int ret = 1;
 
@@ -122,7 +118,7 @@ int main(int argc, char *argv[]) {
 
 	        printf("%d\n", result);
 		    count ++;
-			func_name_restore();
+            memset(&func_name[15], '\0', 17);
 
 			dlclose(handle);
 		}

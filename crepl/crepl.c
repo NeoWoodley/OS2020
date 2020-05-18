@@ -79,7 +79,6 @@ int main(int argc, char *argv[]) {
 		}
 
 		sleep(1);
-		printf("flag:%d\n",flag);
         if(flag == 0) {
 
 		    lseek(tmp_file, 0, SEEK_END);
@@ -95,6 +94,7 @@ int main(int argc, char *argv[]) {
 	    }
 	}
 	else {
+		printf("???????????????????????????\n");
 		char funcbody[256] = "int __expr_wrapper_";
 		char index_str[4];
 		memset(index_str, '\0', 4);

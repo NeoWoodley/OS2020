@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
 
 			void (*func)();
 
-			func = dlsym(handle, funcname);
+			func = dlsym(handle, func_name);
 		}
 	    printf("%d\n", func());
 		count ++;

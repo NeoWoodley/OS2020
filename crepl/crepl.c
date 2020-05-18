@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
 			tmp %= base;
 		}
 
-		printf("num:%d\n", index_str);
+		printf("num:%s\n", index_str);
 
 		
 		strcat(funcbody, index_str);

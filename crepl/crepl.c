@@ -8,6 +8,8 @@ int main(int argc, char *argv[]) {
   static char line[4096];
   static char func[4] = "int";
   static int count = 0;
+  char template[] = "/tmp/tmp-XXXXXX.c";
+  int tmp_file = mkstemps(template, 2);
 
 
   while (1) {
@@ -17,8 +19,7 @@ int main(int argc, char *argv[]) {
       break;
     }
 	if(strncmp(func, line, 3) == 0) {
-		char template[] = "/tmp/tmp-XXXXXX.c";
-		int tmp_file = mkstemps(template, 2);
+		lseek(tmp_file, 0, SEEK_END);
 		write(tmp_file, line, strlen(line));
 		char exec_file[] = "gcc";
 		int pid = fork();
@@ -37,8 +38,6 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	else {
-		char template[] = "/tmp/expr-XXXXXX.c";
-		int tmp_file = mkstemps(template, 2);
 		char funcbody[256] = "int __expr_wrapper_";
 		char index = '0'+ count;
 		char index_str[2];
@@ -51,6 +50,8 @@ int main(int argc, char *argv[]) {
 		strcat(funcbody, line);
 		strcat(funcbody, funcend);
 
+		lseek(tmp_file, 0, SEEK_END);
+		write(tmp_file, funcbody, strlen(funcbody));
 	    //printf("Expr!\n");
 		count ++;
 	}

@@ -4,6 +4,8 @@
 #include <string.h>
 #include <dlfcn.h>
 
+#define eval(expr)  return expr
+
 int main(int argc, char *argv[]) {
   static char line[4096];
   static char func[4] = "int";
@@ -29,6 +31,7 @@ int main(int argc, char *argv[]) {
 			strcat(libname, suffix);
 	        //printf(".c file: %s\n", template);
 	        //printf(".so file: %s\n", libname);
+			printf("%c\n", eval(1+2));
 
 			pid_t pid = fork();
 

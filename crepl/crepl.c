@@ -5,6 +5,16 @@
 #include <dlfcn.h>
 #include <assert.h>
 
+int fac(int base, int time) {
+   int ret = 1;
+
+   for(int i = 0; i < time; i ++) {
+       ret *= base;
+   }
+
+   return ret;
+}
+
 int main(int argc, char *argv[]) {
   static char line[4096];
   static char func[4] = "int";
@@ -19,6 +29,8 @@ int main(int argc, char *argv[]) {
   strcat(libname, suffix);
 
   char exec_file[] = "gcc";
+
+  char func_name[32];
 
   while (1) {
     printf("crepl> ");
@@ -40,10 +52,33 @@ int main(int argc, char *argv[]) {
 	}
 	else {
 		char funcbody[256] = "int __expr_wrapper_";
-		char index = '0'+ count;
-		char index_str[2];
-		index_str[0] = index;
-		index_str[1] = '\0';
+		char index_str[4];
+		memset(index_str, '\0', 4);
+
+		int tmp = count;
+
+		int bitnum = 1;
+
+		while(tmp / 10 > 0) {
+		    tmp /= 10;
+			bitnum ++;
+		}
+
+		tmp = count;
+		char bit;
+		for(int i = 0; i < bitnum; i ++) {
+		    int base = fac(10, bitnum-1-i);
+			int num = tmp / base;
+			bit = num + '0';
+			index_str[i] = bit;
+
+			tmp %= base;
+		}
+
+		printf("count:%d\n",count);
+		printf("str:%s\n", index_str);
+		
+		
 		strcat(funcbody, index_str);
 		char funcpart[32] = "() { return ";
 		char funcend[4] = ";}\n";
@@ -62,6 +97,10 @@ int main(int argc, char *argv[]) {
 			sleep(1);
 		    void* handle = dlopen(libname, RTLD_LAZY);
 			assert(handle != NULL);
+
+			void (*func)();
+
+			func = dlsym(handle, );
 		}
 	    //printf("Expr!\n");
 		count ++;

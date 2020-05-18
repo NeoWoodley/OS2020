@@ -5,6 +5,8 @@
 #include <dlfcn.h>
 #include <assert.h>
 
+char file_buf[65535];
+
 int fac(int base, int time) {
    int ret = 1;
 
@@ -69,8 +71,6 @@ int main(int argc, char *argv[]) {
 		    sleep(1);
 			close(fildes[1]);
             
-
-
 			int readlen = read(fildes[0], buf, 511);
 			
 			if(readlen != 0) {
@@ -78,10 +78,8 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
-		sleep(1);
         if(flag == 0) {
 
-             
 		    lseek(tmp_file, 0, SEEK_END);
 		    write(tmp_file, line, strlen(line));
 		    int pid = fork();
@@ -96,10 +94,12 @@ int main(int argc, char *argv[]) {
 
 		else{
 			printf("Compile Error.\n");
+			memset(buf, '\0', 512);
             continue;
 		}
 	}
 	else {
+		int flag = 0;
 		char funcbody[256] = "int __expr_wrapper_";
 		char index_str[4];
 		memset(index_str, '\0', 4);
@@ -135,41 +135,92 @@ int main(int argc, char *argv[]) {
 		strncat(funcbody, line, strlen(line)-1);
 		strcat(funcbody, funcend);
 
+
+
 //		printf("funcbody:%s\n", funcbody);
 //		printf("funcname:%s\n", func_name);
 
-		lseek(tmp_file, 0, SEEK_END);
-		write(tmp_file, funcbody, strlen(funcbody));
 
-		int pid = fork();
-		if(pid == 0) {
-		    execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+        char testfile[] = "/tmp/test-XXXXXX.c";
+        int test_file = mkstemps(testfile, 2);
+
+		char testlibname[64] = "/tmp/lib";
+		char testsuffix[3] = "so";
+		strncat(testlibname, &testfile[5], 12);
+		strcat(testlibname, testsuffix);
+
+		lseek(tmp_file, 0, SEEK_SET);
+		read(tmp_file, file_buf, 65534);
+		write(test_file, file_buf, strlen(file_buf));
+		lseek(test_file, 0, SEEK_END);
+		write(test_file, funcbody, strlen(funcbody));
+
+		int fildes[2];
+
+		if(pipe(fildes) != 0) {
+		    printf("Pipe failde!\n");
+			assert(0);
+		}
+
+		int prepid = fork();
+		if(prepid == 0) {
+			close(fildes[0]);
+			dup2(fildes[1], fileno(stderr));
+		    execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
+
 		}
 		else {
-			sleep(1);
-		    void* handle = dlopen(libname, RTLD_LAZY);
-			assert(handle != NULL);
-
-			int (*callfunc)();
+		    sleep(1);
+			close(fildes[1]);
+            
+			int readlen = read(fildes[0], buf, 511);
 			
-			char* error;
-
-			callfunc = dlsym(handle, func_name);
-
-            error = dlerror();
-
-			if(error != NULL) {
-			    printf("Error:%s\n", error);
-				exit(1);
+			if(readlen != 0) {
+			    flag = 1;
 			}
+		}
 
-			int result = callfunc();
+		if(flag == 0) { 
 
-	        printf("%d\n", result);
-		    count ++;
-            memset(&func_name[15], '\0', 17);
+		    lseek(tmp_file, 0, SEEK_END);
+		    write(tmp_file, funcbody, strlen(funcbody));
 
-			dlclose(handle);
+		    int pid = fork();
+		    if(pid == 0) {
+		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+		    }
+		    else {
+			    sleep(1);
+		        void* handle = dlopen(libname, RTLD_LAZY);
+			    assert(handle != NULL);
+
+			    int (*callfunc)();
+			
+			    char* error;
+
+			    callfunc = dlsym(handle, func_name);
+
+                error = dlerror();
+
+			    if(error != NULL) {
+			        printf("Error:%s\n", error);
+				    exit(1);
+			    }
+
+			    int result = callfunc();
+
+	            printf("%d\n", result);
+		        count ++;
+                memset(&func_name[15], '\0', 17);
+
+			    dlclose(handle);
+		    }
+		}
+		else {
+			printf("Compile Error.\n");
+			memset(buf, '\0', 512);
+			memset(file_buf, '\0', 65535);
+            continue;
 		}
 	}
     // printf("Got %zu chars.\n", strlen(line)); // WTF?

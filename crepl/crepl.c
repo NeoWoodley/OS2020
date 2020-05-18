@@ -97,8 +97,17 @@ int main(int argc, char *argv[]) {
 			assert(handle != NULL);
 
 			int (*callfunc)();
+			
+			char* error;
 
 			callfunc = dlsym(handle, func_name);
+
+            error = dlerror();
+
+			if(error != NULL) {
+			    printf("Error:%s\n", error);
+				exit(1);
+			}
 
 			int result = callfunc();
 

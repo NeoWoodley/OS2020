@@ -68,12 +68,12 @@ int main(int argc, char *argv[]) {
 		else {
 		    sleep(1);
 			close(fildes[1]);
+            
 
-			dup2(fildes[0], fileno(stdin));
 
-			char* errorfile = fgets(buf, 511, stdin);
+			int readlen = read(fildes[0], buf, 511);
 			
-			if(errorfile != NULL) {
+			if(readlen != 0) {
 			    flag = 1;
 			}
 		}
@@ -95,12 +95,10 @@ int main(int argc, char *argv[]) {
 	    }
 
 		else{
-			printf("********************\n");
             continue;
 		}
 	}
 	else {
-		printf("???????????????????????????\n");
 		char funcbody[256] = "int __expr_wrapper_";
 		char index_str[4];
 		memset(index_str, '\0', 4);

@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 		int flag = 0;
         char testfile[] = "/tmp/test-XXXXXX.c";
         int test_file = mkstemps(testfile, 2);
-		write(tmp_file, line, strlen(line));
+		write(test_file, line, strlen(line));
 
 		char testlibname[64] = "/tmp/lib";
 		char testsuffix[3] = "so";
@@ -63,7 +63,6 @@ int main(int argc, char *argv[]) {
 		if(prepid == 0) {
 			close(fildes[0]);
 			dup2(fildes[1], fileno(stderr));
-			printf("??????????????????????????\n");
 		    execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
 		}
 		else {

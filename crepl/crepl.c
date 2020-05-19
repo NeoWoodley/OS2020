@@ -139,8 +139,8 @@ int main(int argc, char *argv[]) {
 
 
 
-		printf("funcbody:%s\n", funcbody);
-		printf("funcname:%s\n", func_name);
+//		printf("funcbody:%s\n", funcbody);
+//		printf("funcname:%s\n", func_name);
 
 
         char testfile[] = "/tmp/test-XXXXXX.c";

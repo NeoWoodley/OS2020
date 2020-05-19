@@ -5,7 +5,7 @@
 #include <dlfcn.h>
 #include <assert.h>
 
-#define T 100000
+#define T 1000000
 
 char file_buf[65535];
 
@@ -139,8 +139,8 @@ int main(int argc, char *argv[]) {
 
 
 
-//		printf("funcbody:%s\n", funcbody);
-//		printf("funcname:%s\n", func_name);
+		printf("funcbody:%s\n", funcbody);
+		printf("funcname:%s\n", func_name);
 
 
         char testfile[] = "/tmp/test-XXXXXX.c";

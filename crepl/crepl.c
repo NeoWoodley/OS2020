@@ -222,6 +222,7 @@ int main(int argc, char *argv[]) {
 			printf("Compile Error.\n");
 			memset(buf, '\0', 512);
 			memset(file_buf, '\0', 65535);
+            memset(&func_name[15], '\0', 17);
             continue;
 		}
 	}

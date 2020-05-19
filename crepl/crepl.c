@@ -28,7 +28,6 @@ int main(int argc, char *argv[]) {
 
   if (strcmp((argv[0]+8), bit32) == 0) {
       flag32 = 1;
-	  printf("????????????%d\n", flag32);
   }
 
   static int count = 0;
@@ -76,7 +75,12 @@ int main(int argc, char *argv[]) {
 		if(prepid == 0) {
 			close(fildes[0]);
 			dup2(fildes[1], fileno(stderr));
-		    execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
+			if(flag32 == 1) {
+		        execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
+			}
+			else {
+		        execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
+			}
 		}
 		else {
 		    usleep(T);
@@ -95,7 +99,13 @@ int main(int argc, char *argv[]) {
 		    write(tmp_file, line, strlen(line));
 		    int pid = fork();
 		    if(pid == 0) {
-		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+				if(flag32 == 1) {
+		            execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", template, "-o", libname, NULL);
+
+				}
+				else{
+		            execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+				}
 		    }
 		    else {
 			    usleep(T);
@@ -177,7 +187,13 @@ int main(int argc, char *argv[]) {
 		if(prepid == 0) {
 			close(fildes[0]);
 			dup2(fildes[1], fileno(stderr));
-		    execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
+			if(flag32 == 1) {
+		        execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
+
+			}
+			else{
+		        execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
+			}
 
 		}
 		else {
@@ -198,7 +214,12 @@ int main(int argc, char *argv[]) {
 
 		    int pid = fork();
 		    if(pid == 0) {
-		        execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+				if(flag32 == 1) {
+		            execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", template, "-o", libname, NULL);
+				}
+				else{
+		            execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+				}
 		    }
 		    else {
 			    usleep(T);

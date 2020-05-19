@@ -20,10 +20,17 @@ int fac(int base, int time) {
 }
 
 int main(int argc, char *argv[]) {
-  printf("argc:%d\n", argc);
-  printf("argv:%s\n", *argv);
+  
   static char line[4096];
   static char func[4] = "int";
+  static char bit32[3] = "32";
+  int flag32 = 0;
+
+  if (strcmp((argv[0]+8), bit32) == 0) {
+      flag32 = 1;
+	  printf("????????????\n");
+  }
+
   static int count = 0;
   char template[] = "/tmp/tmp-XXXXXX.c";
   int tmp_file = mkstemps(template, 2);

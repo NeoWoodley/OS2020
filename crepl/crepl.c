@@ -5,7 +5,7 @@
 #include <dlfcn.h>
 #include <assert.h>
 
-#define T 1000000
+#define T 500000
 
 char file_buf[65535];
 

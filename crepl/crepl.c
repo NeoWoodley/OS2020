@@ -21,7 +21,7 @@ int fac(int base, int time) {
 
 int main(int argc, char *argv[]) {
   printf("argc:%d\n", argc);
-  printf("argv:%s\n", argv);
+  printf("argv:%s\n", *argv);
   static char line[4096];
   static char func[4] = "int";
   static int count = 0;

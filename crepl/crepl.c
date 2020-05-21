@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
   static char bit32[3] = "32";
   int flag32 = 0;
 
-  if (strstr(argv[0] bit32) != NULL) {
+  if (strstr(argv[0], bit32) != NULL) {
       flag32 = 1;
   }
 

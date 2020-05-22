@@ -28,7 +28,6 @@ int main(int argc, char *argv[]) {
 
   if (strstr(argv[0], bit32) != NULL) {
       flag32 = 1;
-	  exit(1);
   }
 
   static int count = 0;
@@ -77,8 +76,8 @@ int main(int argc, char *argv[]) {
 			close(fildes[0]);
 			dup2(fildes[1], fileno(stderr));
 			if(flag32 == 1) {
-		        execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
-		        //execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
+		        //execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
+		        execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
 			}
 			else {
 		        execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
@@ -102,8 +101,8 @@ int main(int argc, char *argv[]) {
 		    int pid = fork();
 		    if(pid == 0) {
 				if(flag32 == 1) {
-		            execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
-		            //execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", template, "-o", libname, NULL);
+		            //execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+		            execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", template, "-o", libname, NULL);
 
 				}
 				else{
@@ -191,8 +190,8 @@ int main(int argc, char *argv[]) {
 			close(fildes[0]);
 			dup2(fildes[1], fileno(stderr));
 			if(flag32 == 1) {
-		        execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
-		        //execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
+		        //execlp(exec_file, "gcc", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
+		        execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", testfile, "-o", testlibname, NULL);
 
 			}
 			else{
@@ -219,8 +218,8 @@ int main(int argc, char *argv[]) {
 		    int pid = fork();
 		    if(pid == 0) {
 				if(flag32 == 1) {
-		            execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
-		            //execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", template, "-o", libname, NULL);
+		            //execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);
+		            execlp(exec_file, "gcc", "-m32", "-fPIC", "-shared", template, "-o", libname, NULL);
 				}
 				else{
 		            execlp(exec_file, "gcc", "-fPIC", "-shared", template, "-o", libname, NULL);

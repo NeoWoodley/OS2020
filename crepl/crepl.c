@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
 
   if (strstr(argv[0], bit32) != NULL) {
       flag32 = 1;
+	  exit(1);
   }
 
   static int count = 0;

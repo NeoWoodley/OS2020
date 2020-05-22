@@ -25,6 +25,7 @@ int main(int argc, char *argv[]) {
   static char line[4096];
   static char func[4] = "int";
   static char bit32[3] = "32";
+  static char error[6] = "error";
   int flag32 = 0;
 
   if (strstr(argv[0], bit32) != NULL) {
@@ -90,7 +91,7 @@ int main(int argc, char *argv[]) {
             
 			int readlen = read(fildes[0], buf, 511);
 			
-			if(readlen != 0) {
+			if(readlen != 0 && strstr(buf, error) != NULL) {
 			    flag = 1;
 			}
 		}

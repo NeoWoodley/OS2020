@@ -245,6 +245,7 @@ int main(int argc, char *argv[]) {
 
 			    int result = callfunc();
 
+                printf("func_name:%s\n", func_name);
 	            printf("%d\n", result);
 		        count ++;
 

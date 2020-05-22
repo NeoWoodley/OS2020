@@ -247,9 +247,10 @@ int main(int argc, char *argv[]) {
 
 	            printf("%d\n", result);
 		        count ++;
-                memset(&func_name[15], '\0', 5);
 
 			    dlclose(handle);
+                memset(&func_name[15], '\0', 5);
+			    memset(file_buf, '\0', 65535);
 			    memset(buf, '\0', 512);
 		    }
 		}

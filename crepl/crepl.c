@@ -5,7 +5,8 @@
 #include <dlfcn.h>
 #include <assert.h>
 
-#define T 500000
+#define T 300000
+//#define T 500000
 
 char file_buf[65535];
 
@@ -245,7 +246,7 @@ int main(int argc, char *argv[]) {
 
 			    int result = callfunc();
 
-                printf("func_name:%s\n", func_name);
+
 	            printf("%d\n", result);
 		        count ++;
 

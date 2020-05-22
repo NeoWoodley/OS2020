@@ -227,7 +227,7 @@ int main(int argc, char *argv[]) {
 		    }
 		    else {
 			    usleep(T);
-		        void* handle = dlopen(libname, RTLD_LAZY);
+		        void* handle = dlopen(libname, RTLD_NOW);
 			    assert(handle != NULL);
 
 			    int (*callfunc)();

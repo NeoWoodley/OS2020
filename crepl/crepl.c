@@ -246,6 +246,7 @@ int main(int argc, char *argv[]) {
                 memset(&func_name[15], '\0', 17);
 
 			    dlclose(handle);
+			    memset(buf, '\0', 512);
 		    }
 		}
 		else {

@@ -243,7 +243,7 @@ int main(int argc, char *argv[]) {
 
 	            printf("%d\n", result);
 		        count ++;
-                memset(&func_name[15], '\0', 17);
+                memset(&func_name[15], '\0', 1);
 
 			    dlclose(handle);
 			    memset(buf, '\0', 512);
@@ -253,7 +253,7 @@ int main(int argc, char *argv[]) {
 			printf("Compile Error.\n");
 			memset(buf, '\0', 512);
 			memset(file_buf, '\0', 65535);
-            memset(&func_name[15], '\0', 17);
+            memset(&func_name[15], '\0', 1);
             continue;
 		}
 	}

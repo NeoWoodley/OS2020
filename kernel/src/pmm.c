@@ -409,6 +409,21 @@ static void kfree(void *ptr) {
 	}
 }
 
+static void *kalloc_safe(size_t size) {
+    int i = _intr_read();
+	_intr_write(0);
+	void* ret = kalloc(size);
+	if(i) _intr_write(1);
+	return ret;
+}
+
+static void kfree_safe(void *ptr) {
+    int i = _intr_read(); 
+	_intr_write(0);
+	kfree(ptr);
+	if(i) _intr_write(1);
+}
+
 static void pmm_init() {
   pmsize = ((uintptr_t)_heap.end - (uintptr_t)_heap.start);
 //  printf("Size of header_t: %d\n", sizeof(header_t));
@@ -440,6 +455,6 @@ static void pmm_init() {
 
 MODULE_DEF(pmm) = {
   .init  = pmm_init,
-  .alloc = kalloc,
-  .free  = kfree,
+  .alloc = kalloc_safe,
+  .free  = kfree_safe,
 };

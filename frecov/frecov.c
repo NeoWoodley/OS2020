@@ -68,16 +68,16 @@ int main(int argc, char *argv[]) {
 	fat_header* disk = mmap(NULL, 512, PROT_READ, MAP_EXECUTABLE, headpart, 0);
 	//assert(disk != MAP_FAILED);
     switch(errno) {
-	    case EACCES: printf("?\n");
-	    case EAGAIN: printf("!\n");
-	    case EBADF: printf("*\n");
-	    case EINVAL: printf("&\n");
-	    case ENFILE: printf("(\n");
-	    case ENODEV: printf(")\n");
-	    case ENOMEM: printf("^\n");
-	    case EOVERFLOW: printf("-\n");
-	    case EPERM: printf("+\n");
-	    case ETXTBSY: printf("]\n");
+	    case EACCES: {printf("?\n"); break;}
+	    case EAGAIN: {printf("!\n"); break;}
+	    case EBADF: {printf("*\n"); break;}
+	    case EINVAL:{printf("&\n"); break;}
+	    case ENFILE:{printf("(\n"); break;}
+	    case ENODEV: {printf(")\n"); break;}
+	    case ENOMEM: {printf("^\n"); break;}
+	    case EOVERFLOW: {printf("-\n"); break;}
+	    case EPERM: {printf("+\n"); break;}
+	    case ETXTBSY: {printf("]\n"); break;}
 	}
 
 

@@ -41,7 +41,6 @@ struct fat_header {
 typedef struct fat_header fat_header;
 
 int main(int argc, char *argv[]) {
-	assert(sizeof(fat_header) == 512);
-	panic_on((sizeof(fat_header) == 511), "Bad!");
+	panic_on((sizeof(fat_header) == 512), "Bad!");
 
 }

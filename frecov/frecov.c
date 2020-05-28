@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <sys/types.h>    
+#include <sys/stat.h>    
+#include <fcntl.h>
 #include <stdint.h>
 #include <assert.h>
 
@@ -42,5 +45,8 @@ typedef struct fat_header fat_header;
 
 int main(int argc, char *argv[]) {
 	panic_on((sizeof(fat_header) == 512), "Bad!");
+
+	int img = open("./M5-frecov.img", O_RDONLY);
+	printf("%ld\n", img);
 
 }

@@ -51,6 +51,7 @@ int main(int argc, char *argv[]) {
 	int size = ftell(tmpimg);
 	fclose(tmpimg);
 
-	printf("%d\n", size);
+	int img = open("./M5-frecov.img", "O_RDONLY");
+	void* disk = mmap(NULL, size, PROT_READ, MAP_FILE, img, 0);
 
 }

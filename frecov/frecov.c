@@ -80,7 +80,8 @@ int main(int argc, char *argv[]) {
 	    case ETXTBSY: {printf("]\n"); break;}
 	}
 
-	panic_on(((disk->signature) == 0xaa55), "Not a valid fat!");
+	printf("%d\n",disk->signature);
+	//panic_on(((disk->signature) == 0xaa55), "Not a valid fat!");
 
 	return 0;
 

@@ -17,6 +17,19 @@ struct fat_header {
 	uint16_t BPB_NumHeads;
 	uint32_t BPB_Hiddsec;
 	uint32_t BPB_TotSec32;
+	uint32_t BPB_FATSz32;
+	uint16_t BPB_ExtFlags;
+	uint16_t BPB_FSVer;
+	uint32_t BPB_RootClus;
+	uint16_t BPB_FSInfo;
+	uint16_t BPB_BkBootSec;
+	uint32_t BPB_Reserved: 12;
+	uint8_t BS_DrvNum;
+	uint8_t BS_Reserved1;
+	uint8_t BS_BootSig;
+	uint32_t BS_VollD;
+	uint32_t BS_VolLab: 11;
+	uint32_t BS_FilSysType[2];
 
 	uint8_t padding[420];
 	uint16_t signature;

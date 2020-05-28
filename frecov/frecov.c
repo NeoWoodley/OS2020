@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 	write(headpart, read_buf, 512);
 	
 
-	fat_header* disk = mmap(NULL, 512, PROT_READ, MAP_EXECUTABLE, headpart, 0);
+	fat_header* disk = mmap(NULL, 1024, PROT_READ, MAP_EXECUTABLE, headpart, 0);
 	//assert(disk != MAP_FAILED);
     switch(errno) {
 	    case EACCES: {printf("?\n"); break;}
@@ -80,7 +80,8 @@ int main(int argc, char *argv[]) {
 	    case ETXTBSY: {printf("]\n"); break;}
 	}
 
-
 	panic_on(((disk->signature) == 0xaa55), "Not a valid fat!");
+
+	return 0;
 
 }

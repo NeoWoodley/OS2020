@@ -3,6 +3,7 @@
 #include <sys/stat.h>    
 #include <sys/mman.h>    
 #include <fcntl.h>
+#include <unistd.h>   
 #include <stdint.h>
 #include <assert.h>
 
@@ -54,9 +55,16 @@ int main(int argc, char *argv[]) {
 
 
 	int img = open("./M5-frecov.img", O_RDONLY);
-	fat_header* disk = mmap(NULL, 512, PROT_READ, MAP_FILE, img, 0);
+	char template[] = "template-XXXXXX";
+	int headpart = mkstemp(template);
+
+	uint8_t read_buf[522];
+	read(img, read_buf, 512);
+	write(headpart, read_buf, 512);
+	
+
+	fat_header* disk = mmap(NULL, 512, PROT_READ, MAP_FILE, headpart, 0);
     
-	printf("%d\n", disk->signature);
-	//panic_on(((disk->signature) == 0xaa55), "Not a valid fat!");
+	panic_on(((disk->signature) == 0xaa55), "Not a valid fat!");
 
 }

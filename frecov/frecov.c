@@ -65,8 +65,21 @@ int main(int argc, char *argv[]) {
 	
 
 	fat_header* disk = mmap(NULL, 512, PROT_READ, MAP_EXECUTABLE, headpart, 0);
-	assert(disk != MAP_FAILED);
-    
+	//assert(disk != MAP_FAILED);
+    switch(disk) {
+	    case EACCES: printf("?\n");
+	    case EAGAIN: printf("!\n");
+	    case EBADF: printf("*\n");
+	    case EINVAL: printf("&\n");
+	    case ENFILE: printf("(\n");
+	    case ENODEV: printf(")\n");
+	    case ENOMEM: printf("^\n");
+	    case EOVERFLOW: printf("-\n");
+	    case EPERM: printf("+\n");
+	    case ETXTBSY: printf("]\n");
+	}
+
+
 	panic_on(((disk->signature) == 0xaa55), "Not a valid fat!");
 
 }

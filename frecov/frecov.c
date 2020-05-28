@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 	write(headpart, read_buf, 512);
 	
 
-	fat_header* disk = mmap(NULL, 4095, PROT_READ, MAP_EXECUTABLE, headpart, 0);
+	fat_header* disk = mmap(NULL, 4096, PROT_READ, MAP_EXECUTABLE, headpart, 0);
 	//assert(disk != MAP_FAILED);
     switch(errno) {
 	    case EACCES: {printf("?\n"); break;}

@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <assert.h>
 
+#define panic_on(cond, out) {if((cond) != 1) printf("%s\n",out);}
+
 struct fat_header {
     uint8_t BS_jmpBoot[3];
 	uint8_t BS_OEMName[8];
@@ -39,6 +41,7 @@ struct fat_header {
 typedef struct fat_header fat_header;
 
 int main(int argc, char *argv[]) {
+	assert(sizeof(fat_header) == 512);
+	panic_on((sizeof(fat_header) == 511), "Bad!");
 
-	printf("%ld\n",sizeof(fat_header));
 }

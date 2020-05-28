@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
 
 
 	int img = open("./M5-frecov.img", O_RDONLY);
-	char template[] = "template-XXXXXX";
+	char template[] = "/tmp/template-XXXXXX";
 	int headpart = mkstemp(template);
 
 	uint8_t read_buf[522];
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
 	write(headpart, read_buf, 512);
 	
 
-	fat_header* disk = mmap(NULL, 512, PROT_READ, MAP_FILE, headpart, 0);
+	fat_header* disk = mmap(NULL, 512, PROT_READ, NULL, headpart, 0);
     
 	panic_on(((disk->signature) == 0xaa55), "Not a valid fat!");
 

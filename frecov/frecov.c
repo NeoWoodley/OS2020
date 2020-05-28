@@ -17,5 +17,5 @@ typedef struct fat_header fat_header;
 
 int main(int argc, char *argv[]) {
 
-	printf("%d\n",sizeof(fat_header));
+	printf("%ld\n",sizeof(fat_header));
 }

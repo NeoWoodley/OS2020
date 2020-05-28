@@ -18,6 +18,7 @@ struct fat_header {
 	uint32_t BPB_Hiddsec;
 	uint32_t BPB_TotSec32;
 
+	uint8_t padding[420];
 	uint16_t signature;
 } __attribute__((packed));
 

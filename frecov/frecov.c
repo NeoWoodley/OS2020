@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <assert.h>
+
 struct fat_header {
     uint8_t BS_jmpBoot[3];
 	uint8_t BS_OEMName[8];

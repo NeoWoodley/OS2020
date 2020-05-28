@@ -46,7 +46,11 @@ typedef struct fat_header fat_header;
 int main(int argc, char *argv[]) {
 	panic_on((sizeof(fat_header) == 512), "Bad!");
 
-	int img = open("./M5-frecov.img", O_RDONLY);
-	printf("%d\n", img);
+	File* tmpimg = fopen("./M5-frecov.img", "r");
+	fseek(img, 0, SEEK_END);
+	int size = ftell(tmpimg);
+	fclose(tmpimg);
+
+	printf("%d\n", size);
 
 }

@@ -7,6 +7,7 @@
 #include <unistd.h>   
 #include <stdint.h>
 #include <assert.h>
+#include <errno.h>
 
 #define panic_on(cond, out) {if((cond) != 1) printf("%s\n",out);}
 
@@ -66,7 +67,7 @@ int main(int argc, char *argv[]) {
 
 	fat_header* disk = mmap(NULL, 512, PROT_READ, MAP_EXECUTABLE, headpart, 0);
 	//assert(disk != MAP_FAILED);
-    switch(disk) {
+    switch(errno) {
 	    case EACCES: printf("?\n");
 	    case EAGAIN: printf("!\n");
 	    case EBADF: printf("*\n");

@@ -65,6 +65,7 @@ int main(int argc, char *argv[]) {
 	
 
 	fat_header* disk = mmap(NULL, 512, PROT_READ, MAP_EXECUTABLE, headpart, 0);
+	assert(disk != -1);
     
 	panic_on(((disk->signature) == 0xaa55), "Not a valid fat!");
 

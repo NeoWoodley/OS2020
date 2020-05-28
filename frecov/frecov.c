@@ -12,6 +12,9 @@ struct fat_header {
 	uint16_t signature;
 } __attribute__((packed));
 
+
+typedef struct fat_header fat_header;
+
 int main(int argc, char *argv[]) {
 
 	assert(sizeof(fat_header) == 512);

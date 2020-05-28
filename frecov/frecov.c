@@ -56,7 +56,6 @@ int main(int argc, char *argv[]) {
 	int img = open("./M5-frecov.img", O_RDONLY);
     printf("????\n");
 	fat_header* disk = mmap(NULL, size, PROT_READ, MAP_FILE, img, 0);
-    printf("????\n");
-	panic_on((disk->signature == 0xaa55), "Not a valid fat!");
+	panic_on(((disk->signature) == 0xaa55), "Not a valid fat!");
 
 }

@@ -9,6 +9,9 @@
 #include <assert.h>
 #include <errno.h>
 
+#define SecPerClus 8
+#define SecSz 512
+
 #define panic_on(cond, out) {if((cond) != 1) printf("%s\n",out);}
 
 struct fat_header {
@@ -85,6 +88,13 @@ int main(int argc, char *argv[]) {
 	printf("%x\n",disk->signature);
 	*/
 	panic_on(((disk->signature) == 0xaa55), "Not a valid fat!");
+
+    uint32_t ResdSecCnt = disk->BPB_RsvdSecCnt;  //The Sectors of Reserved Areas
+	uint32_t FATEntNum = disk->BPB_NumFATs;
+    
+	printf("A:%d\n", ResdSecCnt);
+	printf("B:%d\n", FATEntNum);
+
 
 	return 0;
 

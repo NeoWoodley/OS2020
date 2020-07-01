@@ -20,7 +20,7 @@ struct fat_header {
 	uint32_t BPB_BytsPerSec: 16;
 	uint32_t BPB_SecPerClus: 8;
 	uint16_t BPB_RsvdSecCnt;
-	uint8_t BPB_NumFATS;
+	uint8_t BPB_NumFATs;
 	uint16_t BPB_RootEntCnt;
 	uint16_t BPB_TotSec16;
 	uint8_t BPB_Media;

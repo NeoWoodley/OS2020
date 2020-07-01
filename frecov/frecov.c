@@ -92,11 +92,13 @@ int main(int argc, char *argv[]) {
     uint32_t ResdSecCnt = disk->BPB_RsvdSecCnt;  //The Sectors of Reserved Areas
 	uint32_t FATsNum = disk->BPB_NumFATs;
 	uint32_t FATsSz = disk->BPB_FATSz32;
+	uint32_t RootClus = disk->BPB_RootClus;
 	
     
 	printf("A:%d\n", ResdSecCnt);
 	printf("B:%d\n", FATsNum);
 	printf("C:%d\n", FATsSz);
+	printf("D:%d\n", RootClus);
 
 
 	return 0;

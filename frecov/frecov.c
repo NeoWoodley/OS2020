@@ -14,6 +14,7 @@
 
 #define FAT_COPIES 2
 #define PADDING_SIZE 15872
+#define CLUSTER_SIZE 5
 
 #define panic_on(cond, out) {if((cond) != 1) printf("%s\n",out);}
 

@@ -12,6 +12,9 @@
 #define SecPerClus 8
 #define SecSz 512
 
+#define FAT_COPIES 2
+#define PADDING_SIZE 15872
+
 #define panic_on(cond, out) {if((cond) != 1) printf("%s\n",out);}
 
 struct fat_header {
@@ -47,8 +50,35 @@ struct fat_header {
 	uint16_t signature;
 } __attribute__((packed));
 
-
 typedef struct fat_header fat_header;
+
+struct sector {
+    uint8_t byte[512];
+};
+typedef struct sector sector;
+
+struct fat_table {
+	uint8_t byte[128];
+} __attribute__((packed));
+
+typedef struct fat_table fat_table;
+
+struct Cluster {
+	sector clusters[8];   
+};
+
+typedef struct Cluster Cluster;
+
+struct FAT {
+    fat_header header;
+	uint8_t padding[PADDING_SIZE];
+	fat_table fat[FAT_COPIES];
+    Cluster clusters[CLUSTER_SIZE];
+} __attribute__((packed));
+
+int classify() {
+    return 0;
+}
 
 int main(int argc, char *argv[]) {
 	panic_on((sizeof(fat_header) == 512), "Bad!");
@@ -93,13 +123,13 @@ int main(int argc, char *argv[]) {
 	uint32_t FATsNum = disk->BPB_NumFATs;
 	uint32_t FATsSz = disk->BPB_FATSz32;
 	uint32_t RootClus = disk->BPB_RootClus;
+	uint32_t TotSec32 = disk->BPB_TotSec32;
 	
-    
 	printf("A:%d\n", ResdSecCnt);
 	printf("B:%d\n", FATsNum);
 	printf("C:%d\n", FATsSz);
 	printf("D:%d\n", RootClus);
-
+	printf("E:%d\n", TotSec32);
 
 	return 0;
 

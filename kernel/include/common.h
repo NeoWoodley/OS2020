@@ -2,6 +2,8 @@
 #include <klib.h>
 #include <klib-macros.h>
 
+#define MAX_CPU 4
+
 //intptr_t locked = 0;
 
 //uintptr_t page_brk = 0;
@@ -15,7 +17,12 @@ typedef struct task {
 	uint8_t stack[4096];
 } task_t;
 
-extern task_t *current;
+struct cpu_local {
+    task_t *current;
+} cpu_local[MAX_CPU];
+
+#define current cpu_local[_cpu()].current
+
 extern task_t tasks[];
 
 struct spinlock {

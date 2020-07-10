@@ -134,7 +134,6 @@ static void os_run() {
   
 }
 
-task_t *current = NULL;
 task_t tasks[] = {
   { .name = "a" },
   { .name = "b" },

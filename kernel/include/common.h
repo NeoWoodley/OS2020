@@ -11,6 +11,7 @@
 typedef struct task {
     struct {
 	    const char *name;
+		int id, cpu;
 		struct task *next;
 		_Context *context;
 	};
@@ -18,7 +19,8 @@ typedef struct task {
 } task_t;
 
 struct cpu_local {
-    task_t *current;
+    task_t *current, idle;
+	int i;
 } cpu_local[MAX_CPU];
 
 #define current cpu_local[_cpu()].current
@@ -29,6 +31,8 @@ struct spinlock {
     char name[64];
 	volatile intptr_t locked;
 };
+
+struct spinlock *glk;
 
 struct semaphore {
     int value;

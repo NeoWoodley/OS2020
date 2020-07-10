@@ -6,6 +6,7 @@
 
 #define KiB (1 << 10)
 
+
 //#define LACK (((uintptr_t)_heap.end-(uintptr_t)_heap.start) >> 2)
 
 //#define CUR
@@ -17,7 +18,7 @@
 
 //#define PTR
 
-intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
+static intptr_t atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     intptr_t result;
 	asm volatile ("lock xchg %0, %1":
 	  "+m"(*addr), "=a"(result) : "1"(newval) : "cc");

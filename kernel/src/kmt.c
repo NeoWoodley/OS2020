@@ -1,6 +1,5 @@
 #include <common.h>
 #include <klib.h>
-#include <struct.h>
 
 static void kmt_init() {
 }
@@ -31,12 +30,15 @@ static void spin_lock(spinlock_t *lk) {
 }
 
 static void sem_init(sem_t *sem, const char *name, int value) {
+	return;
 }
 
 static void sem_wait(sem_t *sem) {
+	return;
 }
 
 static void sem_signal(sem_t *sem) {
+	return;
 }
 
 MODULE_DEF(kmt) = {

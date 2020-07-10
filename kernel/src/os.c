@@ -135,15 +135,15 @@ static void os_run() {
 }
 
 static _Context* os_trap(_Event ev, _Context *context) {
-	if(!Current) {
-	    Current = &task[0];
+	if(!current) {
+	    current = &tasks[0];
 	}
 	else {
-	    Current->context = context;
-		Current = Current->next;
+	    current->context = context;
+		current = current->next;
 	}
 
-    return Current->context;	
+    return current->context;	
 }
 
 static void os_on_irq(int seq, int event, handler_t handler) {

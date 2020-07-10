@@ -7,7 +7,7 @@ typedef struct task {
 	uint8_t stack[4096];
 } task_t;
 
-task_t *Current = NULL, task[] = {
+task_t *current = NULL, tasks[] = {
   { .name = "a" },
   { .name = "b" },
   { .name = "c" },

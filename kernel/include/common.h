@@ -15,11 +15,8 @@ typedef struct task {
 	uint8_t stack[4096];
 } task_t;
 
-task_t *current = NULL, tasks[] = {
-  { .name = "a" },
-  { .name = "b" },
-  { .name = "c" },
-};
+extern task_t *current;
+extern task_t tasks[];
 
 struct spinlock {
     char name[64];

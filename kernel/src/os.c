@@ -134,6 +134,13 @@ static void os_run() {
   
 }
 
+task_t *current = NULL;
+task_t tasks[] = {
+  { .name = "a" },
+  { .name = "b" },
+  { .name = "c" },
+};
+
 static _Context* os_trap(_Event ev, _Context *context) {
 	if(!current) {
 	    current = &tasks[0];

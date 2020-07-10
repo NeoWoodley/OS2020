@@ -1,5 +1,6 @@
 #include <common.h>
 #include <klib.h>
+#include <struct.h>
 
 static void kmt_init() {
 }

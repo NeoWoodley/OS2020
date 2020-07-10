@@ -8,6 +8,8 @@
 
 //uintptr_t page_brk = 0;
 
+int ntask,ncpu;
+
 typedef struct task {
     struct {
 	    const char *name;
@@ -23,7 +25,9 @@ struct cpu_local {
 	int i;
 } cpu_local[MAX_CPU];
 
-#define current cpu_local[_cpu()].current
+#define CPU (&cpu_local[_cpu()])
+#define current (CPU->current)
+#define IDLE (&CPU->idle)
 
 extern task_t tasks[];
 

@@ -138,18 +138,37 @@ task_t tasks[] = {
   { .name = "a" },
   { .name = "b" },
   { .name = "c" },
+  { .name = "d" },
 };
 
 static _Context* os_trap(_Event ev, _Context *context) {
+	kmt->spin_lock(glk);
 	if(!current) {
-	    current = &tasks[0];
+	    CPU->idle.context = context;
+		current = IDLE;
 	}
 	else {
 	    current->context = context;
-		current = current->next;
 	}
 
-    return current->context;	
+	if(current != IDLE) {
+	    //current->cpu = (current->cpu + 1) % ncpu;
+	}
+
+	task_t *next = IDLE;
+	for(int n = ntask; n ; n--) {
+		CPU->i = (CPU->i + 1) % ntask;
+	    if(tasks[CPU->i].cpu == _cpu()) {
+			next = &tasks[CPU->i];
+			break;
+		}
+	}
+
+	current = next;
+
+	kmt->spin_unlock(glk);
+
+    return next->context;
 }
 
 static void os_on_irq(int seq, int event, handler_t handler) {

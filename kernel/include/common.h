@@ -13,7 +13,6 @@ int ntask,ncpu;
 typedef struct task {
     struct {
 	    const char *name;
-		int id, cpu;
 		struct task *next;
 		_Context *context;
 	};
@@ -22,17 +21,14 @@ typedef struct task {
 
 struct cpu_local {
     task_t *current, idle;
-	int i;
 } cpu_local[MAX_CPU];
 
-#define CPU (&cpu_local[_cpu()])
-#define current (CPU->current)
-#define IDLE (&CPU->idle)
+#define current cpu_local[_cpu()].current
 
 extern task_t tasks[];
 
 struct spinlock {
-    char name[64];
+	char name[64];
 	volatile intptr_t locked;
 };
 

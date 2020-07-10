@@ -10,11 +10,11 @@ static void kmt_init() {
 }
 
 static int create(task_t *task, const char *name, void (*entry)(void *arg), void *arg) {
-    assert(0); 
     return 0;
 }
 
 static void teardown(task_t *task) {
+	assert(0);
 
 }
 

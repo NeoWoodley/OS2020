@@ -3,6 +3,7 @@
 #include <klib-macros.h>
 
 #define MAX_CPU 4
+#define STACK_SIZE 4096
 
 //intptr_t locked = 0;
 
@@ -20,7 +21,7 @@ typedef struct task {
 } task_t;
 
 struct cpu_local {
-    task_t *current, idle;
+    task_t *current;
 } cpu_local[MAX_CPU];
 
 #define current cpu_local[_cpu()].current

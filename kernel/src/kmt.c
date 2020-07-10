@@ -1,14 +1,16 @@
 #include <common.h>
 #include <klib.h>
 
+//static int task_count = 0;
+
 static void kmt_init() {
     glk->locked = 0;
 	ncpu = 4;
-	ntask = 4;
+	ntask = 8;
 }
 
 static int create(task_t *task, const char *name, void (*entry)(void *arg), void *arg) {
-
+    assert(0); 
     return 0;
 }
 

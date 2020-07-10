@@ -140,6 +140,9 @@ task_t tasks[] = {
   {  },
   {  },
   {  },
+  {  },
+  {  },
+  {  },
 };
 
 static _Context* os_trap(_Event ev, _Context *context) {

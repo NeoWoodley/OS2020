@@ -1,13 +1,6 @@
 #include <common.h>
 #include <klib.h>
 
-struct node {
-    void* cur;
-	void* next;
-};
-
-typedef struct node node;
-
 /*
 enum ops { OP_ALLOC = 1, OP_FREE };
 struct op {
@@ -33,6 +26,7 @@ void stress_test() {
 }
 */
 
+/*
 void smoke_test() {
 node lib[28];
 	void* cur = pmm->alloc(45*sizeof(char));
@@ -61,6 +55,8 @@ node lib[28];
 	for(int i = 0; i < 28; i ++) {
 	    pmm->free(lib[i].cur);
 	}
+
+	*/
 	/*
 	while(1) {
 	    uintptr_t ptr = (uintptr_t)pmm->alloc(4096*sizeof(char));
@@ -112,9 +108,11 @@ node lib[28];
     
 	//printf("Done From cpu:%d\n", _cpu());
   */
+/*
   printf("Done From cpu:%d\n", _cpu());
   while (1) ;
 }
+*/
 
 static void os_init() {
   pmm->init();
@@ -136,7 +134,25 @@ static void os_run() {
   
 }
 
+static _Context* os_trap(_Event ev, _Context *context) {
+	if(!current) {
+	    current = &tasks[0];
+	}
+	else {
+	    current->context = context;
+		current = current->next;
+	}
+
+    return current->context;	
+}
+
+static void os_on_irq(int seq, int event, handler_t handler) {
+   
+}
+
 MODULE_DEF(os) = {
   .init = os_init,
   .run  = os_run,
+  .trap = os_trap,
+  .on_irq = os_on_irq,
 };

@@ -135,14 +135,11 @@ static void os_run() {
 }
 
 task_t tasks[] = {
-  {  },
-  {  },
-  {  },
-  {  },
-  {  },
-  {  },
-  {  },
-  {  },
+  { .name = "A" },
+  { .name = "B" },
+  { .name = "C" },
+  { .name = "D" },
+  { .name = "E" },
 };
 
 static _Context* os_trap(_Event ev, _Context *context) {

@@ -25,7 +25,7 @@ struct task tasks[] = {
 int main() {
   _ioe_init();
   _cte_init(os->trap);
-  //_vme_init(pmm->alloc, pmm->free);
+  _vme_init(pmm->alloc, pmm->free);
 /*
   for (int i = 0; i < LENGTH(tasks); i ++) {
       task_t *task  = &tasks[i];

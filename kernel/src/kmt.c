@@ -4,6 +4,7 @@
 //static int task_count = 0;
 
 static void kmt_init() {
+	printf("Hello from kmt_init()!\n");
     //glk->locked = 0;
 	//ncpu = 4;
 	//ntask = 8;

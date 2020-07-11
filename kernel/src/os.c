@@ -137,14 +137,12 @@ static void os_init() {
   pmm->init();
   kmt->init();
 
-  /*
   for(int i = 0; i < LENGTH(tasks); i ++) {
       task_t *task    = &tasks[i]; 
 	  _Area stack   = (_Area) { &task->context + 1, task + 1 }; 
 	  task->context = _kcontext(stack, func, (void *)task->name); 
 	  task->next    = &tasks[(i + 1) % LENGTH(tasks)]; 
   }
-  */
 }
 
 static void os_run() {

@@ -146,16 +146,17 @@ static void os_init() {
 }
 
 static void os_run() {
-	//_intr_write(1);
-	//while(1);
+	_intr_write(1);
+	while(1);
 //  os->init();
 //  _mpe_init(smoke_test);
   
+  /*
   for (const char *s = "Hello World from CPU #*\n"; *s; s++) {
     _putc(*s == '*' ? '0' + _cpu() : *s);
   }
   while (1) ;
-  
+  */
 }
 
 static _Context* os_trap(_Event ev, _Context *context) {

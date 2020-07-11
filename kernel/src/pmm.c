@@ -452,6 +452,7 @@ static void pmm_init() {
 
   
   //brk = head.brk;
+  printf("?\n");
 }
 
 MODULE_DEF(pmm) = {

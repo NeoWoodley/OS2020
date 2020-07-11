@@ -7,6 +7,7 @@ static void kmt_init() {
     glk->locked = 0;
 	ncpu = 4;
 	ntask = 8;
+	return;
 }
 
 static int create(task_t *task, const char *name, void (*entry)(void *arg), void *arg) {

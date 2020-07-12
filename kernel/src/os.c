@@ -143,10 +143,10 @@ static void os_init() {
 	  task->context = _kcontext(stack, func, (void *)task->name); 
 	  task->next    = &tasks[(i + 1) % LENGTH(tasks)]; 
   }
-  printf("???????");
 }
 
 static void os_run() {
+  printf("???????");
 	_intr_write(1);
 	_yield();
 //	while(1);

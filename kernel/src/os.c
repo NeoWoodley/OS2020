@@ -154,10 +154,11 @@ static void os_init() {
 }
 
 static void os_run() {
-	_intr_write(1);
+	_intr_write(0);
 //	_yield();
 	//while(1);
 	printf("??????? From CPU:%d\n",_cpu());
+	_intr_write(1);
 //  os->init();
 //  _mpe_init(smoke_test);
   

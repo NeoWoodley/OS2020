@@ -125,12 +125,14 @@ void func(void *arg) {
   }
 }
 
-task_t tasks[] = {
+task_t tasks[16] = {
+	/*
   { .name = "A" },
   { .name = "B" },
   { .name = "C" },
   { .name = "D" },
   { .name = "E" },
+  */
 };
 
 static void os_init() {
@@ -139,6 +141,7 @@ static void os_init() {
 
   biglock.locked = 0;
 
+  
   /*
   for(int i = 0; i < LENGTH(tasks); i ++) {
       task_t *task    = &tasks[i]; 

@@ -11,12 +11,16 @@ static void kmt_init() {
 	return;
 }
 
-static int count = 0;
+static int i = 0;
 
 static int create(task_t *task, const char *name, void (*entry)(void *arg), void *arg) {
-    count ++;
-	assert(count <= 5);
-    return 0;
+	task->name    = name;
+	_Area stack   = (_Area) { &task->context + 1, task + 1 };
+	task->context = _kcontext(stack, entry, arg);
+	task->next    = &tasks[(i + 1) % 16];
+	i ++;
+
+	return 0;
 }
 
 static void teardown(task_t *task) {

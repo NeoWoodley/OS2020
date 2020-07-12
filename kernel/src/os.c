@@ -139,18 +139,21 @@ static void os_init() {
 
   biglock.locked = 0;
 
+  /*
   for(int i = 0; i < LENGTH(tasks); i ++) {
       task_t *task    = &tasks[i]; 
 	  _Area stack   = (_Area) { &task->context + 1, task + 1 }; 
 	  task->context = _kcontext(stack, func, (void *)task->name); 
 	  task->next    = &tasks[(i + 1) % LENGTH(tasks)]; 
   }
+  */
+
 }
 
 static void os_run() {
 	_intr_write(1);
-	_yield();
-//	while(1);
+//	_yield();
+	while(1);
 //  os->init();
 //  _mpe_init(smoke_test);
   
@@ -163,7 +166,7 @@ static void os_run() {
 }
 
 static _Context* os_trap(_Event ev, _Context *context) {
-	//kmt->spin_lock(glk);
+	kmt->spin_lock(glk);
 	if(!current) {
 		current = &tasks[0];
 	} else {
@@ -173,7 +176,7 @@ static _Context* os_trap(_Event ev, _Context *context) {
 	  current = current->next;
 	} while((current - tasks) % _ncpu() != _cpu());
 
-	//kmt->spin_unlock(glk);
+	kmt->spin_unlock(glk);
 
     return current->context;
 }

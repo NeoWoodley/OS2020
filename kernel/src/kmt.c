@@ -11,7 +11,11 @@ static void kmt_init() {
 	return;
 }
 
+static int count = 0;
+
 static int create(task_t *task, const char *name, void (*entry)(void *arg), void *arg) {
+    count ++;
+	assert(count <= 5);
     return 0;
 }
 

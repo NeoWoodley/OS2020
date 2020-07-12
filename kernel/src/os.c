@@ -155,7 +155,7 @@ static void os_init() {
 
 static void os_run() {
 	_intr_write(1);
-	_yield();
+//	_yield();
 	//while(1);
 	printf("??????? From CPU:%d\n",_cpu());
 //  os->init();

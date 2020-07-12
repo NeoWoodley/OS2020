@@ -2,7 +2,7 @@
 #include <klib.h>
 #include <klib-macros.h>
 
-#define MAX_CPU 4
+#define MAX_CPU 8
 #define STACK_SIZE 4096
 
 //intptr_t locked = 0;
@@ -11,10 +11,10 @@
 
 int ntask,ncpu;
 
-typedef struct task {
+typedef union task {
     struct {
 	    const char *name;
-		struct task *next;
+		union task *next;
 		_Context *context;
 	};
 	uint8_t stack[4096];

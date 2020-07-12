@@ -5,7 +5,7 @@
 
 static void kmt_init() {
 	printf("Hello from kmt_init()!\n");
-    glk->locked = 0;
+    //glk->locked = 0;
 	//ncpu = 4;
 	//ntask = 8;
 	return;

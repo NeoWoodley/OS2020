@@ -130,6 +130,7 @@ task_t tasks[16] = {
   { .name = "A" },
   { .name = "B" },
   { .name = "C" },
+  
   { .name = "D" },
   { .name = "E" },
   */
@@ -140,6 +141,10 @@ static void os_init() {
   kmt->init();
 
   biglock.locked = 0;
+
+  for(int i = 0; i < 16; i ++) {
+      kmt->create(&tasks[i], "Name", func, (void*)tasks[i].name);
+  }
 
   
   /*

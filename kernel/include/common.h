@@ -11,13 +11,15 @@
 
 int ntask,ncpu;
 
-typedef union task {
+typedef struct task {
+	union {
     struct {
 	    const char *name;
-		union task *next;
+		struct task *next;
 		_Context *context;
 	};
 	uint8_t stack[4096];
+	};
 } task_t;
 
 struct cpu_local {

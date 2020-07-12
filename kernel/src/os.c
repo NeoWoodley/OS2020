@@ -147,7 +147,8 @@ static void os_init() {
 
 static void os_run() {
 	_intr_write(1);
-	while(1);
+	_yield();
+//	while(1);
 //  os->init();
 //  _mpe_init(smoke_test);
   

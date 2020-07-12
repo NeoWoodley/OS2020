@@ -137,6 +137,8 @@ static void os_init() {
   pmm->init();
   kmt->init();
 
+  biglock.locked = 0;
+
   for(int i = 0; i < LENGTH(tasks); i ++) {
       task_t *task    = &tasks[i]; 
 	  _Area stack   = (_Area) { &task->context + 1, task + 1 }; 

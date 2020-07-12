@@ -163,7 +163,7 @@ static void os_run() {
 }
 
 static _Context* os_trap(_Event ev, _Context *context) {
-	kmt->spin_lock(glk);
+	//kmt->spin_lock(glk);
 	if(!current) {
 		current = &tasks[0];
 	} else {
@@ -173,7 +173,7 @@ static _Context* os_trap(_Event ev, _Context *context) {
 	  current = current->next;
 	} while((current - tasks) % _ncpu() != _cpu());
 
-	kmt->spin_unlock(glk);
+	//kmt->spin_unlock(glk);
 
     return current->context;
 }

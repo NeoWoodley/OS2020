@@ -16,7 +16,7 @@ static int create(task_t *task, const char *name, void (*entry)(void *arg), void
 }
 
 static void teardown(task_t *task) {
-	assert(0);
+	//assert(0);
 }
 
 static void spin_init(spinlock_t *lk, const char *name) {

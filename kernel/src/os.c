@@ -160,6 +160,7 @@ static void os_run() {
 }
 
 static _Context* os_trap(_Event ev, _Context *context) {
+	printf("????????????\n");
 	kmt->spin_lock(glk);
 	if(!current) {
 		current = &tasks[0];

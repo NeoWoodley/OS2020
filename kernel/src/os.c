@@ -170,6 +170,8 @@ static void os_run() {
 
 static _Context* os_trap(_Event ev, _Context *context) {
 	//kmt->spin_lock(glk);
+
+	printf("??????? From CPU:%d\n",_cpu());
 	if(!current) {
 		current = &tasks[0];
 	} else {

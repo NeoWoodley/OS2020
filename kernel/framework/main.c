@@ -36,6 +36,7 @@ int main() {
 */
 
   os->init();
+  printf("??????\n");
   _mpe_init(os->run);
   return 1;
 }

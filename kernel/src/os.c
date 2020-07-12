@@ -136,7 +136,6 @@ task_t tasks[] = {
 static void os_init() {
   pmm->init();
   kmt->init();
-  printf("???????");
 
   for(int i = 0; i < LENGTH(tasks); i ++) {
       task_t *task    = &tasks[i]; 
@@ -144,6 +143,7 @@ static void os_init() {
 	  task->context = _kcontext(stack, func, (void *)task->name); 
 	  task->next    = &tasks[(i + 1) % LENGTH(tasks)]; 
   }
+  printf("???????");
 }
 
 static void os_run() {

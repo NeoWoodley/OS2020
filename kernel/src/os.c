@@ -136,6 +136,7 @@ task_t tasks[] = {
 static void os_init() {
   pmm->init();
   kmt->init();
+  printf("???????");
 
   for(int i = 0; i < LENGTH(tasks); i ++) {
       task_t *task    = &tasks[i]; 
@@ -161,7 +162,6 @@ static void os_run() {
 }
 
 static _Context* os_trap(_Event ev, _Context *context) {
-	printf("????????????\n");
 	kmt->spin_lock(glk);
 	if(!current) {
 		current = &tasks[0];

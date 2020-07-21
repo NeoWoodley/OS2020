@@ -12,6 +12,12 @@ int main(int argc, char *argv[]) {
   int fd;
   uint8_t *disk;
 
+
+  assert(1!=0);
+  assert(2!=0);
+  assert(3!=0);
+  assert(4!=0);
+
   // TODO: argument parsing
 
   assert((fd = open(argv[1], O_RDWR)) > 0);

@@ -150,10 +150,11 @@ static void os_init() {
 
   biglock.locked = 0;
 
+  /*
   for(int i = 0; i < 16; i ++) {
       kmt->create(&tasks[i], "Name", func, (void*)tasks[i].name);
   }
-
+  */
   
   /*
   for(int i = 0; i < LENGTH(tasks); i ++) {
@@ -184,7 +185,7 @@ static void os_run() {
 static _Context* os_trap(_Event ev, _Context *context) {
 	//kmt->spin_lock(glk);
 
-	printf("??????? From CPU:%d\n",_cpu());
+	//printf("??????? From CPU:%d\n",_cpu());
 	if(!current) {
 		current = &tasks[0];
 	} else {
